@@ -46,7 +46,7 @@ jobs:
                   name: ${{ github.event.release.name }}
                   draft: false
                   prerelease: false
-                  token: ${{ secrets.GITHUB_TOKEN }}
+                  token: ${{ secrets.TOKEN }}
                   artifacts: './system.json, ./shadowrun6-elysium.zip'
                   tag: ${{ github.event.release.tag_name }}
                   body: ${{ github.event.release.body }}
