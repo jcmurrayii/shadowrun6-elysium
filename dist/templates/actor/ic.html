@@ -1,0 +1,36 @@
+<form class="{{cssClass}} wholesheet" autocomplete="off">
+    <header class="flexrow">
+        {{> 'systems/shadowrun6-elysium/dist/templates/actor/parts/ProfileImage.html' height='90px' width='90px' }}
+        <div class="flexcol flex-end">
+            <div class="flexrow">
+                <div class="block">{{> 'systems/shadowrun6-elysium/dist/templates/actor/parts/NameInput.html' }}</div>
+                <div class="attributes smooth">
+                    {{> 'systems/shadowrun6-elysium/dist/templates/actor/parts/Initiative.html' }}
+                </div>
+            </div>
+            <div class="attributes smooth">
+                <div class="block">
+                    {{> 'systems/shadowrun6-elysium/dist/templates/common/HorizontalCellInput.html' name=(localize system.track.matrix.label)
+                    value=system.track.matrix.value max=system.track.matrix.max id="matrix" }}
+                </div>
+                <div class="attributes no-border">
+                    <div class="attribute row space-around">
+                    <div data-tooltip="SR6.Roll" class="attribute-name Roll fas fa-dice-six" data-roll-id="prompt-roll"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <nav class="tabs" data-group="primary">
+        <a class="item" data-tab="actions">{{localize "SR6.Actions"}}</a>
+        <a class="item" data-tab="actor">{{localize "SR6.ActorTypes.IC"}}</a>
+        {{#if hasInventory }}<a class="item" data-tab="inventory">{{localize "SR6.Gear"}}</a>{{/if}}
+        <a class="item" data-tab="effects">{{ localize "SR6.Effects" }}</a>
+        <a class="item" data-tab="misc">{{localize "SR6.Miscellaneous"}}</a>
+    </nav>
+    <section class="sheetbody">
+        {{> "systems/shadowrun6-elysium/dist/templates/actor/tabs/ActionsTab.html"}} {{> "systems/shadowrun6-elysium/dist/templates/actor/tabs/ic/ICActorTab.html"}} {{>
+        "systems/shadowrun6-elysium/dist/templates/actor/tabs/InventoryTab.html"}} {{> "systems/shadowrun6-elysium/dist/templates/actor/tabs/EffectsTab.html"}} {{>
+        "systems/shadowrun6-elysium/dist/templates/actor/tabs/ic/ICMiscTab.html"}}
+    </section>
+</form>

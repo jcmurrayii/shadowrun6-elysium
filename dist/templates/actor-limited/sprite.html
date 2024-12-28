@@ -1,0 +1,21 @@
+<form class="{{cssClass}} wholesheet" autocomplete="off">
+   {{> 'systems/shadowrun6-elysium/dist/templates/actor-limited/parts/Header.html' }}
+    <section class="sheetbody">
+        <div class="inventory">
+            <div class="split-container">
+            <div>
+                {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListHeader.html'
+                        name=(localize 'SR6.Biography')
+                        itemId='biography'
+                        icons=(ItemHeaderIcons 'biography')
+                }}
+                {{editor biographyHTML target="system.description.value" engine="prosemirror" callaborate=false button=false
+                         editable=false}}
+            </div>
+            <div class="scroll-area">
+                {{> 'systems/shadowrun6-elysium/dist/templates/actor-limited/parts/MiscSprite.html' }}
+            </div>
+        </div>
+        </div>
+    </section>
+</form>

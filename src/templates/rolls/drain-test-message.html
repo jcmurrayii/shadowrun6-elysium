@@ -1,0 +1,19 @@
+{{> 'systems/shadowrun6-elysium/dist/templates/rolls/success-test-message.html'}}
+<div class="sr6 chat-card roll-card">
+    <div class="card-content">
+        <div class="left-side">
+            {{> 'systems/shadowrun6-elysium/dist/templates/rolls/parts/Damage.html'
+            name=(localize "SR6.IncomingDrain")
+            damage=test.data.incomingDrain
+            showAP=true
+            }}
+        </div>
+        <div class="right-side">
+            {{> 'systems/shadowrun6-elysium/dist/templates/rolls/parts/Damage.html'
+            name=(localize "SR6.ModifiedDrain")
+            damage=test.data.modifiedDrain
+            showAP=true
+            }}
+        </div>
+    </div>
+</div>

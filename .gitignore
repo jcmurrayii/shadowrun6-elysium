@@ -9,3 +9,6 @@ yarn-error.log*
 .pnp.js
 
 .vscode/*
+/packs/general-actions/
+/packs/matrix-actions/
+/packs/system-macros/

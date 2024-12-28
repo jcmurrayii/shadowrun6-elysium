@@ -1,0 +1,49 @@
+{{#> "systems/shadowrun6-elysium/dist/templates/common/Attribute.html"}}
+    <div class="track">
+        <div class="attribute-name">
+            <select name="system.initiative.perception" class="display">
+                {{#select system.initiative.perception}}
+                    <option value="meatspace">{{localize "SR6.InitCatMeatspace"}}</option>
+                    <option value="matrix">{{localize "SR6.InitCatMatrix"}}</option>
+                    {{#ife system.special 'magic'}}
+                        <option value="astral">{{localize "SR6.InitCatAstral"}}</option>
+                    {{/ife}} {{/select}}
+            </select>
+        </div>
+        <div class="attribute-name">
+            <label
+                    data-tooltip="SR6.UseEdgeForInitiativeRoll"
+                    class="checkbox init-edge-label"
+            >
+                <input
+                        type="checkbox"
+                        class="submit-checkbox hidden"
+                        name="system.initiative.edge"
+                    {{checked system.initiative.edge}}
+                />
+                <span class="checkmark far"></span>
+            </label>
+        </div>
+    </div>
+    <div class="track">
+        <div class="attribute-input-container">
+            <input
+                    class="display"
+                    size="4"
+                    type="text"
+                    value="{{system.initiative.current.base.value}}"
+                    disabled
+            />
+        </div>
+        <div class="track-plus"></div>
+        <div class="attribute-input-container">
+            <input
+                    class="display"
+                    size="4"
+                    type="text"
+                    value="{{system.initiative.current.dice.text}}"
+                    disabled
+            />
+        </div>
+    </div>
+{{/"systems/shadowrun6-elysium/dist/templates/common/Attribute.html"}}
