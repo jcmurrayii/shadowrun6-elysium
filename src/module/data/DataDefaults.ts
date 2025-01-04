@@ -2,7 +2,6 @@ import {SKILL_DEFAULT_NAME} from "../constants";
 import DamageData = Shadowrun.DamageData;
 import FireModeData = Shadowrun.FireModeData;
 import ActionRollData = Shadowrun.ActionRollData;
-import LimitField = Shadowrun.LimitField;
 import SkillField = Shadowrun.SkillField;
 import TrackType = Shadowrun.TrackType;
 import SourceEntityField = Shadowrun.SourceEntityField;
@@ -21,15 +20,15 @@ interface MinimalItemData {
 /**
  * Data Defaults are used for partial template data that can't easily be gotten by instead
  * using game.model.Item.<type>.<whatver> or game.mode.Actor.<type>.<whatever>
- * 
+ *
  * This is mostly the case when the system doesn't define data in the system template
  * for fields like track, skill that aren't known during document creation by Foundry.
- * 
+ *
  */
 export class DataDefaults {
     /**
      * Return a base item data structure with minimal necessary FoundryVTT ItemDataModel fields.
-     * 
+     *
      * @param name Whatever name you want to give but not ''.
      * @param type Whatever item type you want to have
      * @param systemData Whatever partial item system data you want to inject into general model system data.
@@ -49,7 +48,7 @@ export class DataDefaults {
     }
     /**
      * Damage data to hold everything around damaging actors.
-     * 
+     *
      * @param partialDamageData give partial DamageData fields to overwrite default values
      */
     static damageData(partialDamageData: RecursivePartial<DamageData> = {}): DamageData {
@@ -86,7 +85,7 @@ export class DataDefaults {
 
     /**
      * Armor data used within actor documents.
-     * 
+     *
      * @param partialActorArmorData Inject partial armor data
      */
     static actorArmor(partialActorArmorData: Partial<Shadowrun.ActorArmor> = {}): Shadowrun.ActorArmor {
@@ -105,7 +104,7 @@ export class DataDefaults {
 
     /**
      * Build a minimal viable action roll data structure.
-     * 
+     *
      * @param partialActionData Inject any minimal action property
      */
     static minimalActionData(partialActionData: Partial<MinimalActionData> = {}) {
@@ -126,11 +125,11 @@ export class DataDefaults {
 
     /**
      * Build a action data capable of rolling a test.
-     * 
+     *
      * This is used instead of game.model.Item.action.action as fields like armor don't mesh well with TestCreator._mergeMinimalActionDataInOrder
-     * 
-     * @param partialActionRollData 
-     * @returns 
+     *
+     * @param partialActionRollData
+     * @returns
      */
     static actionRollData(partialActionRollData: DeepPartial<ActionRollData> = {}): ActionRollData {
         return foundry.utils.mergeObject({
@@ -177,24 +176,8 @@ export class DataDefaults {
     }
 
     /**
-     * Build a full limit value field for use in document data
-     * 
-     * @param partialLimitField Inject any limit property
-     */
-    static limitField(partialLimitField: Partial<LimitField> = {}): LimitField {
-        return foundry.utils.mergeObject({
-            value: 0,
-            base: 0,
-            attribute: '',
-            label: '',
-            hidden: false,
-            mod: []
-        }, partialLimitField) as LimitField;
-    }
-
-    /**
      * Build a skill field for use in document data
-     * 
+     *
      * @param partialSkillData Inject any skill property
      */
     static skillData(partialSkillData: Partial<SkillField> = {}): SkillField {
@@ -215,7 +198,7 @@ export class DataDefaults {
     /**
      * Build a damage track field for use in document data.
      * @param partialTrackData Injet any track property
-     * @returns 
+     * @returns
      */
     static trackData(partialTrackData: Partial<TrackType> = {}): TrackType {
         return foundry.utils.mergeObject({
@@ -230,14 +213,14 @@ export class DataDefaults {
 
     /**
      * Data structure used to reference other document types.
-     * 
+     *
      * Example usage:
      * Host references other IC actors it's able to start in combat.
-     * 
+     *
      * TODO: This uses the v8 old style Document.id pattern instead of v9 style uuid pattern.
-     * 
-     * @param partialSourceEntityData 
-     * @returns 
+     *
+     * @param partialSourceEntityData
+     * @returns
      */
     static sourceItemData(partialSourceEntityData: Partial<SourceEntityField> = {}): SourceEntityField {
         return foundry.utils.mergeObject({
@@ -252,7 +235,7 @@ export class DataDefaults {
 
     /**
      * Build a numerical value field for use anywhere necessary
-     * 
+     *
      * @param partialValueData Inject any value property
      */
     static valueData(partialValueData: Partial<ValueField> = {}) {
@@ -282,7 +265,7 @@ export class DataDefaults {
 
     /**
      * Build a fire mode field for use in range weapon data or testing
-     * 
+     *
      * @param partialFireModeData Inject any fire mode property
      */
     static fireModeData(partialFireModeData: Partial<FireModeData> = {}): FireModeData {
@@ -309,9 +292,9 @@ export class DataDefaults {
 
     /**
      * Build a description data segment
-     * 
-     * @param partialDescriptionData 
-     * @returns 
+     *
+     * @param partialDescriptionData
+     * @returns
      */
     static descriptionData(partialDescriptionData: Partial<Shadowrun.DescriptionData> = {}) {
         return foundry.utils.mergeObject({
@@ -323,9 +306,9 @@ export class DataDefaults {
 
     /**
      * Build a technology data segment
-     * 
-     * @param partialTechnologyData 
-     * @returns 
+     *
+     * @param partialTechnologyData
+     * @returns
      */
     static technologyData(partialTechnologyData: Partial<Shadowrun.TechnologyData> = {}) {
         return foundry.utils.mergeObject({
@@ -351,7 +334,7 @@ export class DataDefaults {
 
     /**
      * Build a attribute data segment.
-     * 
+     *
      * @param partialAttributeData
      * @returns Merged of partial and basic attribute data
      */

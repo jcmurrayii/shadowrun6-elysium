@@ -62,6 +62,18 @@
             },
             "type": "Macro",
             "system": "shadowrun6-elysium"
+        },
+        {
+            "name": "weapons",
+            "label": "SR6e Core Weapons",
+            "path": "packs/weapons",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "TRUSTED": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            },
+            "type": "Item",
+            "system": "shadowrun6-elysium"
         }
     ],
     "relationships": [

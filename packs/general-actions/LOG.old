@@ -1,0 +1,8 @@
+2025/01/03-16:43:24.667 9ac4 Recovering log #100
+2025/01/03-16:43:24.672 9ac4 Delete type=0 #100
+2025/01/03-16:43:24.672 9ac4 Delete type=3 #99
+2025/01/03-18:27:54.416 b6cc Level-0 table #104: started
+2025/01/03-18:27:54.416 b6cc Level-0 table #104: 0 bytes OK
+2025/01/03-18:27:54.417 b6cc Delete type=0 #102
+2025/01/03-18:27:54.423 b6cc Manual compaction at level-0 from '!items!0RHkpnQA1qNjyxKE' @ 72057594037927935 : 1 .. '!items!wWeIV09KjkZvjJKb' @ 0 : 0; will stop at (end)
+2025/01/03-18:27:54.423 b6cc Manual compaction at level-1 from '!items!0RHkpnQA1qNjyxKE' @ 72057594037927935 : 1 .. '!items!wWeIV09KjkZvjJKb' @ 0 : 0; will stop at (end)

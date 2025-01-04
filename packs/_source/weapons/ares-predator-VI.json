@@ -1,0 +1,167 @@
+{
+    "name": "Ares Predator VI",
+    "type": "weapon",
+    "img": "systems/shadowrun6-elysium/dist/icons/importer/weapon/heavy-pistols.svg",
+    "system": {
+        "description": {
+            "value": "",
+            "chat": "",
+            "source": ""
+        },
+        "action": {
+            "type": "complex",
+            "test": "RangedAttackTest",
+            "categories": [],
+            "attribute": "agility",
+            "attribute2": "",
+            "skill": "firearms",
+            "armor": false,
+            "spec": false,
+            "mod": null,
+            "mod_description": "",
+            "roll_mode": "publicroll",
+            "limit": {
+                "value": 0,
+                "base": 0,
+                "attribute": ""
+            },
+            "threshold": {
+                "value": 0,
+                "base": 0
+            },
+            "extended": false,
+            "damage": {
+                "type": {
+                    "value": "",
+                    "base": "physical"
+                },
+                "element": {
+                    "value": "",
+                    "base": ""
+                },
+                "value": 0,
+                "base": 3,
+                "ap": {
+                    "value": 0,
+                    "base": 0,
+                    "base_formula_operator": "add",
+                    "attribute": ""
+                },
+                "base_formula_operator": "add",
+                "attribute": "",
+                "source": {
+                    "actorId": "",
+                    "itemId": "",
+                    "itemType": "",
+                    "itemName": ""
+                }
+            },
+            "opposed": {
+                "type": "",
+                "test": "PhysicalDefenseTest",
+                "attribute": "",
+                "attribute2": "",
+                "skill": "",
+                "armor": false,
+                "mod": 0,
+                "description": "",
+                "resist": {
+                    "test": "PhysicalResistTest",
+                    "skill": "",
+                    "attribute": "",
+                    "attribute2": "",
+                    "armor": false,
+                    "mod": 0
+                }
+            },
+            "followed": {
+                "test": "",
+                "attribute": "",
+                "attribute2": "",
+                "skill": "",
+                "armor": false,
+                "mod": 0
+            },
+            "modifiers": []
+        },
+        "technology": {
+            "rating": 1,
+            "availability": "2(L)",
+            "quantity": 1,
+            "cost": 750,
+            "equipped": false,
+            "conceal": {
+                "base": 0,
+                "value": 0
+            },
+            "condition_monitor": {
+                "value": 0,
+                "max": 9
+            },
+            "wireless": true,
+            "networkController": null
+        },
+        "category": "range",
+        "subcategory": "",
+        "ammo": {
+            "spare_clips": {
+                "value": 0,
+                "max": 0
+            },
+            "current": {
+                "value": 15,
+                "max": 15
+            },
+            "clip_type": "",
+            "partial_reload_value": -1
+        },
+        "range": {
+            "category": "",
+            "ranges": {
+                "short": 5,
+                "medium": 20,
+                "long": 40,
+                "extreme": 60,
+                "category": "heavyPistol",
+                "attribute": null
+            },
+            "rc": {
+                "value": 0,
+                "base": 0
+            },
+            "modes": {
+                "single_shot": false,
+                "semi_auto": true,
+                "burst_fire": true,
+                "full_auto": false
+            }
+        },
+        "melee": {
+            "reach": 0
+        },
+        "thrown": {
+            "ranges": {
+                "short": 0,
+                "medium": 0,
+                "long": 0,
+                "extreme": 0,
+                "attribute": "",
+                "category": "manual"
+            },
+            "blast": {
+                "radius": 0,
+                "dropoff": 0
+            }
+        }
+    },
+    "effects": [],
+    "folder": null,
+    "sort": 0,
+    "permission": {
+        "default": 0,
+        "SPXNNTkUujenPCaS": 3
+    },
+    "flags": {},
+    "_id": "ddOIICHLHWHd7QLs",
+    "_key": "!items!ddOIICHLHWHd7QLs"
+}

@@ -771,6 +771,12 @@
                         "extreme": 0,
                         "category": "manual"
                     },
+                    "attackRating": {
+                        "short": 0,
+                        "medium": 0,
+                        "long": 0,
+                        "extreme": 0
+                    },
                     "rc": {
                         "value": 0
                     },
@@ -921,7 +927,8 @@
                     "electricity": 0,
                     "radiation": 0,
                     "temp": 0,
-                    "hardened": false
+                    "hardened": false,
+                    "capacity": 0
                 }
             },
             "matrix": {

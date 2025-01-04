@@ -104,7 +104,7 @@ export class RangedAttackTest extends SuccessTest<RangedAttackTestData> {
     }
 
     override get testModifiers(): Shadowrun.ModifierTypes[] {
-        return ['global', 'wounds', 'environmental', 'recoil'];
+        return ['global', 'wounds', 'environmental'];
     }
 
     override async prepareDocumentData(){
@@ -224,24 +224,5 @@ export class RangedAttackTest extends SuccessTest<RangedAttackTestData> {
         await super.processResults();
 
         await WeaponRangeTestBehavior.processResults(this);
-    }
-
-    /**
-     * Template helper for showing recoil before attack
-     */
-    get recoilBeforeAttack(): number {
-        if (!this.actor) return 0;
-        return this.actor.recoil;
-    }
-
-    /**
-     * Template helper for showing recoil after attack
-     */
-    get recoilAfterAttack(): number {
-        if (!this.actor) return 0;
-
-        const fireMode = this.data.fireMode;
-        const fireModeRecoil = fireMode.recoil ? fireMode.value : 0;
-        return this.actor.recoil + fireModeRecoil;
     }
 }

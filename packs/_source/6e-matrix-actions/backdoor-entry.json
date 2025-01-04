@@ -1,0 +1,120 @@
+{
+    "name": "Backdoor Entry",
+    "type": "action",
+    "img": "systems/shadowrun6-elysium/dist/icons/exit-door.svg",
+    "system": {
+        "description": {
+            "value": "",
+            "chat": "",
+            "source": ""
+        },
+        "action": {
+            "type": "complex",
+            "test": "SuccessTest",
+            "categories": [
+                "matrix"
+            ],
+            "attribute": "logic",
+            "attribute2": "",
+            "skill": "cracking",
+            "armor": false,
+            "spec": false,
+            "mod": null,
+            "mod_description": "",
+            "roll_mode": "publicroll",
+            "limit": {
+                "value": 0,
+                "base": 0,
+                "attribute": ""
+            },
+            "threshold": {
+                "value": 0,
+                "base": 0
+            },
+            "extended": false,
+            "damage": {
+                "type": {
+                    "value": "",
+                    "base": ""
+                },
+                "element": {
+                    "value": "",
+                    "base": ""
+                },
+                "value": 0,
+                "base": 0,
+                "ap": {
+                    "value": 0,
+                    "base": 0
+                },
+                "base_formula_operator": "add",
+                "attribute": "",
+                "source": {
+                    "actorId": "",
+                    "itemId": "",
+                    "itemType": "",
+                    "itemName": ""
+                }
+            },
+            "opposed": {
+                "type": "",
+                "test": "OpposedTest",
+                "attribute": "willpower",
+                "attribute2": "firewall",
+                "skill": "",
+                "armor": false,
+                "mod": 0,
+                "description": "",
+                "resist": {
+                    "test": "",
+                    "skill": "",
+                    "attribute": "",
+                    "attribute2": "",
+                    "armor": false,
+                    "mod": 0
+                }
+            },
+            "followed": {
+                "test": "",
+                "attribute": "",
+                "attribute2": "",
+                "skill": "",
+                "armor": false,
+                "mod": 0
+            },
+            "modifiers": []
+        },
+        "result": {
+            "success": {
+                "matrix": {
+                    "placeMarks": false
+                }
+            }
+        },
+        "importFlags": {
+            "name": "",
+            "type": "",
+            "subType": "",
+            "isFreshImport": false,
+            "isImported": false
+        }
+    },
+    "effects": [],
+    "folder": null,
+    "flags": {
+        "exportSource": {
+            "world": "sr6-elysium-test-bed",
+            "system": "shadowrun6-elysium",
+            "coreVersion": "12.331",
+            "systemVersion": "0.23.2"
+        }
+    },
+    "_stats": {
+        "coreVersion": "12.331",
+        "systemId": "shadowrun6-elysium",
+        "systemVersion": "0.23.2",
+        "createdTime": 1735425978172,
+        "modifiedTime": 1735426231340,
+        "lastModifiedBy": "HL2sP4F1F1Sm60cA"
+    }
+}

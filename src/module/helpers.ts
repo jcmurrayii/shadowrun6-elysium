@@ -574,6 +574,20 @@ export class Helpers {
         return actor.name as string;
     }
 
+    static getDefenseRating(targets: SR6Actor[]): number {
+        let defenseRating = 0;
+        for(const target of targets) {
+            if ('armor' in target.system && target.system.armor.value > defenseRating) {
+                defenseRating = target.system.armor.value;
+            }
+        }
+        return defenseRating;
+    }
+
+    static getAttackRating(actor: SR6Actor): number {
+        return 0;
+    }
+
     /**
      * Given an actor this will display either the actor or token name, when there is any.
      *

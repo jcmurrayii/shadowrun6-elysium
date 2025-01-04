@@ -270,6 +270,7 @@
         },
         "Karma": "Karma",
         "Range": "Range",
+        "AttackRating": "Attack Rating",
         "Ranges": {
             "LineOfSight": "Line Of Sight",
             "LineOfSightArea": "Line Of Sight (A)",
@@ -1436,6 +1437,7 @@
             "Long": "Long",
             "Medium": "Medium",
             "Ranges": "Ranges",
+            "AttackRating": "Attack Rating",
             "Short": "Short"
         },
         "Reach": "Reach",

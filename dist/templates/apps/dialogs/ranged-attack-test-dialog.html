@@ -9,17 +9,6 @@
                     value="{{test.item.system.ammo.current.value}}/{{test.item.system.ammo.current.max}}"/>
             </div>
             <div class="form-group">
-                <label data-tooltip="SR6.Tooltips.RangedAttack.RecoilCompensation">{{localize 'SR6.RecoilCompensation'}}</label>
-                <input type="text" class="disabled-for-display" disabled
-                    value="{{test.item.totalRecoilCompensation}}"/>
-            </div>
-            <div class="form-group">
-                <label data-tooltip="SR6.Tooltips.RangedAttack.Recoil">{{localize 'SR6.Recoil'}}</label>
-                <div class="form-group-element-2">
-                    <span data-tooltip="SR6.Tooltips.RangedAttack.RecoilBeforeAttack">{{test.recoilBeforeAttack}}</span><span data-tooltip="SR6.Tooltips.RangedAttack.RecoilAfterAttack"> => {{test.recoilAfterAttack}}</span></div>
-                <div id="reset-progressive-recoil" class="form-group-element-1-right roll" data-tooltip="SR6.Tooltips.RangedAttack.ResetRecoil"><button>Reset</button></div>
-            </div>
-            <div class="form-group">
                 <label>{{localize 'SR6.FireMode'}}</label>
                 <select name="test.data.fireModeSelected">
                     {{#select test.data.fireModeSelected}}

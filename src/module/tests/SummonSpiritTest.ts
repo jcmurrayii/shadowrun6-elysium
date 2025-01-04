@@ -1,4 +1,4 @@
-import { SR5 } from './../config';
+import { SR6 } from './../config';
 import { DataDefaults } from "../data/DataDefaults";
 import { SuccessTest, SuccessTestData } from "./SuccessTest";
 import { PartsList } from '../parts/PartsList';
@@ -27,10 +27,10 @@ interface SummonSpiritTestData extends SuccessTestData {
 
 /**
  * Summoning a spirit is described in SR5#300.
- * 
+ *
  * NOTE: While we need spell casting data, we don't need general spell casting flow.
  *       This is due to spell casting operating on spell items, while summoning is a call_in_action item.
- * 
+ *
  * Summoning uses the default Success Test, Opposed Test and Followup Flow.
  */
 export class SummonSpiritTest extends SuccessTest<SummonSpiritTestData> {
@@ -70,7 +70,7 @@ export class SummonSpiritTest extends SuccessTest<SummonSpiritTestData> {
 
     /**
      * Skill + Attribute [Limit] as defined in SR5#300 'Attempt summoning'
-     * 
+     *
      * Limit 'force' is a dynamic test value, so it's missing here as it can't be taken from actor values.
      */
     static override _getDefaultTestAction(): Partial<Shadowrun.MinimalActionData> {
@@ -125,13 +125,13 @@ export class SummonSpiritTest extends SuccessTest<SummonSpiritTestData> {
 
     /**
      * Calculate limit based on force selected by user.
-     * 
+     *
      * According to SR5#300 'Summoning' and SR5#316 'Reagents'.
      */
     prepareLimitValue() {
         const force = Number(this.data.force);
         const reagent = Number(this.data.reagent);
-        const label = SpellcastingRules.limitIsReagentInsteadOfForce(reagent) ? 
+        const label = SpellcastingRules.limitIsReagentInsteadOfForce(reagent) ?
             'SR6.Reagent' : 'SR6.Force';
         const limit = SpellcastingRules.calculateLimit(force, reagent);
 
@@ -174,7 +174,7 @@ export class SummonSpiritTest extends SuccessTest<SummonSpiritTestData> {
 
     /**
      * Derive the actual drain damage from spellcasting values.
-     * 
+     *
      * NOTE: This will be called by the opposing test via a follow up test action.
      */
     calcDrain(opposingHits: number) {
@@ -188,7 +188,7 @@ export class SummonSpiritTest extends SuccessTest<SummonSpiritTestData> {
 
         const magic = this.actor.getAttribute('magic').value;
         const force = this.data.force;
-        
+
         return ConjuringRules.calcDrainDamage(opposingHits, force, magic);
     }
 

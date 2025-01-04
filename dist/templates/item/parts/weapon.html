@@ -89,37 +89,47 @@
             <select name="system.range.ranges.category" class="select-ranged-range-category">
                 {{#each config.weaponRangeCategories as |val key|}}
                 <option value="{{key}}" {{#ife ../system.range.ranges.category key}}selected="selected" {{/ife}}>
-                    {{localize val.label}}</option>
+                {{localize val.label}}</option>
                 {{/each}}
             </select>
             <input size="3" type="text" name="system.range.ranges.short" value="{{system.range.ranges.short}}"
-                data-dtype="Number" {{#if this.isUsingRangeCategory}} disabled {{/if}} />
+                   data-dtype="Number" {{#if this.isUsingRangeCategory}} disabled {{/if}} />
             /
             <input size="3" type="text" name="system.range.ranges.medium" value="{{system.range.ranges.medium}}"
-                data-dtype="Number" {{#if this.isUsingRangeCategory}} disabled {{/if}} />
+                   data-dtype="Number" {{#if this.isUsingRangeCategory}} disabled {{/if}} />
             /
             <input size="3" type="text" name="system.range.ranges.long" value="{{system.range.ranges.long}}"
-                data-dtype="Number" {{#if this.isUsingRangeCategory}} disabled {{/if}} />
+                   data-dtype="Number" {{#if this.isUsingRangeCategory}} disabled {{/if}} />
             /
             <input size="3" type="text" name="system.range.ranges.extreme" value="{{system.range.ranges.extreme}}"
-                data-dtype="Number" {{#if this.isUsingRangeCategory}} disabled {{/if}} />
+                   data-dtype="Number" {{#if this.isUsingRangeCategory}} disabled {{/if}} />
             <i class="fas fa-times"></i>
             <select name="system.range.ranges.attribute" {{#if this.isUsingRangeCategory}} disabled {{/if}}>
-                {{#select system.range.ranges.attribute}}
-                <option value=""></option>
-                {{#each config.attributes as |name type|}}
-                <option value="{{type}}">{{localize name}}</option>
-                {{/each}} {{/select}}
+            {{#select system.range.ranges.attribute}}
+            <option value=""></option>
+            {{#each config.attributes as |name type|}}
+            <option value="{{type}}">{{localize name}}</option>
+            {{/each}} {{/select}}
             </select>
         </div>
     </div>
     <div class="form-line">
         <div class="label">
-            {{localize "SR6.RecoilCompensation"}}
+            {{localize "SR6.Weapon.Range.AttackRating"}}
         </div>
-        <div class="inputs">
-            <input type="text" size="2" name="system.range.rc.base" value="{{system.range.rc.base}}" data-dtype="Number"
-                placeholder="1" />
+        <div class="inputs ranges">
+            <input size="3" type="text" name="system.range.attackRating.short" value="{{system.range.attackRating.short}}"
+                   data-dtype="Number" />
+            /
+            <input size="3" type="text" name="system.range.attackRating.medium" value="{{system.range.attackRating.medium}}"
+                   data-dtype="Number" />
+            /
+            <input size="3" type="text" name="system.range.attackRating.long" value="{{system.range.attackRating.long}}"
+                   data-dtype="Number" />
+            /
+            <input size="3" type="text" name="system.range.attackRating.extreme" value="{{system.range.attackRating.extreme}}"
+                   data-dtype="Number" />
+            <i class="fas fa-times"></i>
         </div>
     </div>
     {{/ife}} {{#ife system.category "thrown"}}

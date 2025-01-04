@@ -154,7 +154,6 @@ export class SR6ActiveEffectConfig extends ActiveEffectConfig {
         const inputElement = html.find('input#test-selection').get(0) as HTMLInputElement;
 
         // Tagify expects this format for localized tags.
-        // @ts-expect-error TODO: I've been lazy and need proper typing of class SuccessTest
         const values = Object.values(game['shadowrun6-elysium'].tests).map(((test: any) => ({
             label: test.label, id: test.name
         })));

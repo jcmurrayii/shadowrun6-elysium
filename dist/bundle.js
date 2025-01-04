@@ -9429,7 +9429,7 @@ var DataDefaults = class {
   }
   /**
    * Return a base item data structure with minimal necessary FoundryVTT ItemDataModel fields.
-   * 
+   *
    * @param name Whatever name you want to give but not ''.
    * @param type Whatever item type you want to have
    * @param systemData Whatever partial item system data you want to inject into general model system data.
@@ -9448,7 +9448,7 @@ var DataDefaults = class {
   }
   /**
    * Damage data to hold everything around damaging actors.
-   * 
+   *
    * @param partialDamageData give partial DamageData fields to overwrite default values
    */
   static damageData(partialDamageData = {}) {
@@ -9484,7 +9484,7 @@ var DataDefaults = class {
   }
   /**
    * Armor data used within actor documents.
-   * 
+   *
    * @param partialActorArmorData Inject partial armor data
    */
   static actorArmor(partialActorArmorData = {}) {
@@ -9502,7 +9502,7 @@ var DataDefaults = class {
   }
   /**
    * Build a minimal viable action roll data structure.
-   * 
+   *
    * @param partialActionData Inject any minimal action property
    */
   static minimalActionData(partialActionData = {}) {
@@ -9522,11 +9522,11 @@ var DataDefaults = class {
   }
   /**
    * Build a action data capable of rolling a test.
-   * 
+   *
    * This is used instead of game.model.Item.action.action as fields like armor don't mesh well with TestCreator._mergeMinimalActionDataInOrder
-   * 
-   * @param partialActionRollData 
-   * @returns 
+   *
+   * @param partialActionRollData
+   * @returns
    */
   static actionRollData(partialActionRollData = {}) {
     return foundry.utils.mergeObject({
@@ -9572,23 +9572,8 @@ var DataDefaults = class {
     }, partialActionRollData);
   }
   /**
-   * Build a full limit value field for use in document data
-   * 
-   * @param partialLimitField Inject any limit property
-   */
-  static limitField(partialLimitField = {}) {
-    return foundry.utils.mergeObject({
-      value: 0,
-      base: 0,
-      attribute: "",
-      label: "",
-      hidden: false,
-      mod: []
-    }, partialLimitField);
-  }
-  /**
    * Build a skill field for use in document data
-   * 
+   *
    * @param partialSkillData Inject any skill property
    */
   static skillData(partialSkillData = {}) {
@@ -9608,7 +9593,7 @@ var DataDefaults = class {
   /**
    * Build a damage track field for use in document data.
    * @param partialTrackData Injet any track property
-   * @returns 
+   * @returns
    */
   static trackData(partialTrackData = {}) {
     return foundry.utils.mergeObject({
@@ -9622,14 +9607,14 @@ var DataDefaults = class {
   }
   /**
    * Data structure used to reference other document types.
-   * 
+   *
    * Example usage:
    * Host references other IC actors it's able to start in combat.
-   * 
+   *
    * TODO: This uses the v8 old style Document.id pattern instead of v9 style uuid pattern.
-   * 
-   * @param partialSourceEntityData 
-   * @returns 
+   *
+   * @param partialSourceEntityData
+   * @returns
    */
   static sourceItemData(partialSourceEntityData = {}) {
     return foundry.utils.mergeObject({
@@ -9643,7 +9628,7 @@ var DataDefaults = class {
   }
   /**
    * Build a numerical value field for use anywhere necessary
-   * 
+   *
    * @param partialValueData Inject any value property
    */
   static valueData(partialValueData = {}) {
@@ -9671,7 +9656,7 @@ var DataDefaults = class {
   }
   /**
    * Build a fire mode field for use in range weapon data or testing
-   * 
+   *
    * @param partialFireModeData Inject any fire mode property
    */
   static fireModeData(partialFireModeData = {}) {
@@ -9696,9 +9681,9 @@ var DataDefaults = class {
   }
   /**
    * Build a description data segment
-   * 
-   * @param partialDescriptionData 
-   * @returns 
+   *
+   * @param partialDescriptionData
+   * @returns
    */
   static descriptionData(partialDescriptionData = {}) {
     return foundry.utils.mergeObject({
@@ -9709,9 +9694,9 @@ var DataDefaults = class {
   }
   /**
    * Build a technology data segment
-   * 
-   * @param partialTechnologyData 
-   * @returns 
+   *
+   * @param partialTechnologyData
+   * @returns
    */
   static technologyData(partialTechnologyData = {}) {
     return foundry.utils.mergeObject({
@@ -9736,7 +9721,7 @@ var DataDefaults = class {
   }
   /**
    * Build a attribute data segment.
-   * 
+   *
    * @param partialAttributeData
    * @returns Merged of partial and basic attribute data
    */
@@ -10332,7 +10317,7 @@ var SR6Roll = class extends Roll {
 };
 
 // src/module/config.ts
-var SR62 = {
+var SR6 = {
   itemTypes: {
     action: "SR6.ItemTypes.Action",
     adept_power: "SR6.ItemTypes.AdeptPower",
@@ -11738,7 +11723,7 @@ var ActionFlow = class _ActionFlow {
    */
   static sortedActiveSkills(actor, skillName) {
     if (!actor || actor.isIC()) {
-      const globalSkills = foundry.utils.deepClone(SR62.activeSkills);
+      const globalSkills = foundry.utils.deepClone(SR6.activeSkills);
       _ActionFlow._injectMissingCustomSkill(globalSkills, skillName);
       return Helpers.sortConfigValuesByTranslation(globalSkills);
     }
@@ -12148,7 +12133,7 @@ var TestCreator = {
       }
     }
     for (const [name3, applicable] of Object.entries(modifiers)) {
-      const label = SR62.modifierTypes[name3];
+      const label = SR6.modifierTypes[name3];
       const options = { applicable };
       const value = actor.modifiers.totalFor(name3, options);
       data.modifiers.mod = PartsList.AddUniquePart(data.modifiers.mod, label, value);
@@ -12276,11 +12261,11 @@ var ChatData = {
   call_in_action: /* @__PURE__ */ __name((system, labels, props) => {
     switch (system.actor_type) {
       case "sprite":
-        if (system.sprite.type) props.push(`${game.i18n.localize("SR6.Compilation.SpriteType")} ${game.i18n.localize(SR62.spriteTypes[system.sprite.type])}`);
+        if (system.sprite.type) props.push(`${game.i18n.localize("SR6.Compilation.SpriteType")} ${game.i18n.localize(SR6.spriteTypes[system.sprite.type])}`);
         if (system.sprite.level) props.push(`${game.i18n.localize("SR6.Level")} ${system.sprite.level}`);
         return;
       case "spirit":
-        if (system.spirit.type) props.push(`${game.i18n.localize("SR6.Summoning.SpiritType")} ${game.i18n.localize(SR62.spiritTypes[system.spirit.type])}`);
+        if (system.spirit.type) props.push(`${game.i18n.localize("SR6.Summoning.SpiritType")} ${game.i18n.localize(SR6.spiritTypes[system.spirit.type])}`);
         if (system.spirit.force) props.push(`${game.i18n.localize("SR6.Force")} ${system.spirit.force}`);
         return;
     }
@@ -12311,11 +12296,11 @@ var ChatData = {
         else if (opposed.attribute) labels.opposedRoll = `vs. ${Helpers.label(opposed.attribute)}`;
       }
       if (system.action.type !== "" && system.action.type !== "varies" && system.action.type !== "none") {
-        props.push(`${Helpers.label(`${game.i18n.localize(SR62.actionTypes[system.action.type])}`)} ${game.i18n.localize("SR6.Action")}`);
+        props.push(`${Helpers.label(`${game.i18n.localize(SR6.actionTypes[system.action.type])}`)} ${game.i18n.localize("SR6.Action")}`);
       }
       if (system.action.limit) {
         const { limit } = system.action;
-        const attribute = limit.attribute ? `[${game.i18n.localize(SR62.limits[limit.attribute])}]` : "";
+        const attribute = limit.attribute ? `[${game.i18n.localize(SR6.limits[limit.attribute])}]` : "";
         const limitVal = limit.value ? limit.value : "";
         let limitStr = "";
         if (attribute) {
@@ -12335,28 +12320,28 @@ var ChatData = {
         const { damage } = system.action;
         let damageString = "";
         let elementString = "";
-        let operator = SR62.actionDamageFormulaOperators[damage.base_formula_operator] ?? "";
-        let attribute = damage.attribute ? `${game.i18n.localize(SR62.attributes[damage.attribute])} ${operator} ` : "";
+        let operator = SR6.actionDamageFormulaOperators[damage.base_formula_operator] ?? "";
+        let attribute = damage.attribute ? `${game.i18n.localize(SR6.attributes[damage.attribute])} ${operator} ` : "";
         if (damage.value || attribute) {
-          const type = damage.type.value ? game.i18n.localize(SR62.damageTypes[damage.type.value]).toUpperCase().charAt(0) : "";
+          const type = damage.type.value ? game.i18n.localize(SR6.damageTypes[damage.type.value]).toUpperCase().charAt(0) : "";
           damageString = `${game.i18n.localize("SR6.DV")} ${attribute}${damage.value}${type}`;
         }
         if (damage.element.value) {
           if (damage.value) {
             if (damage.element.value === "electricity") {
-              damageString += ` (${game.i18n.localize(SR62.elementTypes.electricity).toLowerCase().charAt(0)})`;
+              damageString += ` (${game.i18n.localize(SR6.elementTypes.electricity).toLowerCase().charAt(0)})`;
             } else {
-              elementString = Helpers.label(game.i18n.localize(SR62.elementTypes[damage.element.value]));
+              elementString = Helpers.label(game.i18n.localize(SR6.elementTypes[damage.element.value]));
             }
           } else {
-            elementString = Helpers.label(game.i18n.localize(SR62.elementTypes[damage.element.value]));
+            elementString = Helpers.label(game.i18n.localize(SR6.elementTypes[damage.element.value]));
           }
         }
         if (damageString) props.push(damageString);
         if (elementString) props.push(elementString);
         const ap = damage.ap;
-        operator = SR62.actionDamageFormulaOperators[ap.base_formula_operator] ?? "";
-        attribute = ap.attribute ? `${game.i18n.localize(SR62.attributes[ap.attribute])} ${operator} ` : "";
+        operator = SR6.actionDamageFormulaOperators[ap.base_formula_operator] ?? "";
+        attribute = ap.attribute ? `${game.i18n.localize(SR6.attributes[ap.attribute])} ${operator} ` : "";
         if (ap.value || attribute) {
           props.push(`${game.i18n.localize("SR6.AP")} ${attribute}${damage.ap.value}`);
         }
@@ -12381,7 +12366,7 @@ var ChatData = {
     }
   }, "contact"),
   lifestyle: /* @__PURE__ */ __name((system, labels, props) => {
-    props.push(game.i18n.localize(SR62.lifestyleTypes[system.type]));
+    props.push(game.i18n.localize(SR6.lifestyleTypes[system.type]));
     if (system.cost) props.push(`\xA5${system.cost}`);
     if (system.comforts) props.push(`${game.i18n.localize("SR6.LifestyleComforts")} ${system.comforts}`);
     if (system.security) props.push(`${game.i18n.localize("SR6.LifestyleSecurity")} ${system.security}`);
@@ -12391,7 +12376,7 @@ var ChatData = {
   adept_power: /* @__PURE__ */ __name((system, labels, props) => {
     ChatData.action(system, labels, props);
     props.push(`${game.i18n.localize("SR6.PP")} ${system.pp}`);
-    props.push(Helpers.label(game.i18n.localize(SR62.adeptPower.types[system.type])));
+    props.push(Helpers.label(game.i18n.localize(SR6.adeptPower.types[system.type])));
   }, "adept_power"),
   armor: /* @__PURE__ */ __name((system, labels, props) => {
     if (system.armor) {
@@ -12404,19 +12389,19 @@ var ChatData = {
     }
   }, "armor"),
   ammo: /* @__PURE__ */ __name((system, labels, props) => {
-    if (system.damageType) props.push(`${game.i18n.localize("SR6.DamageType")} ${game.i18n.localize(SR62.damageTypes[system.damageType])}`);
+    if (system.damageType) props.push(`${game.i18n.localize("SR6.DamageType")} ${game.i18n.localize(SR6.damageTypes[system.damageType])}`);
     if (system.damage) props.push(`${game.i18n.localize("SR6.DamageValue")} ${system.damage}`);
-    if (system.element) props.push(`${game.i18n.localize("SR6.Element")} ${game.i18n.localize(SR62.elementTypes[system.element])}`);
+    if (system.element) props.push(`${game.i18n.localize("SR6.Element")} ${game.i18n.localize(SR6.elementTypes[system.element])}`);
     if (system.ap) props.push(`${game.i18n.localize("SR6.AP")} ${system.ap}`);
     if (system.blast.radius) props.push(`${game.i18n.localize("SR6.BlastRadius")} ${system.blast.radius}m`);
     if (system.blast.dropoff) props.push(`${game.i18n.localize("SR6.Dropoff")} ${system.blast.dropoff}/m`);
   }, "ammo"),
   program: /* @__PURE__ */ __name((system, labels, props) => {
-    props.push(game.i18n.localize(SR62.programTypes[system.type]));
+    props.push(game.i18n.localize(SR6.programTypes[system.type]));
   }, "program"),
   complex_form: /* @__PURE__ */ __name((system, labels, props) => {
     ChatData.action(system, labels, props);
-    props.push(game.i18n.localize(SR62.matrixTargets[system.target]));
+    props.push(game.i18n.localize(SR6.matrixTargets[system.target]));
     props.push(`${system.duration}`);
     const { fade } = system;
     if (fade > 0) props.push(`${game.i18n.localize("SR6.Fade")} ${game.i18n.localize("SR6.Level").charAt(0)}+${fade}`);
@@ -12437,12 +12422,12 @@ var ChatData = {
     if (system.technology && system.technology.rating) props.push(`${game.i18n.localize("SR6.Rating")} ${system.technology.rating}`);
     if (system.category === "cyberdeck" || system.category === "rcc") {
       for (const attribute of Object.values(system.atts)) {
-        props.push(`${Helpers.label(`${game.i18n.localize(SR62.matrixAttributes[attribute.att])}`)} ${attribute.value}`);
+        props.push(`${Helpers.label(`${game.i18n.localize(SR6.matrixAttributes[attribute.att])}`)} ${attribute.value}`);
       }
     }
     if (system.category === "commlink") {
       for (const attribute of Object.values(system.atts)) {
-        if (attribute.value) props.push(`${Helpers.label(`${game.i18n.localize(SR62.matrixAttributes[attribute.att])}`)} ${attribute.value}`);
+        if (attribute.value) props.push(`${Helpers.label(`${game.i18n.localize(SR6.matrixAttributes[attribute.att])}`)} ${attribute.value}`);
       }
     }
   }, "device"),
@@ -12452,41 +12437,41 @@ var ChatData = {
   }, "equipment"),
   quality: /* @__PURE__ */ __name((system, labels, props) => {
     ChatData.action(system, labels, props);
-    props.push(Helpers.label(game.i18n.localize(SR62.qualityTypes[system.type])));
+    props.push(Helpers.label(game.i18n.localize(SR6.qualityTypes[system.type])));
     if (system.rating) props.push(`${game.i18n.localize("SR6.Rating")} ${system.rating}`);
   }, "quality"),
   sprite_power: /* @__PURE__ */ __name((system, labels, props) => {
     ChatData.action(system, labels, props);
   }, "sprite_power"),
   critter_power: /* @__PURE__ */ __name((system, labels, props) => {
-    props.push(game.i18n.localize(SR62.critterPower.types[system.powerType]));
-    props.push(game.i18n.localize(SR62.critterPower.durations[system.duration]));
-    props.push(game.i18n.localize(SR62.critterPower.ranges[system.range]));
+    props.push(game.i18n.localize(SR6.critterPower.types[system.powerType]));
+    props.push(game.i18n.localize(SR6.critterPower.durations[system.duration]));
+    props.push(game.i18n.localize(SR6.critterPower.ranges[system.range]));
     if (system.rating) props.push(`${game.i18n.localize("SR6.Rating")} ${system.rating}`);
     ChatData.action(system, labels, props);
   }, "critter_power"),
   // add properties for spell data, follow order in book
   spell: /* @__PURE__ */ __name((system, labels, props) => {
-    props.push(game.i18n.localize(SR62.spellCategories[system.category]), game.i18n.localize(SR62.spellTypes[system.type]));
+    props.push(game.i18n.localize(SR6.spellCategories[system.category]), game.i18n.localize(SR6.spellTypes[system.type]));
     if (system.category === "combat") {
-      props.push(game.i18n.localize(SR62.combatSpellTypes[system.combat.type]));
+      props.push(game.i18n.localize(SR6.combatSpellTypes[system.combat.type]));
     } else if (system.category === "health") {
     } else if (system.category === "illusion") {
-      props.push(game.i18n.localize(SR62.illusionSpellTypes[system.illusion.type]));
-      props.push(game.i18n.localize(SR62.illusionSpellSenses[system.illusion.sense]));
+      props.push(game.i18n.localize(SR6.illusionSpellTypes[system.illusion.type]));
+      props.push(game.i18n.localize(SR6.illusionSpellSenses[system.illusion.sense]));
     } else if (system.category === "manipulation") {
       if (system.manipulation.damaging) props.push(game.i18n.localize("SR6.Spell.ManipulationDamaging"));
       if (system.manipulation.mental) props.push(game.i18n.localize("SR6.Spell.ManipulationMental"));
       if (system.manipulation.environmental) props.push(game.i18n.localize("SR6.Spell.ManipulationEnvironmental"));
       if (system.manipulation.physical) props.push(game.i18n.localize("SR6.Spell.ManipulationPhysical"));
     } else if (system.category === "detection") {
-      props.push(game.i18n.localize(SR62.detectionSpellTypes[system.detection.type]));
+      props.push(game.i18n.localize(SR6.detectionSpellTypes[system.detection.type]));
       props.push(system.detection.passive ? game.i18n.localize("SR6.Passive") : game.i18n.localize("SR6.Active"));
       if (system.detection.extended) props.push(game.i18n.localize("SR6.DetectionSpellExtended"));
     }
-    props.push(game.i18n.localize(SR62.spellRanges[system.range]));
+    props.push(game.i18n.localize(SR6.spellRanges[system.range]));
     ChatData.action(system, labels, props);
-    props.push(game.i18n.localize(SR62.durations[system.duration]));
+    props.push(game.i18n.localize(SR6.durations[system.duration]));
     const { drain } = system;
     if (drain > 0) props.push(game.i18n.format("SR6.QuickInfo.DrainForce", { sign: "+", drain }));
     else if (drain < 0) props.push(game.i18n.format("SR6.QuickInfo.DrainForce", { sign: "", drain }));
@@ -12494,7 +12479,7 @@ var ChatData = {
     labels.roll = "Cast";
   }, "spell"),
   ritual: /* @__PURE__ */ __name((system, labels, props) => {
-    props.push(game.i18n.localize(SR62.spellTypes[system.type]));
+    props.push(game.i18n.localize(SR6.spellTypes[system.type]));
     props.push(system.descriptors);
     ChatData.action(system, labels, props);
   }, "ritual"),
@@ -12539,7 +12524,7 @@ var ChatData = {
       }
       if (system.range.ranges) {
         const { short, medium, long, extreme, category: category3, attribute } = system.range.ranges;
-        const categoryLabel = game.i18n.localize(SR62.weaponRangeCategories[category3]?.label ?? "");
+        const categoryLabel = game.i18n.localize(SR6.weaponRangeCategories[category3]?.label ?? "");
         let output = `${categoryLabel} (${short}/${medium}/${long}/${extreme})`;
         if (attribute) {
           output += `/${attribute}`;
@@ -13837,7 +13822,7 @@ var TestDialog = class extends FormDialog {
     data.rollMode = data.test.data.options?.rollMode;
     data.rollModes = CONFIG.Dice.rollModes;
     data.default = "roll";
-    data.config = SR62;
+    data.config = SR6;
     return data;
   }
   /**
@@ -16779,7 +16764,7 @@ var SuccessTest = class _SuccessTest {
     return { name: name3, value };
   }
   _getModifierTypeLabel(type) {
-    return SR62.modifierTypes[type];
+    return SR6.modifierTypes[type];
   }
   /**
    * Allow subclasses to alter test modifiers based on the item used for casting.
@@ -18338,7 +18323,7 @@ var UpdateActionFlow = {
       foundry.utils.setProperty(applyData, "system.action.test", "");
       return;
     }
-    const test = SR62.weaponCategoryActiveTests[changeData.system.category];
+    const test = SR6.weaponCategoryActiveTests[changeData.system.category];
     if (!test) {
       console.error(`Shadowrun 5 | There is no active test configured for the weapon category ${changeData.system.category}.`, changeData);
     }
@@ -18355,10 +18340,10 @@ var UpdateActionFlow = {
       foundry.utils.setProperty(applyData, "system.action.test", "");
       return;
     }
-    const test = SR62.activeTests[type];
-    const opposedTest = SR62.opposedTests[type][changeData.system.category] || "OpposedTest";
-    const resistTest = SR62.opposedResistTests[type][changeData.system.category] || "";
-    const drainTest = SR62.followedTests[test] ?? "";
+    const test = SR6.activeTests[type];
+    const opposedTest = SR6.opposedTests[type][changeData.system.category] || "OpposedTest";
+    const resistTest = SR6.opposedResistTests[type][changeData.system.category] || "";
+    const drainTest = SR6.followedTests[test] ?? "";
     foundry.utils.setProperty(applyData, "system.action.test", test);
     foundry.utils.setProperty(applyData, "system.action.opposed.test", opposedTest);
     foundry.utils.setProperty(applyData, "system.action.opposed.resist.test", resistTest);
@@ -18368,7 +18353,7 @@ var UpdateActionFlow = {
    * See injectActionTestsIntoChangeData for documentation.
    */
   injectComplexFormTestIntoChangeData(type, changeData, applyData) {
-    const test = SR62.activeTests[type];
+    const test = SR6.activeTests[type];
     foundry.utils.setProperty(applyData, "system.action.test", test);
   },
   /**
@@ -19733,7 +19718,7 @@ var ModifiersPrep = class _ModifiersPrep {
   static clearAttributeMods(system) {
     const { attributes } = system;
     for (const [name3, attribute] of Object.entries(attributes)) {
-      if (!SR62.attributes.hasOwnProperty(name3) || !attribute) return;
+      if (!SR6.attributes.hasOwnProperty(name3) || !attribute) return;
       attribute.mod = [];
     }
   }
@@ -19744,7 +19729,7 @@ var ModifiersPrep = class _ModifiersPrep {
   static clearLimitMods(system) {
     const { limits } = system;
     for (const [name3, limit] of Object.entries(limits)) {
-      if (!SR62.limits.hasOwnProperty(name3) || !limit) return;
+      if (!SR6.limits.hasOwnProperty(name3) || !limit) return;
       limit.mod = [];
     }
   }
@@ -19776,7 +19761,7 @@ var ItemPrep = class {
     const { armor: armor3 } = system;
     armor3.base = 0;
     armor3.value = 0;
-    for (const element of Object.keys(SR62.elementTypes)) {
+    for (const element of Object.keys(SR6.elementTypes)) {
       armor3[element] = 0;
     }
     const armorModParts = new PartsList(armor3.mod);
@@ -19794,7 +19779,7 @@ var ItemPrep = class {
           }
         }
       }
-      for (const element of Object.keys(SR62.elementTypes)) {
+      for (const element of Object.keys(SR6.elementTypes)) {
         armor3[element] += item.getArmorElements()[element];
       }
     });
@@ -19842,9 +19827,9 @@ var AttributesPrep = class _AttributesPrep {
    * @param attribute The AttributeField to prepare
    */
   static prepareAttribute(name3, attribute, ranges) {
-    if (!SR62.attributes.hasOwnProperty(name3) || !attribute) return;
+    if (!SR6.attributes.hasOwnProperty(name3) || !attribute) return;
     _AttributesPrep.calculateAttribute(name3, attribute, ranges);
-    attribute.label = SR62.attributes[name3];
+    attribute.label = SR6.attributes[name3];
   }
   /**
    * Calculate a single attributes value with all it's ranges and rules applied.
@@ -19853,7 +19838,7 @@ var AttributesPrep = class _AttributesPrep {
    * @param attribute The attribute will be modified in place
    */
   static calculateAttribute(name3, attribute, ranges) {
-    if (!SR62.attributes.hasOwnProperty(name3) || !attribute) return;
+    if (!SR6.attributes.hasOwnProperty(name3) || !attribute) return;
     const range = ranges ? ranges[name3] : SR.attributes.ranges[name3];
     Helpers.calcTotal(attribute, range);
   }
@@ -19938,7 +19923,7 @@ var MatrixPrep = class _MatrixPrep {
    */
   static prepareMatrixToLimitsAndAttributes(system) {
     const { matrix, attributes, limits } = system;
-    Object.keys(SR62.matrixAttributes).forEach((attributeName) => {
+    Object.keys(SR6.matrixAttributes).forEach((attributeName) => {
       if (!matrix.hasOwnProperty(attributeName)) {
         return console.error(`SR6Actor matrix preparation failed due to missing matrix attributes`);
       }
@@ -20069,7 +20054,7 @@ var SkillsPrep = class {
       }, {});
     }
     for (let [skillKey, skillValue] of Object.entries(active3)) {
-      skillValue.label = SR62.activeSkills[skillKey];
+      skillValue.label = SR6.activeSkills[skillKey];
     }
   }
 };
@@ -20209,7 +20194,7 @@ var ConditionMonitorsPrep = class _ConditionMonitorsPrep {
     const { track, attributes, modifiers } = system;
     track.stun.base = 8 + Math.ceil(attributes.willpower.value / 2);
     track.stun.max = track.stun.base + Number(modifiers.stun_track);
-    track.stun.label = SR62.damageTypes.stun;
+    track.stun.label = SR6.damageTypes.stun;
     track.stun.disabled = false;
   }
   static preparePhysical(system) {
@@ -20217,7 +20202,7 @@ var ConditionMonitorsPrep = class _ConditionMonitorsPrep {
     track.physical.base = 8 + Math.ceil(attributes.body.value / 2);
     track.physical.max = track.physical.base + Number(modifiers.physical_track);
     track.physical.overflow.max = attributes.body.value + Number(modifiers.physical_overflow_track);
-    track.physical.label = SR62.damageTypes.physical;
+    track.physical.label = SR6.damageTypes.physical;
     track.physical.disabled = false;
   }
   static prepareGrunt(system) {
@@ -20411,8 +20396,8 @@ var SpiritPrep = class _SpiritPrep {
    */
   static prepareActiveSkill(skillId, skills) {
     if (skills[skillId]) return skills[skillId];
-    const label = SR62.activeSkills[skillId];
-    const attribute = SR62.activeSkillAttribute[skillId];
+    const label = SR6.activeSkills[skillId];
+    const attribute = SR6.activeSkillAttribute[skillId];
     return DataDefaults.skillData({ label, attribute, canDefault: false });
   }
   static prepareSpiritArmor(data) {
@@ -21160,7 +21145,7 @@ var VehiclePrep = class _VehiclePrep {
       if (stat.temp) parts.addUniquePart("SR6.Temporary", stat.temp);
       stat.mod = parts.list;
       Helpers.calcTotal(stat);
-      stat.label = SR62.vehicle.stats[key];
+      stat.label = SR6.vehicle.stats[key];
     }
     if (isOffRoad) {
       vehicle_stats.off_road_speed.hidden = false;
@@ -21239,7 +21224,7 @@ var VehiclePrep = class _VehiclePrep {
       track.physical.base = 12 + halfBody;
       track.physical.max = track.physical.base + (Number(modifiers["physical_track"]) || 0);
     }
-    track.physical.label = SR62.damageTypes.physical;
+    track.physical.label = SR6.damageTypes.physical;
     const rating = matrix.rating || 0;
     matrix.condition_monitor.max = 8 + Math.ceil(rating / 2) + Number(modifiers.matrix_track);
   }
@@ -21364,12 +21349,12 @@ var FireModeRules = {
    * @returns A list of firemodes sorted by weapon mode and rounds necessary.
    */
   availableFireModes: /* @__PURE__ */ __name(function(rangedWeaponModes, ammoLeft) {
-    return SR62.fireModes.filter((fireMode) => rangedWeaponModes[fireMode.mode]).sort((modeA, modeB) => {
+    return SR6.fireModes.filter((fireMode) => rangedWeaponModes[fireMode.mode]).sort((modeA, modeB) => {
       if (modeA.mode === modeB.mode) {
         return modeA.value - modeB.value;
       }
-      const modeAIndex = SR62.rangeWeaponMode.indexOf(modeA.mode);
-      const modeBIndex = SR62.rangeWeaponMode.indexOf(modeB.mode);
+      const modeAIndex = SR6.rangeWeaponMode.indexOf(modeA.mode);
+      const modeBIndex = SR6.rangeWeaponMode.indexOf(modeB.mode);
       return modeAIndex > modeBIndex ? 1 : -1;
     });
   }, "availableFireModes")
@@ -22189,7 +22174,7 @@ var ICPrep = class _ICPrep {
     track.matrix.base = MatrixRules.getConditionMonitor(matrix.rating);
     track.matrix.mod = PartsList.AddUniquePart(track.matrix.mod, "SR6.Bonus", Number(modifiers["matrix_track"]));
     track.matrix.max = matrix.condition_monitor.max;
-    track.matrix.label = SR62.damageTypes.matrix;
+    track.matrix.label = SR6.damageTypes.matrix;
   }
   static prepareMatrixInit(system) {
     const { initiative, modifiers, host } = system;
@@ -22229,7 +22214,7 @@ var ICPrep = class _ICPrep {
   }
   static prepareMeatAttributes(system) {
     const { attributes, host } = system;
-    for (const id of Object.keys(SR62.attributes)) {
+    for (const id of Object.keys(SR6.attributes)) {
       if (!attributes.hasOwnProperty(id)) continue;
       if (["magic", "edge", "essence", "resonance"].includes(id)) continue;
       const attribute = attributes[id];
@@ -22245,7 +22230,7 @@ var ICPrep = class _ICPrep {
    */
   static prepareMatrixAttributes(system) {
     const { matrix } = system;
-    for (const id of Object.keys(SR62.matrixAttributes)) {
+    for (const id of Object.keys(SR6.matrixAttributes)) {
       if (!matrix.hasOwnProperty(id)) continue;
       const attribute = matrix[id];
       AttributesPrep.prepareAttribute(id, attribute);
@@ -23320,7 +23305,7 @@ var SR6Actor = class _SR6Actor extends Actor {
    * @param options Success Test options
    */
   async generalActionTest(actionName, options) {
-    return await this.packActionTest(SR62.packNames.generalActions, actionName, options);
+    return await this.packActionTest(SR6.packNames.generalActions, actionName, options);
   }
   /**
    * Roll an action as defined within the systems general action pack.
@@ -23329,7 +23314,7 @@ var SR6Actor = class _SR6Actor extends Actor {
    * @param options Success Test options
    */
   async rollGeneralAction(actionName, options) {
-    return await this.rollPackAction(SR62.packNames.generalActions, actionName, options);
+    return await this.rollPackAction(SR6.packNames.generalActions, actionName, options);
   }
   /**
    * Roll a skill test for a specific skill
@@ -23431,7 +23416,7 @@ var SR6Actor = class _SR6Actor extends Actor {
    * @param attribute
    */
   _isMatrixAttribute(attribute) {
-    return SR62.matrixAttributes.hasOwnProperty(attribute);
+    return SR6.matrixAttributes.hasOwnProperty(attribute);
   }
   /**
    * Add matrix modifier values to the given modifier parts from whatever Value as part of
@@ -24757,6 +24742,12 @@ var Helpers = class _Helpers {
     if (useTokenNameForChatOutput && token) return token.name;
     return actor.name;
   }
+  static getDefenseRating(targets) {
+    return 0;
+  }
+  static getAttackRating(actor) {
+    return 0;
+  }
   /**
    * Given an actor this will display either the actor or token name, when there is any.
    *
@@ -25239,6 +25230,8 @@ var registerRollAndLabelHelpers = /* @__PURE__ */ __name(() => {
   });
   Handlebars.registerHelper("speakerName", Helpers.getChatSpeakerName);
   Handlebars.registerHelper("speakerImg", Helpers.getChatSpeakerImg);
+  Handlebars.registerHelper("defenseRating", Helpers.getDefenseRating);
+  Handlebars.registerHelper("attackRating", Helpers.getAttackRating);
 }, "registerRollAndLabelHelpers");
 
 // src/module/utils/strings.ts
@@ -25618,33 +25611,33 @@ var registerItemLineHelpers = /* @__PURE__ */ __name(() => {
           textLimitParts.push(limitBase.toString());
         }
         if (limitAttribute) {
-          textLimitParts.push(game.i18n.localize(SR62.limits[limitAttribute ?? ""]));
+          textLimitParts.push(game.i18n.localize(SR6.limits[limitAttribute ?? ""]));
         }
         const textLimit = textLimitParts.join(" + ");
         return [
           {
             text: {
               // Instead of 'complex' only show C. This might break in some languages. At that point, you can call me lazy.
-              text: item.system.action.type ? game.i18n.localize(SR62.actionTypes[item.system.action.type] ?? "")[0] : ""
+              text: item.system.action.type ? game.i18n.localize(SR6.actionTypes[item.system.action.type] ?? "")[0] : ""
             }
           },
           {
             text: {
               // Either use the legacy skill localization OR just the skill name/id instead.
-              text: game.i18n.localize(SR62.activeSkills[wrapper.getActionSkill() ?? ""] ?? wrapper.getActionSkill()),
+              text: game.i18n.localize(SR6.activeSkills[wrapper.getActionSkill() ?? ""] ?? wrapper.getActionSkill()),
               cssClass: "six"
             }
           },
           {
             text: {
-              text: game.i18n.localize(SR62.attributes[wrapper.getActionAttribute() ?? ""]),
+              text: game.i18n.localize(SR6.attributes[wrapper.getActionAttribute() ?? ""]),
               cssClass: "six"
             }
           },
           {
             text: {
               // Legacy actions could have both skill and attribute2 set, which would show both information, when it shouldn't.
-              text: wrapper.getActionSkill() ? "" : game.i18n.localize(SR62.attributes[wrapper.getActionAttribute2() ?? ""]),
+              text: wrapper.getActionSkill() ? "" : game.i18n.localize(SR6.attributes[wrapper.getActionAttribute2() ?? ""]),
               cssClass: "six"
             }
           },
@@ -25668,7 +25661,7 @@ var registerItemLineHelpers = /* @__PURE__ */ __name(() => {
           return [
             {
               text: {
-                text: game.i18n.localize(SR62.modificationCategories[wrapper.getModificationCategory() ?? ""])
+                text: game.i18n.localize(SR6.modificationCategories[wrapper.getModificationCategory() ?? ""])
               }
             },
             {
@@ -25741,7 +25734,7 @@ var registerItemLineHelpers = /* @__PURE__ */ __name(() => {
         return [
           {
             text: {
-              text: game.i18n.localize(SR62.qualityTypes[item.system.type ?? ""])
+              text: game.i18n.localize(SR6.qualityTypes[item.system.type ?? ""])
             }
           },
           {
@@ -25754,7 +25747,7 @@ var registerItemLineHelpers = /* @__PURE__ */ __name(() => {
         return [
           {
             text: {
-              text: game.i18n.localize(SR62.adeptPower.types[item.system.type ?? ""])
+              text: game.i18n.localize(SR6.adeptPower.types[item.system.type ?? ""])
             }
           }
         ];
@@ -25762,17 +25755,17 @@ var registerItemLineHelpers = /* @__PURE__ */ __name(() => {
         return [
           {
             text: {
-              text: game.i18n.localize(SR62.spellTypes[item.system.type ?? ""])
+              text: game.i18n.localize(SR6.spellTypes[item.system.type ?? ""])
             }
           },
           {
             text: {
-              text: game.i18n.localize(SR62.spellRanges[item.system.range ?? ""])
+              text: game.i18n.localize(SR6.spellRanges[item.system.range ?? ""])
             }
           },
           {
             text: {
-              text: game.i18n.localize(SR62.durations[item.system.duration ?? ""])
+              text: game.i18n.localize(SR6.durations[item.system.duration ?? ""])
             }
           },
           {
@@ -25785,17 +25778,17 @@ var registerItemLineHelpers = /* @__PURE__ */ __name(() => {
         return [
           {
             text: {
-              text: game.i18n.localize(SR62.critterPower.types[item.system.powerType ?? ""])
+              text: game.i18n.localize(SR6.critterPower.types[item.system.powerType ?? ""])
             }
           },
           {
             text: {
-              text: game.i18n.localize(SR62.critterPower.ranges[item.system.range ?? ""])
+              text: game.i18n.localize(SR6.critterPower.ranges[item.system.range ?? ""])
             }
           },
           {
             text: {
-              text: game.i18n.localize(SR62.critterPower.durations[item.system.duration ?? ""])
+              text: game.i18n.localize(SR6.critterPower.durations[item.system.duration ?? ""])
             }
           },
           {
@@ -25808,12 +25801,12 @@ var registerItemLineHelpers = /* @__PURE__ */ __name(() => {
         return [
           {
             text: {
-              text: game.i18n.localize(SR62.matrixTargets[item.system.target ?? ""])
+              text: game.i18n.localize(SR6.matrixTargets[item.system.target ?? ""])
             }
           },
           {
             text: {
-              text: game.i18n.localize(SR62.durations[item.system.duration ?? ""])
+              text: game.i18n.localize(SR6.durations[item.system.duration ?? ""])
             }
           },
           {
@@ -25841,7 +25834,7 @@ var registerItemLineHelpers = /* @__PURE__ */ __name(() => {
       case "call_in_action":
         if (item.system.actor_type === "spirit") {
           const summoningData = item.system;
-          const spiritTypeLabel = SR62.spiritTypes[summoningData.spirit.type] ?? "";
+          const spiritTypeLabel = SR6.spiritTypes[summoningData.spirit.type] ?? "";
           return [
             {
               text: {
@@ -25857,7 +25850,7 @@ var registerItemLineHelpers = /* @__PURE__ */ __name(() => {
         }
         if (item.system.actor_type === "sprite") {
           const compilationData = item.system;
-          const spriteTypeLabel = SR62.spriteTypes[compilationData.sprite.type] ?? "";
+          const spriteTypeLabel = SR6.spriteTypes[compilationData.sprite.type] ?? "";
           return [
             {
               text: {
@@ -25918,7 +25911,7 @@ var registerItemLineHelpers = /* @__PURE__ */ __name(() => {
       {
         // Apply To Column
         text: {
-          text: game.i18n.localize(SR62.effectApplyTo[effect.applyTo]),
+          text: game.i18n.localize(SR6.effectApplyTo[effect.applyTo]),
           cssClass: "six"
         }
       },
@@ -26484,7 +26477,7 @@ var CompileSpriteTest = class extends SuccessTest {
     data.preparedSpriteUuid = data.preparedSpriteUuid || compilation.system.sprite.uuid;
   }
   _prepareSpriteTypes() {
-    return SR62.spriteTypes;
+    return SR6.spriteTypes;
   }
   get _dialogTemplate() {
     return "systems/shadowrun6-elysium/dist/templates/apps/dialogs/compilation-test-dialog.html";
@@ -28034,7 +28027,7 @@ var SR6ItemSheet = class extends ItemSheet {
         console.log(e2);
       }
     }
-    data["config"] = SR62;
+    data["config"] = SR6;
     const itemTypes = this.item.items.reduce(
       (sheetItemData, nestedItem) => {
         const itemData2 = nestedItem.toObject();
@@ -28104,13 +28097,13 @@ var SR6ItemSheet = class extends ItemSheet {
    * Action limits currently contain limits for all action types. Be it matrix, magic or physical.
    */
   _getSortedLimitsForSelect() {
-    return Helpers.sortConfigValuesByTranslation(SR62.limits);
+    return Helpers.sortConfigValuesByTranslation(SR6.limits);
   }
   /**
    * Sorted (by translation) actor attributes.
    */
   _getSortedAttributesForSelect() {
-    return Helpers.sortConfigValuesByTranslation(SR62.attributes);
+    return Helpers.sortConfigValuesByTranslation(SR6.attributes);
   }
   /**
    * Sorted (by translation) active skills either from the owning actor or general configuration.
@@ -28297,7 +28290,7 @@ var SR6ItemSheet = class extends ItemSheet {
         }
       });
     } else {
-      const ranges = SR62.weaponRangeCategories[selectedRangeCategory].ranges;
+      const ranges = SR6.weaponRangeCategories[selectedRangeCategory].ranges;
       await this.item.update({
         [key]: {
           ...ranges,
@@ -28362,7 +28355,7 @@ var SR6ItemSheet = class extends ItemSheet {
     event.preventDefault();
     const type = "modification";
     const itemData = {
-      name: `${game.i18n.localize("SR6.New")} ${Helpers.label(game.i18n.localize(SR62.itemTypes[type]))}`,
+      name: `${game.i18n.localize("SR6.New")} ${Helpers.label(game.i18n.localize(SR6.itemTypes[type]))}`,
       type,
       system: { type: "weapon" }
     };
@@ -28389,14 +28382,14 @@ var SR6ItemSheet = class extends ItemSheet {
     event.preventDefault();
     const type = "ammo";
     const itemData = {
-      name: `${game.i18n.localize("SR6.New")} ${Helpers.label(game.i18n.localize(SR62.itemTypes[type]))}`,
+      name: `${game.i18n.localize("SR6.New")} ${Helpers.label(game.i18n.localize(SR6.itemTypes[type]))}`,
       type
     };
     const item = new SR6Item(itemData, { parent: this.item });
     await this.item.createNestedItem(item._source);
   }
   async _onClipEquip(clipType) {
-    if (!clipType || !Object.keys(SR62.weaponCliptypes).includes(clipType)) return;
+    if (!clipType || !Object.keys(SR6.weaponCliptypes).includes(clipType)) return;
     const agilityValue = this.item.actor ? this.item.actor.getAttribute("agility").value : 0;
     await this.item.update({
       "system.ammo.clip_type": clipType,
@@ -28443,14 +28436,14 @@ var SR6ItemSheet = class extends ItemSheet {
       console.error("Shadowrun 6e | Action item sheet does not contain an action-modifier input element");
       return;
     }
-    const whitelist = Object.keys(SR62.modifierTypes).map((modifier) => ({
-      value: game.i18n.localize(SR62.modifierTypes[modifier]),
+    const whitelist = Object.keys(SR6.modifierTypes).map((modifier) => ({
+      value: game.i18n.localize(SR6.modifierTypes[modifier]),
       id: modifier
     }));
-    const maxItems = Object.keys(SR62.modifierTypes).length;
+    const maxItems = Object.keys(SR6.modifierTypes).length;
     const modifiers = this.item.system.action?.modifiers ?? [];
     const tags = modifiers.map((modifier) => ({
-      value: game.i18n.localize(SR62.modifierTypes[modifier]),
+      value: game.i18n.localize(SR6.modifierTypes[modifier]),
       id: modifier
     }));
     const tagify = createTagify(inputElement, { whitelist, maxItems, tags });
@@ -28473,14 +28466,14 @@ var SR6ItemSheet = class extends ItemSheet {
       console.error("Shadowrun 6e | Action item sheet does not contain an action-categories input element");
       return;
     }
-    const whitelist = Object.keys(SR62.actionCategories).map((category3) => ({
-      value: game.i18n.localize(SR62.actionCategories[category3]),
+    const whitelist = Object.keys(SR6.actionCategories).map((category3) => ({
+      value: game.i18n.localize(SR6.actionCategories[category3]),
       id: category3
     }));
-    const maxItems = Object.keys(SR62.actionCategories).length;
+    const maxItems = Object.keys(SR6.actionCategories).length;
     const categories = this.item.system.action?.categories ?? [];
     const tags = categories.map((category3) => ({
-      value: game.i18n.localize(SR62.actionCategories[category3]) ?? category3,
+      value: game.i18n.localize(SR6.actionCategories[category3]) ?? category3,
       id: category3
     }));
     const tagify = createTagify(inputElement, { whitelist, maxItems, tags });
@@ -29496,7 +29489,7 @@ async function iconAssign(importFlags, system, iconList) {
   const imgSubType = importFlags.subType;
   const useOverrides = game.settings.get(SYSTEM_NAME, FLAGS.UseImportIconOverrides);
   let override = "";
-  if (imgSubType && useOverrides) override = SR62.itemSubTypeIconOverrides[imgType][imgSubType];
+  if (imgSubType && useOverrides) override = SR6.itemSubTypeIconOverrides[imgType][imgSubType];
   let fileNamePriority = [
     imgFolder + override,
     imgFolder + imgType + (imgSubType ? "/" : "") + imgSubType,
@@ -29548,7 +29541,7 @@ var DataImporter = class _DataImporter {
     this.unsupportedBooks = ["2050"];
   }
   static {
-    this.SR6 = SR62;
+    this.SR6 = SR6;
   }
   /**
    * Get complete item data.
@@ -29610,7 +29603,7 @@ var DataImporter = class _DataImporter {
       subType: "",
       isFreshImport: true
     };
-    if (subType && Object.keys(SR62.itemSubTypeIconOverrides[type]).includes(subType)) {
+    if (subType && Object.keys(SR6.itemSubTypeIconOverrides[type]).includes(subType)) {
       flags.subType = subType;
     }
     return flags;
@@ -29870,7 +29863,7 @@ var WeaponParserBase = class _WeaponParserBase extends TechnologyItemParserBase 
       return void 0;
     }
     return {
-      ...SR62.weaponRangeCategories[systemRangeCategory].ranges,
+      ...SR6.weaponRangeCategories[systemRangeCategory].ranges,
       category: systemRangeCategory
     };
   }
@@ -31832,7 +31825,7 @@ var SkillEditSheet = class extends DocumentSheet {
   /** Enhance attribute selection by an empty option to allow newly created skills to have no attribute selected.
    */
   _getSkillAttributesForSelect() {
-    return { ...SR62.attributes, "": "" };
+    return { ...SR6.attributes, "": "" };
   }
   _allowSkillNameEditing() {
     const skill = this.document.getSkill(this.skillId);
@@ -32004,7 +31997,7 @@ var parseTechnology = /* @__PURE__ */ __name((chummerEntry) => {
   return parsedTechnology;
 }, "parseTechnology");
 var setSubType = /* @__PURE__ */ __name((parsedItem, parserType, subType) => {
-  if (Object.keys(SR62.itemSubTypeIconOverrides[parserType]).includes(subType)) {
+  if (Object.keys(SR6.itemSubTypeIconOverrides[parserType]).includes(subType)) {
     parsedItem.importFlags.subType = formatAsSlug(subType);
   }
 }, "setSubType");
@@ -32352,7 +32345,7 @@ var BaseGearParser = class {
     return parsedGear;
   }
   setSubType(parsedGear, parserType, subType) {
-    if (Object.keys(SR62.itemSubTypeIconOverrides[parserType]).includes(subType)) {
+    if (Object.keys(SR6.itemSubTypeIconOverrides[parserType]).includes(subType)) {
       parsedGear.system.importFlags.subType = formatAsSlug(subType);
     }
   }
@@ -33261,7 +33254,7 @@ var LifestyleParser = class {
     const parserType = "lifestyle";
     const system = {};
     const chummerLifestyleType = chummerLifestyle.baselifestyle.toLowerCase();
-    if (chummerLifestyleType in SR62.lifestyleTypes) {
+    if (chummerLifestyleType in SR6.lifestyleTypes) {
       system.type = chummerLifestyleType;
     } else {
       if (chummerLifestyleType === "luxury") {
@@ -33986,7 +33979,7 @@ var SR6BaseActorSheet = class extends ActorSheet {
       // @ts-expect-error TODO: foundry-vtt-types v10
       system: actorData.system
     };
-    data.config = SR62;
+    data.config = SR6;
     data.filters = this._filters;
     this._prepareActorAttributes(data);
     this._prepareActorModifiers(data);
@@ -34105,7 +34098,7 @@ var SR6BaseActorSheet = class extends ActorSheet {
       if (inventory.types.hasOwnProperty(type)) continue;
       inventory.types[type] = {
         type,
-        label: SR62.itemTypes[type],
+        label: SR6.itemTypes[type],
         isOpen: this._inventoryOpenClose[type],
         items: []
       };
@@ -34188,7 +34181,7 @@ var SR6BaseActorSheet = class extends ActorSheet {
       if (data.type === "Actor" && data.uuid !== this.actor.uuid) {
         const actor = await fromUuid(data.uuid);
         const itemData = {
-          name: actor.name ?? `${game.i18n.localize("SR6.New")} ${game.i18n.localize(SR62.itemTypes["contact"])}`,
+          name: actor.name ?? `${game.i18n.localize("SR6.New")} ${game.i18n.localize(SR6.itemTypes["contact"])}`,
           type: "contact",
           "system.linkedActor": actor.uuid
         };
@@ -34284,7 +34277,7 @@ var SR6BaseActorSheet = class extends ActorSheet {
     const type = event.currentTarget.closest(".list-header").dataset.itemId;
     this._setInventoryTypeVisibility(type, true);
     const itemData = {
-      name: `${game.i18n.localize("SR6.New")} ${Helpers.label(game.i18n.localize(SR62.itemTypes[type]))}`,
+      name: `${game.i18n.localize("SR6.New")} ${Helpers.label(game.i18n.localize(SR6.itemTypes[type]))}`,
       type
     };
     const items = await this.actor.createEmbeddedDocuments("Item", [itemData], { renderSheet: true });
@@ -34541,7 +34534,7 @@ var SR6BaseActorSheet = class extends ActorSheet {
         if (!inventorySheet.types[item.type]) {
           inventorySheet.types[item.type] = {
             type: item.type,
-            label: SR62.itemTypes[item.type],
+            label: SR6.itemTypes[item.type],
             isOpen: this._inventoryOpenClose[item.type],
             items: []
           };
@@ -35206,7 +35199,7 @@ var SR6BaseActorSheet = class extends ActorSheet {
     if (!modifiers) return [];
     return Object.entries(modifiers._modifiers).map(([category3, modifier]) => {
       const hidden = this._hideSituationModifier(category3);
-      const label = SR62.modifierTypes[category3];
+      const label = SR6.modifierTypes[category3];
       return { category: category3, value: modifier.total, hidden, label };
     });
   }
@@ -35412,7 +35405,7 @@ var SR6ActiveEffectConfig = class extends ActiveEffectConfig {
    * should not be available.
    */
   prepareApplyToOptions() {
-    const effectApplyTo = foundry.utils.deepClone(SR62.effectApplyTo);
+    const effectApplyTo = foundry.utils.deepClone(SR6.effectApplyTo);
     if (this.object.parent instanceof SR6Actor) {
       delete effectApplyTo.test_item;
     }
@@ -35456,7 +35449,7 @@ var SR6ActiveEffectConfig = class extends ActiveEffectConfig {
    */
   _prepareActionCategoriesSelectionTagify(html) {
     const inputElement = html.find("input#categories-selection").get(0);
-    const values = Object.entries(SR62.actionCategories).map(([category3, label]) => ({ label, id: category3 }));
+    const values = Object.entries(SR6.actionCategories).map(([category3, label]) => ({ label, id: category3 }));
     const maxItems = values.length;
     const value = this.object.getFlag(SYSTEM_NAME, "selection_categories");
     const selected = value ? JSON.parse(value) : [];
@@ -35476,7 +35469,7 @@ var SR6ActiveEffectConfig = class extends ActiveEffectConfig {
   }
   _prepareAttributesSelectionTagify(html) {
     const inputElement = html.find("input#attribute-selection").get(0);
-    const values = Object.entries(SR62.attributes).map(([attribute, label]) => ({ label, id: attribute }));
+    const values = Object.entries(SR6.attributes).map(([attribute, label]) => ({ label, id: attribute }));
     const maxItems = values.length;
     const value = this.object.getFlag(SYSTEM_NAME, "selection_attributes");
     const selected = value ? JSON.parse(value) : [];
@@ -35484,7 +35477,7 @@ var SR6ActiveEffectConfig = class extends ActiveEffectConfig {
   }
   _prepareLimitsSelectionTagify(html) {
     const inputElement = html.find("input#limit-selection").get(0);
-    const values = Object.entries(SR62.limits).map(([limit, label]) => ({ label, id: limit }));
+    const values = Object.entries(SR6.limits).map(([limit, label]) => ({ label, id: limit }));
     const maxItems = values.length;
     const value = this.object.getFlag(SYSTEM_NAME, "selection_limits");
     const selected = value ? JSON.parse(value) : [];
@@ -35947,7 +35940,7 @@ var WeaponRangeTestBehavior = class _WeaponRangeTestBehavior {
     for (const key of ["short", "medium", "long", "extreme"]) {
       const rangeValue = ranges[key];
       const distance = test.actor && !!ranges.attribute ? test.actor.getAttribute(ranges.attribute).value * rangeValue : rangeValue;
-      newRanges[key] = Helpers.createRangeDescription(SR62.weaponRanges[key], distance, range_modifiers[key]);
+      newRanges[key] = Helpers.createRangeDescription(SR6.weaponRanges[key], distance, range_modifiers[key]);
     }
     test.data.ranges = newRanges;
     const actor = test.actor;
@@ -36037,7 +36030,7 @@ var WeaponRangeTestBehavior = class _WeaponRangeTestBehavior {
     const modifiers = DocumentSituationModifiers.getDocumentModifiers(test.actor);
     modifiers.environmental.setActive("range", Number(range));
     modifiers.environmental.apply({ reapply: true, test });
-    poolMods.addUniquePart(SR62.modifierTypes.environmental, modifiers.environmental.total);
+    poolMods.addUniquePart(SR6.modifierTypes.environmental, modifiers.environmental.total);
   }
   static async processResults(test) {
     await _WeaponRangeTestBehavior.markActionPhaseAsAttackUsed(test);
@@ -36099,7 +36092,7 @@ var RangedAttackTest = class extends SuccessTest {
     if (!weapon) return;
     this.data.fireModes = FireModeRules.availableFireModes(weapon.system.range.modes);
     if (this.data.fireModes.length === 0) {
-      this.data.fireModes.push(SR62.fireModes[0]);
+      this.data.fireModes.push(SR6.fireModes[0]);
       ui.notifications?.warn("SR6.Warnings.NoFireModeConfigured", { localize: true });
     }
     const lastFireMode = this.item.getLastFireMode() || DataDefaults.fireModeData();
@@ -36111,7 +36104,7 @@ var RangedAttackTest = class extends SuccessTest {
     return ["attack", "attack_ranged"];
   }
   get testModifiers() {
-    return ["global", "wounds", "environmental", "recoil"];
+    return ["global", "wounds", "environmental"];
   }
   async prepareDocumentData() {
     WeaponRangeTestBehavior.prepareDocumentData(this, (weapon) => weapon.system.range.ranges);
@@ -36125,7 +36118,7 @@ var RangedAttackTest = class extends SuccessTest {
    * If a suppression fire mode is used, ignore action opposed test configuration.
    */
   get _opposedTestClass() {
-    if (this.data.fireMode.suppression) return TestCreator._getTestClass(SR62.suppressionDefenseTest);
+    if (this.data.fireMode.suppression) return TestCreator._getTestClass(SR6.suppressionDefenseTest);
     return super._opposedTestClass;
   }
   /**
@@ -36201,22 +36194,6 @@ var RangedAttackTest = class extends SuccessTest {
   async processResults() {
     await super.processResults();
     await WeaponRangeTestBehavior.processResults(this);
-  }
-  /**
-   * Template helper for showing recoil before attack
-   */
-  get recoilBeforeAttack() {
-    if (!this.actor) return 0;
-    return this.actor.recoil;
-  }
-  /**
-   * Template helper for showing recoil after attack
-   */
-  get recoilAfterAttack() {
-    if (!this.actor) return 0;
-    const fireMode = this.data.fireMode;
-    const fireModeRecoil = fireMode.recoil ? fireMode.value : 0;
-    return this.actor.recoil + fireModeRecoil;
   }
 };
 
@@ -37500,7 +37477,7 @@ var SummonSpiritTest = class extends SuccessTest {
   }
   /**
    * Skill + Attribute [Limit] as defined in SR5#300 'Attempt summoning'
-   * 
+   *
    * Limit 'force' is a dynamic test value, so it's missing here as it can't be taken from actor values.
    */
   static _getDefaultTestAction() {
@@ -37549,7 +37526,7 @@ var SummonSpiritTest = class extends SuccessTest {
   }
   /**
    * Calculate limit based on force selected by user.
-   * 
+   *
    * According to SR5#300 'Summoning' and SR5#316 'Reagents'.
    */
   prepareLimitValue() {
@@ -37585,7 +37562,7 @@ var SummonSpiritTest = class extends SuccessTest {
   }
   /**
    * Derive the actual drain damage from spellcasting values.
-   * 
+   *
    * NOTE: This will be called by the opposing test via a follow up test action.
    */
   calcDrain(opposingHits) {
@@ -37815,7 +37792,7 @@ var shadowrunAttackTesting = /* @__PURE__ */ __name((context) => {
         semi_auto: true,
         burst_fire: true,
         full_auto: true
-      }), SR62.fireModes.length);
+      }), SR6.fireModes.length);
       assert.lengthOf(FireModeRules.availableFireModes({
         single_shot: true,
         semi_auto: false,
@@ -43858,7 +43835,7 @@ ___________________
     Combatant.prototype._getInitiativeFormula = _combatantGetInitiativeFormula;
     CONFIG.Dice.rolls.push(SR6Roll);
     CONFIG.Dice.SR6oll = SR6Roll;
-    CONFIG.SR6 = SR62;
+    CONFIG.SR6 = SR6;
     registerSystemSettings();
     registerSystemKeybindings();
     Actors.unregisterSheet("core", ActorSheet);

@@ -29,19 +29,6 @@
                 </div>
             </div>
             <h2>{{localize "SR6.SituationalModifiersApplication.Category.Physical"}}</h2>
-            {{#if modifiers.documentIsActor}}
-            <div class="form-group">
-                <label for="modifiers-recoil-total">{{localize "SR6.ModifierTypes.Recoil"}}: {{modifiers.applied.recoil.total}}</label>
-                <div class="form-group-element-numerical recoil-delta">
-                    <button data-delta="-3">-3</button>
-                    <button data-delta="-1">-</button>
-                    <input id="modifiers-recoil-total" type='number' size='3' maxlength='3' data-tooltip="SR6.Tooltips.SituationalModifier.Recoil"
-                        value='{{modifiers.applied.recoil.total}}' placeholder="0" disabled/>
-                    <button data-delta="1">+</button>
-                    <button data-delta="3">+3</button>
-                </div>
-            </div>
-            {{/if}}
             <div>
                 {{> 'systems/shadowrun6-elysium/dist/templates/apps/partials/modifiers-physical.hbs'}}
             </div>

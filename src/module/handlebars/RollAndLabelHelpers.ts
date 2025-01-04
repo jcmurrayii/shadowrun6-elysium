@@ -67,4 +67,6 @@ export const registerRollAndLabelHelpers = () => {
 
     Handlebars.registerHelper('speakerName', Helpers.getChatSpeakerName);
     Handlebars.registerHelper('speakerImg', Helpers.getChatSpeakerImg);
+    Handlebars.registerHelper("defenseRating", Helpers.getDefenseRating);
+    Handlebars.registerHelper("attackRating", Helpers.getAttackRating)
 };

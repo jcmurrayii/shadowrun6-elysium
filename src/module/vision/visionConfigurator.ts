@@ -6,7 +6,7 @@ import AugmentedRealityVisionDetectionMode from './augmentedReality/arDetectionM
 
 export default class VisionConfigurator {
     static configureAstralPerception() {
-        //todo: v10 foundry-vtt-types 
+        //todo: v10 foundry-vtt-types
         //@ts-expect-error
         CONFIG.Canvas.detectionModes.astralPerception = new AstralPerceptionDetectionMode({
             id: 'astralPerception',
@@ -14,7 +14,7 @@ export default class VisionConfigurator {
             //@ts-expect-error
             type: DetectionMode.DETECTION_TYPES.SIGHT,
           });
-  
+
         //@ts-expect-error
         CONFIG.Canvas.visionModes.astralPerception = new VisionMode({
             id: 'astralPerception',
@@ -43,7 +43,7 @@ export default class VisionConfigurator {
     }
 
     static configureThermographicVision() {
-        //todo: v10 foundry-vtt-types 
+        //todo: v10 foundry-vtt-types
         //@ts-expect-error
         CONFIG.Canvas.detectionModes.thermographic = new ThermographicVisionDetectionMode({
             id: 'thermographic',
@@ -54,7 +54,7 @@ export default class VisionConfigurator {
     }
 
     static configureLowlight() {
-        //todo: v10 foundry-vtt-types 
+        //todo: v10 foundry-vtt-types
         //@ts-expect-error
         CONFIG.Canvas.detectionModes.lowlight = new LowlightVisionDetectionMode({
             id: 'lowlight',
@@ -65,7 +65,7 @@ export default class VisionConfigurator {
     }
 
     static configureAR() {
-        //todo: v10 foundry-vtt-types 
+        //todo: v10 foundry-vtt-types
         //@ts-expect-error
         CONFIG.Canvas.detectionModes.augmentedReality = new AugmentedRealityVisionDetectionMode({
             id: 'augmentedReality',

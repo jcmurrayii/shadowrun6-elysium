@@ -1,5 +1,5 @@
 import { SR6Actor } from "../actor/SR6Actor";
-import { SR5 } from "../config";
+import { SR6 } from "../config";
 import { PartsList } from "../parts/PartsList";
 import { CompileSpriteTest } from "./CompileSpriteTest";
 import { OpposedTest, OpposedTestData } from "./OpposedTest";
