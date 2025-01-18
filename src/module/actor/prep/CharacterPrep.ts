@@ -44,6 +44,7 @@ export class CharacterPrep {
         SkillsPrep.prepareSkills(system);
 
         ItemPrep.prepareArmor(system, items);
+        ItemPrep.prepareWeapons(system, items);
 
         MatrixPrep.prepareMatrix(system, items);
         MatrixPrep.prepareMatrixToLimitsAndAttributes(system);
@@ -85,11 +86,20 @@ export class CharacterPrep {
         Helpers.calcTotal(system.values.recoil_compensation, { min: 0 });
     }
 
+    static prepareMeleeAttackRating(system: Shadowrun.CharacterData) {
+        const baseAttackRating: number = 0;
+        let attackRating:number = 0;
+        system.values.attack_rating.base = attackRating;
+        //PartsList.AddUniquePart(system.values.attack_rating.mod, 'SR6.AttackRating', )
+        Helpers.calcTotal(system.values.attack_rating, { min: 0 });
+    }
+
     static addSpecialAttributes(system: Shadowrun.CharacterData) {
         const { attributes } = system;
 
         // This is necessary to support critter actor types.
         attributes.initiation = DataDefaults.attributeData({ base: system.magic.initiation, label: "SR6.Initiation", hidden: true });
-        attributes.submersion = DataDefaults.attributeData({ base: system.technomancer.submersion, label: "SR6.Submersion", hidden: true });
+        attributes.submersion = DataDefaults.attributeData({ base: system.technomancer.submersion, label: "F", hidden: true });
+        attributes.transhumanism = DataDefaults.attributeData({ base: system.transhuman.rank, label: "SR6.Transhumanism", hidden: true });
     }
 }

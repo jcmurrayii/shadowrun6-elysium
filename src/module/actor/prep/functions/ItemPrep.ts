@@ -67,4 +67,8 @@ export class ItemPrep {
 
         system.attributes.essence.mod = parts.list;
     }
+
+    static prepareWeapons(system: Shadowrun.CharacterData, items: SR6ItemDataWrapper[]) {
+        
+    }
 }

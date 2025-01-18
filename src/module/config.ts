@@ -54,6 +54,7 @@ export const SR6 = {
         force: 'SR6.Force',
         initiation: 'SR6.Initiation',
         submersion: 'SR6.Submersion',
+        transhumanism: 'SR6.Transhumanism',
         rating: 'SR6.Rating',
     },
 

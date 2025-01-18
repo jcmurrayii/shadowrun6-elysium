@@ -16,6 +16,7 @@ declare namespace Shadowrun {
         WoundsActorData,
         MovementActorData,
         TechnomancerActorData,
+        TranshumanActorData,
         NPCActorData {
             attributes: CharacterAttributes
             values: PhysicalCombatValues
@@ -63,6 +64,13 @@ declare namespace Shadowrun {
             // Fade test attribute
             attribute: ActorAttribute
             submersion: number
+        }
+    }
+
+    export type TranshumanActorData = {
+        transhuman: {
+            attribute: ActorAttribute,
+            rank: number
         }
     }
 

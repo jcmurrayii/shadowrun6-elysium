@@ -93,7 +93,11 @@ declare namespace Shadowrun {
         // The current amount of progressive recoil (bullets fired) without any compensation.
         recoil: ModifiableValue
         // The base amount of recoil compensation of an actor, without recoil reducing it.
-        recoil_compensation: ModifiableValue
+        recoil_compensation: ModifiableValue,
+        attack_rating: ModifiableValue
+        melee_attack_rating: ModifiableValue,
+        unarmed_attack_rating: ModifiableValue,
+        defense_rating: ModifiableValue
     }
 
     export interface VisibilityChecks {

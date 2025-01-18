@@ -472,6 +472,24 @@ export class SR6Actor extends Actor {
         return this.system.values.recoil_compensation.value;
     }
 
+    get unarmedAttackRating() : number {
+        if(!this.system.values.hasOwnProperty("attack_rating")) return 0;
+        //@ts-expect-error
+        return this.system.values.unarmed_attack_rating.value;
+    }
+
+    get meleeAttackRating(): number {
+        if(!this.system.values.hasOwnProperty("attack_rating")) return 0;
+        //@ts-expect-error
+        return this.system.values.melee_attack_rating.value;
+    }
+
+    get defenseRating() : number {
+        if(!this.system.values.hasOwnProperty("defense_rating")) return 0;
+        //@ts-expect-error
+        return this.system.values.defense_rating.value;
+    }
+
 
     /**
      * Current recoil compensation with current recoil included.

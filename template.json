@@ -491,6 +491,21 @@
                         "base": 0,
                         "value": 0,
                         "mod": []
+                    },
+                    "unarmed_attack_rating": {
+                        "base": 0,
+                        "value": 0,
+                        "mod": []
+                    },
+                    "melee_attack_rating": {
+                        "base": 0,
+                        "value": 0,
+                        "mod": []
+                    },
+                    "defense_rating": {
+                        "base": 0,
+                        "value": 0,
+                        "mod": []
                     }
                 }
             },
