@@ -574,11 +574,15 @@ export class Helpers {
         return actor.name as string;
     }
 
-    static getDefenseRating(targets: SR6Actor[]): number {
+    static getDefenseRating(targets: TokenDocument[]): number {
         let defenseRating = 0;
-        for(const target of targets) {
-            if ('armor' in target.system && target.system.armor.value > defenseRating) {
-                defenseRating = target.system.armor.value;
+        for(const token of targets) {
+            let target = token.actor;
+            console.log(target);
+            // @ts-ignore
+            if ('defense_rating' in target.system.values && target.system.values.defense_rating.value > defenseRating) {
+                // @ts-ignore
+                defenseRating = target.system.values.defense_rating.value;
             }
         }
         return defenseRating;

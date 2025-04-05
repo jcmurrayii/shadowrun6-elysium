@@ -4,38 +4,50 @@
     </div>
     <div class="form-line">
         <div class="label">
-            {{localize "SR6.ArmorValue"}}
+            Defense Rating
         </div>
         <div class="inputs">
             <input
                 type="text"
                 maxlength="2"
                 size="2"
-                name="system.armor.value"
-                value="{{system.armor.value}}"
+                name="system.armor.defense_rating.base"
+                value="{{system.armor.defense_rating.base}}"
                 data-dtype="Number"
-                placeholder="1"
+                placeholder="0"
             />
         </div>
     </div>
     <div class="form-line">
         <div class="label">
-            {{localize "SR6.Accessory"}}
+            Social Rating
         </div>
         <div class="inputs">
-            <label>
-                <input type="checkbox" name="system.armor.mod" {{checked system.armor.mod}} />
-            </label>
+            <input
+                type="text"
+                maxlength="2"
+                size="2"
+                name="system.armor.social_rating.base"
+                value="{{system.armor.social_rating.base}}"
+                data-dtype="Number"
+                placeholder="0"
+            />
         </div>
     </div>
     <div class="form-line">
         <div class="label">
-            {{localize "SR6.ArmorHardened"}}
+            Defense Rating
         </div>
         <div class="inputs">
-            <label>
-                <input type="checkbox" name="system.armor.hardened" {{checked system.armor.hardened}} />
-            </label>
+            <input
+                type="text"
+                maxlength="2"
+                size="2"
+                name="system.armor.capacity.base"
+                value="{{system.armor.capacity.base}}"
+                data-dtype="Number"
+                placeholder="1"
+            />
         </div>
     </div>
     <div class="form-line">

@@ -5,7 +5,13 @@ import {SR6} from "../config";
 import {FireModeRules} from "../rules/FireModeRules";
 import { SR6Item } from "../item/SR6Item";
 import { TestCreator } from './TestCreator';
-import { WeaponRangeTestBehavior, WeaponRangeTestDataFragment } from '../rules/WeaponRangeRules';
+import { RANGE_CATEGORIES, WeaponRangeTestBehavior, WeaponRangeTestDataFragment } from '../rules/WeaponRangeRules';
+import { Helpers } from '../helpers';
+import { SR6Actor } from '../actor/SR6Actor';
+import { SYSTEM_NAME } from '../constants';
+import { PartsList } from '../parts/PartsList';
+import { CharacterPrep } from '../rules/CharacterPrep';
+import { SR6ItemDataWrapper } from '../item/SR6ItemDataWrapper';
 
 export interface RangedAttackTestData extends SuccessTestData, WeaponRangeTestDataFragment {
     damage: Shadowrun.DamageData
@@ -19,7 +25,19 @@ export interface RangedAttackTestData extends SuccessTestData, WeaponRangeTestDa
     // index of selected target range in targetRanges
     targetRangesSelected: number
     // Distance to target in meters.
-    distance: number
+    distance: number,
+    attackerAR: number
+    defenderDRs: number[]
+    attackerEdge: boolean
+    defenders: {
+        actorUuid: string;
+        name: string
+        dr: number
+        isWinner: boolean    // Add this to track who wins
+        edgeAwarded: boolean // Add this to track if edge was awarded
+        edgeReason: string   // Add this to track the reason for not gaining edge
+    }[]
+    noEdge: boolean
 }
 
 
@@ -29,10 +47,71 @@ export class RangedAttackTest extends SuccessTest<RangedAttackTestData> {
     override _prepareData(data, options): RangedAttackTestData {
         data = super._prepareData(data, options);
 
+        console.log('Shadowrun 6e | RangedAttackTest preparation started');
+
         data.fireModes = [];
         data.fireMode = {value: 0, defense: 0, label: ''};
         WeaponRangeTestBehavior.prepareData(this, data);
 
+        data.attackerAR = 5;
+
+        console.log('Shadowrun 6e | Getting user targets');
+        const targets = Helpers.getUserTargets(game.user);
+        console.log('Shadowrun 6e | Found targets:', targets);
+
+        if(this.actor) {
+            console.log('Shadowrun 6e | Processing targets for actor:', this.actor.name);
+
+            // Map targets to defenders with their actual DR values
+            data.defenders = targets.map(token => {
+                console.log('Shadowrun 6e | Processing target token:', token.name);
+
+                const targetActor = token.actor;
+                let dr = 5; // default DR
+
+                if (!targetActor) {
+                    console.log('Shadowrun 6e | No actor found for token:', token.name);
+                    return null;
+                }
+
+                if (!(targetActor instanceof SR6Actor)) {
+                    console.log('Shadowrun 6e | Actor is not SR6Actor:', token.name);
+                    return null;
+                }
+
+                console.log('Shadowrun 6e | Processing SR6Actor target:', {
+                    name: targetActor.name,
+                    type: targetActor.type,
+                    hasSystem: !!targetActor.system,
+                    hasAttributes: !!targetActor.system?.attributes
+                });
+
+                // Get the calculated DR
+                const targetArmor = targetActor.system.armor;
+                dr = targetArmor?.defense_rating?.value || 5;
+
+                console.log('Shadowrun 6e | Target DR Calculation:', {
+                    name: targetActor.name,
+                    armor: targetArmor,
+                    dr: dr,
+                    body: targetActor.system.attributes?.body?.value,
+                    rawSystem: targetActor.system
+                });
+
+                return {
+                    actorUuid: targetActor.uuid,
+                    dr: dr,
+                    name: token.name || '',
+                    isWinner: false,
+                    edgeAwarded: false,
+                    hasSignificantAdvantage: false
+                };
+            }).filter(defender => defender !== null);
+
+            console.log('Shadowrun 6e | Final defenders data:', data.defenders);
+        } else {
+            console.log('Shadowrun 6e | No actor found for this test');
+        }
 
         return data;
     }
@@ -107,8 +186,8 @@ export class RangedAttackTest extends SuccessTest<RangedAttackTestData> {
         return ['global', 'wounds', 'environmental'];
     }
 
-    override async prepareDocumentData(){
-        WeaponRangeTestBehavior.prepareDocumentData(this, (weapon) => weapon.system.range.ranges);
+    override async prepareDocumentData() {
+        WeaponRangeTestBehavior.prepareDocumentData(this);
         this._prepareFireMode();
 
         await super.prepareDocumentData();
@@ -143,9 +222,10 @@ export class RangedAttackTest extends SuccessTest<RangedAttackTestData> {
      * Apply test selections made by user in dialog.
      * @returns
      */
-    override prepareBaseValues() {
-        if (!this.actor) return;
-        if (!this.item) return;
+    override async prepareBaseValues() {
+        await super.prepareBaseValues();
+
+        if (!this.actor || !this.item) return;
 
         // Use selection for actual fireMode, overwriting possible previous selection for item.
         this._selectFireMode(this.data.fireModeSelected);
@@ -153,16 +233,38 @@ export class RangedAttackTest extends SuccessTest<RangedAttackTestData> {
         // Alter fire mode by ammunition constraints.
         this.data.fireMode.defense = FireModeRules.fireModeDefenseModifier(this.data.fireMode, this.item.ammoLeft);
 
-        WeaponRangeTestBehavior.prepareBaseValues(this);
+        // Calculate AR
+        this.calculateAR();
 
-        super.prepareBaseValues();
+        // Get range data for selected target
+        if (this.data.targetRanges.length > 0) {
+            const selectedTarget = this.data.targetRanges[this.data.targetRangesSelected];
+            if (selectedTarget) {
+                // Update weapon range data
+                await this.item.update({
+                    'system.range.current': selectedTarget.distance,
+                    'system.range.category': selectedTarget.range.category,
+                    'system.range.modifier': selectedTarget.range.modifier
+                });
+            }
+        }
     }
 
     /**
      * Ranged attack tests allow for temporarily changing of modifiers without altering the document.
      */
     override prepareTestModifiers() {
-        WeaponRangeTestBehavior.prepareTestModifiers(this);
+        const modifiers = new PartsList<number>(this.data.modifiers.mod);
+
+        // Add range modifier if we have a target
+        if (this.data.targetRanges.length > 0) {
+            const selectedTarget = this.data.targetRanges[this.data.targetRangesSelected];
+            if (selectedTarget) {
+                modifiers.addUniquePart('range', selectedTarget.range.modifier);
+            }
+        }
+
+        super.prepareTestModifiers();
     }
 
     /**
@@ -221,8 +323,205 @@ export class RangedAttackTest extends SuccessTest<RangedAttackTestData> {
     }
 
     override async processResults() {
+        console.log('Shadowrun 6e | Processing ranged attack test results');
         await super.processResults();
-
+        console.log('Shadowrun 6e | Starting edge award calculations');
+        await this.calculateEdgeAwards();
+        console.log('Shadowrun 6e | Finished edge award calculations');
         await WeaponRangeTestBehavior.processResults(this);
+    }
+
+    private async calculateEdgeAwards() {
+        if (!this.actor) {
+            console.log('Shadowrun 6e | Cannot calculate edge awards: No actor found');
+            return;
+        }
+
+        console.log(`Shadowrun 6e | Calculating edge awards for combat between ${this.actor.name} and ${this.data.defenders.length} defender(s)`);
+
+        for (const defender of this.data.defenders) {
+            console.log('Shadowrun 6e | Processing defender:', {
+                name: defender.name,
+                uuid: defender.actorUuid,
+                dr: defender.dr
+            });
+
+            const attackerWins = this.data.attackerAR >= defender.dr;
+            const hasSignificantAdvantage = Math.abs(this.data.attackerAR - defender.dr) >= 4;
+
+            defender.isWinner = !attackerWins;
+            defender.hasSignificantAdvantage = hasSignificantAdvantage;
+            defender.edgeReason = ''; // Add this to track the reason
+
+            if (!attackerWins && hasSignificantAdvantage) {
+                console.log(`Shadowrun 6e | ${defender.name} (DR: ${defender.dr}) has significant advantage over ${this.actor.name} (AR: ${this.data.attackerAR})`);
+
+                try {
+                    const defenderActor = await fromUuid(defender.actorUuid);
+                    console.log('Shadowrun 6e | Defender actor lookup result:', {
+                        found: !!defenderActor,
+                        type: defenderActor?.constructor.name,
+                        name: defenderActor?.name
+                    });
+
+                    if (defenderActor instanceof SR6Actor) {
+                        const edge = defenderActor.getEdge();
+                        const edgeGainedThisRound = defenderActor.getFlag(SYSTEM_NAME, 'edgeGainedThisRound') || 0;
+
+                        // Check conditions and set reasons
+                        if (!edge) {
+                            defender.edgeReason = `${defenderActor.name} has no Edge attribute`;
+                        } else if (edgeGainedThisRound >= 2) {
+                            defender.edgeReason = `${defenderActor.name} has already gained the maximum Edge (${edgeGainedThisRound}) this round`;
+                        } else if (edge.uses >= 7) {
+                            defender.edgeReason = `${defenderActor.name} is already at maximum Edge (${edge.uses})`;
+                        }
+
+                        const canGainEdge = edge && edgeGainedThisRound < 2 && edge.uses < 7;
+
+                        console.log('Shadowrun 6e | Edge check for defender:', {
+                            hasEdge: !!edge,
+                            edgeValue: edge?.uses,
+                            edgeGainedThisRound,
+                            canGainEdge
+                        });
+
+                        if (canGainEdge) {
+                            console.log('Shadowrun 6e | Attempting to award edge to defender');
+                            defender.edgeAwarded = await this.awardEdge(defenderActor);
+                        }
+                    } else {
+                        defender.edgeReason = 'Invalid actor type for Edge calculation';
+                        console.log('Shadowrun 6e | Defender actor is not an SR6Actor:', defenderActor);
+                    }
+                } catch (error) {
+                    defender.edgeReason = 'Error processing Edge calculation';
+                    console.error('Shadowrun 6e | Error processing defender:', error);
+                }
+            }
+        }
+    }
+
+    private async awardEdge(actor: SR6Actor) {
+        const edge = actor.getEdge();
+        if (!edge) {
+            console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: No edge attribute found`);
+            await ChatMessage.create({
+                content: `${actor.name} cannot gain Edge (no Edge attribute found)`,
+                speaker: ChatMessage.getSpeaker({actor: actor})
+            });
+            return false;  // Return false to indicate edge was not awarded
+        }
+
+        // Check if actor has already gained maximum edge this round
+        const edgeGainedThisRound = actor.getFlag(SYSTEM_NAME, 'edgeGainedThisRound') || 0;
+        if (edgeGainedThisRound >= 2) {
+            console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: Maximum edge gained this round (${edgeGainedThisRound})`);
+            await ChatMessage.create({
+                content: `${actor.name} has already gained maximum Edge this round (${edgeGainedThisRound})`,
+                speaker: ChatMessage.getSpeaker({actor: actor})
+            });
+            return false;  // Return false to indicate edge was not awarded
+        }
+
+        // Check if adding edge would exceed maximum
+        const newEdgeUses = Math.min(7, edge.uses + 1);
+        if (newEdgeUses <= edge.uses) {
+            console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: Already at maximum edge (${edge.uses})`);
+            await ChatMessage.create({
+                content: `${actor.name} is already at maximum Edge (${edge.uses})`,
+                speaker: ChatMessage.getSpeaker({actor: actor})
+            });
+            return false;  // Return false to indicate edge was not awarded
+        }
+
+        // Only proceed with edge award if we haven't returned false above
+        await actor.update({
+            'system.attributes.edge.uses': newEdgeUses
+        });
+        await actor.setFlag(SYSTEM_NAME, 'edgeGainedThisRound', edgeGainedThisRound + 1);
+
+        // Show floating text - try both token and primary token
+        const token = actor.token || actor.getActiveTokens()[0];
+        if (token) {
+            canvas.interface?.createScrollingText(token.center, `Edge +1`, {
+                anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
+                direction: CONST.TEXT_ANCHOR_POINTS.TOP,
+                distance: 20,
+                fontSize: 24,
+                fill: "#00FF00",
+                stroke: "#000000",
+                strokeThickness: 4,
+                duration: 1000
+            });
+        }
+
+        // Notify in chat
+        await ChatMessage.create({
+            content: `${actor.name} gains Edge (+1)`,
+            speaker: ChatMessage.getSpeaker({actor: actor})
+        });
+
+        console.log(`Shadowrun 6e | Edge awarded to ${actor.name}: ${edge.uses} → ${newEdgeUses}`);
+        return true;  // Return true to indicate edge was successfully awarded
+    }
+
+    /**
+     * Get the Attack Rating (AR) for the current range.
+     * Each weapon has specific ARs defined for different ranges.
+     * If no AR is defined for the current range, the weapon cannot be used.
+     */
+    calculateAR(): number {
+        if (!this.actor || !this.item) return 0;
+
+        const weapon = this.item.asWeapon;
+        if (!weapon) return 0;
+
+        // Get the current range category
+        let rangeCategory = RANGE_CATEGORIES.NEAR.toLowerCase(); // Convert to lowercase to match data structure
+        if (this.data.targetRanges.length > 0) {
+            const selectedTarget = this.data.targetRanges[this.data.targetRangesSelected];
+            if (selectedTarget) {
+                rangeCategory = selectedTarget.range.category.toLowerCase(); // Convert to lowercase
+            }
+        }
+
+        // Get the AR for the specific range
+        const rangeAR = weapon.system.range.attackRating?.[rangeCategory];
+
+        // If no AR is defined for this range, the weapon cannot be used
+        if (typeof rangeAR !== 'number') {
+            console.log('Shadowrun 6e | Weapon cannot be used at range:', {
+                weapon: weapon.name,
+                targetName: this.data.targetRanges[this.data.targetRangesSelected]?.name,
+                range: {
+                    category: rangeCategory,
+                    distance: this.data.targetRanges[this.data.targetRangesSelected]?.distance
+                },
+                attackRatings: weapon.system.range.attackRating,
+                selectedTarget: this.data.targetRanges[this.data.targetRangesSelected],
+                hasTargets: this.data.targetRanges.length > 0,
+                selectedTargetIndex: this.data.targetRangesSelected
+            });
+
+            ui.notifications?.warn(
+                game.i18n.format('SR6.WeaponRange.CannotBeUsedAtRange', {
+                    weapon: weapon.name,
+                    range: game.i18n.localize(`SR6.WeaponRange.${rangeCategory}`)
+                })
+            );
+            return 0;
+        }
+
+        this.data.attackerAR = rangeAR;
+
+        console.log('Shadowrun 6e | AR Selection:', {
+            weapon: weapon.name,
+            range: rangeCategory,
+            ar: rangeAR,
+            allRanges: weapon.system.range.attackRating
+        });
+
+        return this.data.attackerAR;
     }
 }

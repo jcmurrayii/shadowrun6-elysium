@@ -154,6 +154,9 @@ export const ChatData = {
 
     armor: (system, labels, props) => {
         if (system.armor) {
+            if (system.armor.capacity) props.push(`${game.i18n.localize('SR6.Capacity')} ${system.armor.capacity}`);
+            if (system.armor.defense_rating.value) props.push(`${game.i18n.localize('SR6.DefenseRating')} ${system.armor.defense_rating.value}`);
+            if (system.armor.social_rating.value) props.push(`${game.i18n.localize('SR6.SocialRating')} ${system.armor.social_rating.value}`);
             if (system.armor.value) props.push(`${game.i18n.localize('SR6.Armor')} ${system.armor.mod ? '+' : ''}${system.armor.value}`);
             if (system.armor.acid) props.push(`${game.i18n.localize('SR6.ElementAcid')} ${system.armor.acid}`);
             if (system.armor.cold) props.push(`${game.i18n.localize('SR6.ElementCold')} ${system.armor.cold}`);

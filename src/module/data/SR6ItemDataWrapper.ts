@@ -269,6 +269,29 @@ export class SR6ItemDataWrapper extends DataWrapper<ShadowrunItemData> {
         return this.getData()?.armor?.hardened ?? false;
     }
 
+    hasDefenseRating() : boolean {
+        return this.getData().armor?.defense_rating.base !== 0;
+    }
+
+    getDefenseRating() : number {
+        return this.getData().armor?.defense_rating.value ?? 0;
+    }
+
+    getBaseDefenseRating() : number {
+        return this.getData().armor?.defense_rating.base ?? 0;
+    }
+
+    getDefenseRatingRaw() : object {
+        return this.getData().armor?.defense_rating ?? {};
+    }
+
+    setDefenseRatingValue(value: number) : void {
+        let armor = this.getData().armor;
+        if(armor !== undefined) {
+            armor.defense_rating.value = value;
+        }
+    }
+
     getArmorElements(): { [key: string]: number } {
         const { fire, electricity, cold, acid, radiation } = this.getData().armor || {};
         return { fire: fire ?? 0, electricity: electricity ?? 0, cold: cold ?? 0, acid: acid ?? 0, radiation: radiation ?? 0 };

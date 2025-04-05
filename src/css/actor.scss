@@ -225,3 +225,12 @@
         overflow: hidden;
     }
 }
+
+#tracks .cell-container {
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+}
+
+#tracks .cell-container .cell {
+    padding: 2px;
+}

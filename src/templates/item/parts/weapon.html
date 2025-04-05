@@ -118,18 +118,20 @@
             {{localize "SR6.Weapon.Range.AttackRating"}}
         </div>
         <div class="inputs ranges">
-            <input size="3" type="text" name="system.range.attackRating.short" value="{{system.range.attackRating.short}}"
+            <input size="3" type="text" name="system.range.attackRating.close" value="{{system.range.attackRating.close}}"
+                   data-dtype="Number" />
+            /
+            <input size="3" type="text" name="system.range.attackRating.near" value="{{system.range.attackRating.near}}"
                    data-dtype="Number" />
             /
             <input size="3" type="text" name="system.range.attackRating.medium" value="{{system.range.attackRating.medium}}"
                    data-dtype="Number" />
             /
-            <input size="3" type="text" name="system.range.attackRating.long" value="{{system.range.attackRating.long}}"
+            <input size="3" type="text" name="system.range.attackRating.far" value="{{system.range.attackRating.far}}"
                    data-dtype="Number" />
             /
             <input size="3" type="text" name="system.range.attackRating.extreme" value="{{system.range.attackRating.extreme}}"
                    data-dtype="Number" />
-            <i class="fas fa-times"></i>
         </div>
     </div>
     {{/ife}} {{#ife system.category "thrown"}}

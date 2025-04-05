@@ -45,7 +45,6 @@ import QualityItemData = Shadowrun.QualityItemData;
 import SinItemData = Shadowrun.SinItemData;
 import SpellItemData = Shadowrun.SpellItemData;
 import SpritePowerItemData = Shadowrun.SpritePowerItemData;
-import WeaponItemData = Shadowrun.WeaponItemData;
 import HostItemData = Shadowrun.HostItemData;
 import ActionResultData = Shadowrun.ActionResultData;
 import ActionTestLabel = Shadowrun.ActionTestLabel;
@@ -74,6 +73,8 @@ import { AdeptPowerPrep } from './prep/AdeptPowerPrep';
  */
 import { ActionResultFlow } from './flows/ActionResultFlow';
 import { UpdateActionFlow } from './flows/UpdateActionFlow';
+import { WeaponRangeRules } from '../rules/WeaponRangeRules';
+import WeaponItemData = Shadowrun.WeaponItemData;
 
 ActionResultFlow; // DON'T TOUCH!
 
@@ -1668,5 +1669,30 @@ export class SR6Item extends Item {
         }
 
         await super._preUpdate(changed, options, user);
+    }
+
+    /**
+     * Get the current range category and modifier for a weapon
+     */
+    getRangeData(): Shadowrun.RangeDescription | undefined {
+        if (!this.isRangedWeapon) return;
+
+        const system = (this.system as unknown) as WeaponItemData['system'];
+        const distance = system.range.current;
+        return WeaponRangeRules.getTargetRangeDescription(distance);
+    }
+
+    /**
+     * Update the weapon's range data based on a target distance
+     */
+    async updateRangeForDistance(distance: number) {
+        if (!this.isRangedWeapon) return;
+
+        const rangeData = WeaponRangeRules.getTargetRangeDescription(distance);
+        await this.update({
+            'system.range.current': distance,
+            'system.range.category': rangeData.category,
+            'system.range.modifier': rangeData.modifier
+        });
     }
 }

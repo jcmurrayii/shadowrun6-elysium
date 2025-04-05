@@ -72,6 +72,26 @@
                     }
                 }
             },
+            "ratings": {
+                "social": {
+                    "base": 0,
+                    "value": 0,
+                    "mod": [],
+                    "temp": 0
+                },
+                "defense": {
+                    "base": 0,
+                    "value": 0,
+                    "mod": [],
+                    "temp": 0
+                },
+                "attack": {
+                    "base": 0,
+                    "value": 0,
+                    "mod": [],
+                    "temp": 0
+                }
+            },
             "attributes": {
                 "attributes": {
                     "body": {
@@ -343,6 +363,12 @@
             },
             "armor": {
                 "armor": {
+                    "defense_rating": {
+                        "base": 0,
+                        "value": 0,
+                        "mod": [],
+                        "temp": 0
+                    },
                     "base": 0,
                     "value": 0,
                     "mod": 0,
@@ -414,7 +440,9 @@
                     "value": ""
                 },
                 "wounds": {
-                    "value": 0
+                    "base": 0,
+                    "value": 0,
+                    "mod": []
                 },
                 "initiative": {
                     "perception": "meatspace",
@@ -505,7 +533,8 @@
                     "defense_rating": {
                         "base": 0,
                         "value": 0,
-                        "mod": []
+                        "mod": [],
+                        "temp": 0
                     }
                 }
             },
@@ -943,7 +972,19 @@
                     "radiation": 0,
                     "temp": 0,
                     "hardened": false,
-                    "capacity": 0
+                    "capacity": 0,
+                    "defense_rating": {
+                        "base": 0,
+                        "value": 0,
+                        "mod": [],
+                        "temp": 0
+                    },
+                    "social_rating": {
+                        "base": 0,
+                        "value": 0,
+                        "mod": [],
+                        "temp": 0
+                    }
                 }
             },
             "matrix": {

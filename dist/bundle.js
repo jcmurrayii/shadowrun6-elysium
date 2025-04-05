@@ -9950,6 +9950,24 @@ var SR6ItemDataWrapper = class extends DataWrapper {
   getHardened() {
     return this.getData()?.armor?.hardened ?? false;
   }
+  hasDefenseRating() {
+    return this.getData().armor?.defense_rating.base !== 0;
+  }
+  getDefenseRating() {
+    return this.getData().armor?.defense_rating.value ?? 0;
+  }
+  getBaseDefenseRating() {
+    return this.getData().armor?.defense_rating.base ?? 0;
+  }
+  getDefenseRatingRaw() {
+    return this.getData().armor?.defense_rating ?? {};
+  }
+  setDefenseRatingValue(value) {
+    let armor3 = this.getData().armor;
+    if (armor3 !== void 0) {
+      armor3.defense_rating.value = value;
+    }
+  }
   getArmorElements() {
     const { fire, electricity, cold, acid, radiation } = this.getData().armor || {};
     return { fire: fire ?? 0, electricity: electricity ?? 0, cold: cold ?? 0, acid: acid ?? 0, radiation: radiation ?? 0 };
@@ -10366,6 +10384,7 @@ var SR6 = {
     force: "SR6.Force",
     initiation: "SR6.Initiation",
     submersion: "SR6.Submersion",
+    transhumanism: "SR6.Transhumanism",
     rating: "SR6.Rating"
   },
   /**
@@ -12380,6 +12399,9 @@ var ChatData = {
   }, "adept_power"),
   armor: /* @__PURE__ */ __name((system, labels, props) => {
     if (system.armor) {
+      if (system.armor.capacity) props.push(`${game.i18n.localize("SR6.Capacity")} ${system.armor.capacity}`);
+      if (system.armor.defense_rating.value) props.push(`${game.i18n.localize("SR6.DefenseRating")} ${system.armor.defense_rating.value}`);
+      if (system.armor.social_rating.value) props.push(`${game.i18n.localize("SR6.SocialRating")} ${system.armor.social_rating.value}`);
       if (system.armor.value) props.push(`${game.i18n.localize("SR6.Armor")} ${system.armor.mod ? "+" : ""}${system.armor.value}`);
       if (system.armor.acid) props.push(`${game.i18n.localize("SR6.ElementAcid")} ${system.armor.acid}`);
       if (system.armor.cold) props.push(`${game.i18n.localize("SR6.ElementCold")} ${system.armor.cold}`);
@@ -18379,6 +18401,1010 @@ var UpdateActionFlow = {
   }
 };
 
+// src/module/rules/FireModeRules.ts
+var FireModeRules = {
+  /**
+   * Give a defense modifier according to rounds consumed and SR5#180.
+   *
+   * If given and not enough ammunition is available reduced defense modifier rules
+   * will be applied.
+   *
+   * @param fireMode The selected fireMode
+   * @param ammoLeft How many rounds can be fired
+   *
+   * @returns a negative defense modifier value
+   */
+  fireModeDefenseModifier: /* @__PURE__ */ __name(function(fireMode, ammoLeft = 0) {
+    const rounds = fireMode.value < 0 ? fireMode.value * -1 : fireMode.value;
+    const modifier = Number(fireMode.defense);
+    if (modifier === 0) return 0;
+    if (ammoLeft <= 0) ammoLeft = rounds;
+    if (ammoLeft >= rounds) return modifier;
+    return Math.min(modifier + rounds - ammoLeft, 0);
+  }, "fireModeDefenseModifier"),
+  /**
+   * Calculate the recoil attack modifier according to SR5#175
+   *
+   * NOTE: Reducing recoil compensation here is a bit unintuitive and might be easier to read
+   *       with its own rule function.
+   *
+   * @param fireMode The chosen fire mode for the attack
+   * @param compensation Actors recoil compensation
+   * @param recoil Accured progressive recoil of the actor before current attack
+   * @param ammoLeft Amount of ammunition available
+   *
+   * @return compensation Amount of compensation left.
+   * @return new recoil modifier.
+   */
+  recoilModifierAfterAttack: /* @__PURE__ */ __name(function(fireMode, compensation, recoil = 0, ammoLeft = 0) {
+    if (fireMode.value < 0) return 0;
+    if (ammoLeft <= 0) ammoLeft = fireMode.value;
+    const additionalRecoil = FireModeRules.additionalRecoil(fireMode, ammoLeft);
+    return FireModeRules.recoilModifier(compensation, recoil, additionalRecoil);
+  }, "recoilModifierAfterAttack"),
+  /**
+   * Calculate the amount of additional recoil possible depending on recoil of the firemode and
+   * ammunition left.
+   *
+   * @param fireMode Choosen fire mode to attack with
+   * @param ammoLeft Ammunition left in the weapon
+   * @returns A positive number or zero, if no additional recoil will be caused.
+   */
+  additionalRecoil: /* @__PURE__ */ __name(function(fireMode, ammoLeft) {
+    return fireMode.recoil ? Math.min(fireMode.value, ammoLeft) : 0;
+  }, "additionalRecoil"),
+  /**
+   * Calculate the revoil modifier value according to SR5#175 'Recoil' and 'Progressive Recoil'
+   *
+   * @param compensation Amount of total recoil compensation available.
+   * @param recoil Current Amount of total progressive recoil.
+   * @param additionalRecoil Amount of additional fired ammunition.
+   *
+   * @returns a negative number or zero.
+   */
+  recoilModifier: /* @__PURE__ */ __name(function(compensation, recoil, additionalRecoil = 0) {
+    return Math.min(compensation - (recoil + additionalRecoil), 0);
+  }, "recoilModifier"),
+  /**
+   * Determine what firemodes are available to a ranged weapon user.
+   *
+   * @param rangedWeaponModes The weapon modes on the actual gun
+   * @param ammoLeft The amount of rounds left. If not given, all firemodes will returned.
+   *
+   * @returns A list of firemodes sorted by weapon mode and rounds necessary.
+   */
+  availableFireModes: /* @__PURE__ */ __name(function(rangedWeaponModes, ammoLeft) {
+    return SR6.fireModes.filter((fireMode) => rangedWeaponModes[fireMode.mode]).sort((modeA, modeB) => {
+      if (modeA.mode === modeB.mode) {
+        return modeA.value - modeB.value;
+      }
+      const modeAIndex = SR6.rangeWeaponMode.indexOf(modeA.mode);
+      const modeBIndex = SR6.rangeWeaponMode.indexOf(modeB.mode);
+      return modeAIndex > modeBIndex ? 1 : -1;
+    });
+  }, "availableFireModes")
+};
+
+// src/module/effect/flows/EnvironmentalChangeFlow.ts
+var lowLightVision = /* @__PURE__ */ __name((modifier, test) => {
+  console.debug("Shadowrun 6e | Applying Low Light Effect", modifier);
+  if (!modifier.applied.active.light) return;
+  if (modifier.applied.active.light >= -3) modifier.applied.active.light = 0;
+  console.debug("Shadowrun 6e | Applied Low Light Effect", modifier);
+}, "lowLightVision");
+var imageMagnification = /* @__PURE__ */ __name((modifier, test) => {
+  console.debug("Shadowrun 6e | Applying Image Magnification Effect", modifier);
+  if (modifier.applied.active.range) modifier.applied.active.range = _shiftUpByOneRow(modifier.applied.active.range);
+  console.debug("Shadowrun 6e | Applied Image Magnification Effect", modifier);
+}, "imageMagnification");
+var thermographicVision = /* @__PURE__ */ __name((modifier, test) => {
+  console.debug("Shadowrun 6e | Applying Thermographic Vision Effect", modifier);
+  if (modifier.applied.active.light) modifier.applied.active.light = _shiftUpByOneRow(modifier.applied.active.light);
+  if (modifier.applied.active.visibility) modifier.applied.active.visibility = _shiftUpByOneRow(modifier.applied.active.visibility);
+  console.debug("Shadowrun 6e | Applied Thermographic Vision Effect", modifier);
+}, "thermographicVision");
+var tracerRounds = /* @__PURE__ */ __name((modifier, test) => {
+  console.debug("Shadowrun 6e | Applying Tracer Rounds Effect", modifier);
+  if (modifier.applied.active.wind && modifier.applied.active.wind < SR.combat.environmental.levels.light) {
+    modifier.applied.active.wind = _shiftUpByOneRow(modifier.applied.active.wind);
+  }
+  if (modifier.applied.active.range && modifier.applied.active.range < SR.combat.environmental.levels.light) {
+    modifier.applied.active.range = _shiftUpByOneRow(modifier.applied.active.range);
+  }
+  console.debug("Shadowrun 6e | Applied Tracer Rounds Effect", modifier);
+}, "tracerRounds");
+var smartlink = /* @__PURE__ */ __name((modifier, test) => {
+  console.debug("Shadowrun 6e | Applying Smartlink Effect", modifier);
+  if (modifier.applied.active.wind) modifier.applied.active.wind = _shiftUpByOneRow(modifier.applied.active.wind);
+}, "smartlink");
+var ultrasound = /* @__PURE__ */ __name((modifier, test) => {
+  console.debug("Shadowrun 6e | Applying Ultrasound Effect", modifier);
+  if (modifier.applied.active.visibility) {
+    modifier.applied.active.visibility = _shiftUpByOneRow(modifier.applied.active.visibility);
+  }
+  if (!test) return;
+  const distance = test.data["distance"];
+  if (!distance) return;
+  if (Number(distance) <= 50) modifier.applied.active.light = 0;
+}, "ultrasound");
+var _shiftUpByOneRow = /* @__PURE__ */ __name((active3) => {
+  const levels = Object.values(SR.combat.environmental.levels);
+  const activeIndex = levels.findIndex((level) => level === active3);
+  if (activeIndex === -1) {
+    console.error("Shadowrun 6e | Could not find matching active modifier level");
+    return 0;
+  }
+  ;
+  if (active3 === 0) return 0;
+  return levels[activeIndex - 1];
+}, "_shiftUpByOneRow");
+
+// src/module/effect/flows/SituationModifierEffectsFlow.ts
+var SituationModifierEffectsFlow = class {
+  constructor(modifier) {
+    this.applyHandlers = {};
+    this.modifier = modifier;
+    this.applyHandlers = {
+      "low_light_vision": lowLightVision,
+      "image_magnification": imageMagnification,
+      "tracer_rounds": tracerRounds,
+      "smartlink": smartlink,
+      "ultrasound": ultrasound,
+      "thermographic_vision": thermographicVision
+    };
+  }
+  static {
+    __name(this, "SituationModifierEffectsFlow");
+  }
+  /**
+   * Copied version of SR6Actor.applyActiveEffects to apply effects to situation modifiers.
+   *
+   * @param test The test to use during application for context.
+   * @returns
+   */
+  applyAllEffects(test) {
+    console.debug("Shadowrun 6e | Applying Situation Modifier Effects", this);
+    const changes = [];
+    for (const effect of this.allApplicableEffects()) {
+      if (!effect.active) continue;
+      if (effect.onlyForItemTest && (test === void 0 || effect.parent !== test?.item)) continue;
+      changes.push(...effect.changes.map((change) => {
+        const c2 = foundry.utils.deepClone(change);
+        c2.effect = effect;
+        return c2;
+      }));
+    }
+    changes.sort((a2, b2) => a2.priority - b2.priority);
+    console.debug("Shadowrun 6e | Applying Situation Modifier Effect changes", changes);
+    for (const change of changes) {
+      if (!change.key) continue;
+      const changeKeySplit = change.key.split(".");
+      if (changeKeySplit.length !== 2) return false;
+      const [modifierType, modifierHandler] = changeKeySplit;
+      if (modifierType !== this.modifier.type) continue;
+      const handler = this.applyHandlers[modifierHandler];
+      if (!handler) continue;
+      console.debug("Shadowrun 6e | ... applying modifier handler", this.modifier, handler, test);
+      handler(this.modifier, test);
+    }
+  }
+  /**
+   * Reduce all actor effects to those applicable to Situational Modifiers.
+   *
+   * Since Foundry Core uses a generator, keep this pattern for consistency.
+   * @param test An optional SuccessTest implementation to use for context.
+   */
+  *allApplicableEffects() {
+    if (this.modifier.sourceDocumentIsActor && this.modifier.modifiers?.document) {
+      const actor = this.modifier.modifiers.document;
+      for (const effect of allApplicableDocumentEffects(actor, { applyTo: ["modifier"] })) {
+        yield effect;
+      }
+      for (const effect of allApplicableItemsEffects(actor, { applyTo: ["modifier"] })) {
+        yield effect;
+      }
+    }
+  }
+};
+
+// src/module/rules/modifiers/SituationModifier.ts
+var SituationModifier = class {
+  static {
+    __name(this, "SituationModifier");
+  }
+  /**
+   *
+   * @param data The low level modifier data for this handler to work on.
+   * @param modifiers Modifiers instances this handler is used in.
+   */
+  constructor(data, modifiers) {
+    this.source = this._prepareSourceData(data);
+    this.modifiers = modifiers;
+    this.effects = new SituationModifierEffectsFlow(this);
+  }
+  /**
+   * Prepare valid source modifier data.
+   *
+   * @param data A documents source modifier data
+   * @returns Either a documents source modifier data or a valid fallback.
+   */
+  _prepareSourceData(data = {}) {
+    return { ...{ active: {} }, ...data };
+  }
+  /**
+   * Determine if any documents have been added to this instance.
+   */
+  get hasDocuments() {
+    return this.modifiers !== void 0;
+  }
+  /**
+   * Determine if the source document used is an actor.
+   */
+  get sourceDocumentIsActor() {
+    return this.modifiers !== void 0 && this.modifiers.documentIsActor;
+  }
+  /**
+   * Determine if the source document used is a scene.
+   */
+  get sourceDocumentIsScene() {
+    return this.modifiers !== void 0 && this.modifiers.documentIsScene;
+  }
+  /**
+   * Return the source active values for use during selection.
+   */
+  get active() {
+    return this.source.active;
+  }
+  /**
+   * Allow a situational modifier to NOT need any source data to apply it's modifiers.
+   *
+   * This can be used to implement a modifier that IS situational but doesn't need data structures for selection.
+   *
+   * @returns false, when a handler doesn't use any document source data.
+   */
+  static get hasSourceData() {
+    return true;
+  }
+  /**
+   * Determine if the source data has an active modifier set for this situational modifier.
+   */
+  get hasActive() {
+    return !foundry.utils.isEmpty(this.source.active);
+  }
+  /**
+   * Determine if a fixed value has been set.
+   */
+  get hasFixed() {
+    return this.applied.hasOwnProperty("fixed");
+  }
+  /**
+   * Determine if a fixed user selection has been made.
+   */
+  get hasFixedSelection() {
+    return this.applied.active.hasOwnProperty("value");
+  }
+  /**
+   * Determine if any user selection has been made.
+   */
+  get hasSelection() {
+    return this.hasActive || this.hasFixed;
+  }
+  /**
+   * Does the applied selection match?
+   *
+   * Use applied as source might not match, but applied might.
+   *
+   * In that case a matching applied might need to be altered in source.
+   *
+   * @param modifier The selection / active identifier
+   * @param level The modifier level
+   */
+  isMatching(modifier, level) {
+    return this.applied.active[modifier] === level;
+  }
+  /**
+   * Set a active selection to a modifier level.
+   *
+   * @param modifier The selection / active identifier.
+   * @param level The modifier level
+   */
+  setActive(modifier, level) {
+    this.source.active[modifier] = level;
+    this._updateDocumentSourceModifiers();
+  }
+  /**
+   * Set a active selection as inactive.
+   *
+   * @param modifier The selection / active identivier.
+   */
+  setInactive(modifier) {
+    delete this.source.active[modifier];
+    this._updateDocumentSourceModifiers();
+  }
+  /**
+   * Determine if the given modifier is active
+   * @param modifier The possibly active modifier to check
+   */
+  isActive(modifier) {
+    return this.source.active.hasOwnProperty(modifier);
+  }
+  /**
+   * When using a selection this method will toggle an active modifier on and off.
+   *
+   * @param modifier The active modifier name
+   * @param value The value the modifier uses currently.
+   */
+  toggleSelection(modifier, value) {
+    if (this.isMatching(modifier, value)) {
+      this.setInactive(modifier);
+    } else {
+      this.setActive(modifier, value);
+    }
+  }
+  /**
+   * Using the local documents source modifier data apply all higher-level situational modifiers
+   * on top and apply to the actual modifiers.
+   *
+   * @params options An optional set of options.
+   * @params options.reapply When set to true, should cause a full re application.
+   */
+  apply(options = {}) {
+    if (!this.applied || options.reapply || options.source) {
+      this.applied = {
+        active: {},
+        total: 0
+      };
+    }
+    this.source = options.source ?? this.source;
+    const applicable = options.applicable ?? null;
+    const sources = [];
+    if (Object.getPrototypeOf(this).constructor.hasSourceData && this.modifiers && this.sourceDocumentIsActor) {
+      if (!this.type) return console.error(`Shadowrun 6e | ${this.constructor.name} can't interact with documents without a modifier category set.`);
+      const actor = this.modifiers.document;
+      this._addSceneSourceDataFromActor(actor, sources);
+    }
+    sources.push(this.source);
+    sources.forEach((source3) => foundry.utils.mergeObject(this.applied, source3));
+    if (applicable && applicable.length > 0) {
+      Object.keys(this.applied.active).forEach((selection) => {
+        if (!applicable.includes(selection)) delete this.applied.active[selection];
+      });
+    }
+    this.effects.applyAllEffects(options.test);
+    if (!this.hasFixed && this.hasFixedSelection) this.applied.fixed = this.applied.active.value || 0;
+    if (this.hasFixed) this.applied.total = this.applied.fixed;
+    else this.applied.total = this._calcActiveTotal(options);
+    console.debug(`Shadowrun 6e | Totalled situational modifiers for ${this.modifiers?.document?.name} to be: ${this.applied.total}`, this.applied);
+  }
+  /**
+   * Add scene modifier sources into the applicable sources, when an actor is present on scene
+   *
+   * @param actor The actor to check for tokens
+   * @param sources The sources list, as used within #apply
+   */
+  _addSceneSourceDataFromActor(actor, sources) {
+    const scene = actor.getToken()?.parent;
+    if (!scene) return;
+    const sceneSource = this._getDocumentsSourceData(scene);
+    if (!sceneSource) return;
+    sources.push(sceneSource);
+  }
+  _getDocumentsSourceData(document2) {
+    if (!this.type) return;
+    const modifiers = DocumentSituationModifiers.getDocumentModifiers(document2);
+    return modifiers.source[this.type];
+  }
+  /**
+   * Determine the total value of all active modifier values.
+   *
+   * Override this method if you want to apply different rules depending on the situational modifier category.
+   *
+   * By default the active modifiers will simply be sumed up.
+   *
+   * @param options.test The SuccessTest implementation used to access this modifier. Use if the modifier changes based on test configuration.
+   *
+   * @returns The total modifier value to be used for this situational modifier category.
+   */
+  _calcActiveTotal(options = {}) {
+    return Object.values(this.applied.active).reduce((sum, current) => sum + current, 0) || 0;
+  }
+  /**
+   * Give the total modifier value for this category.
+   *
+   * Should this modifier not yet been applied, this will apply it.
+   *
+   * NOTE: Always use this field to access resulting modifier values as some modifiers might have a total level applied vs a total modifer given.
+   */
+  get total() {
+    if (!this.applied) {
+      this.apply();
+    }
+    return this.applied.total;
+  }
+  /**
+   * Clear the source modifier data to a default state.
+   */
+  clear() {
+    this.source = this._prepareSourceData();
+    this.apply({ reapply: true });
+    this._updateDocumentModifiers();
+  }
+  _updateDocumentSourceModifiers() {
+    if (!this.type || !this.modifiers) return;
+    this.modifiers.source[this.type] = this.source;
+  }
+  _updateDocumentAppliedModifiers() {
+    if (!this.type || !this.modifiers) return;
+    this.modifiers.applied[this.type] = this.applied;
+  }
+  _updateDocumentModifiers() {
+    this._updateDocumentSourceModifiers();
+    this._updateDocumentAppliedModifiers();
+  }
+};
+
+// src/module/rules/modifiers/RecoilModifier.ts
+var RecoilModifier = class extends SituationModifier {
+  static {
+    __name(this, "RecoilModifier");
+  }
+  /**
+   * Recoil modifiers don't allow for any selection.
+   */
+  static get hasSourceData() {
+    return false;
+  }
+  _calcActiveTotal(options) {
+    if (!this.modifiers || !this.modifiers.documentIsActor) return 0;
+    if (!options.test || options.test.type !== "RangedAttackTest") return this.modifiers.document?.recoil ?? 0;
+    const rangedAttack = options.test;
+    const testActor = options.test.actor;
+    const testItem = options.test.item;
+    const fireMode = rangedAttack.data.fireMode;
+    if (!testActor || !testItem) {
+      console.error(`Shadowrun 6e | ${this.constructor.name} calculated the recoil modifier within context of a ${options.test.constructor.name} which lacked either an actor or item document`, this, options.test);
+      return 0;
+    }
+    return FireModeRules.recoilModifierAfterAttack(fireMode, testItem.totalRecoilCompensation, testActor.recoil, testItem.ammoLeft);
+  }
+};
+
+// src/module/rules/modifiers/BackgroundCountModifier.ts
+var BackgroundCountModifier = class extends SituationModifier {
+  constructor() {
+    super(...arguments);
+    this.type = "background_count";
+  }
+  static {
+    __name(this, "BackgroundCountModifier");
+  }
+};
+
+// src/module/rules/modifiers/NoiseModifier.ts
+var NoiseModifier = class extends SituationModifier {
+  constructor() {
+    super(...arguments);
+    this.type = "noise";
+  }
+  static {
+    __name(this, "NoiseModifier");
+  }
+};
+
+// src/module/rules/modifiers/EnvironmentalModifier.ts
+var EnvironmentalModifier = class extends SituationModifier {
+  constructor() {
+    super(...arguments);
+    this.type = "environmental";
+  }
+  static {
+    __name(this, "EnvironmentalModifier");
+  }
+  get levels() {
+    return SR.combat.environmental.levels;
+  }
+  /**
+   * How many selectios / modifiers are active per level of enviornmental modifiers.
+   * 
+   * A level would be light and fitting modifiers would be 'Light Rain', 'Light Winds' or Medium Range.
+   * 
+   * @param values Active modifier values to be matched to level values
+   * @returns A count per level of modifiers on that level
+   */
+  activeLevels(values) {
+    return {
+      light: values.reduce((count, value) => value === this.levels.light ? count + 1 : count, 0),
+      moderate: values.reduce((count, value) => value === this.levels.moderate ? count + 1 : count, 0),
+      heavy: values.reduce((count, value) => value === this.levels.heavy ? count + 1 : count, 0),
+      extreme: values.reduce((count, value) => value === this.levels.extreme ? count + 1 : count, 0)
+    };
+  }
+  /**
+   * Apply rules for environmental modifier selection to calculate a total modifier value.
+   * 
+   * SR5#173 'Environmental Modifiers'
+   */
+  _calcActiveTotal() {
+    if (this.applied.active.value)
+      return this.applied.active.value;
+    const activeCategories = Object.entries(this.applied.active);
+    const activeValues = activeCategories.map(([category3, level]) => level ? level : 0);
+    const count = this.activeLevels(activeValues);
+    if (count.extreme > 0 || count.heavy >= 2) {
+      return this.levels.extreme;
+    } else if (count.heavy === 1 || count.moderate >= 2) {
+      return this.levels.heavy;
+    } else if (count.moderate === 1 || count.light >= 2) {
+      return this.levels.moderate;
+    } else if (count.light === 1) {
+      return this.levels.light;
+    }
+    return this.levels.good;
+  }
+  setInactive(modifier) {
+    if (this.source.active[modifier] !== this.applied.active[modifier]) this.setActive(modifier, 0);
+    else delete this.source.active[modifier];
+  }
+};
+
+// src/module/rules/modifiers/DefenseModifier.ts
+var DefenseModifier = class extends SituationModifier {
+  static {
+    __name(this, "DefenseModifier");
+  }
+  /**
+   * Defense modifier is a legacy modifier but can differ based set actor modifiers
+   */
+  static get hasSourceData() {
+    return false;
+  }
+  /**
+   * Depending on the test context additional defense modifiers might apply
+   *
+   */
+  _calcActiveTotal(options) {
+    if (!this.modifiers || !this.modifiers.documentIsActor) return 0;
+    const actor = this.modifiers.document;
+    if (!options.test || options.test.type !== "PhysicalDefenseTest") return Number(actor.system.modifiers.defense);
+    const test = options.test;
+    let defense = Number(actor.system.modifiers.defense);
+    switch (test.data.activeDefense) {
+      case "dodge":
+        defense += actor.modifiers.totalFor("defense_dodge");
+        break;
+      case "block":
+        defense += actor.modifiers.totalFor("defense_block");
+        break;
+      case "parry":
+        defense += actor.modifiers.totalFor("defense_parry");
+        break;
+    }
+    if (test.against.item?.isRangedWeapon) defense += actor.modifiers.totalFor("defense_ranged");
+    if (test.against.item?.isMeleeWeapon) defense += actor.modifiers.totalFor("defense_melee");
+    return defense;
+  }
+};
+
+// src/module/rules/DocumentSituationModifiers.ts
+var DocumentSituationModifiers = class _DocumentSituationModifiers {
+  static {
+    __name(this, "DocumentSituationModifiers");
+  }
+  /**
+   * Prepare a Modifiers instance for a and allow handling of the resulting modifiers.
+   *
+   * @param data situational modifiers taken from a Document.
+   * @param document The source document used to retrieve data.
+   */
+  constructor(data, document2) {
+    if (!data || foundry.utils.getType(data) !== "Object") {
+      data = _DocumentSituationModifiers._defaultModifiers;
+    }
+    this.source = this._completeSourceData(data);
+    this.document = document2;
+    this._prepareModifiers();
+  }
+  /**
+   * Prepare modifier handlers and their source data.
+   */
+  _prepareModifiers() {
+    this._modifiers = {
+      noise: new NoiseModifier(this.source.noise, this),
+      background_count: new BackgroundCountModifier(this.source.background_count, this),
+      environmental: new EnvironmentalModifier(this.source.environmental, this),
+      recoil: new RecoilModifier({}, this),
+      defense: new DefenseModifier({}, this)
+    };
+  }
+  /**
+   * Does this document have a handle a situation modifier category
+   *
+   * @param category A category found within the handler registry
+   * @returns true, when a total modifier can be calculated by a handler.
+   */
+  handlesTotalFor(category3) {
+    return this._modifiers.hasOwnProperty(category3);
+  }
+  /**
+   * Access helper for the noise modifier handler.
+   */
+  get noise() {
+    return this._modifiers.noise;
+  }
+  /**
+   * Access helper for the background modifier handler.
+   */
+  get background_count() {
+    return this._modifiers.background_count;
+  }
+  /**
+   * Access helper for the environmental modifier handler.
+   */
+  get environmental() {
+    return this._modifiers.environmental;
+  }
+  /**
+   * Access helper for the recoilModifier handler.
+   */
+  get recoil() {
+    return this._modifiers.recoil;
+  }
+  /**
+   * Access helper for the defense modifier handler
+   */
+  get defense() {
+    return this._modifiers.defense;
+  }
+  /**
+   * Complete a partial modifier data object, making sure all modifier category fields are set.
+   *
+   * @param data An incomplete modifier data object.
+   * @returns A completed modifier data object.
+   */
+  _completeSourceData(data) {
+    data = foundry.utils.duplicate(data);
+    for (const [category3, modifiers] of Object.entries(_DocumentSituationModifiers._defaultModifiers)) {
+      if (!data.hasOwnProperty(category3)) data[category3] = modifiers;
+    }
+    return data;
+  }
+  /**
+   * Return this total value for a modifiers category selection.
+   *
+   * @param category A string matching a situation modifiers category.
+   * @param options
+   */
+  getTotalFor(category3, options = {}) {
+    const modifier = this._modifiers[category3];
+    if (options.reapply || options.applicable) {
+      modifier.apply({ applicable: options.applicable, test: options.test });
+    }
+    return modifier.total;
+  }
+  /**
+   * Re-apply all situational modifiers totals based on their active selections made.
+   *
+   * This will turn the source data per modifier category over to their matching handler
+   * and apply that categories total according to the rules for that category.
+   *
+   * The result will be stored in the applied modifiers, where a total and the applied
+   * selections can be found.
+   *
+   * @params options What options to pass onto the SituationModifier.apply method.
+   *                 The source property will be overriden.
+   */
+  applyAll(options = {}) {
+    this.applied = {};
+    Object.entries(this._modifiers).forEach(([category3, handler]) => {
+      if (Object.getPrototypeOf(handler).constructor.hasSourceData) {
+        Object.entries(this.source[category3].active).forEach(([modifier, value]) => {
+          switch (value) {
+            case null:
+            case void 0:
+              delete this.source[category3].active[modifier];
+          }
+        });
+      }
+      options.reapply = options.reapply ?? true;
+      options.source = this.source[category3];
+      handler.apply(options);
+      this.applied[category3] = handler.applied;
+    });
+  }
+  /**
+   * Clear a given document from all situation modifiers selection.
+   *
+   * @param document The document to clear.
+   * @returns A new instance with the resulting modifiers structure
+   */
+  static async clearAllOn(document2) {
+    if (document2 instanceof SR6Actor) {
+      await document2.update({ "system.-=situation_modifiers": null }, { render: false });
+      await document2.update({ "system.situation_modifiers": _DocumentSituationModifiers._defaultModifiers });
+    } else {
+      await document2.unsetFlag(SYSTEM_NAME, FLAGS.Modifier);
+      await document2.setFlag(SYSTEM_NAME, FLAGS.Modifier, _DocumentSituationModifiers._defaultModifiers);
+    }
+  }
+  /**
+   * Clear a given modifiers categories selection from a document.
+   *
+   * @param document The document to clear.
+   * @param category Modifiers category to clear
+   * @returns A new instance with the resulting modifiers structure
+   */
+  static async clearTypeOn(document2, category3) {
+    const modifiers = _DocumentSituationModifiers.getDocumentModifiers(document2);
+    if (!modifiers.source.hasOwnProperty(category3)) return modifiers;
+    modifiers.source[category3] = _DocumentSituationModifiers._defaultModifier;
+    await _DocumentSituationModifiers.setDocumentModifiers(document2, modifiers.source);
+    return modifiers;
+  }
+  /**
+   * Prepare complete default modifier structure for a single modifier category.
+   */
+  static get _defaultModifier() {
+    return {
+      active: {}
+    };
+  }
+  /**
+   * Prepare complete default modifier data structure for a single document.
+   */
+  static get _defaultModifiers() {
+    return {
+      environmental: _DocumentSituationModifiers._defaultModifier,
+      noise: _DocumentSituationModifiers._defaultModifier,
+      background_count: _DocumentSituationModifiers._defaultModifier
+    };
+  }
+  /**
+   * Determine if the current document is a scene.
+   */
+  get documentIsScene() {
+    return this.document instanceof CONFIG.Scene.documentClass;
+  }
+  /**
+   * Determine if the current document is an actor.
+   */
+  get documentIsActor() {
+    return this.document instanceof CONFIG.Actor.documentClass;
+  }
+  /**
+   * Retrieve the situational modifiers data.
+   *
+   * @param document Any document with flags support.
+   * @returns The raw modifier data of a document
+   */
+  static getDocumentModifiersData(document2) {
+    if (document2 instanceof SR6Actor) {
+      return document2.system.situation_modifiers;
+    } else {
+      return document2.getFlag(SYSTEM_NAME, FLAGS.Modifier);
+    }
+  }
+  /**
+   * For a modifiable document return all situational modifiers.
+   *
+   * @param document The document containing modifiers or implementing a custom modifier retrieval system.
+   */
+  static fromDocument(document2) {
+    if (document2 instanceof SR6Actor) {
+      return document2.getSituationModifiers();
+    }
+    return _DocumentSituationModifiers.getDocumentModifiers(document2);
+  }
+  /**
+   * Build a full set of situational modifiers for a document.
+   *
+   * @param document Any document that may contain situational modifiers.
+   * @returns A full set of situational modifiers.
+   */
+  static getDocumentModifiers(document2) {
+    const data = _DocumentSituationModifiers.getDocumentModifiersData(document2);
+    return new _DocumentSituationModifiers(data, document2);
+  }
+  /**
+   * Set the situation modifiers data on the given document.
+   *
+   * @param document Any document with flags support.
+   * @param modifiers Source data of all situation modifiers for this document.
+   */
+  static async setDocumentModifiers(document2, modifiers) {
+    if (document2 instanceof SR6Actor) {
+      await document2.update({ "system.situation_modifiers": modifiers }, { diff: false });
+    } else {
+      await document2.unsetFlag(SYSTEM_NAME, FLAGS.Modifier);
+      await document2.setFlag(SYSTEM_NAME, FLAGS.Modifier, modifiers);
+    }
+  }
+  /**
+   * Helper for instances to update modifiers on a document
+   */
+  async updateDocument() {
+    if (!this.document) return console.error(`'Shadowrun 6e | ${this.constructor.name} can't update without connected document'`);
+    await _DocumentSituationModifiers.setDocumentModifiers(this.document, this.source);
+  }
+  /**
+   * Helper for instances to clear all modifiers on a document
+   */
+  async clearAll() {
+    if (!this.document) return console.error(`'Shadowrun 6e | ${this.constructor.name} can't clear without connected document'`);
+    await _DocumentSituationModifiers.clearAllOn(this.document);
+    this.source = _DocumentSituationModifiers.getDocumentModifiersData(this.document);
+  }
+  /**
+   * Helper for scene modifier instances to clear all modifiers for all placed tokens
+   */
+  async clearAllTokensOnScene() {
+    if (!canvas.ready || !canvas.scene) return;
+    if (!this.documentIsScene) return;
+    const scene = this.document;
+    if (canvas.scene.id !== scene.id) return;
+    canvas.scene.tokens.forEach((token) => token.actor?.getSituationModifiers().clearAll());
+  }
+};
+
+// src/module/rules/WeaponRangeRules.ts
+var RANGE_CATEGORIES = {
+  CLOSE: "CLOSE",
+  NEAR: "NEAR",
+  MEDIUM: "MEDIUM",
+  FAR: "FAR",
+  EXTREME: "EXTREME"
+};
+var RANGE_DISTANCES = {
+  [RANGE_CATEGORIES.CLOSE]: { min: 0, max: 3 },
+  [RANGE_CATEGORIES.NEAR]: { min: 4, max: 50 },
+  [RANGE_CATEGORIES.MEDIUM]: { min: 51, max: 250 },
+  [RANGE_CATEGORIES.FAR]: { min: 251, max: 500 },
+  [RANGE_CATEGORIES.EXTREME]: { min: 501, max: Infinity }
+};
+var RANGE_MODIFIERS = {
+  [RANGE_CATEGORIES.CLOSE]: 0,
+  [RANGE_CATEGORIES.NEAR]: 0,
+  [RANGE_CATEGORIES.MEDIUM]: -2,
+  [RANGE_CATEGORIES.FAR]: -4,
+  [RANGE_CATEGORIES.EXTREME]: -6
+};
+var WeaponRangeRules = class {
+  static {
+    __name(this, "WeaponRangeRules");
+  }
+  static getRangeCategory(distance) {
+    if (distance <= RANGE_DISTANCES[RANGE_CATEGORIES.CLOSE].max) return "CLOSE";
+    if (distance <= RANGE_DISTANCES[RANGE_CATEGORIES.NEAR].max) return "NEAR";
+    if (distance <= RANGE_DISTANCES[RANGE_CATEGORIES.MEDIUM].max) return "MEDIUM";
+    if (distance <= RANGE_DISTANCES[RANGE_CATEGORIES.FAR].max) return "FAR";
+    return "EXTREME";
+  }
+  static getRangeModifier(distance) {
+    const category3 = this.getRangeCategory(distance);
+    return RANGE_MODIFIERS[category3];
+  }
+  static getTargetRangeDescription(distance) {
+    const category3 = this.getRangeCategory(distance);
+    const modifier = RANGE_MODIFIERS[category3];
+    return {
+      label: game.i18n.localize(`SR6.WeaponRange.${category3.toLowerCase()}`),
+      distance,
+      modifier,
+      category: category3
+    };
+  }
+};
+var WeaponRangeTestBehavior = class _WeaponRangeTestBehavior {
+  static {
+    __name(this, "WeaponRangeTestBehavior");
+  }
+  static prepareData(test, data) {
+    data.range = 0;
+    data.targetRanges = [];
+    data.targetRangesSelected = 0;
+    data.damage = data.damage || DataDefaults.damageData();
+    data.attackerAR = 5;
+    data.defenderDR = 5;
+  }
+  static prepareTargetRanges(test) {
+    if (!test.actor) return;
+    const targets = Helpers.getUserTargets(game.user);
+    if (targets.length === 0) return;
+    const attacker = test.actor.getToken();
+    if (!attacker) {
+      ui.notifications?.warn(game.i18n.localize("SR6.TargetingNeedsActorWithToken"));
+      return;
+    }
+    test.data.targetRanges = targets.map((token) => {
+      const distance = Helpers.measureTokenDistance(attacker, token.document);
+      const rangeDescription = WeaponRangeRules.getTargetRangeDescription(distance);
+      return {
+        tokenUuid: token.document.uuid,
+        name: token.name || "",
+        unit: LENGTH_UNIT,
+        range: rangeDescription,
+        distance
+      };
+    });
+    test.data.targetRanges = test.data.targetRanges.sort((a2, b2) => a2.distance - b2.distance);
+    const modifiers = test.actor.getSituationModifiers();
+    modifiers.environmental.apply({ test });
+    test.data.range = modifiers.environmental.applied.active.range || (test.data.targetRanges[0]?.range.modifier ?? 0);
+  }
+  static prepareDocumentData(test) {
+    _WeaponRangeTestBehavior.prepareTargetRanges(test);
+  }
+  /**
+   * Save selections made back to documents.
+   * @returns
+   */
+  static async saveUserSelectionAfterDialog(test) {
+    if (!test.actor) return;
+    if (!test.item) return;
+    const modifiers = test.actor.getSituationModifiers();
+    modifiers.environmental.setActive("range", test.data.range);
+    await test.actor.setSituationModifiers(modifiers);
+  }
+  /**
+   * Apply test selections made by user in dialog.
+   * @returns
+   */
+  static prepareBaseValues(test) {
+    if (!test.actor) return;
+    if (!test.item) return;
+    const targets = Helpers.getUserTargets(game.user);
+    if (targets.length > 0) {
+      test.targets = targets.map((token) => token.document);
+      if (test.data.targetRanges.length > 0) {
+        test.data.targetRangesSelected = Number(test.data.targetRangesSelected);
+        if (test.data.targetRangesSelected >= 0 && test.data.targetRangesSelected < test.data.targetRanges.length) {
+          const target = test.data.targetRanges[test.data.targetRangesSelected];
+          if (target && target.range) {
+            test.data.range = target.range.modifier;
+            const token = fromUuidSync(target.tokenUuid);
+            if (!(token instanceof TokenDocument)) return console.error(`Shadowrun 6e | ${test.type} got a target that is no TokenDocument`, token);
+            if (!token.actor) return console.error(`Shadowrun 6e | ${test.type} got a token that has no actor`, token);
+            test.data.targetActorsUuid = [token.actor.uuid];
+          }
+        }
+      }
+    }
+    test.data.range = Number(test.data.range);
+  }
+  /**
+   * Ranged attack tests allow for temporarily changing of modifiers without altering the document.
+   */
+  static prepareTestModifiers(test) {
+    _WeaponRangeTestBehavior.prepareEnvironmentalModifier(test);
+  }
+  static prepareEnvironmentalModifier(test) {
+    if (!test.actor) return;
+    const poolMods = new PartsList(test.data.modifiers.mod);
+    const modifiers = DocumentSituationModifiers.getDocumentModifiers(test.actor);
+    const targets = Helpers.getUserTargets(game.user);
+    let range = 0;
+    if (targets.length > 0 && test.data.targetRanges && test.data.targetRanges.length > 0 && test.data.targetRangesSelected >= 0 && test.data.targetRangesSelected < test.data.targetRanges.length) {
+      const selectedTarget = test.data.targetRanges[test.data.targetRangesSelected];
+      if (selectedTarget && selectedTarget.range && typeof selectedTarget.range.modifier === "number") {
+        range = selectedTarget.range.modifier;
+      }
+    } else if (typeof test.data.range === "number") {
+      range = test.data.range;
+    }
+    modifiers.environmental.setActive("range", range);
+    modifiers.environmental.apply({ reapply: true, test });
+    poolMods.addUniquePart(SR6.modifierTypes.environmental, modifiers.environmental.total);
+  }
+  static async processResults(test) {
+    await _WeaponRangeTestBehavior.markActionPhaseAsAttackUsed(test);
+  }
+  static async markActionPhaseAsAttackUsed(test) {
+    if (!test.actor || !test.actor.combatActive) return;
+    const combatant = test.actor.combatant;
+    if (!combatant) return;
+    await combatant.setFlag(SYSTEM_NAME, "turnsSinceLastAttack", 0);
+  }
+};
+
 // src/module/item/SR6Item.ts
 var SR6Item = class _SR6Item extends Item {
   constructor() {
@@ -19570,6 +20596,27 @@ var SR6Item = class _SR6Item extends Item {
     }
     await super._preUpdate(changed, options, user);
   }
+  /**
+   * Get the current range category and modifier for a weapon
+   */
+  getRangeData() {
+    if (!this.isRangedWeapon) return;
+    const system = this.system;
+    const distance = system.range.current;
+    return WeaponRangeRules.getTargetRangeDescription(distance);
+  }
+  /**
+   * Update the weapon's range data based on a target distance
+   */
+  async updateRangeForDistance(distance) {
+    if (!this.isRangedWeapon) return;
+    const rangeData = WeaponRangeRules.getTargetRangeDescription(distance);
+    await this.update({
+      "system.range.current": distance,
+      "system.range.category": rangeData.category,
+      "system.range.modifier": rangeData.modifier
+    });
+  }
 };
 
 // src/module/actor/prep/functions/InitiativePrep.ts
@@ -19759,32 +20806,34 @@ var ItemPrep = class {
    */
   static prepareArmor(system, items) {
     const { armor: armor3 } = system;
-    armor3.base = 0;
-    armor3.value = 0;
-    for (const element of Object.keys(SR6.elementTypes)) {
-      armor3[element] = 0;
-    }
-    const armorModParts = new PartsList(armor3.mod);
+    armor3.defense_rating.base = 0;
+    armor3.defense_rating.value = 0;
+    const parts = new PartsList(armor3.mod);
+    const defenseRatingParts = new PartsList(armor3.defense_rating.mod);
     const equippedArmor = items.filter((item) => item.couldHaveArmor() && item.isEquipped());
+    console.log("Shadowrun 6e | Armor Preparation:", {
+      equippedArmorItems: equippedArmor.map((item) => ({
+        name: item.getName(),
+        baseDR: item.getBaseDefenseRating(),
+        totalDR: item.getDefenseRating()
+      })),
+      initialArmor: foundry.utils.duplicate(armor3)
+    });
     equippedArmor?.forEach((item) => {
-      if (item.hasArmor()) {
-        if (item.hasArmorAccessory()) {
-          armorModParts.addUniquePart(item.getName(), item.getArmorValue());
-        } else {
-          const armorValue = item.getArmorValue();
-          if (armorValue > armor3.base) {
-            armor3.base = item.getArmorValue();
-            armor3.label = item.getName();
-            armor3.hardened = item.getHardened();
-          }
-        }
+      const itemBaseDefenseRating = item.getBaseDefenseRating();
+      if (itemBaseDefenseRating > armor3.defense_rating.base) {
+        armor3.defense_rating.base = itemBaseDefenseRating;
       }
+      defenseRatingParts.addPart(item.getName(), item.getDefenseRating() - itemBaseDefenseRating);
       for (const element of Object.keys(SR6.elementTypes)) {
         armor3[element] += item.getArmorElements()[element];
       }
     });
-    if (system.modifiers["armor"]) armorModParts.addUniquePart(game.i18n.localize("SR6.Bonus"), system.modifiers["armor"]);
-    armor3.value = Helpers.calcTotal(armor3);
+    armor3.defense_rating.value = Helpers.calcTotal(armor3.defense_rating);
+    console.log("Shadowrun 6e | After Armor Preparation:", {
+      finalArmor: foundry.utils.duplicate(armor3),
+      defenseRatingParts
+    });
   }
   /**
    * Apply all changes to an actor by their 'ware items.
@@ -19799,6 +20848,8 @@ var ItemPrep = class {
       }
     });
     system.attributes.essence.mod = parts.list;
+  }
+  static prepareWeapons(system, items) {
   }
 };
 
@@ -20263,6 +21314,7 @@ var CharacterPrep = class _CharacterPrep {
     NPCPrep.prepareNPCData(system);
     SkillsPrep.prepareSkills(system);
     ItemPrep.prepareArmor(system, items);
+    ItemPrep.prepareWeapons(system, items);
     MatrixPrep.prepareMatrix(system, items);
     MatrixPrep.prepareMatrixToLimitsAndAttributes(system);
     GruntPrep.prepareConditionMonitors(system);
@@ -20274,6 +21326,7 @@ var CharacterPrep = class _CharacterPrep {
     InitiativePrep.prepareCurrentInitiative(system);
     _CharacterPrep.prepareRecoil(system);
     _CharacterPrep.prepareRecoilCompensation(system);
+    _CharacterPrep.prepareDefenseRating(system);
   }
   /**
    * Prepare the current progressive recoil of an actor.
@@ -20295,10 +21348,34 @@ var CharacterPrep = class _CharacterPrep {
     PartsList.AddUniquePart(system.values.recoil_compensation.mod, "SR6.RecoilCompensation", recoilCompensation);
     Helpers.calcTotal(system.values.recoil_compensation, { min: 0 });
   }
+  static prepareMeleeAttackRating(system) {
+    const baseAttackRating = 0;
+    let attackRating = 0;
+    system.values.attack_rating.base = attackRating;
+    Helpers.calcTotal(system.values.attack_rating, { min: 0 });
+  }
   static addSpecialAttributes(system) {
     const { attributes } = system;
     attributes.initiation = DataDefaults.attributeData({ base: system.magic.initiation, label: "SR6.Initiation", hidden: true });
-    attributes.submersion = DataDefaults.attributeData({ base: system.technomancer.submersion, label: "SR6.Submersion", hidden: true });
+    attributes.submersion = DataDefaults.attributeData({ base: system.technomancer.submersion, label: "F", hidden: true });
+  }
+  static prepareDefenseRating(system) {
+    const { attributes } = system;
+    const { defense_rating } = system.armor;
+    console.log("Shadowrun 6e | Defense Rating Pre-Calculation:", {
+      attributes,
+      initialDefenseRating: foundry.utils.duplicate(defense_rating),
+      bodyValue: attributes.body.value
+    });
+    PartsList.AddUniquePart(defense_rating.mod, "SR6.AttrBody", attributes.body.value);
+    defense_rating.value = Helpers.calcTotal(defense_rating, { min: 0 });
+    console.log("Shadowrun 6e | Defense Rating Post-Calculation:", {
+      baseArmor: defense_rating.base,
+      bodyMod: attributes.body.value,
+      otherMods: defense_rating.mod,
+      totalDR: defense_rating.value,
+      calculation: `${defense_rating.base} (base armor) + ${attributes.body.value} (body) + ${defense_rating.mod.total || 0} (mods) = ${defense_rating.value}`
+    });
   }
 };
 
@@ -21276,850 +22353,6 @@ var VehiclePrep = class _VehiclePrep {
   }
 };
 
-// src/module/rules/FireModeRules.ts
-var FireModeRules = {
-  /**
-   * Give a defense modifier according to rounds consumed and SR5#180.
-   *
-   * If given and not enough ammunition is available reduced defense modifier rules
-   * will be applied.
-   *
-   * @param fireMode The selected fireMode
-   * @param ammoLeft How many rounds can be fired
-   *
-   * @returns a negative defense modifier value
-   */
-  fireModeDefenseModifier: /* @__PURE__ */ __name(function(fireMode, ammoLeft = 0) {
-    const rounds = fireMode.value < 0 ? fireMode.value * -1 : fireMode.value;
-    const modifier = Number(fireMode.defense);
-    if (modifier === 0) return 0;
-    if (ammoLeft <= 0) ammoLeft = rounds;
-    if (ammoLeft >= rounds) return modifier;
-    return Math.min(modifier + rounds - ammoLeft, 0);
-  }, "fireModeDefenseModifier"),
-  /**
-   * Calculate the recoil attack modifier according to SR5#175
-   *
-   * NOTE: Reducing recoil compensation here is a bit unintuitive and might be easier to read
-   *       with its own rule function.
-   *
-   * @param fireMode The chosen fire mode for the attack
-   * @param compensation Actors recoil compensation
-   * @param recoil Accured progressive recoil of the actor before current attack
-   * @param ammoLeft Amount of ammunition available
-   *
-   * @return compensation Amount of compensation left.
-   * @return new recoil modifier.
-   */
-  recoilModifierAfterAttack: /* @__PURE__ */ __name(function(fireMode, compensation, recoil = 0, ammoLeft = 0) {
-    if (fireMode.value < 0) return 0;
-    if (ammoLeft <= 0) ammoLeft = fireMode.value;
-    const additionalRecoil = FireModeRules.additionalRecoil(fireMode, ammoLeft);
-    return FireModeRules.recoilModifier(compensation, recoil, additionalRecoil);
-  }, "recoilModifierAfterAttack"),
-  /**
-   * Calculate the amount of additional recoil possible depending on recoil of the firemode and
-   * ammunition left.
-   *
-   * @param fireMode Choosen fire mode to attack with
-   * @param ammoLeft Ammunition left in the weapon
-   * @returns A positive number or zero, if no additional recoil will be caused.
-   */
-  additionalRecoil: /* @__PURE__ */ __name(function(fireMode, ammoLeft) {
-    return fireMode.recoil ? Math.min(fireMode.value, ammoLeft) : 0;
-  }, "additionalRecoil"),
-  /**
-   * Calculate the revoil modifier value according to SR5#175 'Recoil' and 'Progressive Recoil'
-   *
-   * @param compensation Amount of total recoil compensation available.
-   * @param recoil Current Amount of total progressive recoil.
-   * @param additionalRecoil Amount of additional fired ammunition.
-   *
-   * @returns a negative number or zero.
-   */
-  recoilModifier: /* @__PURE__ */ __name(function(compensation, recoil, additionalRecoil = 0) {
-    return Math.min(compensation - (recoil + additionalRecoil), 0);
-  }, "recoilModifier"),
-  /**
-   * Determine what firemodes are available to a ranged weapon user.
-   *
-   * @param rangedWeaponModes The weapon modes on the actual gun
-   * @param ammoLeft The amount of rounds left. If not given, all firemodes will returned.
-   *
-   * @returns A list of firemodes sorted by weapon mode and rounds necessary.
-   */
-  availableFireModes: /* @__PURE__ */ __name(function(rangedWeaponModes, ammoLeft) {
-    return SR6.fireModes.filter((fireMode) => rangedWeaponModes[fireMode.mode]).sort((modeA, modeB) => {
-      if (modeA.mode === modeB.mode) {
-        return modeA.value - modeB.value;
-      }
-      const modeAIndex = SR6.rangeWeaponMode.indexOf(modeA.mode);
-      const modeBIndex = SR6.rangeWeaponMode.indexOf(modeB.mode);
-      return modeAIndex > modeBIndex ? 1 : -1;
-    });
-  }, "availableFireModes")
-};
-
-// src/module/effect/flows/EnvironmentalChangeFlow.ts
-var lowLightVision = /* @__PURE__ */ __name((modifier, test) => {
-  console.debug("Shadowrun 6e | Applying Low Light Effect", modifier);
-  if (!modifier.applied.active.light) return;
-  if (modifier.applied.active.light >= -3) modifier.applied.active.light = 0;
-  console.debug("Shadowrun 6e | Applied Low Light Effect", modifier);
-}, "lowLightVision");
-var imageMagnification = /* @__PURE__ */ __name((modifier, test) => {
-  console.debug("Shadowrun 6e | Applying Image Magnification Effect", modifier);
-  if (modifier.applied.active.range) modifier.applied.active.range = _shiftUpByOneRow(modifier.applied.active.range);
-  console.debug("Shadowrun 6e | Applied Image Magnification Effect", modifier);
-}, "imageMagnification");
-var thermographicVision = /* @__PURE__ */ __name((modifier, test) => {
-  console.debug("Shadowrun 6e | Applying Thermographic Vision Effect", modifier);
-  if (modifier.applied.active.light) modifier.applied.active.light = _shiftUpByOneRow(modifier.applied.active.light);
-  if (modifier.applied.active.visibility) modifier.applied.active.visibility = _shiftUpByOneRow(modifier.applied.active.visibility);
-  console.debug("Shadowrun 6e | Applied Thermographic Vision Effect", modifier);
-}, "thermographicVision");
-var tracerRounds = /* @__PURE__ */ __name((modifier, test) => {
-  console.debug("Shadowrun 6e | Applying Tracer Rounds Effect", modifier);
-  if (modifier.applied.active.wind && modifier.applied.active.wind < SR.combat.environmental.levels.light) {
-    modifier.applied.active.wind = _shiftUpByOneRow(modifier.applied.active.wind);
-  }
-  if (modifier.applied.active.range && modifier.applied.active.range < SR.combat.environmental.levels.light) {
-    modifier.applied.active.range = _shiftUpByOneRow(modifier.applied.active.range);
-  }
-  console.debug("Shadowrun 6e | Applied Tracer Rounds Effect", modifier);
-}, "tracerRounds");
-var smartlink = /* @__PURE__ */ __name((modifier, test) => {
-  console.debug("Shadowrun 6e | Applying Smartlink Effect", modifier);
-  if (modifier.applied.active.wind) modifier.applied.active.wind = _shiftUpByOneRow(modifier.applied.active.wind);
-}, "smartlink");
-var ultrasound = /* @__PURE__ */ __name((modifier, test) => {
-  console.debug("Shadowrun 6e | Applying Ultrasound Effect", modifier);
-  if (modifier.applied.active.visibility) {
-    modifier.applied.active.visibility = _shiftUpByOneRow(modifier.applied.active.visibility);
-  }
-  if (!test) return;
-  const distance = test.data["distance"];
-  if (!distance) return;
-  if (Number(distance) <= 50) modifier.applied.active.light = 0;
-}, "ultrasound");
-var _shiftUpByOneRow = /* @__PURE__ */ __name((active3) => {
-  const levels = Object.values(SR.combat.environmental.levels);
-  const activeIndex = levels.findIndex((level) => level === active3);
-  if (activeIndex === -1) {
-    console.error("Shadowrun 6e | Could not find matching active modifier level");
-    return 0;
-  }
-  ;
-  if (active3 === 0) return 0;
-  return levels[activeIndex - 1];
-}, "_shiftUpByOneRow");
-
-// src/module/effect/flows/SituationModifierEffectsFlow.ts
-var SituationModifierEffectsFlow = class {
-  constructor(modifier) {
-    this.applyHandlers = {};
-    this.modifier = modifier;
-    this.applyHandlers = {
-      "low_light_vision": lowLightVision,
-      "image_magnification": imageMagnification,
-      "tracer_rounds": tracerRounds,
-      "smartlink": smartlink,
-      "ultrasound": ultrasound,
-      "thermographic_vision": thermographicVision
-    };
-  }
-  static {
-    __name(this, "SituationModifierEffectsFlow");
-  }
-  /**
-   * Copied version of SR6Actor.applyActiveEffects to apply effects to situation modifiers.
-   *
-   * @param test The test to use during application for context.
-   * @returns
-   */
-  applyAllEffects(test) {
-    console.debug("Shadowrun 6e | Applying Situation Modifier Effects", this);
-    const changes = [];
-    for (const effect of this.allApplicableEffects()) {
-      if (!effect.active) continue;
-      if (effect.onlyForItemTest && (test === void 0 || effect.parent !== test?.item)) continue;
-      changes.push(...effect.changes.map((change) => {
-        const c2 = foundry.utils.deepClone(change);
-        c2.effect = effect;
-        return c2;
-      }));
-    }
-    changes.sort((a2, b2) => a2.priority - b2.priority);
-    console.debug("Shadowrun 6e | Applying Situation Modifier Effect changes", changes);
-    for (const change of changes) {
-      if (!change.key) continue;
-      const changeKeySplit = change.key.split(".");
-      if (changeKeySplit.length !== 2) return false;
-      const [modifierType, modifierHandler] = changeKeySplit;
-      if (modifierType !== this.modifier.type) continue;
-      const handler = this.applyHandlers[modifierHandler];
-      if (!handler) continue;
-      console.debug("Shadowrun 6e | ... applying modifier handler", this.modifier, handler, test);
-      handler(this.modifier, test);
-    }
-  }
-  /**
-   * Reduce all actor effects to those applicable to Situational Modifiers.
-   *
-   * Since Foundry Core uses a generator, keep this pattern for consistency.
-   * @param test An optional SuccessTest implementation to use for context.
-   */
-  *allApplicableEffects() {
-    if (this.modifier.sourceDocumentIsActor && this.modifier.modifiers?.document) {
-      const actor = this.modifier.modifiers.document;
-      for (const effect of allApplicableDocumentEffects(actor, { applyTo: ["modifier"] })) {
-        yield effect;
-      }
-      for (const effect of allApplicableItemsEffects(actor, { applyTo: ["modifier"] })) {
-        yield effect;
-      }
-    }
-  }
-};
-
-// src/module/rules/modifiers/SituationModifier.ts
-var SituationModifier = class {
-  static {
-    __name(this, "SituationModifier");
-  }
-  /**
-   *
-   * @param data The low level modifier data for this handler to work on.
-   * @param modifiers Modifiers instances this handler is used in.
-   */
-  constructor(data, modifiers) {
-    this.source = this._prepareSourceData(data);
-    this.modifiers = modifiers;
-    this.effects = new SituationModifierEffectsFlow(this);
-  }
-  /**
-   * Prepare valid source modifier data.
-   *
-   * @param data A documents source modifier data
-   * @returns Either a documents source modifier data or a valid fallback.
-   */
-  _prepareSourceData(data = {}) {
-    return { ...{ active: {} }, ...data };
-  }
-  /**
-   * Determine if any documents have been added to this instance.
-   */
-  get hasDocuments() {
-    return this.modifiers !== void 0;
-  }
-  /**
-   * Determine if the source document used is an actor.
-   */
-  get sourceDocumentIsActor() {
-    return this.modifiers !== void 0 && this.modifiers.documentIsActor;
-  }
-  /**
-   * Determine if the source document used is a scene.
-   */
-  get sourceDocumentIsScene() {
-    return this.modifiers !== void 0 && this.modifiers.documentIsScene;
-  }
-  /**
-   * Return the source active values for use during selection.
-   */
-  get active() {
-    return this.source.active;
-  }
-  /**
-   * Allow a situational modifier to NOT need any source data to apply it's modifiers.
-   *
-   * This can be used to implement a modifier that IS situational but doesn't need data structures for selection.
-   *
-   * @returns false, when a handler doesn't use any document source data.
-   */
-  static get hasSourceData() {
-    return true;
-  }
-  /**
-   * Determine if the source data has an active modifier set for this situational modifier.
-   */
-  get hasActive() {
-    return !foundry.utils.isEmpty(this.source.active);
-  }
-  /**
-   * Determine if a fixed value has been set.
-   */
-  get hasFixed() {
-    return this.applied.hasOwnProperty("fixed");
-  }
-  /**
-   * Determine if a fixed user selection has been made.
-   */
-  get hasFixedSelection() {
-    return this.applied.active.hasOwnProperty("value");
-  }
-  /**
-   * Determine if any user selection has been made.
-   */
-  get hasSelection() {
-    return this.hasActive || this.hasFixed;
-  }
-  /**
-   * Does the applied selection match?
-   *
-   * Use applied as source might not match, but applied might.
-   *
-   * In that case a matching applied might need to be altered in source.
-   *
-   * @param modifier The selection / active identifier
-   * @param level The modifier level
-   */
-  isMatching(modifier, level) {
-    return this.applied.active[modifier] === level;
-  }
-  /**
-   * Set a active selection to a modifier level.
-   *
-   * @param modifier The selection / active identifier.
-   * @param level The modifier level
-   */
-  setActive(modifier, level) {
-    this.source.active[modifier] = level;
-    this._updateDocumentSourceModifiers();
-  }
-  /**
-   * Set a active selection as inactive.
-   *
-   * @param modifier The selection / active identivier.
-   */
-  setInactive(modifier) {
-    delete this.source.active[modifier];
-    this._updateDocumentSourceModifiers();
-  }
-  /**
-   * Determine if the given modifier is active
-   * @param modifier The possibly active modifier to check
-   */
-  isActive(modifier) {
-    return this.source.active.hasOwnProperty(modifier);
-  }
-  /**
-   * When using a selection this method will toggle an active modifier on and off.
-   *
-   * @param modifier The active modifier name
-   * @param value The value the modifier uses currently.
-   */
-  toggleSelection(modifier, value) {
-    if (this.isMatching(modifier, value)) {
-      this.setInactive(modifier);
-    } else {
-      this.setActive(modifier, value);
-    }
-  }
-  /**
-   * Using the local documents source modifier data apply all higher-level situational modifiers
-   * on top and apply to the actual modifiers.
-   *
-   * @params options An optional set of options.
-   * @params options.reapply When set to true, should cause a full re application.
-   */
-  apply(options = {}) {
-    if (!this.applied || options.reapply || options.source) {
-      this.applied = {
-        active: {},
-        total: 0
-      };
-    }
-    this.source = options.source ?? this.source;
-    const applicable = options.applicable ?? null;
-    const sources = [];
-    if (Object.getPrototypeOf(this).constructor.hasSourceData && this.modifiers && this.sourceDocumentIsActor) {
-      if (!this.type) return console.error(`Shadowrun 6e | ${this.constructor.name} can't interact with documents without a modifier category set.`);
-      const actor = this.modifiers.document;
-      this._addSceneSourceDataFromActor(actor, sources);
-    }
-    sources.push(this.source);
-    sources.forEach((source3) => foundry.utils.mergeObject(this.applied, source3));
-    if (applicable && applicable.length > 0) {
-      Object.keys(this.applied.active).forEach((selection) => {
-        if (!applicable.includes(selection)) delete this.applied.active[selection];
-      });
-    }
-    this.effects.applyAllEffects(options.test);
-    if (!this.hasFixed && this.hasFixedSelection) this.applied.fixed = this.applied.active.value || 0;
-    if (this.hasFixed) this.applied.total = this.applied.fixed;
-    else this.applied.total = this._calcActiveTotal(options);
-    console.debug(`Shadowrun 6e | Totalled situational modifiers for ${this.modifiers?.document?.name} to be: ${this.applied.total}`, this.applied);
-  }
-  /**
-   * Add scene modifier sources into the applicable sources, when an actor is present on scene
-   *
-   * @param actor The actor to check for tokens
-   * @param sources The sources list, as used within #apply
-   */
-  _addSceneSourceDataFromActor(actor, sources) {
-    const scene = actor.getToken()?.parent;
-    if (!scene) return;
-    const sceneSource = this._getDocumentsSourceData(scene);
-    if (!sceneSource) return;
-    sources.push(sceneSource);
-  }
-  _getDocumentsSourceData(document2) {
-    if (!this.type) return;
-    const modifiers = DocumentSituationModifiers.getDocumentModifiers(document2);
-    return modifiers.source[this.type];
-  }
-  /**
-   * Determine the total value of all active modifier values.
-   *
-   * Override this method if you want to apply different rules depending on the situational modifier category.
-   *
-   * By default the active modifiers will simply be sumed up.
-   *
-   * @param options.test The SuccessTest implementation used to access this modifier. Use if the modifier changes based on test configuration.
-   *
-   * @returns The total modifier value to be used for this situational modifier category.
-   */
-  _calcActiveTotal(options = {}) {
-    return Object.values(this.applied.active).reduce((sum, current) => sum + current, 0) || 0;
-  }
-  /**
-   * Give the total modifier value for this category.
-   *
-   * Should this modifier not yet been applied, this will apply it.
-   *
-   * NOTE: Always use this field to access resulting modifier values as some modifiers might have a total level applied vs a total modifer given.
-   */
-  get total() {
-    if (!this.applied) {
-      this.apply();
-    }
-    return this.applied.total;
-  }
-  /**
-   * Clear the source modifier data to a default state.
-   */
-  clear() {
-    this.source = this._prepareSourceData();
-    this.apply({ reapply: true });
-    this._updateDocumentModifiers();
-  }
-  _updateDocumentSourceModifiers() {
-    if (!this.type || !this.modifiers) return;
-    this.modifiers.source[this.type] = this.source;
-  }
-  _updateDocumentAppliedModifiers() {
-    if (!this.type || !this.modifiers) return;
-    this.modifiers.applied[this.type] = this.applied;
-  }
-  _updateDocumentModifiers() {
-    this._updateDocumentSourceModifiers();
-    this._updateDocumentAppliedModifiers();
-  }
-};
-
-// src/module/rules/modifiers/RecoilModifier.ts
-var RecoilModifier = class extends SituationModifier {
-  static {
-    __name(this, "RecoilModifier");
-  }
-  /**
-   * Recoil modifiers don't allow for any selection.
-   */
-  static get hasSourceData() {
-    return false;
-  }
-  _calcActiveTotal(options) {
-    if (!this.modifiers || !this.modifiers.documentIsActor) return 0;
-    if (!options.test || options.test.type !== "RangedAttackTest") return this.modifiers.document?.recoil ?? 0;
-    const rangedAttack = options.test;
-    const testActor = options.test.actor;
-    const testItem = options.test.item;
-    const fireMode = rangedAttack.data.fireMode;
-    if (!testActor || !testItem) {
-      console.error(`Shadowrun 6e | ${this.constructor.name} calculated the recoil modifier within context of a ${options.test.constructor.name} which lacked either an actor or item document`, this, options.test);
-      return 0;
-    }
-    return FireModeRules.recoilModifierAfterAttack(fireMode, testItem.totalRecoilCompensation, testActor.recoil, testItem.ammoLeft);
-  }
-};
-
-// src/module/rules/modifiers/BackgroundCountModifier.ts
-var BackgroundCountModifier = class extends SituationModifier {
-  constructor() {
-    super(...arguments);
-    this.type = "background_count";
-  }
-  static {
-    __name(this, "BackgroundCountModifier");
-  }
-};
-
-// src/module/rules/modifiers/NoiseModifier.ts
-var NoiseModifier = class extends SituationModifier {
-  constructor() {
-    super(...arguments);
-    this.type = "noise";
-  }
-  static {
-    __name(this, "NoiseModifier");
-  }
-};
-
-// src/module/rules/modifiers/EnvironmentalModifier.ts
-var EnvironmentalModifier = class extends SituationModifier {
-  constructor() {
-    super(...arguments);
-    this.type = "environmental";
-  }
-  static {
-    __name(this, "EnvironmentalModifier");
-  }
-  get levels() {
-    return SR.combat.environmental.levels;
-  }
-  /**
-   * How many selectios / modifiers are active per level of enviornmental modifiers.
-   * 
-   * A level would be light and fitting modifiers would be 'Light Rain', 'Light Winds' or Medium Range.
-   * 
-   * @param values Active modifier values to be matched to level values
-   * @returns A count per level of modifiers on that level
-   */
-  activeLevels(values) {
-    return {
-      light: values.reduce((count, value) => value === this.levels.light ? count + 1 : count, 0),
-      moderate: values.reduce((count, value) => value === this.levels.moderate ? count + 1 : count, 0),
-      heavy: values.reduce((count, value) => value === this.levels.heavy ? count + 1 : count, 0),
-      extreme: values.reduce((count, value) => value === this.levels.extreme ? count + 1 : count, 0)
-    };
-  }
-  /**
-   * Apply rules for environmental modifier selection to calculate a total modifier value.
-   * 
-   * SR5#173 'Environmental Modifiers'
-   */
-  _calcActiveTotal() {
-    if (this.applied.active.value)
-      return this.applied.active.value;
-    const activeCategories = Object.entries(this.applied.active);
-    const activeValues = activeCategories.map(([category3, level]) => level ? level : 0);
-    const count = this.activeLevels(activeValues);
-    if (count.extreme > 0 || count.heavy >= 2) {
-      return this.levels.extreme;
-    } else if (count.heavy === 1 || count.moderate >= 2) {
-      return this.levels.heavy;
-    } else if (count.moderate === 1 || count.light >= 2) {
-      return this.levels.moderate;
-    } else if (count.light === 1) {
-      return this.levels.light;
-    }
-    return this.levels.good;
-  }
-  setInactive(modifier) {
-    if (this.source.active[modifier] !== this.applied.active[modifier]) this.setActive(modifier, 0);
-    else delete this.source.active[modifier];
-  }
-};
-
-// src/module/rules/modifiers/DefenseModifier.ts
-var DefenseModifier = class extends SituationModifier {
-  static {
-    __name(this, "DefenseModifier");
-  }
-  /**
-   * Defense modifier is a legacy modifier but can differ based set actor modifiers
-   */
-  static get hasSourceData() {
-    return false;
-  }
-  /**
-   * Depending on the test context additional defense modifiers might apply
-   *
-   */
-  _calcActiveTotal(options) {
-    if (!this.modifiers || !this.modifiers.documentIsActor) return 0;
-    const actor = this.modifiers.document;
-    if (!options.test || options.test.type !== "PhysicalDefenseTest") return Number(actor.system.modifiers.defense);
-    const test = options.test;
-    let defense = Number(actor.system.modifiers.defense);
-    switch (test.data.activeDefense) {
-      case "dodge":
-        defense += actor.modifiers.totalFor("defense_dodge");
-        break;
-      case "block":
-        defense += actor.modifiers.totalFor("defense_block");
-        break;
-      case "parry":
-        defense += actor.modifiers.totalFor("defense_parry");
-        break;
-    }
-    if (test.against.item?.isRangedWeapon) defense += actor.modifiers.totalFor("defense_ranged");
-    if (test.against.item?.isMeleeWeapon) defense += actor.modifiers.totalFor("defense_melee");
-    return defense;
-  }
-};
-
-// src/module/rules/DocumentSituationModifiers.ts
-var DocumentSituationModifiers = class _DocumentSituationModifiers {
-  static {
-    __name(this, "DocumentSituationModifiers");
-  }
-  /**
-   * Prepare a Modifiers instance for a and allow handling of the resulting modifiers.
-   *
-   * @param data situational modifiers taken from a Document.
-   * @param document The source document used to retrieve data.
-   */
-  constructor(data, document2) {
-    if (!data || foundry.utils.getType(data) !== "Object") {
-      data = _DocumentSituationModifiers._defaultModifiers;
-    }
-    this.source = this._completeSourceData(data);
-    this.document = document2;
-    this._prepareModifiers();
-  }
-  /**
-   * Prepare modifier handlers and their source data.
-   */
-  _prepareModifiers() {
-    this._modifiers = {
-      noise: new NoiseModifier(this.source.noise, this),
-      background_count: new BackgroundCountModifier(this.source.background_count, this),
-      environmental: new EnvironmentalModifier(this.source.environmental, this),
-      recoil: new RecoilModifier({}, this),
-      defense: new DefenseModifier({}, this)
-    };
-  }
-  /**
-   * Does this document have a handle a situation modifier category
-   *
-   * @param category A category found within the handler registry
-   * @returns true, when a total modifier can be calculated by a handler.
-   */
-  handlesTotalFor(category3) {
-    return this._modifiers.hasOwnProperty(category3);
-  }
-  /**
-   * Access helper for the noise modifier handler.
-   */
-  get noise() {
-    return this._modifiers.noise;
-  }
-  /**
-   * Access helper for the background modifier handler.
-   */
-  get background_count() {
-    return this._modifiers.background_count;
-  }
-  /**
-   * Access helper for the environmental modifier handler.
-   */
-  get environmental() {
-    return this._modifiers.environmental;
-  }
-  /**
-   * Access helper for the recoilModifier handler.
-   */
-  get recoil() {
-    return this._modifiers.recoil;
-  }
-  /**
-   * Access helper for the defense modifier handler
-   */
-  get defense() {
-    return this._modifiers.defense;
-  }
-  /**
-   * Complete a partial modifier data object, making sure all modifier category fields are set.
-   *
-   * @param data An incomplete modifier data object.
-   * @returns A completed modifier data object.
-   */
-  _completeSourceData(data) {
-    data = foundry.utils.duplicate(data);
-    for (const [category3, modifiers] of Object.entries(_DocumentSituationModifiers._defaultModifiers)) {
-      if (!data.hasOwnProperty(category3)) data[category3] = modifiers;
-    }
-    return data;
-  }
-  /**
-   * Return this total value for a modifiers category selection.
-   *
-   * @param category A string matching a situation modifiers category.
-   * @param options
-   */
-  getTotalFor(category3, options = {}) {
-    const modifier = this._modifiers[category3];
-    if (options.reapply || options.applicable) {
-      modifier.apply({ applicable: options.applicable, test: options.test });
-    }
-    return modifier.total;
-  }
-  /**
-   * Re-apply all situational modifiers totals based on their active selections made.
-   *
-   * This will turn the source data per modifier category over to their matching handler
-   * and apply that categories total according to the rules for that category.
-   *
-   * The result will be stored in the applied modifiers, where a total and the applied
-   * selections can be found.
-   *
-   * @params options What options to pass onto the SituationModifier.apply method.
-   *                 The source property will be overriden.
-   */
-  applyAll(options = {}) {
-    this.applied = {};
-    Object.entries(this._modifiers).forEach(([category3, handler]) => {
-      if (Object.getPrototypeOf(handler).constructor.hasSourceData) {
-        Object.entries(this.source[category3].active).forEach(([modifier, value]) => {
-          switch (value) {
-            case null:
-            case void 0:
-              delete this.source[category3].active[modifier];
-          }
-        });
-      }
-      options.reapply = options.reapply ?? true;
-      options.source = this.source[category3];
-      handler.apply(options);
-      this.applied[category3] = handler.applied;
-    });
-  }
-  /**
-   * Clear a given document from all situation modifiers selection.
-   *
-   * @param document The document to clear.
-   * @returns A new instance with the resulting modifiers structure
-   */
-  static async clearAllOn(document2) {
-    if (document2 instanceof SR6Actor) {
-      await document2.update({ "system.-=situation_modifiers": null }, { render: false });
-      await document2.update({ "system.situation_modifiers": _DocumentSituationModifiers._defaultModifiers });
-    } else {
-      await document2.unsetFlag(SYSTEM_NAME, FLAGS.Modifier);
-      await document2.setFlag(SYSTEM_NAME, FLAGS.Modifier, _DocumentSituationModifiers._defaultModifiers);
-    }
-  }
-  /**
-   * Clear a given modifiers categories selection from a document.
-   *
-   * @param document The document to clear.
-   * @param category Modifiers category to clear
-   * @returns A new instance with the resulting modifiers structure
-   */
-  static async clearTypeOn(document2, category3) {
-    const modifiers = _DocumentSituationModifiers.getDocumentModifiers(document2);
-    if (!modifiers.source.hasOwnProperty(category3)) return modifiers;
-    modifiers.source[category3] = _DocumentSituationModifiers._defaultModifier;
-    await _DocumentSituationModifiers.setDocumentModifiers(document2, modifiers.source);
-    return modifiers;
-  }
-  /**
-   * Prepare complete default modifier structure for a single modifier category.
-   */
-  static get _defaultModifier() {
-    return {
-      active: {}
-    };
-  }
-  /**
-   * Prepare complete default modifier data structure for a single document.
-   */
-  static get _defaultModifiers() {
-    return {
-      environmental: _DocumentSituationModifiers._defaultModifier,
-      noise: _DocumentSituationModifiers._defaultModifier,
-      background_count: _DocumentSituationModifiers._defaultModifier
-    };
-  }
-  /**
-   * Determine if the current document is a scene.
-   */
-  get documentIsScene() {
-    return this.document instanceof CONFIG.Scene.documentClass;
-  }
-  /**
-   * Determine if the current document is an actor.
-   */
-  get documentIsActor() {
-    return this.document instanceof CONFIG.Actor.documentClass;
-  }
-  /**
-   * Retrieve the situational modifiers data.
-   *
-   * @param document Any document with flags support.
-   * @returns The raw modifier data of a document
-   */
-  static getDocumentModifiersData(document2) {
-    if (document2 instanceof SR6Actor) {
-      return document2.system.situation_modifiers;
-    } else {
-      return document2.getFlag(SYSTEM_NAME, FLAGS.Modifier);
-    }
-  }
-  /**
-   * For a modifiable document return all situational modifiers.
-   *
-   * @param document The document containing modifiers or implementing a custom modifier retrieval system.
-   */
-  static fromDocument(document2) {
-    if (document2 instanceof SR6Actor) {
-      return document2.getSituationModifiers();
-    }
-    return _DocumentSituationModifiers.getDocumentModifiers(document2);
-  }
-  /**
-   * Build a full set of situational modifiers for a document.
-   *
-   * @param document Any document that may contain situational modifiers.
-   * @returns A full set of situational modifiers.
-   */
-  static getDocumentModifiers(document2) {
-    const data = _DocumentSituationModifiers.getDocumentModifiersData(document2);
-    return new _DocumentSituationModifiers(data, document2);
-  }
-  /**
-   * Set the situation modifiers data on the given document.
-   *
-   * @param document Any document with flags support.
-   * @param modifiers Source data of all situation modifiers for this document.
-   */
-  static async setDocumentModifiers(document2, modifiers) {
-    if (document2 instanceof SR6Actor) {
-      await document2.update({ "system.situation_modifiers": modifiers }, { diff: false });
-    } else {
-      await document2.unsetFlag(SYSTEM_NAME, FLAGS.Modifier);
-      await document2.setFlag(SYSTEM_NAME, FLAGS.Modifier, modifiers);
-    }
-  }
-  /**
-   * Helper for instances to update modifiers on a document
-   */
-  async updateDocument() {
-    if (!this.document) return console.error(`'Shadowrun 6e | ${this.constructor.name} can't update without connected document'`);
-    await _DocumentSituationModifiers.setDocumentModifiers(this.document, this.source);
-  }
-  /**
-   * Helper for instances to clear all modifiers on a document
-   */
-  async clearAll() {
-    if (!this.document) return console.error(`'Shadowrun 6e | ${this.constructor.name} can't clear without connected document'`);
-    await _DocumentSituationModifiers.clearAllOn(this.document);
-    this.source = _DocumentSituationModifiers.getDocumentModifiersData(this.document);
-  }
-  /**
-   * Helper for scene modifier instances to clear all modifiers for all placed tokens
-   */
-  async clearAllTokensOnScene() {
-    if (!canvas.ready || !canvas.scene) return;
-    if (!this.documentIsScene) return;
-    const scene = this.document;
-    if (canvas.scene.id !== scene.id) return;
-    canvas.scene.tokens.forEach((token) => token.actor?.getSituationModifiers().clearAll());
-  }
-};
-
 // src/module/actor/prep/ICPrep.ts
 var ICPrep = class _ICPrep {
   static {
@@ -22671,9 +22904,6 @@ var SR6Actor = class _SR6Actor extends Actor {
     let effects = this.effects.filter(showEffectIcon);
     for (const item of this.items) {
       effects = effects.concat(item.effects.filter(showEffectIcon));
-      for (const nestedItem of item.items) {
-        effects = effects.concat(nestedItem.effects.filter(showEffectIcon));
-      }
     }
     return effects;
   }
@@ -22852,6 +23082,18 @@ var SR6Actor = class _SR6Actor extends Actor {
   get recoilCompensation() {
     if (!this.system.values.hasOwnProperty("recoil_compensation")) return 0;
     return this.system.values.recoil_compensation.value;
+  }
+  get unarmedAttackRating() {
+    if (!this.system.values.hasOwnProperty("attack_rating")) return 0;
+    return this.system.values.unarmed_attack_rating.value;
+  }
+  get meleeAttackRating() {
+    if (!this.system.values.hasOwnProperty("attack_rating")) return 0;
+    return this.system.values.melee_attack_rating.value;
+  }
+  get defenseRating() {
+    if (!this.system.values.hasOwnProperty("defense_rating")) return 0;
+    return this.system.values.defense_rating.value;
   }
   /**
    * Current recoil compensation with current recoil included.
@@ -24245,6 +24487,11 @@ var SR6Actor = class _SR6Actor extends Actor {
     if (this.isMatrixActor) await this.setMatrixDamage(0);
     if (updateData) await this.update(updateData);
   }
+  async newSceneSetup() {
+    const updateData = {};
+    updateData["system.attributes.edge.uses"] = this.getEdge().value;
+    if (updateData) await this.update(updateData);
+  }
   /**
    * Will unequip all other items of the same type as the given item.
    *
@@ -24743,7 +24990,15 @@ var Helpers = class _Helpers {
     return actor.name;
   }
   static getDefenseRating(targets) {
-    return 0;
+    let defenseRating = 0;
+    for (const token of targets) {
+      let target = token.actor;
+      console.log(target);
+      if ("defense_rating" in target.system.values && target.system.values.defense_rating.value > defenseRating) {
+        defenseRating = target.system.values.defense_rating.value;
+      }
+    }
+    return defenseRating;
   }
   static getAttackRating(actor) {
     return 0;
@@ -25388,7 +25643,7 @@ var registerItemLineHelpers = /* @__PURE__ */ __name(() => {
           },
           {
             text: {
-              text: game.i18n.localize("SR6.Skill.Skill"),
+              text: game.i18n.localize("SR6.Skill"),
               cssClass: "six"
             }
           },
@@ -27786,6 +28041,70 @@ var Migrator = class _Migrator {
   }
 };
 
+// src/module/migration/MigrationRunner.ts
+var MigrationRunner = class {
+  static {
+    __name(this, "MigrationRunner");
+  }
+  // ... existing code ...
+  static async migrateWeaponRanges(item) {
+    if (!item.isRangedWeapon) return;
+    const updateData = {
+      "system.range": {
+        current: 0,
+        category: RANGE_CATEGORIES.NEAR,
+        // Default to "near" range
+        modifier: RANGE_MODIFIERS[RANGE_CATEGORIES.NEAR]
+      }
+    };
+    await item.update({
+      "system.range.-=ranges": null,
+      "system.range.-=selected": null,
+      // Add new range structure
+      ...updateData
+    });
+  }
+  static async migrateToNewRanges() {
+    ui.notifications?.info("Starting weapon range migration...");
+    for (const actor of game.actors || []) {
+      const weapons3 = actor.items.filter((i2) => i2.isRangedWeapon);
+      for (const weapon of weapons3) {
+        await this.migrateWeaponRanges(weapon);
+      }
+    }
+    for (const item of game.items || []) {
+      if (item.isRangedWeapon) {
+        await this.migrateWeaponRanges(item);
+      }
+    }
+    ui.notifications?.info("Weapon range migration complete.");
+  }
+  static async migrateWeaponAttackRatings(item) {
+    if (!item.isRangedWeapon) return;
+    const updateData = {
+      "system.range.attackRating": {
+        [RANGE_CATEGORIES.CLOSE]: 0,
+        [RANGE_CATEGORIES.NEAR]: 0,
+        [RANGE_CATEGORIES.MEDIUM]: 0,
+        [RANGE_CATEGORIES.FAR]: 0,
+        [RANGE_CATEGORIES.EXTREME]: 0
+      }
+    };
+    const oldAR = item.system?.attack_rating;
+    if (oldAR) {
+      if (oldAR.close) updateData.system.range.attackRating[RANGE_CATEGORIES.CLOSE] = oldAR.close;
+      if (oldAR.near) updateData.system.range.attackRating[RANGE_CATEGORIES.NEAR] = oldAR.near;
+      if (oldAR.medium) updateData.system.range.attackRating[RANGE_CATEGORIES.MEDIUM] = oldAR.medium;
+      if (oldAR.far) updateData.system.range.attackRating[RANGE_CATEGORIES.FAR] = oldAR.far;
+      if (oldAR.extreme) updateData.system.range.attackRating[RANGE_CATEGORIES.EXTREME] = oldAR.extreme;
+    }
+    await item.update({
+      "system.-=attack_rating": null,
+      ...updateData
+    });
+  }
+};
+
 // src/module/settings.ts
 var registerSystemSettings = /* @__PURE__ */ __name(() => {
   game.settings.register(SYSTEM_NAME, FLAGS.GlobalDataStorage, {
@@ -27962,6 +28281,21 @@ var registerSystemSettings = /* @__PURE__ */ __name(() => {
     config: true,
     type: Boolean,
     default: true
+  });
+  game.settings.register("shadowrun6-elysium", "migrateWeaponRanges", {
+    name: "Migrate to Standard Weapon Ranges",
+    hint: "Updates all weapons to use the standard SR6e range categories.",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: false,
+    onChange: /* @__PURE__ */ __name((value) => {
+      if (value) {
+        MigrationRunner.migrateToNewRanges().then(() => {
+          game.settings.set("shadowrun6-elysium", "migrateWeaponRanges", false);
+        });
+      }
+    }, "onChange")
   });
 }, "registerSystemSettings");
 
@@ -29155,31 +29489,31 @@ var Constants = class {
   }
   static {
     this.MAP_CATEGORY_TO_SKILL = {
-      "Assault Cannons": "heavy_weapons",
-      "Assault Rifles": "automatics",
-      "Blades": "blades",
-      "Bows": "archery",
-      "Carbines": "automatics",
-      "Clubs": "clubs",
-      "Crossbows": "archery",
+      "Assault Cannons": "firearms",
+      "Assault Rifles": "firearms",
+      "Blades": "close_combat",
+      "Bows": "exotic_ranged",
+      "Carbines": "firearms",
+      "Clubs": "close_combat",
+      "Crossbows": "exotic_ranged",
       "Exotic Melee Weapons": "exotic_melee",
       "Exotic Ranged Weapons": "exotic_ranged",
       "Flamethrowers": "exotic_ranged",
-      "Grenade Launchers": "heavy_weapons",
-      "Heavy Machine Guns": "heavy_weapons",
-      "Heavy Pistols": "pistols",
-      "Holdouts": "pistols",
+      "Grenade Launchers": "exotic_ranged",
+      "Heavy Machine Guns": "exotic_ranged",
+      "Heavy Pistols": "firearms",
+      "Holdouts": "firearms",
       "Laser Weapons": "exotic_ranged",
-      "Light Machine Guns": "heavy_weapons",
-      "Light Pistols": "pistols",
-      "Machine Pistols": "automatics",
-      "Medium Machine Guns": "automatics",
-      "Missile Launchers": "heavy_weapons",
-      "Shotguns": "longarms",
-      "Sniper Rifles": "longarms",
-      "Sporting Rifles": "longarms",
-      "Submachine Guns": "automatics",
-      "Tasers": "pistols",
+      "Light Machine Guns": "firearms",
+      "Light Pistols": "firearms",
+      "Machine Pistols": "firearms",
+      "Medium Machine Guns": "firearms",
+      "Missile Launchers": "exotic_ranged",
+      "Shotguns": "firearms",
+      "Sniper Rifles": "firearms",
+      "Sporting Rifles": "firearms",
+      "Submachine Guns": "firearms",
+      "Tasers": "firearms",
       "Unarmed": "unarmed_combat"
     };
   }
@@ -35254,6 +35588,9 @@ var SR6BaseActorSheet = class extends ActorSheet {
   _onResetActorRunData(event) {
     this.actor.resetRunData();
   }
+  _onStartNewSchene(event) {
+    this.actor.newSceneSetup();
+  }
   /**
    * Prepare keybindings to be shown when hovering over a rolling icon
    * in any list item view that has rolls.
@@ -35913,136 +36250,6 @@ var TeamworkTest = class {
   }
 };
 
-// src/module/rules/WeaponRangeRules.ts
-var WeaponRangeTestBehavior = class _WeaponRangeTestBehavior {
-  static {
-    __name(this, "WeaponRangeTestBehavior");
-  }
-  static prepareData(test, data) {
-    data.ranges = {};
-    data.range = 0;
-    data.targetRanges = [];
-    data.targetRangesSelected = 0;
-    data.damage = data.damage || DataDefaults.damageData();
-  }
-  /**
-   * Weapon range selection depends on the weapon alone.
-   *
-   * In case of selected targets, test will be overwritten.
-   *
-   */
-  static prepareWeaponRanges(test, rangesAccessor) {
-    const weapon = test.item?.asWeapon;
-    if (!weapon) return;
-    const ranges = rangesAccessor(weapon);
-    const { range_modifiers } = SR.combat.environmental;
-    const newRanges = {};
-    for (const key of ["short", "medium", "long", "extreme"]) {
-      const rangeValue = ranges[key];
-      const distance = test.actor && !!ranges.attribute ? test.actor.getAttribute(ranges.attribute).value * rangeValue : rangeValue;
-      newRanges[key] = Helpers.createRangeDescription(SR6.weaponRanges[key], distance, range_modifiers[key]);
-    }
-    test.data.ranges = newRanges;
-    const actor = test.actor;
-    if (!actor) return;
-    const modifiers = actor.getSituationModifiers();
-    modifiers.environmental.apply({ test });
-    test.data.range = modifiers.environmental.applied.active.range || 0;
-  }
-  /**
-   * Actual target range between attack and target.
-   *
-   * This will overwrite the default weapon range selection.
-   */
-  static prepareTargetRanges(test) {
-    if (foundry.utils.isEmpty(test.data.ranges)) return;
-    if (!test.actor) return;
-    if (!test.hasTargets) return;
-    const attacker = test.actor.getToken();
-    if (!attacker) {
-      ui.notifications?.warn(game.i18n.localize("SR6.TargetingNeedsActorWithToken"));
-      return [];
-    }
-    test.data.targetRanges = test.targets.map((token) => {
-      const distance = Helpers.measureTokenDistance(attacker, token);
-      const range = RangedWeaponRules.getRangeForTargetDistance(distance, test.data.ranges);
-      return {
-        tokenUuid: token.uuid,
-        name: token.name || "",
-        unit: LENGTH_UNIT,
-        range,
-        distance
-      };
-    });
-    test.data.targetRanges = test.data.targetRanges.sort((a2, b2) => {
-      if (a2.distance < b2.distance) return -1;
-      if (a2.distance > b2.distance) return 1;
-      return 0;
-    });
-    const modifiers = test.actor.getSituationModifiers();
-    modifiers.environmental.apply({ test });
-    test.data.range = modifiers.environmental.applied.active.range || test.data.targetRanges[0].range.modifier;
-  }
-  static prepareDocumentData(test, rangesAccessor) {
-    _WeaponRangeTestBehavior.prepareWeaponRanges(test, rangesAccessor);
-    _WeaponRangeTestBehavior.prepareTargetRanges(test);
-  }
-  /**
-   * Save selections made back to documents.
-   * @returns
-   */
-  static async saveUserSelectionAfterDialog(test) {
-    if (!test.actor) return;
-    if (!test.item) return;
-    const modifiers = test.actor.getSituationModifiers();
-    modifiers.environmental.setActive("range", test.data.range);
-    await test.actor.setSituationModifiers(modifiers);
-  }
-  /**
-   * Apply test selections made by user in dialog.
-   * @returns
-   */
-  static prepareBaseValues(test) {
-    if (!test.actor) return;
-    if (!test.item) return;
-    if (test.hasTargets) {
-      test.data.targetRangesSelected = Number(test.data.targetRangesSelected);
-      const target = test.data.targetRanges[test.data.targetRangesSelected];
-      test.data.range = target.range.modifier;
-      const token = fromUuidSync(target.tokenUuid);
-      if (!(token instanceof TokenDocument)) return console.error(`Shadowrun 6e | ${test.type} got a target that is no TokenDocument`, token);
-      if (!token.actor) return console.error(`Shadowrun 6e | ${test.type} got a token that has no actor`, token);
-      test.data.targetActorsUuid = [token.actor.uuid];
-      test.targets = [token];
-    }
-    test.data.range = Number(test.data.range);
-  }
-  /**
-   * Ranged attack tests allow for temporarily changing of modifiers without altering the document.
-   */
-  static prepareTestModifiers(test) {
-    _WeaponRangeTestBehavior.prepareEnvironmentalModifier(test);
-  }
-  static prepareEnvironmentalModifier(test) {
-    if (!test.actor) return;
-    const poolMods = new PartsList(test.data.modifiers.mod);
-    const range = test.hasTargets ? test.data.targetRanges[test.data.targetRangesSelected].range.modifier : test.data.range;
-    const modifiers = DocumentSituationModifiers.getDocumentModifiers(test.actor);
-    modifiers.environmental.setActive("range", Number(range));
-    modifiers.environmental.apply({ reapply: true, test });
-    poolMods.addUniquePart(SR6.modifierTypes.environmental, modifiers.environmental.total);
-  }
-  static async processResults(test) {
-    await _WeaponRangeTestBehavior.markActionPhaseAsAttackUsed(test);
-  }
-  static async markActionPhaseAsAttackUsed(test) {
-    if (!test.actor || !test.actor.combatActive) return;
-    const combatant = test.actor.combatant;
-    if (!combatant) return;
-    await combatant.setFlag(SYSTEM_NAME, "turnsSinceLastAttack", 0);
-  }
-};
-
 // src/module/tests/RangedAttackTest.ts
 var RangedAttackTest = class extends SuccessTest {
   static {
@@ -36050,9 +36257,56 @@ var RangedAttackTest = class extends SuccessTest {
   }
   _prepareData(data, options) {
     data = super._prepareData(data, options);
+    console.log("Shadowrun 6e | RangedAttackTest preparation started");
     data.fireModes = [];
     data.fireMode = { value: 0, defense: 0, label: "" };
     WeaponRangeTestBehavior.prepareData(this, data);
+    data.attackerAR = 5;
+    console.log("Shadowrun 6e | Getting user targets");
+    const targets = Helpers.getUserTargets(game.user);
+    console.log("Shadowrun 6e | Found targets:", targets);
+    if (this.actor) {
+      console.log("Shadowrun 6e | Processing targets for actor:", this.actor.name);
+      data.defenders = targets.map((token) => {
+        console.log("Shadowrun 6e | Processing target token:", token.name);
+        const targetActor = token.actor;
+        let dr = 5;
+        if (!targetActor) {
+          console.log("Shadowrun 6e | No actor found for token:", token.name);
+          return null;
+        }
+        if (!(targetActor instanceof SR6Actor)) {
+          console.log("Shadowrun 6e | Actor is not SR6Actor:", token.name);
+          return null;
+        }
+        console.log("Shadowrun 6e | Processing SR6Actor target:", {
+          name: targetActor.name,
+          type: targetActor.type,
+          hasSystem: !!targetActor.system,
+          hasAttributes: !!targetActor.system?.attributes
+        });
+        const targetArmor = targetActor.system.armor;
+        dr = targetArmor?.defense_rating?.value || 5;
+        console.log("Shadowrun 6e | Target DR Calculation:", {
+          name: targetActor.name,
+          armor: targetArmor,
+          dr,
+          body: targetActor.system.attributes?.body?.value,
+          rawSystem: targetActor.system
+        });
+        return {
+          actorUuid: targetActor.uuid,
+          dr,
+          name: token.name || "",
+          isWinner: false,
+          edgeAwarded: false,
+          hasSignificantAdvantage: false
+        };
+      }).filter((defender) => defender !== null);
+      console.log("Shadowrun 6e | Final defenders data:", data.defenders);
+    } else {
+      console.log("Shadowrun 6e | No actor found for this test");
+    }
     return data;
   }
   _testDialogListeners() {
@@ -36107,7 +36361,7 @@ var RangedAttackTest = class extends SuccessTest {
     return ["global", "wounds", "environmental"];
   }
   async prepareDocumentData() {
-    WeaponRangeTestBehavior.prepareDocumentData(this, (weapon) => weapon.system.range.ranges);
+    WeaponRangeTestBehavior.prepareDocumentData(this);
     this._prepareFireMode();
     await super.prepareDocumentData();
   }
@@ -36135,19 +36389,35 @@ var RangedAttackTest = class extends SuccessTest {
    * Apply test selections made by user in dialog.
    * @returns
    */
-  prepareBaseValues() {
-    if (!this.actor) return;
-    if (!this.item) return;
+  async prepareBaseValues() {
+    await super.prepareBaseValues();
+    if (!this.actor || !this.item) return;
     this._selectFireMode(this.data.fireModeSelected);
     this.data.fireMode.defense = FireModeRules.fireModeDefenseModifier(this.data.fireMode, this.item.ammoLeft);
-    WeaponRangeTestBehavior.prepareBaseValues(this);
-    super.prepareBaseValues();
+    this.calculateAR();
+    if (this.data.targetRanges.length > 0) {
+      const selectedTarget = this.data.targetRanges[this.data.targetRangesSelected];
+      if (selectedTarget) {
+        await this.item.update({
+          "system.range.current": selectedTarget.distance,
+          "system.range.category": selectedTarget.range.category,
+          "system.range.modifier": selectedTarget.range.modifier
+        });
+      }
+    }
   }
   /**
    * Ranged attack tests allow for temporarily changing of modifiers without altering the document.
    */
   prepareTestModifiers() {
-    WeaponRangeTestBehavior.prepareTestModifiers(this);
+    const modifiers = new PartsList(this.data.modifiers.mod);
+    if (this.data.targetRanges.length > 0) {
+      const selectedTarget = this.data.targetRanges[this.data.targetRangesSelected];
+      if (selectedTarget) {
+        modifiers.addUniquePart("range", selectedTarget.range.modifier);
+      }
+    }
+    super.prepareTestModifiers();
   }
   /**
    * Enough resources according to test configuration?
@@ -36192,8 +36462,169 @@ var RangedAttackTest = class extends SuccessTest {
     return true;
   }
   async processResults() {
+    console.log("Shadowrun 6e | Processing ranged attack test results");
     await super.processResults();
+    console.log("Shadowrun 6e | Starting edge award calculations");
+    await this.calculateEdgeAwards();
+    console.log("Shadowrun 6e | Finished edge award calculations");
     await WeaponRangeTestBehavior.processResults(this);
+  }
+  async calculateEdgeAwards() {
+    if (!this.actor) {
+      console.log("Shadowrun 6e | Cannot calculate edge awards: No actor found");
+      return;
+    }
+    console.log(`Shadowrun 6e | Calculating edge awards for combat between ${this.actor.name} and ${this.data.defenders.length} defender(s)`);
+    for (const defender of this.data.defenders) {
+      console.log("Shadowrun 6e | Processing defender:", {
+        name: defender.name,
+        uuid: defender.actorUuid,
+        dr: defender.dr
+      });
+      const attackerWins = this.data.attackerAR >= defender.dr;
+      const hasSignificantAdvantage = Math.abs(this.data.attackerAR - defender.dr) >= 4;
+      defender.isWinner = !attackerWins;
+      defender.hasSignificantAdvantage = hasSignificantAdvantage;
+      defender.edgeReason = "";
+      if (!attackerWins && hasSignificantAdvantage) {
+        console.log(`Shadowrun 6e | ${defender.name} (DR: ${defender.dr}) has significant advantage over ${this.actor.name} (AR: ${this.data.attackerAR})`);
+        try {
+          const defenderActor = await fromUuid(defender.actorUuid);
+          console.log("Shadowrun 6e | Defender actor lookup result:", {
+            found: !!defenderActor,
+            type: defenderActor?.constructor.name,
+            name: defenderActor?.name
+          });
+          if (defenderActor instanceof SR6Actor) {
+            const edge = defenderActor.getEdge();
+            const edgeGainedThisRound = defenderActor.getFlag(SYSTEM_NAME, "edgeGainedThisRound") || 0;
+            if (!edge) {
+              defender.edgeReason = `${defenderActor.name} has no Edge attribute`;
+            } else if (edgeGainedThisRound >= 2) {
+              defender.edgeReason = `${defenderActor.name} has already gained the maximum Edge (${edgeGainedThisRound}) this round`;
+            } else if (edge.uses >= 7) {
+              defender.edgeReason = `${defenderActor.name} is already at maximum Edge (${edge.uses})`;
+            }
+            const canGainEdge = edge && edgeGainedThisRound < 2 && edge.uses < 7;
+            console.log("Shadowrun 6e | Edge check for defender:", {
+              hasEdge: !!edge,
+              edgeValue: edge?.uses,
+              edgeGainedThisRound,
+              canGainEdge
+            });
+            if (canGainEdge) {
+              console.log("Shadowrun 6e | Attempting to award edge to defender");
+              defender.edgeAwarded = await this.awardEdge(defenderActor);
+            }
+          } else {
+            defender.edgeReason = "Invalid actor type for Edge calculation";
+            console.log("Shadowrun 6e | Defender actor is not an SR6Actor:", defenderActor);
+          }
+        } catch (error) {
+          defender.edgeReason = "Error processing Edge calculation";
+          console.error("Shadowrun 6e | Error processing defender:", error);
+        }
+      }
+    }
+  }
+  async awardEdge(actor) {
+    const edge = actor.getEdge();
+    if (!edge) {
+      console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: No edge attribute found`);
+      await ChatMessage.create({
+        content: `${actor.name} cannot gain Edge (no Edge attribute found)`,
+        speaker: ChatMessage.getSpeaker({ actor })
+      });
+      return false;
+    }
+    const edgeGainedThisRound = actor.getFlag(SYSTEM_NAME, "edgeGainedThisRound") || 0;
+    if (edgeGainedThisRound >= 2) {
+      console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: Maximum edge gained this round (${edgeGainedThisRound})`);
+      await ChatMessage.create({
+        content: `${actor.name} has already gained maximum Edge this round (${edgeGainedThisRound})`,
+        speaker: ChatMessage.getSpeaker({ actor })
+      });
+      return false;
+    }
+    const newEdgeUses = Math.min(7, edge.uses + 1);
+    if (newEdgeUses <= edge.uses) {
+      console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: Already at maximum edge (${edge.uses})`);
+      await ChatMessage.create({
+        content: `${actor.name} is already at maximum Edge (${edge.uses})`,
+        speaker: ChatMessage.getSpeaker({ actor })
+      });
+      return false;
+    }
+    await actor.update({
+      "system.attributes.edge.uses": newEdgeUses
+    });
+    await actor.setFlag(SYSTEM_NAME, "edgeGainedThisRound", edgeGainedThisRound + 1);
+    const token = actor.token || actor.getActiveTokens()[0];
+    if (token) {
+      canvas.interface?.createScrollingText(token.center, `Edge +1`, {
+        anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
+        direction: CONST.TEXT_ANCHOR_POINTS.TOP,
+        distance: 20,
+        fontSize: 24,
+        fill: "#00FF00",
+        stroke: "#000000",
+        strokeThickness: 4,
+        duration: 1e3
+      });
+    }
+    await ChatMessage.create({
+      content: `${actor.name} gains Edge (+1)`,
+      speaker: ChatMessage.getSpeaker({ actor })
+    });
+    console.log(`Shadowrun 6e | Edge awarded to ${actor.name}: ${edge.uses} \u2192 ${newEdgeUses}`);
+    return true;
+  }
+  /**
+   * Get the Attack Rating (AR) for the current range.
+   * Each weapon has specific ARs defined for different ranges.
+   * If no AR is defined for the current range, the weapon cannot be used.
+   */
+  calculateAR() {
+    if (!this.actor || !this.item) return 0;
+    const weapon = this.item.asWeapon;
+    if (!weapon) return 0;
+    let rangeCategory = RANGE_CATEGORIES.NEAR.toLowerCase();
+    if (this.data.targetRanges.length > 0) {
+      const selectedTarget = this.data.targetRanges[this.data.targetRangesSelected];
+      if (selectedTarget) {
+        rangeCategory = selectedTarget.range.category.toLowerCase();
+      }
+    }
+    const rangeAR = weapon.system.range.attackRating?.[rangeCategory];
+    if (typeof rangeAR !== "number") {
+      console.log("Shadowrun 6e | Weapon cannot be used at range:", {
+        weapon: weapon.name,
+        targetName: this.data.targetRanges[this.data.targetRangesSelected]?.name,
+        range: {
+          category: rangeCategory,
+          distance: this.data.targetRanges[this.data.targetRangesSelected]?.distance
+        },
+        attackRatings: weapon.system.range.attackRating,
+        selectedTarget: this.data.targetRanges[this.data.targetRangesSelected],
+        hasTargets: this.data.targetRanges.length > 0,
+        selectedTargetIndex: this.data.targetRangesSelected
+      });
+      ui.notifications?.warn(
+        game.i18n.format("SR6.WeaponRange.CannotBeUsedAtRange", {
+          weapon: weapon.name,
+          range: game.i18n.localize(`SR6.WeaponRange.${rangeCategory}`)
+        })
+      );
+      return 0;
+    }
+    this.data.attackerAR = rangeAR;
+    console.log("Shadowrun 6e | AR Selection:", {
+      weapon: weapon.name,
+      range: rangeCategory,
+      ar: rangeAR,
+      allRanges: weapon.system.range.attackRating
+    });
+    return this.data.attackerAR;
   }
 };
 

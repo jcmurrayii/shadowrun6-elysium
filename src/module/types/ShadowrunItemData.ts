@@ -240,9 +240,51 @@ declare namespace Shadowrun {
     }
     export interface WeaponItemData {
         type: 'weapon';
-        name: string;
-        img: string;
-        data: WeaponData;
-        system: WeaponData;
+        system: {
+            // Range properties
+            range: {
+                current: number;  // Current distance to target
+                category: string; // Current range category (close, near, etc)
+                modifier: number; // Current range modifier
+                ranges?: RangesTemplateData;
+            };
+            // Ammo properties
+            ammo: {
+                current: {
+                    value: number;
+                    max: number;
+                };
+                clip_type: string;
+                spare_clips: {
+                    value: number;
+                    max: number;
+                };
+            };
+            // Thrown properties (for grenades)
+            thrown?: {
+                blast: {
+                    radius: number;
+                    dropoff: number;
+                };
+            };
+            // Technology properties
+            technology?: {
+                equipped: boolean;
+                quantity: number;
+            };
+            // Blast properties
+            blast?: {
+                radius: number;
+                dropoff: number;
+            };
+            // Other weapon-specific properties from the original ShadowrunItemData
+        } & ShadowrunItemDataData;  // Extend from base item data
+    }
+
+    interface RangeDescription {
+        label: string;
+        distance: number;
+        modifier: number;
+        category: string;
     }
 }

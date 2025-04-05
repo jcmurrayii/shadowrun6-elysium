@@ -1040,6 +1040,15 @@
   overflow: hidden;
 }
 
+#tracks .cell-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#tracks .cell-container .cell {
+  padding: 2px;
+}
+
 .sr6.chat-card {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("assets/page.webp") repeat;
   color: white;

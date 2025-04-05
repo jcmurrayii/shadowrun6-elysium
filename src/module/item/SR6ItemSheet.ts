@@ -42,6 +42,8 @@ export interface SR6BaseItemSheetData extends FoundryItemSheetData {
     rollModes: CONFIG.Dice.RollModes
 }
 
+// @ts-ignore
+// @ts-ignore
 /**
  * Template fields for item sheet
  */

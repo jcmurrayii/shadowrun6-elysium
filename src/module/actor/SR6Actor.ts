@@ -216,9 +216,9 @@ export class SR6Actor extends Actor {
             effects = effects.concat(item.effects.filter(showEffectIcon));
 
             // Collect nested item effects.
-            for (const nestedItem of item.items) {
-                effects = effects.concat(nestedItem.effects.filter(showEffectIcon));
-            }
+            // for (const nestedItem of item.items) {
+            //     effects = effects.concat(nestedItem.effects.filter(showEffectIcon));
+            // }
         }
 
         return effects;
@@ -439,6 +439,8 @@ export class SR6Actor extends Actor {
 
         return armor;
     }
+
+
 
     getMatrixDevice(): SR6Item | undefined {
         if (!("matrix" in this.system)) return;
@@ -2269,6 +2271,15 @@ export class SR6Actor extends Actor {
 
         if (this.isMatrixActor) await this.setMatrixDamage(0);
         if (updateData) await this.update(updateData);
+    }
+
+    async newSceneSetup() {
+        const updateData: Record<string, any> = {};
+
+        updateData['system.attributes.edge.uses'] = this.getEdge().value;
+
+        if(updateData) await this.update(updateData);
+
     }
 
     /**

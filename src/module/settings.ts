@@ -2,6 +2,7 @@
 
 import { VersionMigration } from './migrator/VersionMigration';
 import { FLAGS, SYSTEM_NAME } from './constants';
+import { MigrationRunner } from './migration/MigrationRunner';
 
 export const registerSystemSettings = () => {
     /**
@@ -255,4 +256,22 @@ export const registerSystemSettings = () => {
         type: Boolean,
         default: true
     });
+
+    game.settings.register('shadowrun6-elysium', 'migrateWeaponRanges', {
+        name: 'Migrate to Standard Weapon Ranges',
+        hint: 'Updates all weapons to use the standard SR6e range categories.',
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: false,
+        onChange: value => {
+            if (value) {
+                MigrationRunner.migrateToNewRanges().then(() => {
+                    // Reset the setting after migration
+                    game.settings.set('shadowrun6-elysium', 'migrateWeaponRanges', false);
+                });
+            }
+        }
+    });
+
 };

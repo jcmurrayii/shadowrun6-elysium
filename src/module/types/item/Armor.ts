@@ -10,6 +10,7 @@ declare namespace Shadowrun {
 
     export interface ArmorPartData {
         armor: {
+            defense_rating: ModifiableValue;
             mod: boolean;
             value: number;
             acid: number;

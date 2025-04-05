@@ -1878,6 +1878,10 @@ export class SR6BaseActorSheet extends ActorSheet {
         this.actor.resetRunData()
     }
 
+    _onStartNewSchene(event) {
+        this.actor.newSceneSetup()
+    }
+
     /**
      * Prepare keybindings to be shown when hovering over a rolling icon
      * in any list item view that has rolls.

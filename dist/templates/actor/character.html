@@ -9,8 +9,8 @@
                 {{> 'systems/shadowrun6-elysium/dist/templates/actor/parts/NameInput.html' }}
             </div>
             <div class="attributes smooth" id="tracks">
-                <div class="block">
                     {{#each system.track as |track id|}}
+                    <div class="block">
                         {{> 'systems/shadowrun6-elysium/dist/templates/common/HorizontalCellInput.html'
                                 name=(localize track.label)
                                 value=track.value
@@ -30,8 +30,8 @@
                                 }}
                             {{/ife}}
                         {{/if}}
+                    </div>
                     {{/each}}
-                </div>
             </div>
         </div>
         <div class="flexcol flex-end">
@@ -44,7 +44,7 @@
                     {{> 'systems/shadowrun6-elysium/dist/templates/common/HorizontalCellInput.html'
                             name=(localize "SR6.AttrEdge")
                             value=system.attributes.edge.uses
-                            max=system.attributes.edge.value
+                            max=7
                             id="edge"
                     }}
                 </div>
@@ -75,9 +75,6 @@
             </div>
             <div data-tooltip="SR6.Soak" class="attribute-name Roll" data-roll-id="damage-resist">
                 {{localize "SR6.RollSoak"}}
-            </div>
-            <div class="attribute-name Roll" data-roll-id="armor">
-                {{localize "SR6.RollArmor"}} ({{system.armor.value}})
             </div>
 
             {{#if awakened}}

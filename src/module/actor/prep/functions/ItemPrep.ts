@@ -13,41 +13,48 @@ export class ItemPrep {
      */
     static prepareArmor(system: ActorTypesData & ArmorActorData, items: SR6ItemDataWrapper[]) {
         const { armor } = system;
-        armor.base = 0;
-        armor.value = 0;
 
-        for (const element of Object.keys(SR6.elementTypes)) {
-            armor[element] = 0;
-        }
+        // Initialize defense rating
+        armor.defense_rating.base = 0;
+        armor.defense_rating.value = 0;
 
-        const armorModParts = new PartsList<number>(armor.mod);
+        const parts = new PartsList(armor.mod);
+        const defenseRatingParts = new PartsList(armor.defense_rating.mod);
         const equippedArmor = items.filter((item) => item.couldHaveArmor() && item.isEquipped());
+
+        console.log('Shadowrun 6e | Armor Preparation:', {
+            equippedArmorItems: equippedArmor.map(item => ({
+                name: item.getName(),
+                baseDR: item.getBaseDefenseRating(),
+                totalDR: item.getDefenseRating()
+            })),
+            initialArmor: foundry.utils.duplicate(armor)
+        });
+
+        // Calculate base DR from equipped armor
         equippedArmor?.forEach((item) => {
-            // Don't spam armor values with clothing or armor like items without any actual armor.
-            if (item.hasArmor()) {
-                // We allow only one base armor but multiple armor accessories
-                if (item.hasArmorAccessory()) {
-                    armorModParts.addUniquePart(item.getName(), item.getArmorValue());
-                }
-                else {
-                    const armorValue = item.getArmorValue();
-                    if (armorValue > armor.base) {
-                        armor.base = item.getArmorValue();
-                        armor.label = item.getName();
-                        armor.hardened = item.getHardened();
-                    }
-                }
+            // Set the base DR from the highest armor value
+            const itemBaseDefenseRating = item.getBaseDefenseRating();
+            if (itemBaseDefenseRating > armor.defense_rating.base) {
+                armor.defense_rating.base = itemBaseDefenseRating;
             }
 
-            // Apply elemental modifiers of all worn armor and clothing SR5#169.
+            // Add any DR modifiers from the item
+            defenseRatingParts.addPart(item.getName(), item.getDefenseRating() - itemBaseDefenseRating);
+
+            // Apply elemental modifiers
             for (const element of Object.keys(SR6.elementTypes)) {
                 armor[element] += item.getArmorElements()[element];
             }
         });
 
-        if (system.modifiers['armor']) armorModParts.addUniquePart(game.i18n.localize('SR6.Bonus'), system.modifiers['armor']);
-        // SET ARMOR
-        armor.value = Helpers.calcTotal(armor);
+        // Calculate total DR including modifiers
+        armor.defense_rating.value = Helpers.calcTotal(armor.defense_rating);
+
+        console.log('Shadowrun 6e | After Armor Preparation:', {
+            finalArmor: foundry.utils.duplicate(armor),
+            defenseRatingParts: defenseRatingParts
+        });
     }
     /**
      * Apply all changes to an actor by their 'ware items.
@@ -69,6 +76,6 @@ export class ItemPrep {
     }
 
     static prepareWeapons(system: Shadowrun.CharacterData, items: SR6ItemDataWrapper[]) {
-        
+
     }
 }
