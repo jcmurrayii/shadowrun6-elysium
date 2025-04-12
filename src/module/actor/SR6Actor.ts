@@ -261,6 +261,12 @@ export class SR6Actor extends Actor {
                 ICPrep.prepareDerivedData(this.system, itemDataWrappers);
                 break;
         }
+
+        // Ensure matrix actions are available for all actors that can use the Matrix
+        if (game.user?.isGM && this.isOwner && (this.isCharacter() || this.isSprite() || this.isIC())) {
+            // We need to use a setTimeout to avoid issues with the actor being locked during data preparation
+            setTimeout(() => this.ensureMatrixActions(), 500);
+        }
     }
 
     /**
@@ -446,6 +452,24 @@ export class SR6Actor extends Actor {
         if (!("matrix" in this.system)) return;
         const matrix = this.system.matrix;
         if (matrix.device) return this.items.get(matrix.device);
+    }
+
+    /**
+     * Check if the actor has a matrix device with an active hacking program
+     * @returns True if the actor has a matrix device with an active hacking program
+     */
+    hasActiveHackingProgram(): boolean {
+        // First, check if the actor has a matrix device
+        const matrixDevice = this.getMatrixDevice();
+        if (!matrixDevice) return false;
+
+        // Get all program items owned by the actor
+        const programs = this.items.filter(item => item.type === 'program');
+
+        // Check if any of the programs are hacking programs
+        // In this implementation, we assume all programs on the device are active
+        // A more sophisticated implementation might check for a specific 'active' flag on programs
+        return programs.some(program => MatrixRules.isHackingProgram(program));
     }
 
     getFullDefenseAttribute(): Shadowrun.AttributeField | undefined {
@@ -2271,6 +2295,52 @@ export class SR6Actor extends Actor {
 
         if (this.isMatrixActor) await this.setMatrixDamage(0);
         if (updateData) await this.update(updateData);
+    }
+
+    /**
+     * Ensures that the actor has access to all matrix actions from the matrix-actions compendium.
+     * This method will add any missing matrix actions to the actor.
+     *
+     * @returns {Promise<void>}
+     */
+    async ensureMatrixActions() {
+        console.log(`Shadowrun 6e | Ensuring matrix actions for actor ${this.name} (${this.id})`);
+
+        // Get the matrix actions compendium
+        const matrixPack = game.packs.get("shadowrun6-elysium.matrix-actions");
+        if (!matrixPack) {
+            console.error("Shadowrun 6e | Matrix Actions compendium not found");
+            return;
+        }
+
+        // Get all matrix actions
+        await matrixPack.getIndex();
+        const matrixActions = await Promise.all(
+            Array.from(matrixPack.index).map(i => matrixPack.getDocument(i._id))
+        );
+
+        // Get existing action names to avoid duplicates
+        const existingNames = this.items
+            .filter(i => i.type === "action")
+            .map(i => i.name.toLowerCase());
+
+        // Filter out actions the actor already has
+        const actionsToAdd = matrixActions.filter(
+            a => !existingNames.includes(a.name.toLowerCase())
+        );
+
+        if (actionsToAdd.length === 0) {
+            console.log(`Shadowrun 6e | ${this.name} already has all matrix actions`);
+            return;
+        }
+
+        // Add the actions
+        await this.createEmbeddedDocuments(
+            "Item",
+            actionsToAdd.map(a => a.toObject())
+        );
+
+        console.log(`Shadowrun 6e | Added ${actionsToAdd.length} matrix actions to ${this.name}`);
     }
 
     async newSceneSetup() {

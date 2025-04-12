@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <item avail="1" cost="0" id="control_rig_mm" maxrat="3" rate="true" ratemul="PRICE MODIFIER" modonly="true">
+     <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.0"/>
+       <modifications>
+         <edgemod type="BONUS" skill="perception"/>
+         <edgemod type="BONUS" skill="piloting"/>
+         <edgemod type="BONUS" skill="stealth"/>
+         <edgemod type="BONUS" skill="cracking"/>
+         <edgemod type="BONUS" skill="engineering"/>
+         <skillmod ref="con" val="1" cond="true" condindex="1" modType="AUGMENTED"/>
+         <skillmod ref="influence" val="1" cond="true" condindex="1" modType="AUGMENTED"/>
+      </modifications>
+   </item>
+
+   <item avail="5" cost="15000" id="cyskul_srm_synthetic">
+      <useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.75" />
+      <modifications>
+         <itemhookmod capacity="2" hook="HEADWARE_IMPLANT"/>
+         <attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="1"/>
+      </modifications>
+   </item>
+
+   <item avail="5" cost="10000" id="cyskul_srm_obvious">
+      <useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.75" />
+      <modifications>
+         <itemhookmod capacity="4" hook="HEADWARE_IMPLANT"/>
+         <attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="1"/>
+      </modifications>
+   </item>
+
+   <item avail="2" cost="1500" id="cyberjaw_augment" >
+      <useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+      <useas type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON" ess="0.1"/>
+      <modifications>
+        <itemmod item="cyberjaw"/>
+      </modifications>
+   </item>
+
+   <item avail="3" cost="12000" id="cyberforearm_synthetic">
+      <useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.45" />
+      <modifications>
+         <itemhookmod capacity="5" hook="CYBERLIMB_IMPLANT"/>
+      </modifications>
+   </item>
+   <item avail="3" cost="10000" id="cyberforearm_obvious">
+      <useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.45" />
+      <modifications>
+         <itemhookmod capacity="10" hook="CYBERLIMB_IMPLANT"/>
+      </modifications>
+   </item>
+
+   <item avail="4" cost="12000" id="cyberlowerleg_synthetic">
+      <useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.45" />
+      <modifications>
+         <itemhookmod capacity="6" hook="CYBERLIMB_IMPLANT"/>
+      </modifications>
+   </item>
+   <item avail="4" cost="10000" id="cyberlowerleg_obvious">
+      <useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.45" />
+      <modifications>
+         <itemhookmod capacity="12" hook="CYBERLIMB_IMPLANT"/>
+      </modifications>
+   </item>
+
+   <item id="mnemonic_enhancer" avail="5" cost="9000"  maxrat="3" rate="true" ratemul="PRICE ESSENCE MODIFIER">
+      <useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+      <modifications>
+        <relevancemod topic="SOCIAL"/>
+        <attrmod attr="MEMORY" val="1"/>
+      </modifications>
+   </item>
+
+   <item avail="1" cost="5000" id="attribute_increase_agility" maxrat="13" rate="true" ratemul="AVAIL CAPACITY PRICE MODIFIER">
+      <useas type="ACCESSORY" subtype="CYBER_LIMB_ENHANCEMENT" cap="1" slot="CYBERLIMB_IMPLANT"/>
+      <modifications>
+         <attrmod attr="AGILITY" type="ALTERNATE" val="1" cyber="true"/>
+      </modifications>
+   </item>
+
+   <item avail="1" cost="5000" id="attribute_increase_strength" maxrat="13" rate="true" ratemul="AVAIL CAPACITY PRICE MODIFIER">
+      <useas type="ACCESSORY" subtype="CYBER_LIMB_ENHANCEMENT" cap="1" slot="CYBERLIMB_IMPLANT"/>
+      <modifications>
+         <attrmod attr="STRENGTH" type="ALTERNATE" val="1" cyber="true"/>
+      </modifications>
+   </item>
+
+   <item avail="4" cost="1000" id="skilljack" lang="de" maxrat="6" rate="true" ratemul="PRICE ESSENCE">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1"/>
+      <modifications>
+         <itemhookmod hook="SKILLJACK" capacity="99"/>
+      </modifications>
+   </item>
+   <item avail="4" cost="20000" id="skilljack" lang="en" maxrat="6" rate="true" ratemul="PRICE ESSENCE">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1"/>
+      <modifications>
+         <itemhookmod hook="SKILLJACK" capacity="99"/>
+      </modifications>
+   </item>
+   <item avail="4" cost="20000" id="skilljack_us" maxrat="6" rate="true" ratemul="PRICE ESSENCE" modonly="true"> <!-- keep for backward character compatibility -->
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1"/>
+      <modifications>
+         <itemhookmod hook="SKILLJACK" capacity="99"/>
+      </modifications>
+   </item>
+
+</items>

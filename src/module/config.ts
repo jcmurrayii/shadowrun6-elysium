@@ -520,9 +520,15 @@ export const SR6 = {
     actionTypes: {
         none: 'SR6.ActionTypeNone',
         free: 'SR6.ActionTypeFree',
-        simple: 'SR6.ActionTypeSimple',
-        complex: 'SR6.ActionTypeComplex',
+        minor: 'SR6.ActionTypeMinor',
+        major: 'SR6.ActionTypeMajor',
         varies: 'SR6.ActionTypeVaries',
+    },
+
+    initiativeTiming: {
+        none: 'SR6.InitiativeTimingNone',
+        initiative: 'SR6.InitiativeTimingInOrder',
+        anytime: 'SR6.InitiativeTimingAnyTime',
     },
 
     // Use within action damage calculation (base <operator> attribute) => value

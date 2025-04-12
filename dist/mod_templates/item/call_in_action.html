@@ -1,0 +1,47 @@
+<form class="{{cssClass}} wholesheet" autocomplete="off">
+    {{> "systems/shadowrun6-elysium/dist/mod_templates/item/parts/header.html"}}
+    <nav class="tabs" data-group="primary">
+        <a class="item" data-tab="description">{{localize "SR6.Description"}}</a>
+        <a class="item" data-tab="action">{{localize "SR6.Action"}}</a>
+        <a class="item" data-tab="effects">{{ localize "SR6.Effects" }}</a>
+    </nav>
+    <section class="sheetbody">
+        <div class="tab" data-group="primary" data-tab="description">
+            <div class="flexrow align-start nowrap full-height">
+                <div class="flexcol flex0 item-sidebar">
+                    <div class="flexrow nowrap">
+                        <label data-tooltip="SR6.Tooltips.CallInAction.ActorType">{{localize "SR6.CallInAction.ActorType"}}</label>
+                        <select name="system.actor_type" class="display">
+                            <option value="">{{localize name}}</option>
+                            {{#select system.actor_type}} {{#each config.callInActorTypes as |name type|}}
+                            <option value="{{type}}">{{localize name}}</option>
+                            {{/each}} {{/select}}
+                        </select>
+                    </div>
+                    <hr/>
+                    {{#if isForSprite}}
+                    {{> "systems/shadowrun6-elysium/dist/mod_templates/item/parts/compilation.html"}}
+                    {{/if}}
+                    {{#if isForSpirit}}
+                    {{> "systems/shadowrun6-elysium/dist/mod_templates/item/parts/summoning.html"}}
+                    {{/if}}
+                </div>
+                {{> "systems/shadowrun6-elysium/dist/mod_templates/item/parts/description.html"}}
+            </div>
+        </div>
+        <div class="tab" data-group="primary" data-tab="action">
+            <div class="tabbody">
+                <div class="inventory">
+                    <div class="scroll-area">
+                        {{> "systems/shadowrun6-elysium/dist/mod_templates/item/parts/action.html" header="SR6.Action"}}
+                        {{> "systems/shadowrun6-elysium/dist/mod_templates/item/parts/opposed.html"
+                            header=(localize "SR6.Labels.Action.OpposedTest")
+                            disableTestSelection=true
+                        }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{> "systems/shadowrun6-elysium/dist/mod_templates/actor/tabs/EffectsTab.html"}}
+    </section>
+</form>

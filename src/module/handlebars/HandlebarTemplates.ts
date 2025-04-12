@@ -54,6 +54,7 @@ export const preloadHandlebarsTemplates = async () => {
         'systems/shadowrun6-elysium/dist/templates/actor/parts/matrix/SpritePowerList.html',
         'systems/shadowrun6-elysium/dist/templates/actor/parts/matrix/DeviceRating.html',
         'systems/shadowrun6-elysium/dist/templates/actor/parts/matrix/Marks.html',
+        'systems/shadowrun6-elysium/dist/templates/actor/parts/matrix/MatrixActionList.html',
 
         // attributes
         'systems/shadowrun6-elysium/dist/templates/actor/parts/attributes/Attribute.html',

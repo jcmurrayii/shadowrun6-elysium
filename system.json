@@ -1,7 +1,7 @@
 {
     "id": "shadowrun6-elysium",
     "name": "shadowrun6-elysium",
-    "title": "Unofficieal Shadowrun 6e: Elysium",
+    "title": "Unofficial Shadowrun 6e: Elysium",
     "description": "Shadowrun 6e system",
     "authors": [
         {
@@ -10,15 +10,19 @@
         }
     ],
     "url": "#{URL}#",
-    "version": "0.23.2",
+    "version": "0.24.1",
     "compatibility": {
         "minimum": "11",
         "verified": "12"
     },
     "minimumCoreVersion": "11",
     "scripts": [],
-    "esmodules": ["dist/bundle.js"],
-    "styles": ["dist/bundle.css"],
+    "esmodules": [
+        "dist/bundle.js"
+    ],
+    "styles": [
+        "dist/bundle.css"
+    ],
     "languages": [
         {
             "lang": "en",
@@ -27,6 +31,30 @@
         }
     ],
     "packs": [
+        {
+            "name": "edge-macros",
+            "label": "Edge Macros",
+            "path": "packs/edge-macros",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "TRUSTED": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            },
+            "type": "Macro",
+            "system": "shadowrun6-elysium"
+        },
+        {
+            "name": "major-actions",
+            "label": "Major Actions",
+            "path": "packs/major-actions",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "TRUSTED": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            },
+            "type": "Item",
+            "system": "shadowrun6-elysium"
+        },
         {
             "name": "matrix-actions",
             "label": "SR6e Matrix Actions",
@@ -67,6 +95,18 @@
             "name": "weapons",
             "label": "SR6e Core Weapons",
             "path": "packs/weapons",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "TRUSTED": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            },
+            "type": "Item",
+            "system": "shadowrun6-elysium"
+        },
+        {
+            "name": "spells",
+            "label": "Spells",
+            "path": "packs/spells",
             "ownership": {
                 "PLAYER": "OBSERVER",
                 "TRUSTED": "OBSERVER",

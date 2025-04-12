@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <item id="water-repellent_coating" avail="0" cost="100">
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="0"/>
+   </item>
+
+</items>

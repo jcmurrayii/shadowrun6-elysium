@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item id="evo_landtreader" avail="4L"  cost="15000" subtype="CARS" type="VEHICLES">
+      <vehicle han="2/2" acc="5" spdi="10" tspd="20" bod="2" arm="1" pil="2" sen="1" sea="1"/>
+      <modifications>
+        <accessorymod item="extreme_environment_water" hook="VEHICLE_CHASSIS" />
+        <accessorymod item="suncell_power" hook="VEHICLE_POWERTRAIN" />
+      </modifications>
+   </item>
+</items>

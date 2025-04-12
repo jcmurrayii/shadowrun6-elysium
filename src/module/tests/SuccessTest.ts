@@ -21,6 +21,7 @@ import ResultActionData = Shadowrun.ResultActionData;
 import { TestCreator } from "./TestCreator";
 import Template from "../template";
 import { TestRules } from "../rules/TestRules";
+import { MatrixRules } from "../rules/MatrixRules";
 
 import { ActionResultFlow } from "../item/flows/ActionResultFlow";
 import { SuccessTestEffectsFlow } from '../effect/flows/SuccessTestEffectsFlow';
@@ -1496,12 +1497,69 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
             await this.afterFailure();
         }
 
+        // Check if this is a matrix action and if the actor has an active hacking program
+        await this.checkMatrixActionOverwatch();
+
         if (this.autoExecuteFollowupTest) {
             await this.executeFollowUpTest();
         }
 
         if (this.extended) {
             await this.executeAsExtended();
+        }
+    }
+
+    /**
+     * Check if this is a matrix action and if the actor has an active hacking program
+     * If both conditions are met, increment the overwatch score by 1
+     * Also check if this is an illegal matrix action and add overwatch equal to hits scored against the actor
+     */
+    async checkMatrixActionOverwatch() {
+        // Only proceed if we have an actor
+        if (!this.actor) return;
+
+        // Check if this is a matrix action
+        const isMatrixAction = this.data.action?.categories &&
+                              MatrixRules.isMatrixAction(this.data.action.categories);
+        if (!isMatrixAction) return;
+
+        let totalOverwatchAdded = 0;
+        let overwatchReasons = [];
+
+        // Check if the actor has an active hacking program
+        if (this.actor.hasActiveHackingProgram()) {
+            // Increment overwatch score by 1
+            totalOverwatchAdded += 1;
+            overwatchReasons.push(game.i18n.localize('SR6.MatrixAction.HackingProgramReason'));
+        }
+
+        // Check if this is an illegal matrix action
+        const isIllegalAction = this.data.action &&
+                               MatrixRules.isIllegalMatrixAction(this.data.action);
+
+        // If this is an illegal action and it's an opposed test, add overwatch equal to hits scored against the actor
+        if (isIllegalAction && this.opposed) {
+            // For opposed tests, we need to wait for the opposed test to complete to get the hits against
+            // This will be handled in the OpposedTest class
+        } else if (isIllegalAction) {
+            // For non-opposed illegal matrix actions, add 1 overwatch point
+            totalOverwatchAdded += 1;
+            overwatchReasons.push(game.i18n.localize('SR6.MatrixAction.IllegalActionReason'));
+        }
+
+        // Apply the total overwatch if any was accrued
+        if (totalOverwatchAdded > 0) {
+            const currentOS = this.actor.getOverwatchScore();
+            await this.actor.setOverwatchScore(currentOS + totalOverwatchAdded);
+
+            // Notify the user
+            ui.notifications?.info(game.i18n.format('SR6.MatrixAction.OverwatchAccrued', {
+                name: this.actor.name,
+                amount: totalOverwatchAdded,
+                reasons: overwatchReasons.join(', ')
+            }));
+
+            console.debug(`Shadowrun 6e | Added ${totalOverwatchAdded} Overwatch Score to ${this.actor.name} for matrix action`);
         }
     }
 

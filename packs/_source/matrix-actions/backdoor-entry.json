@@ -1,0 +1,125 @@
+{
+  "name": "Backdoor Entry",
+  "type": "action",
+  "_id": "mWgPkl4wjgmIowJR",
+  "img": "systems/shadowrun5e/dist/icons/redist/mite.svg",
+  "system": {
+    "description": {
+      "value": "<p>This action is linked to the Sleaze Attribute.</p><p></p><p>You attempt to use a backdoor you have put in place to gain illicit entry into a host, device, or other Matrix area. This action can only be used if you have previously used Probe on the target successfully; net hits from that successful Probe count as a dice-pool bonus on this test. If the test is successful, you gain Admin access to the target, and it does not count as illegal Admin access (though taking illegal Matrix Actions will still increase your Overwatch Score).  If this test fails, the backdoor you have made was detected and removed, and you cannot attempt Backdoor Entry again with the same host until a new backdoor is made through the Probe Action. Failing this test does not immediately set off alarms, but the character's OS increases as normal.</p>",
+      "chat": "",
+      "source": ""
+    },
+    "action": {
+      "type": "major",
+      "test": "SuccessTest",
+      "categories": [
+        "matrix"
+      ],
+      "attribute": "logic",
+      "attribute2": "",
+      "skill": "cracking",
+      "armor": false,
+      "spec": false,
+      "mod": null,
+      "mod_description": "",
+      "roll_mode": "publicroll",
+      "limit": {
+        "value": 0,
+        "base": 0,
+        "attribute": ""
+      },
+      "threshold": {
+        "value": 0,
+        "base": 0
+      },
+      "extended": false,
+      "damage": {
+        "type": {
+          "value": "",
+          "base": ""
+        },
+        "element": {
+          "value": "",
+          "base": ""
+        },
+        "value": 0,
+        "base": 0,
+        "ap": {
+          "value": 0,
+          "base": 0
+        },
+        "base_formula_operator": "add",
+        "attribute": "",
+        "source": {
+          "actorId": "",
+          "itemId": "",
+          "itemType": "",
+          "itemName": ""
+        }
+      },
+      "opposed": {
+        "type": "",
+        "test": "OpposedTest",
+        "attribute": "willpower",
+        "attribute2": "firewall",
+        "skill": "",
+        "armor": false,
+        "mod": 0,
+        "description": "",
+        "resist": {
+          "test": "",
+          "skill": "",
+          "attribute": "",
+          "attribute2": "",
+          "armor": false,
+          "mod": 0
+        }
+      },
+      "followed": {
+        "test": "",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0
+      },
+      "modifiers": [
+        "noise",
+        "wounds"
+      ],
+      "initiative_timing": "initiative"
+    },
+    "result": {
+      "success": {
+        "matrix": {
+          "placeMarks": false
+        }
+      }
+    },
+    "importFlags": {
+      "name": "",
+      "type": "",
+      "subType": "",
+      "isFreshImport": false,
+      "isImported": false
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "shadowrun6-elysium",
+    "systemVersion": "0.23.2",
+    "createdTime": 1744066089880,
+    "modifiedTime": 1744077316222,
+    "lastModifiedBy": "sr5ebuilder"
+  },
+  "_key": "!items!mWgPkl4wjgmIowJR"
+}

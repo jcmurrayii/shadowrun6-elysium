@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metatypes>
+
+    <metatype id="tandoran" variantof="human">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="6"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="7"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="6"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="7"/>
+            <attrmod type="MAX"      attr="EDGE"      val="7"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="functional_tail_balance" />
+            <qualitymod ref="functional_tail_paddle" />
+            <qualitymod ref="scales" />
+            <qualitymod ref="underwater_vision" />
+            <qualitymod ref="tough_skin" />
+            <qualitymod ref="saurian" />
+         </modifications>
+    </metatype>
+
+</metatypes>

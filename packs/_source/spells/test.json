@@ -1,0 +1,136 @@
+{
+  "name": "test",
+  "type": "spell",
+  "_id": "0rszuztwAilTH8fo",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": {
+      "value": "<p>test test test test test test test test </p>",
+      "chat": "",
+      "source": ""
+    },
+    "action": {
+      "type": "",
+      "test": "",
+      "categories": [],
+      "attribute": "",
+      "attribute2": "",
+      "skill": "",
+      "armor": false,
+      "spec": "",
+      "mod": 0,
+      "mod_description": "",
+      "roll_mode": "",
+      "limit": {
+        "value": 0,
+        "base": 0,
+        "attribute": ""
+      },
+      "threshold": {
+        "value": 0,
+        "base": 0
+      },
+      "extended": false,
+      "damage": {
+        "type": {
+          "value": "",
+          "base": ""
+        },
+        "element": {
+          "value": "",
+          "base": ""
+        },
+        "value": 0,
+        "base": 0,
+        "ap": {
+          "value": 0,
+          "base": 0
+        },
+        "base_formula_operator": "add",
+        "attribute": "",
+        "source": {
+          "actorId": "",
+          "itemId": "",
+          "itemType": "",
+          "itemName": ""
+        }
+      },
+      "opposed": {
+        "type": "",
+        "test": "",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0,
+        "description": "",
+        "resist": {
+          "test": "",
+          "skill": "",
+          "attribute": "",
+          "attribute2": "",
+          "armor": false,
+          "mod": 0
+        }
+      },
+      "followed": {
+        "test": "DrainTest",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0
+      },
+      "modifiers": [],
+      "initiative_timing": "none"
+    },
+    "importFlags": {
+      "name": "",
+      "type": "",
+      "subType": "",
+      "isFreshImport": false,
+      "isImported": false
+    },
+    "drain": 0,
+    "category": "",
+    "type": "",
+    "range": "",
+    "duration": "",
+    "combat": {
+      "type": ""
+    },
+    "detection": {
+      "passive": false,
+      "type": "",
+      "extended": false
+    },
+    "illusion": {
+      "type": "",
+      "sense": ""
+    },
+    "manipulation": {
+      "damaging": false,
+      "mental": false,
+      "environmental": false,
+      "physical": false
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "shadowrun6-elysium",
+    "systemVersion": "0.23.2",
+    "createdTime": 1743304896024,
+    "modifiedTime": 1744077316153,
+    "lastModifiedBy": "sr5ebuilder"
+  },
+  "_key": "!items!0rszuztwAilTH8fo"
+}

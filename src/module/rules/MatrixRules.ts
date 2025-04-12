@@ -1,4 +1,5 @@
 import {SR} from "../constants";
+import {SR6Item} from "../item/SR6Item";
 
 export class MatrixRules {
     /**
@@ -76,5 +77,83 @@ export class MatrixRules {
      */
     static hostMatrixAttributeRatings(hostRating): number[] {
         return [0, 1, 2, 3].map(rating => rating + hostRating);
+    }
+
+    /**
+     * Determine if a program is a hacking program
+     * @param program The program item to check
+     * @returns True if the program is a hacking program
+     */
+    static isHackingProgram(program: SR6Item): boolean {
+        if (program.type !== 'program') return false;
+
+        // Check if the program's type is explicitly set to 'hacking_program'
+        if (program.system?.type === 'hacking_program') return true;
+
+        // If we can't determine the type, assume it's not a hacking program
+        return false;
+    }
+
+    /**
+     * Check if a matrix action test should accrue overwatch
+     * @param categories The action categories to check
+     * @returns True if the action is a matrix action
+     */
+    static isMatrixAction(categories: string[]): boolean {
+        if (!categories || !categories.length) return false;
+
+        // Matrix action categories
+        const matrixCategories = [
+            'matrix',
+            'matrix_action',
+            'matrix_defense',
+            'matrix_initiative',
+            'matrix_perception',
+            'matrix_search',
+            'hack_on_the_fly',
+            'brute_force',
+            'data_spike',
+            'crack_file',
+            'matrix_stealth',
+            'matrix_confuse_persona',
+            'matrix_jump_into_rigged_device',
+            'matrix_control_device',
+            'matrix_format_device',
+            'matrix_reboot_device',
+            'matrix_full_matrix_defense',
+            'matrix_hide',
+            'matrix_jack_out',
+            'matrix_jam_signals',
+            'matrix_spoof_command',
+            'matrix_trace_icon'
+        ];
+
+        return categories.some(category => matrixCategories.includes(category));
+    }
+
+    /**
+     * Check if a matrix action is illegal based on its legality attribute
+     * @param action The action data to check
+     * @returns True if the action is an illegal matrix action
+     */
+    static isIllegalMatrixAction(action: Shadowrun.ActionRollData): boolean {
+        // Check if the action has a legality attribute set to 'illegal'
+        if (action.legality === 'illegal') return true;
+
+        // If no legality attribute is set, fall back to checking categories
+        if (action.categories && action.categories.length > 0) {
+            // Cracking-based categories that indicate illegal actions
+            const illegalCategories = [
+                'hack_on_the_fly',
+                'brute_force',
+                'data_spike',
+                'crack_file',
+                'matrix_stealth'
+            ];
+
+            return action.categories.some(category => illegalCategories.includes(category));
+        }
+
+        return false;
     }
 }

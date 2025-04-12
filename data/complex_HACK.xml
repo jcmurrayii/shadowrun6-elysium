@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<complexforms>
+   <complexform id="loto"          dur="IMMEDIATE" fad="4"/>
+   <complexform id="hyperthreading"          dur="SUSTAINED" fad="0"/>
+   <complexform id="control_virtual_life"          dur="SUSTAINED" fad="5"/>
+
+   <complexform id="arc_feedback"          dur="SUSTAINED" fad="3"/>
+   <complexform id="attack_attribution"        dur="SUSTAINED" fad="HITS"/>
+   <complexform id="bubble_shield"        dur="SUSTAINED" fad="HITS"/>
+   <complexform id="btl_irl"        dur="SUSTAINED" fad="4"/>
+   <complexform id="cyber_spike"        dur="IMMEDIATE" fad="HITS"/>
+   <complexform id="cyberjack_overclock"        dur="SUSTAINED" fad="HITS"/>
+   <complexform id="cyberware_stamina"        dur="SUSTAINED" fad="3"/>
+   <complexform id="data_bomb_eater"        dur="SUSTAINED" fad="3"/>
+   <complexform id="data_disguise"        dur="SUSTAINED" fad="2"/>
+   <complexform id="enhance_autosofts"        dur="SUSTAINED" fad="HITS"/>
+   <complexform id="enlighten_automaton"        dur="SUSTAINED" fad="HITS"/>
+   <complexform id="host_emulator"        dur="SUSTAINED" fad="6"/>
+   <complexform id="ic_pick"        dur="IMMEDIATE" fad="4"/>
+   <complexform id="machine_merge"        dur="SUSTAINED" fad="HITS"/>
+   <complexform id="marionette"        dur="SUSTAINED" fad="6"/>
+   <complexform id="primed_charge"        dur="SUSTAINED" fad="HITS"/>
+   <complexform id="resonance_wires"        dur="SUSTAINED" fad="2"/>
+   <complexform id="restore_continuity"        dur="PERMANENT" fad="HITS"/>
+   <complexform id="search_history"        dur="PERMANENT" fad="2"/>
+   <complexform id="sleaze_attribution"        dur="SUSTAINED" fad="HITS"/>
+   <complexform id="smartgun_amplifier"        dur="SUSTAINED" fad="HITS"/>
+   <complexform id="technoregeneration"        dur="PERMANENT" fad="HITS"/>
+   <complexform id="threat_analyzer"        dur="SUSTAINED" fad="HITS"/>
+<!-- Fade = Encryption Rating for Unravel Encryption -->
+   <complexform id="unravel_encryption"        dur="PERMANENT" fad="0"/>
+</complexforms>

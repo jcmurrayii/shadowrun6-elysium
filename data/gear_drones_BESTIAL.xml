@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<item avail="4" cost="3000" id="mitsuhama_helping_hand" type="DRONE_SMALL" subtype="ANTHRO">
+		<vehicle han="4" acc="2" spdi="5" tspd="6" bod="1" arm="0" pil="2" sen="1" />
+		<modifications>
+			<accessorymod item="integrated_cyberarm" hook="VEHICLE_CHASSIS" />
+			<accessorymod item="integrated_cyberarm" hook="VEHICLE_CHASSIS" />
+			<accessorymod item="gecko_tips2" hook="VEHICLE_POWERTRAIN" /> <!-- Gecko tips rating = Size Class 2 -->
+			<itemattrmod attr="CAPACITY" slot="VEHICLE_CHASSIS" val="4" />
+			<itemattrmod attr="CAPACITY" slot="VEHICLE_POWERTRAIN" val="1" />
+		</modifications>
+	</item>
+
+	<item avail="2" cost="4500" id="renraku_pelican_2" type="DRONE_SMALL" subtype="AIR">
+		<vehicle han="4" acc="20" spdi="15" tspd="120" bod="1" arm="0" pil="2" sen="1" />
+		<modifications>
+			<accessorymod item="increased_integrity" hook="VEHICLE_CHASSIS" rating="1" />
+			<accessorymod item="increase_cargo_space" hook="VEHICLE_CHASSIS" rating="1" />
+			<accessorymod item="second_power_rotor" hook="VEHICLE_POWERTRAIN" rating="1" />
+			<itemattrmod attr="CAPACITY" slot="VEHICLE_CHASSIS" val="2" />
+			<itemattrmod attr="CAPACITY" slot="VEHICLE_POWERTRAIN" val="4" />
+		</modifications>
+	</item>
+
+	<item avail="4" cost="5000" id="shiawase_buoy" type="DRONE_SMALL" subtype="AQUATIC">
+		<vehicle han="4" acc="1" spdi="1" tspd="5" bod="1" arm="0" pil="1" sen="1" />
+		<modifications>
+			<accessorymod item="retrans_unit" hook="VEHICLE_ELECTRONICS" />
+			<itemattrmod attr="CAPACITY" slot="VEHICLE_ELECTRONICS" val="1" />
+		</modifications>
+	</item>
+
+</items>

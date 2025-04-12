@@ -77,6 +77,7 @@ declare namespace Shadowrun {
      */
     export interface MeleeWeaponData  {
         reach: number;
+        attribute?: ActorAttribute;
     }
 
     /**

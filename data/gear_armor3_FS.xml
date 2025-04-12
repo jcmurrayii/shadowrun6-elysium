@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+    <item id="mortimer_summit_suit" avail="5" cost="2400">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="3" social="+4"/>
+        <modifications>
+            <itemhookmod capacity="6" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="summit_dress" avail="5" cost="2400">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="3" social="+4"/>
+        <modifications>
+            <itemhookmod capacity="6" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="nightshade_moonsilver_dress_suit" avail="6" cost="2800">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="3" social="+6"/>
+        <modifications>
+            <itemhookmod capacity="4" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="moonsilver_dress" avail="6" cost="2800">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="3" social="+6"/>
+        <modifications>
+            <itemhookmod capacity="4" hook="ARMOR"/>
+        </modifications>
+    </item>
+</items>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metaechoes>
+   <metaecho id="cyberadept" type="ECHO"/>
+   <metaecho id="data_structure_encoding" type="ECHO">
+      <requires>
+         <metaechoreq ref="skin_link"/>
+      </requires>
+   </metaecho>
+   <metaecho id="dissonant_scream" type="ECHO"/>
+   <metaecho id="hybrid_sprites" type="ECHO"/>
+   <metaecho id="living_command_console" type="ECHO">
+      <requires>
+         <metaechoreq ref="machine_mind"/>
+         <metaechoreq ref="living_network"/>
+      </requires>
+   </metaecho>
+   <metaecho id="living_host" type="ECHO">
+      <requires>
+         <metaechoreq ref="transcendent_network"/>
+      </requires>
+   </metaecho>
+   <metaecho id="machine_mastermind" type="ECHO">
+      <requires>
+         <metaechoreq ref="machine_mind"/>
+      </requires>
+      <modifications>
+         <itemmod item="control_rig_mm" rating="1" remove="true"/>
+         <itemmod item="control_rig" rating="1" remove="true"/>
+         <itemmod item="control_rig_mm" rating="2"/>
+      </modifications>
+   </metaecho>
+   <metaecho id="mega-sprite" type="ECHO"/>
+   <metaecho id="matrix_amplifier" type="ECHO"/>
+   <metaecho id="new_sprite_type" type="ECHO"/>
+   <metaecho id="resonance_power" type="ECHO" select="NAME"/>
+   <metaecho id="software_emulator" type="ECHO">
+      <requires>
+         <metaechoreq ref="living_network"/>
+      </requires>
+   </metaecho>
+   <metaecho id="sprite_conduit" type="ECHO"/>
+   <metaecho id="sprite_link" type="ECHO"/>
+   <metaecho id="sprite_symbiosis" type="ECHO">
+      <requires>
+         <metaechoreq ref="sprite_conduit"/>
+      </requires>
+   </metaecho>
+   <metaecho id="syntax_error" type="ECHO"/>
+   <metaecho id="transcendent_network" type="ECHO">
+      <requires>
+         <metaechoreq ref="living_network"/>
+      </requires>
+   </metaecho>
+</metaechoes>

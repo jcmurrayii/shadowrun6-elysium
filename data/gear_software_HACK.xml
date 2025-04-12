@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+    <!-- Agents -->
+   <item avail="1L" cost="1500" id="agent_program" maxrat="6" rate="true" ratemul="PRICE AVAIL">
+      <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+
+    <!-- Basic Program -->
+   <item avail="1" cost="60" id="autosoft_host">
+       <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="1" cost="60" id="emulator"> 
+       <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+
+    <!-- Hacking Program -->
+   <item avail="4I" cost="250" id="blaster-charger" >
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="bomb_kit">
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="directional_shield">
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="defense_pods" >
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="double_agent">
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="drone_master" >
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="hitchhiker">
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="quartermaster">
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="rocket_launcher" >
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="secret_agent">
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="smoke_bomb" >
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="sp_agent_cybercombat">
+      <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="sp_agent_electronic_warfare">
+      <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="sp_agent_hacking">
+      <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="sp_agent_computer">
+      <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="sp_agent_hardware">
+      <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="sp_agent_software">
+      <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="spin_doctor">
+      <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="spineshield">
+      <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="4I" cost="250" id="tapeworm">
+      <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" cap="1" />
+   </item>
+
+    <!-- Commlink Apps -->
+   <item avail="2" cost="30" id="code_buddy">
+       <useas type="ACCESSORY" subtype="OTHER_PROGRAMS" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="1" cost="0" id="eparkour">
+       <useas type="ACCESSORY" subtype="OTHER_PROGRAMS" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="3" cost="100" id="file_vault">
+       <useas type="ACCESSORY" subtype="OTHER_PROGRAMS" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="1" cost="0" id="simshare">
+       <useas type="ACCESSORY" subtype="OTHER_PROGRAMS" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="1" cost="0" id="mefeed">
+       <useas type="ACCESSORY" subtype="OTHER_PROGRAMS" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="1" cost="0" id="mannequin">
+       <useas type="ACCESSORY" subtype="OTHER_PROGRAMS" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="2" cost="100" id="personal_assistant" maxrat="6" rate="true" ratemul="PRICE">
+       <useas type="ACCESSORY" subtype="OTHER_PROGRAMS" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="3" cost="250" id="p-ice_nope">
+       <useas type="ACCESSORY" subtype="OTHER_PROGRAMS" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="3L" cost="500" id="p-ice_spines">
+       <useas type="ACCESSORY" subtype="OTHER_PROGRAMS" slot="SOFTWARE" cap="1" />
+   </item>
+   <item avail="3" cost="250" id="p-ice_watchdog">
+       <useas type="ACCESSORY" subtype="OTHER_PROGRAMS" slot="SOFTWARE" cap="1" />
+   </item>
+</items>

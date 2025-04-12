@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <item id="autovoice" avail="1" cost="1000" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.2"/>
+      <modifications>
+        <skillmod ref="con" val="1" cond="true" condindex="1"/>
+      </modifications>
+   </item>
+
+   <item id="vocal_expansion" avail="3" cost="8000" >
+      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+      <modifications>
+        <skillmod ref="con" val="1" cond="true" condindex="1"/>
+      </modifications>
+   </item>
+
+   <item id="autovoice_hacked" avail="0" cost="0" modonly="true" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.2"/>
+   </item>
+
+   <item id="audio_enhancement_advanced" avail="0" cost="0" modonly="true" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.2"/>
+   </item>
+
+   <item id="vision_enhancement_advanced" avail="0" cost="0" modonly="true" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.2"/>
+   </item>
+
+</items>

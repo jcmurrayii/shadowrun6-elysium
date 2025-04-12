@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+	<item id="hardening7" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon dmg="4P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed"/>
+	</item>
+</items>

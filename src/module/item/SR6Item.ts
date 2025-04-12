@@ -1337,6 +1337,21 @@ export class SR6Item extends Item {
         return 0;
     }
 
+    /**
+     * Determine if a melee weapon uses agility instead of strength
+     * @returns True if the weapon uses agility, false if it uses strength
+     */
+    usesAgility(): boolean {
+        if (!this.isMeleeWeapon) return false;
+
+        // Check if the weapon has a specific attribute set
+        const system = this.system as WeaponData;
+        if (system.melee.attribute === 'agility') return true;
+
+        // Default to strength for melee weapons
+        return false;
+    }
+
     getCondition(): ConditionData | undefined {
         const technology = this.getTechnologyData();
         if (technology && "condition_monitor" in technology)

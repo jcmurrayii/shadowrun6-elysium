@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+	<item id="chainblade" avail="5L" cost="1250" >
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon dmg="4P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="chainsword" avail="6L" cost="1800" >
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon dmg="5P" attack="10,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="chainglaive" avail="7L" cost="2300" >
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon dmg="6P" attack="12,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="vibroblade" avail="5L" cost="800" >
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon dmg="3P" attack="13,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="vibrosword" avail="6L" cost="1200" >
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon dmg="4P" attack="15,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="vibrokatana" avail="7L" cost="1500" >
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon dmg="5P" attack="16,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="pwr_hammer" avail="4L" cost="1100" >
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+		<weapon dmg="3P" attack="8,,,," skill="close_combat" spec="close_combat/clubs"/>
+	</item>
+	<item id="pwr_hammer_double" avail="5L" cost="1900" >
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+		<weapon dmg="3P" attack="8,,,," skill="close_combat" spec="close_combat/clubs"/>
+	</item>
+	<item id="pwr_maul" avail="5L" cost="1700" >
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+		<weapon dmg="5P" attack="9,,,," skill="close_combat" spec="close_combat/clubs"/>
+	</item>
+	<item id="pwr_maul_double" avail="6L" cost="2400" >
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+		<weapon dmg="5P" attack="9,,,," skill="close_combat" spec="close_combat/clubs"/>
+	</item>
+	<item id="pwr_fist" avail="3L" cost="950" >
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="2P" attack="7,,,," skill="close_combat" spec="close_combat/unarmed"/>
+	</item>
+</items>

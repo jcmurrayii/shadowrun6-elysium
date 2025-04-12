@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+   <quality id="paragon" karma="10" type="SPECIAL">
+     <requires>
+       <magresreq type="technomancer"/>
+     </requires>
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+
+   <quality id="stream-machinists" karma="20" type="SPECIAL" >
+     <requires>
+       <magresreq type="technomancer"/>
+     </requires>
+   </quality>
+   <quality id="stream-sourcerors" karma="20" type="SPECIAL" >
+     <requires>
+       <magresreq type="technomancer"/>
+     </requires>
+   </quality>
+   <quality id="stream-technoshamans" karma="20" type="SPECIAL" >
+     <requires>
+       <magresreq type="technomancer"/>
+     </requires>
+   </quality>
+
+   <quality id="at_home_in_the_matrix" karma="15" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="brilliant_heuristics" karma="10" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="data_anomaly" karma="5" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="data_haven_membership" karma="5" type="POSITIVE" max="20">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="deck_builder" karma="6" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="fade_to_black" karma="3" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="fractal_blast" karma="9" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="golden_screwdriver" karma="5" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="hacker_combo" karma="10" type="POSITIVE" select="NAME">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="hold_the_door" karma="9" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="icu" karma="3" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="impenetrable_logic" karma="7" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="COMBAT"/>
+     </modifications>
+   </quality>
+   <quality id="jack_jockey" karma="11" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="loner" karma="5" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="matrix_attribute_advancement_attack" karma="15" type="POSITIVE" max="3">
+     <modifications>
+       <attrmod attr="ATTACK" val="1" type="AUGMENTED"/>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>   
+   <quality id="matrix_attribute_advancement_sleaze" karma="15" type="POSITIVE" max="3">
+     <modifications>
+       <attrmod attr="SLEAZE" val="1" type="AUGMENTED"/>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>   
+   <quality id="matrix_attribute_advancement_dataprocessing" karma="15" type="POSITIVE" max="3">
+     <modifications>
+       <attrmod attr="DATA_PROCESSING" val="1" type="AUGMENTED"/>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>   
+   <quality id="matrix_attribute_advancement_firewall" karma="15" type="POSITIVE" max="3">
+     <modifications>
+       <attrmod attr="FIREWALL" val="1" type="AUGMENTED"/>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>   
+   <quality id="natural_hacker" karma="15" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="online_fame" karma="3" type="POSITIVE" max="6">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="profiler" karma="7" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+       <relevancemod topic="SOCIAL"/>
+     </modifications>
+   </quality>
+   <quality id="quick_config" karma="3" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="reverberant" karma="5" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="satisfaction" karma="3" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="surgical_strike" karma="11" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="voider_of_warranties" karma="13" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+
+   <quality id="achilles_heel" karma="12" type="NEGATIVE" select="NAME">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="binary_mentality" karma="10" type="NEGATIVE" select="NAME">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="buddy_system" karma="7" type="NEGATIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+       <relevancemod topic="COMBAT"/>
+       <relevancemod topic="MAGICAL"/>
+     </modifications>
+   </quality>
+   <quality id="bull_in_a_ceramics_store" karma="8" type="NEGATIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="compulsive_archivist" karma="8" type="NEGATIVE"/>
+   <quality id="curiosity_killed_the_cat" karma="5" type="NEGATIVE" max="3">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="data_liberator" karma="2" type="NEGATIVE"/>
+   <quality id="defective_attribute" karma="7" type="NEGATIVE" select="NAME">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="like_a_boss" karma="5" type="NEGATIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="mode_lock" karma="7" type="NEGATIVE" select="NAME">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="program_dependency" karma="2" type="NEGATIVE" select="NAME">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+       <relevancemod topic="COMBAT"/>
+     </modifications>
+   </quality>
+   <quality id="simsense_dependency" karma="16" type="NEGATIVE">
+      <requires>
+         <metareq ref="pilot" negated="true"/>
+         <metareq ref="agent" negated="true"/>
+         <metareq ref="foundation" negated="true"/>
+         <metareq ref="realm" negated="true"/>
+      </requires>
+      <modifications>
+         <relevancemod topic="MATRIX"/>
+      </modifications>
+   </quality>
+   <quality id="resonance_burn" karma="13" type="NEGATIVE">
+      <requires>
+         <magresreq type="technomancer"/>
+      </requires>
+      <modifications>
+         <relevancemod topic="MATRIX"/>
+      </modifications>
+   </quality>
+   <quality id="sloppy_coder" karma="3" type="NEGATIVE">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="wanted_by_god" karma="5" type="NEGATIVE" max="4">
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+
+   <quality id="cyberadept_novice" karma="5" type="POSITIVE" path="true" >
+     <requires>
+         <metareq ref="pilot" negated="true"/>
+         <metareq ref="agent" negated="true"/>
+         <metareq ref="foundation" negated="true"/>
+         <metareq ref="realm" negated="true"/>
+         <metaechoreq ref="cyberadept"/>
+         <magresreq type="technomancer"/>
+     </requires>
+   </quality>
+   <quality id="cyberadept_disciple" karma="5" type="POSITIVE" path="true">
+     <requires>
+       <qualreq ref="cyberadept_novice"/>
+     </requires>
+   </quality>
+   <quality id="cyberadept_master" karma="5" type="POSITIVE" path="true">
+     <requires>
+       <qualreq ref="cyberadept_disciple"/>
+     </requires>
+   </quality>
+   <quality id="cyberadept_transcendent" karma="12" type="POSITIVE" path="true">
+     <requires>
+       <qualreq ref="cyberadept_master"/>
+     </requires>
+   </quality>
+
+<!-- A.I. -->  
+
+   <quality id="neuromorph1" karma="11" type="SPECIAL" >
+     <requires>
+       <magresreq type="mundane"/>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+     <modifications>
+       <attrmod attr="ESSENCE" val="1000"/>
+     </modifications>
+   </quality>
+   <quality id="neuromorph2" karma="12" type="SPECIAL" >
+     <requires>
+       <qualreq ref="neuromorph1" />
+     </requires>
+     <modifications>
+       <attrmod attr="ESSENCE" val="1000"/>
+     </modifications>
+   </quality>
+   <quality id="neuromorph3" karma="13" type="SPECIAL" >
+     <requires>
+       <qualreq ref="neuromorph2" />
+     </requires>
+     <modifications>
+       <attrmod attr="ESSENCE" val="1000"/>
+     </modifications>
+   </quality>
+   <quality id="neuromorph4" karma="14" type="SPECIAL" >
+     <requires>
+       <qualreq ref="neuromorph3" />
+     </requires>
+     <modifications>
+       <attrmod attr="ESSENCE" val="1000"/>
+     </modifications>
+   </quality>
+   <quality id="neuromorph5" karma="15" type="SPECIAL" >
+     <requires>
+       <qualreq ref="neuromorph4" />
+     </requires>
+     <modifications>
+       <attrmod attr="ESSENCE" val="1000"/>
+     </modifications>
+   </quality>
+   <quality id="neuromorph6" karma="16" type="SPECIAL" >
+     <requires>
+       <qualreq ref="neuromorph5" />
+     </requires>
+     <modifications>
+       <attrmod attr="ESSENCE" val="1000"/>
+     </modifications>
+   </quality>
+   <quality id="neuromorph7" karma="17" type="SPECIAL" >
+     <requires>
+       <qualreq ref="neuromorph6" />
+     </requires>
+     <modifications>
+       <attrmod attr="ESSENCE" val="1000"/>
+     </modifications>
+   </quality>
+   <quality id="neuromorph8" karma="18" type="SPECIAL" >
+     <requires>
+       <qualreq ref="neuromorph7" />
+     </requires>
+     <modifications>
+       <attrmod attr="ESSENCE" val="1000"/>
+     </modifications>
+   </quality>
+   <quality id="neuromorph9" karma="19" type="SPECIAL" >
+     <requires>
+       <qualreq ref="neuromorph8" />
+     </requires>
+     <modifications>
+       <attrmod attr="ESSENCE" val="1000"/>
+     </modifications>
+   </quality>
+
+   <quality id="chatty" karma="12" type="POSITIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+   <quality id="designer" karma="6" type="POSITIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+     <modifications>
+       <attrmod attr="AGILITY" val="1" type="AUGMENTED" />
+     </modifications>
+   </quality>
+   <quality id="hello_world" karma="8" type="POSITIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+   <quality id="inherent_program" karma="7" type="POSITIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+   <quality id="improved_restoration" karma="7" type="POSITIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+   <quality id="low_profile" karma="10" type="POSITIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+   <quality id="multiprocessing" karma="11" type="POSITIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+   <quality id="pilot_origins" karma="8" type="POSITIVE" max="3" rate="true" ratemul="MODIFIER" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+     <modifications>
+       <itemmod item="control_rig_mm" rating="1"/>
+     </modifications>
+   </quality>
+   <quality id="redundancy" karma="8" type="POSITIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+   <quality id="sapper" karma="6" type="POSITIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+   <quality id="sensor_upgrade" karma="5" type="POSITIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+   <quality id="snooper" karma="8" type="POSITIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+   <quality id="virtual_stability" karma="5" type="POSITIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+
+   <quality id="cascading_failure" karma="9" type="NEGATIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+   <quality id="corruptor" karma="10" type="NEGATIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+   <quality id="doomscrolling‍" karma="4" type="NEGATIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+   <quality id="easily_exploitable" karma="8" type="NEGATIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+   <quality id="fragmentation" karma="18" type="NEGATIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+     <modifications>
+       <attrmod attr="ESSENCE" val="-1000"/>
+     </modifications>
+   </quality>
+   <quality id="inv_inferences" karma="7" type="NEGATIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+   <quality id="out_of_memory_exception" karma="3" type="NEGATIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+   <quality id="persnickety_renter" karma="6" type="NEGATIVE" >
+     <requires>
+       <anyreq>
+         <metareq ref="pilot"/>
+         <metareq ref="agent"/>
+         <metareq ref="foundation"/>
+         <metareq ref="realm"/>
+       </anyreq>
+     </requires>
+   </quality>
+   <quality id="real_world_naivete" karma="8" type="NEGATIVE" />
+</qualities>

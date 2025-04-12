@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<item id="ballistic_hood" avail="2" cost="0">
+		 <useas type="ARMOR" subtype="ARMOR_HELMET"/>
+		 <armor rating="1" add="true"/>
+	</item>
+
+	<item id="disposable_cloak" avail="1" cost="5">
+		<useas type="ARMOR" subtype="ARMOR_CLOTHES" />
+		 <armor rating="0" add="true"/>
+		 <modifications>
+			 <itemhookmod capacity="0" hook="ARMOR"/>
+			 <accessorymod hook="ARMOR" item="water-repellent_coating" included="true"/>
+		 </modifications>
+	</item>
+
+	<item id="armorweave_cloak" avail="2" cost="200">
+		<useas type="ARMOR" subtype="ARMOR_CLOTHES"/>
+		<armor rating="1" add="true"/>
+		<modifications>
+			<itemhookmod capacity="4" hook="ARMOR"/>
+			<accessorymod hook="ARMOR" item="water-repellent_coating" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="tres_chic_cloak" avail="4" cost="5000">
+		<useas type="ARMOR" subtype="ARMOR_CLOTHES" />
+		<armor rating="1" add="true"/>
+		<modifications>
+			<itemhookmod capacity="5" hook="ARMOR"/>
+			<accessorymod hook="ARMOR" item="water-repellent_coating" included="true"/>
+		</modifications>
+	</item>
+
+</items>

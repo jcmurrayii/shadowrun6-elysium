@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item avail="1" cost="150" id="ext_program_carrier" maxrat="40" rate="true" ratemul="PRICE MODIFIER" multi="yes">
+      <useas type="ACCESSORY" subtype="ELECTRONIC_ACCESSORIES" slot="ELECTRONIC_ACCESSORY" />
+      <modifications>
+         <itemattrmod attr="CONCURRENT_PROGRAMS" val="1"/>
+      </modifications>
+   </item>
+   <item avail="4I" cost="5000" id="cj_boost_d1" >
+      <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+      <modifications>
+         <attrmod attr="DATA_PROCESSING" val="1"/>
+      </modifications>
+   </item>
+   <item avail="6I" cost="10000" id="cj_boost_d2" >
+      <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+      <modifications>
+         <attrmod attr="DATA_PROCESSING" val="2"/>
+      </modifications>
+   </item>
+   <item avail="4I" cost="5000" id="cj_boost_f1" >
+      <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+      <modifications>
+         <attrmod attr="FIREWALL" val="1"/>
+      </modifications>
+   </item>
+   <item avail="6I" cost="10000" id="cj_boost_f2" >
+      <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+      <modifications>
+         <attrmod attr="FIREWALL" val="2"/>
+      </modifications>
+   </item>
+   <item avail="4I" cost="10000" id="cj_boost_i1" >
+      <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+      <modifications>
+         <attrmod attr="INITIATIVE_MATRIX_VR_COLD" val="1"/>
+         <attrmod attr="INITIATIVE_MATRIX_VR_HOT" val="1"/>
+      </modifications>
+   </item>
+   <item avail="6I" cost="25000" id="cj_boost_i2" >
+      <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+      <modifications>
+         <attrmod attr="INITIATIVE_MATRIX_VR_COLD" val="2"/>
+         <attrmod attr="INITIATIVE_MATRIX_VR_HOT" val="2"/>
+      </modifications>
+   </item>
+
+   <item avail="3I" cost="100" id="comhack_agent_box_hack" maxrat="6" rate="true" ratemul="PRICE" >
+	<useas type="ACCESSORY" subtype="ELECTRONIC_ACCESSORIES"  slot="ELECTRONIC_ACCESSORY" />
+	<requires>
+		<itemreq item="comhack_armorlink_upgrade" negated="true"/>
+		<itemreq item="comhack_decoy_pod_hack" negated="true"/>
+		<itemreq item="comhack_persona_booster_hack" negated="true"/>
+		<itemreq item="comhack_securelink_upgrade" negated="true"/>
+		<itemreq item="comhack_stealthlink_upgrade" negated="true"/>
+	</requires>
+	<modifications>
+		<itemhookmod hook="SOFTWARE" capacity="1"/>
+	</modifications>
+   </item>
+   <item avail="4L" cost="250" id="comhack_armorlink_upgrade" maxrat="6" rate="true" ratemul="PRICE" >
+     <useas type="ACCESSORY" subtype="ELECTRONIC_ACCESSORIES"  slot="ELECTRONIC_ACCESSORY" />
+	<requires>
+		<itemreq item="comhack_agent_box_hack" negated="true"/>
+		<itemreq item="comhack_decoy_pod_hack" negated="true"/>
+		<itemreq item="comhack_persona_booster_hack" negated="true"/>
+		<itemreq item="comhack_securelink_upgrade" negated="true"/>
+		<itemreq item="comhack_stealthlink_upgrade" negated="true"/>
+	</requires>
+   </item>
+   <item avail="4I" cost="100" id="comhack_decoy_pod_hack" maxrat="6" rate="true" ratemul="PRICE" >
+     <useas type="ACCESSORY" subtype="ELECTRONIC_ACCESSORIES"  slot="ELECTRONIC_ACCESSORY" />
+	<requires>
+		<itemreq item="comhack_agent_box_hack" negated="true"/>
+		<itemreq item="comhack_armorlink_upgrade" negated="true"/>
+		<itemreq item="comhack_persona_booster_hack" negated="true"/>
+		<itemreq item="comhack_securelink_upgrade" negated="true"/>
+		<itemreq item="comhack_stealthlink_upgrade" negated="true"/>
+	</requires>
+   </item>
+   <item avail="3I" cost="100" id="comhack_persona_booster_hack" maxrat="3" rate="true" ratemul="PRICE" >
+     <useas type="ACCESSORY" subtype="ELECTRONIC_ACCESSORIES"  slot="ELECTRONIC_ACCESSORY" />
+	<requires>
+		<itemreq item="comhack_agent_box_hack" negated="true"/>
+		<itemreq item="comhack_armorlink_upgrade" negated="true"/>
+		<itemreq item="comhack_decoy_pod_hack" negated="true"/>
+		<itemreq item="comhack_securelink_upgrade" negated="true"/>
+		<itemreq item="comhack_stealthlink_upgrade" negated="true"/>
+	</requires>
+   </item>
+   <item avail="4L" cost="500" id="comhack_securelink_upgrade" maxrat="3" rate="true" ratemul="PRICE" >
+     <useas type="ACCESSORY" subtype="ELECTRONIC_ACCESSORIES"  slot="ELECTRONIC_ACCESSORY" />
+	<requires>
+		<itemreq item="comhack_agent_box_hack" negated="true"/>
+		<itemreq item="comhack_armorlink_upgrade" negated="true"/>
+		<itemreq item="comhack_decoy_pod_hack" negated="true"/>
+		<itemreq item="comhack_persona_booster_hack" negated="true"/>
+		<itemreq item="comhack_stealthlink_upgrade" negated="true"/>
+	</requires>
+   </item>
+   <item avail="4I" cost="1000" id="comhack_stealthlink_upgrade" maxrat="3" rate="true" ratemul="PRICE" >
+     <useas type="ACCESSORY" subtype="ELECTRONIC_ACCESSORIES"  slot="ELECTRONIC_ACCESSORY" />
+	<requires>
+		<itemreq item="comhack_agent_box_hack" negated="true"/>
+		<itemreq item="comhack_armorlink_upgrade" negated="true"/>
+		<itemreq item="comhack_decoy_pod_hack" negated="true"/>
+		<itemreq item="comhack_persona_booster_hack" negated="true"/>
+		<itemreq item="comhack_securelink_upgrade" negated="true"/>
+	</requires>
+   </item>
+   <item avail="4I" cost="2000" id="data_tap_arrow" >
+        <useas type="AMMUNITION" subtype="AMMUNITION" />
+        <requires>
+            <itemsubtypereq type="BOWS" />
+        </requires>
+   </item>
+   <item avail="4I" cost="2000" id="data_tap_bolt" >
+        <useas type="AMMUNITION" subtype="AMMUNITION" />
+        <requires>
+            <itemsubtypereq type="CROSSBOWS" />
+        </requires>
+   </item>
+   <item avail="4I" cost="2000" id="data_tap_dart" >
+        <useas type="AMMUNITION" subtype="AMMUNITION" />
+        <requires>
+            <itemsubtypereq type="OTHER_SPECIAL" />
+        </requires>
+   </item>
+   <item avail="4I" cost="2000" id="data_tap_thrown" >
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="MELEE_EXTERNAL"/>
+      <requires>
+         <anyreq>
+		 <itemreq item="throwing_knives"/>
+		 <itemreq item="throwing_stars"/>
+         </anyreq>
+      </requires>
+   </item>
+   <item avail="4I" cost="750" id="data_tap_grapple" >
+      <useas type="ELECTRONICS" subtype="COMMUNICATION"/>
+      <useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.5" />
+      <useas type="ACCESSORY" subtype="CYBER_BODYWARE" cap="4" slot="CYBERLIMB_IMPLANT" />
+   </item>
+   <item avail="2" cost="50" id="data-tap_grappler_tap_cable_spool_50m" >
+      <useas type="ELECTRONICS" subtype="COMMUNICATION"/>
+   </item>
+   <item avail="4I" cost="350" id="data-tap_grappler_tap_pod" >
+      <useas type="ELECTRONICS" subtype="COMMUNICATION"/>
+   </item>
+   <item avail="4" cost="100" id="data_tap_laser_jack" >
+      <useas type="ELECTRONICS" subtype="COMMUNICATION"/>
+      <useas type="ACCESSORY" subtype="MOD_MISC" slot="VEHICLE_ELECTRONICS" cap="0" />
+   </item>
+   <item avail="5L" cost="500" id="data_tap_link_gloves" >
+      <useas type="ELECTRONICS" subtype="COMMUNICATION"/>
+   </item>
+   <item avail="2I" cost="500" id="data_tap_stealth" >
+      <useas type="ELECTRONICS" subtype="COMMUNICATION"/>
+   </item>
+   <item avail="5I" cost="400" id="data_tap_taser" count="y">
+      <useas type="AMMUNITION" subtype="AMMUNITION" />
+      <requires>
+         <itemsubtypereq type="TASERS" />
+      </requires>
+   </item>
+   <item avail="2" cost="1000" id="matrix_relay01" >
+      <useas type="ELECTRONICS" subtype="COMMUNICATION"/>
+   </item>
+   <item avail="2" cost="2000" id="matrix_relay02" >
+     <useas type="ELECTRONICS" subtype="COMMUNICATION"/>
+   </item>
+   <item avail="2" cost="3000" id="matrix_relay03" >
+     <useas type="ELECTRONICS" subtype="COMMUNICATION"/>
+   </item>
+   <item avail="4L" cost="20000" id="matrix_relay04" >
+     <useas type="ELECTRONICS" subtype="COMMUNICATION"/>
+   </item>
+   <item avail="4L" cost="25000" id="matrix_relay05" >
+     <useas type="ELECTRONICS" subtype="COMMUNICATION"/>
+   </item>
+   <item avail="4L" cost="30000" id="matrix_relay06" >
+     <useas type="ELECTRONICS" subtype="COMMUNICATION"/>
+   </item>
+   <item avail="6L" cost="140000" id="matrix_relay07" >
+     <useas type="ELECTRONICS" subtype="COMMUNICATION"/>
+   </item>
+   <item avail="6L" cost="160000" id="matrix_relay08" >
+     <useas type="ELECTRONICS" subtype="COMMUNICATION"/>
+   </item>
+   <item avail="6L" cost="180000" id="matrix_relay09" >
+     <useas type="ELECTRONICS" subtype="COMMUNICATION"/>
+   </item>
+   <item avail="10L" cost="500000" id="matrix_relay10" >
+     <useas type="ELECTRONICS" subtype="COMMUNICATION"/>
+   </item>
+   <item avail="4I" cost="500" id="rfid_god_bomb" maxrat="6" rate="true" ratemul="PRICE" count="y" >
+     <useas type="ELECTRONICS" subtype="RFID"/>
+   </item>
+   <item avail="2I" cost="100" id="rfid_screamer_tag_bombs" maxrat="6" rate="true" ratemul="PRICE" count="y" >
+     <useas type="ELECTRONICS" subtype="RFID"/>
+   </item>
+   <item avail="4L" cost="100" id="rfid_software_tags" count="y" >
+     <useas type="ELECTRONICS" subtype="RFID"/>
+   </item>
+   <item avail="2L" cost="250" id="rfid_spy_tags" count="y" >
+     <useas type="ELECTRONICS" subtype="RFID"/>
+   </item>
+   <item avail="2I" cost="200" id="rfid_whisper_tag_bomb" maxrat="6" rate="true" ratemul="PRICE" count="y" >
+     <useas type="ELECTRONICS" subtype="RFID"/>
+   </item>
+</items>

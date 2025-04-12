@@ -197,4 +197,60 @@
             }
         }
     }
+
+    /* Styling for action type letters */
+    .item-list {
+        .item-right-side {
+            .text {
+                /* Action type styling */
+                &:first-child {
+                    /* Add a class in the helper instead of using complex selectors */
+                    .action-type {
+                        font-weight: bold;
+
+                        /* Major action (M) */
+                        &.action-major {
+                            color: #d93636; /* Red color for Major actions */
+                        }
+
+                        /* Minor action (m) */
+                        &.action-minor {
+                            color: #f0a742; /* Orange color for Minor actions */
+                        }
+
+                        /* Free action (F) */
+                        &.action-free {
+                            color: #4caf50; /* Green color for Free actions */
+                        }
+
+                        /* Varies action (V) */
+                        &.action-varies {
+                            color: #9c27b0; /* Purple color for Varies actions */
+                        }
+
+                        /* Initiative timing styling */
+                        &.timing-initiative::after {
+                            content: "";
+                            display: inline-block;
+                            width: 8px;
+                            height: 8px;
+                            border-radius: 50%;
+                            background-color: #2196f3; /* Blue for In Initiative */
+                            margin-left: 4px;
+                        }
+
+                        &.timing-anytime::after {
+                            content: "";
+                            display: inline-block;
+                            width: 8px;
+                            height: 8px;
+                            border-radius: 50%;
+                            background-color: #4caf50; /* Green for Any Time */
+                            margin-left: 4px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

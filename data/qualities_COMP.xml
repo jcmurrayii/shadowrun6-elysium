@@ -1,0 +1,2627 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+	<quality id="transhuman1" karma="11" type="SPECIAL" selectable="y" >
+		<requires>
+			<magresreq type="mundane"/>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="ESSENCE" val="1000"/>
+		</modifications>
+	</quality>
+	<quality id="transhuman2" karma="12" type="SPECIAL" selectable="y" >
+		<requires>
+			<qualreq ref="transhuman1" />
+		</requires>
+		<modifications>
+			<attrmod attr="ESSENCE" val="1000"/>
+		</modifications>
+	</quality>
+	<quality id="transhuman3" karma="13" type="SPECIAL" selectable="y" >
+		<requires>
+			<qualreq ref="transhuman2" />
+		</requires>
+		<modifications>
+			<attrmod attr="ESSENCE" val="1000"/>
+		</modifications>
+	</quality>
+	<quality id="transhuman4" karma="14" type="SPECIAL" selectable="y" >
+		<requires>
+			<qualreq ref="transhuman3" />
+		</requires>
+		<modifications>
+			<attrmod attr="ESSENCE" val="1000"/>
+		</modifications>
+	</quality>
+	<quality id="transhuman5" karma="15" type="SPECIAL" selectable="y" >
+		<requires>
+			<qualreq ref="transhuman4" />
+		</requires>
+		<modifications>
+			<attrmod attr="ESSENCE" val="1000"/>
+		</modifications>
+	</quality>
+	<quality id="transhuman6" karma="16" type="SPECIAL" selectable="y" >
+		<requires>
+			<qualreq ref="transhuman5" />
+		</requires>
+		<modifications>
+			<attrmod attr="ESSENCE" val="1000"/>
+		</modifications>
+	</quality>
+	<quality id="transhuman7" karma="17" type="SPECIAL" selectable="y" >
+		<requires>
+			<qualreq ref="transhuman6" />
+		</requires>
+		<modifications>
+			<attrmod attr="ESSENCE" val="1000"/>
+		</modifications>
+	</quality>
+	<quality id="transhuman8" karma="18" type="SPECIAL" selectable="y" >
+		<requires>
+			<qualreq ref="transhuman7" />
+		</requires>
+		<modifications>
+			<attrmod attr="ESSENCE" val="1000"/>
+		</modifications>
+	</quality>
+	<quality id="transhuman9" karma="19" type="SPECIAL" selectable="y" >
+		<requires>
+			<qualreq ref="transhuman8" />
+		</requires>
+		<modifications>
+			<attrmod attr="ESSENCE" val="1000"/>
+		</modifications>
+	</quality>
+	<quality id="transhuman10" karma="20" type="SPECIAL" selectable="y" >
+		<requires>
+			<qualreq ref="transhuman9" />
+		</requires>
+		<modifications>
+			<attrmod attr="ESSENCE" val="1000"/>
+		</modifications>
+	</quality>
+	<quality id="transhuman11" karma="21" type="SPECIAL" selectable="y" >
+		<requires>
+			<qualreq ref="transhuman10" />
+		</requires>
+		<modifications>
+			<attrmod attr="ESSENCE" val="1000"/>
+		</modifications>
+	</quality>
+	<quality id="transhuman12" karma="22" type="SPECIAL" selectable="y" >
+		<requires>
+			<qualreq ref="transhuman11" />
+		</requires>
+		<modifications>
+			<attrmod attr="ESSENCE" val="1000"/>
+		</modifications>
+	</quality>
+	<quality id="transhuman13" karma="23" type="SPECIAL" selectable="y" >
+		<requires>
+			<qualreq ref="transhuman12" />
+		</requires>
+		<modifications>
+			<attrmod attr="ESSENCE" val="1000"/>
+		</modifications>
+	</quality>
+	<quality id="transhuman14" karma="24" type="SPECIAL" selectable="y" >
+		<requires>
+			<qualreq ref="transhuman13" />
+		</requires>
+		<modifications>
+			<attrmod attr="ESSENCE" val="1000"/>
+		</modifications>
+	</quality>
+	<quality id="transhuman15" karma="25" type="SPECIAL" selectable="y" >
+		<requires>
+			<qualreq ref="transhuman14" />
+		</requires>
+		<modifications>
+			<attrmod attr="ESSENCE" val="1000"/>
+		</modifications>
+	</quality>
+
+	<quality id="augmentation_acclimation" karma="2" type="POSITIVE" selectable="y" max="10" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="ESSENCE" val="100"/>
+		</modifications>
+	</quality>
+	<quality id="cyborg" karma="5" type="POSITIVE" selectable="y" max="10" >
+		<requires>
+			<qualreq ref="augmentation_acclimation" val="10" />
+		</requires>
+		<modifications>
+			<attrmod attr="ESSENCE" val="100"/>
+		</modifications>
+	</quality>
+	<quality id="bravado" karma="6" type="POSITIVE" selectable="y" />
+	<quality id="critter_dominator" karma="10" type="POSITIVE" selectable="y" />
+	<quality id="critter_trainer" karma="10" type="POSITIVE" selectable="y" />
+	<quality id="cyberjack_maximization" karma="12" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="cyberjack_maximization_firewall" negated="true" />
+		</requires>
+	</quality>
+	<quality id="discreet_smuggler" karma="7" type="POSITIVE" selectable="y" />
+	<quality id="extended_overdrive" karma="6" type="POSITIVE" selectable="y" max="4" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+	<quality id="focused_ambition" karma="6" type="POSITIVE" selectable="y" />
+	<quality id="inspire_competence" karma="11" type="POSITIVE" selectable="y" />
+	<quality id="many_talents" karma="18" type="POSITIVE" selectable="y" />
+	<quality id="many_skills" karma="18" type="POSITIVE" selectable="y" />
+	<quality id="martial_arts_prodigy" karma="14" type="POSITIVE" selectable="y" />
+	<quality id="maximum_overdrive" karma="7" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+	<quality id="more_machine_than_metahuman" karma="5" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+	<quality id="muscles" karma="6" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+	<quality id="polyglot" karma="4" type="POSITIVE" selectable="y" >
+<!--		modifications>/-->
+<!--		specrulemod ref="LANGUAGE_COST2_AT_GEN"/-->
+<!--		modifications>/-->
+	</quality>
+	<quality id="relentless_tracker" karma="6" type="POSITIVE" selectable="y" />
+	<quality id="rote_alchemist" karma="10" type="POSITIVE" selectable="y" />
+	<quality id="software_optimization" karma="10" type="POSITIVE" selectable="y" />
+	<quality id="soothing_static" karma="4" type="POSITIVE" selectable="y" />
+	<quality id="spell_components" karma="12" type="POSITIVE" selectable="y" />
+	<quality id="team_player" karma="10" type="POSITIVE" selectable="y" />
+	<quality id="teflon_coated" karma="12" type="POSITIVE" selectable="y" />
+
+	<quality id="all_business" karma="8" type="NEGATIVE" selectable="y" />
+	<quality id="bad_back" karma="12" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+	<quality id="borrowed_time" karma="25" type="NEGATIVE" selectable="y" />
+	<quality id="bounty" karma="10" type="NEGATIVE" selectable="y" />
+	<quality id="chronic_pain" karma="15" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+	<quality id="combat_junkie" karma="6" type="NEGATIVE" selectable="y" />
+	<quality id="cyber_psychosis" karma="8" type="NEGATIVE" selectable="y" max="3" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+	<quality id="finesse" karma="7" type="NEGATIVE" selectable="y" />
+	<quality id="gear_acquisition_syndrome" karma="5" type="NEGATIVE" selectable="y" max="3" />
+	<quality id="glitchy" karma="12" type="NEGATIVE" selectable="y" />
+	<quality id="gourmand" karma="5" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+	<quality id="hooder" karma="5" type="NEGATIVE" selectable="y" max="3" />
+	<quality id="hunted" karma="5" type="NEGATIVE" selectable="y" max="5" />
+	<quality id="indecisive" karma="11" type="NEGATIVE" selectable="y" />
+	<quality id="injury_prone" karma="15" type="NEGATIVE" selectable="y" />
+	<quality id="killer" karma="4" type="NEGATIVE" selectable="y" />
+	<quality id="limited_attributes" karma="5" type="NEGATIVE" selectable="y" />
+	<quality id="limited_skills" karma="5" type="NEGATIVE" selectable="y" />
+	<quality id="momentous_misfortune" karma="25" type="NEGATIVE" selectable="y" />
+	<quality id="non-lethal" karma="5" type="NEGATIVE" selectable="y" />
+	<quality id="stim_patch_allergy" karma="10" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+	<quality id="toxin_susceptibility" karma="2" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+	<quality id="trust_issues" karma="10" type="NEGATIVE" selectable="y" />
+	<quality id="twitchy" karma="5" type="NEGATIVE" selectable="y" />
+
+<!-- SURGE Positive Qualities-->
+
+	<quality id="arcane_arrester" karma="20" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="balance_receptor" karma="4" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<edgemod skill="athletics" type="BONUS"/>
+		</modifications>
+	</quality>
+
+	<quality id="beak_raptor" karma="11" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_raptor_beak" />
+		</modifications>
+	</quality>
+
+	<quality id="beak_standard" karma="9" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="bicardiac" karma="5" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="biosonar" karma="6" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="bone_spikes" karma="10" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_bone_spikes" />
+		</modifications>
+	</quality>
+
+	<quality id="broadened_auditory_spectrum_infrasonic" karma="8" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="broadened_auditory_spectrum_ultrasonic" karma="8" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="camouflage_fur" karma="4" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+
+	<quality id="celerity" karma="5" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+
+	<quality id="claws_digging" karma="8" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="claws_razor" negated="true"/>
+			<qualreq ref="claws_retractable" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="claws_razor" karma="8" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="claws_digging" negated="true"/>
+			<qualreq ref="claws_retractable" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="claws_retractable" karma="10" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="claws_razor" negated="true"/>
+			<qualreq ref="claws_digging" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="climate_adaptation_cold" karma="5" type="POSITIVE" selectable="y" max="3" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<edgemod skill="outdoors/survival" type="BONUS"/>
+		</modifications>
+	</quality>
+
+	<quality id="climate_adaptation_hot" karma="5" type="POSITIVE" selectable="y" max="3" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<edgemod skill="outdoors/survival" type="BONUS"/>
+		</modifications>
+	</quality>
+
+	<quality id="corrosive_spit1" karma="4" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="corrosive_spit2" negated="true"/>
+			<qualreq ref="corrosive_spit3" negated="true"/>
+			<qualreq ref="corrosive_spit4" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_corrosive_spit1" />
+			<relevancemod topic="COMBAT"/>
+		</modifications>
+	</quality>
+
+	<quality id="corrosive_spit2" karma="8" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="corrosive_spit1" negated="true"/>
+			<qualreq ref="corrosive_spit3" negated="true"/>
+			<qualreq ref="corrosive_spit4" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_corrosive_spit2" />
+			<relevancemod topic="COMBAT"/>
+		</modifications>
+	</quality>
+
+	<quality id="corrosive_spit3" karma="12" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="corrosive_spit1" negated="true"/>
+			<qualreq ref="corrosive_spit2" negated="true"/>
+			<qualreq ref="corrosive_spit4" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_corrosive_spit3" />
+			<relevancemod topic="COMBAT"/>
+		</modifications>
+	</quality>
+
+	<quality id="corrosive_spit4" karma="16" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="corrosive_spit1" negated="true"/>
+			<qualreq ref="corrosive_spit2" negated="true"/>
+			<qualreq ref="corrosive_spit3" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_corrosive_spit4" />
+			<relevancemod topic="COMBAT"/>
+		</modifications>
+	</quality>
+
+	<quality id="defensive_secretion" karma="6" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+
+	<quality id="da_bark" karma="4" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="DEFENSE_RATING" type="NATURAL" val="2" />
+		</modifications>
+	</quality>
+
+	<quality id="da_blubber" karma="3" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+
+	<quality id="da_camo_bas" karma="5" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="camouflage_dynamic" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="da_camo_dyn" karma="10" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="camouflage_basic" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="da_dragon" karma="3" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+
+	<quality id="da_granite" karma="15" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="DEFENSE_RATING" type="NATURAL" val="4" />
+		</modifications>
+	</quality>
+
+	<quality id="da_granite_srm" karma="15" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="DEFENSE_RATING" type="NATURAL" val="6" />
+		</modifications>
+	</quality>
+
+	<quality id="da_rhino" karma="8" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="DEFENSE_RATING" type="NATURAL" val="3" />
+		</modifications>
+	</quality>
+
+	<quality id="da_thorns" karma="5" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_thorns" />
+			<relevancemod topic="COMBAT"/>
+			<lifecostmod percent="25"/>
+		</modifications>
+	</quality>
+
+	<quality id="electrosense" karma="8" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+
+	<quality id="elongated_limbs" karma="12" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<relevancemod topic="COMBAT"/>
+		</modifications>
+	</quality>
+
+	<quality id="fangs" karma="4" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="fangs" />
+			<relevancemod topic="COMBAT"/>
+		</modifications>
+	</quality>
+
+	<quality id="frog_tongue" karma="8" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="functional_tail_balance" karma="6" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="functional_tail_paddle" negated="true"/>
+			<qualreq ref="functional_tail_prehensile" negated="true"/>
+			<qualreq ref="functional_tail_thagomizer" negated="true"/>
+			<qualreq ref="functional_tail_whip" negated="true"/>
+			<qualreq ref="vestigial_tail" negated="true"/>
+		</requires>
+		<modifications>
+			<edgemod skill="athletics/climbing" type="BONUS"/>
+			<edgemod skill="athletics/gymnastics" type="BONUS"/>
+		</modifications>
+	</quality>
+
+	<quality id="functional_tail_paddle" karma="6" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="functional_tail_balance" negated="true"/>
+			<qualreq ref="functional_tail_prehensile" negated="true"/>
+			<qualreq ref="functional_tail_thagomizer" negated="true"/>
+			<qualreq ref="functional_tail_whip" negated="true"/>
+			<qualreq ref="vestigial_tail" negated="true"/>
+		</requires>
+		<modifications>
+			<edgemod skill="athletics/swimming" type="BONUS"/>
+		</modifications>
+	</quality>
+
+	<quality id="functional_tail_prehensile" karma="8" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="functional_tail_balance" negated="true"/>
+			<qualreq ref="functional_tail_paddle" negated="true"/>
+			<qualreq ref="functional_tail_thagomizer" negated="true"/>
+			<qualreq ref="functional_tail_whip" negated="true"/>
+			<qualreq ref="vestigial_tail" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="functional_tail_thagomizer" karma="10" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="functional_tail_balance" negated="true"/>
+			<qualreq ref="functional_tail_prehensile" negated="true"/>
+			<qualreq ref="functional_tail_paddle" negated="true"/>
+			<qualreq ref="functional_tail_whip" negated="true"/>
+			<qualreq ref="vestigial_tail" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_tail_thagomizer" />
+			<relevancemod topic="COMBAT"/>
+		</modifications>
+	</quality>
+
+	<quality id="functional_tail_whip" karma="10" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="functional_tail_balance" negated="true"/>
+			<qualreq ref="functional_tail_prehensile" negated="true"/>
+			<qualreq ref="functional_tail_paddle" negated="true"/>
+			<qualreq ref="functional_tail_thagomizer" negated="true"/>
+			<qualreq ref="vestigial_tail" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_tail_whip" />
+			<relevancemod topic="COMBAT"/>
+		</modifications>
+	</quality>
+
+	<quality id="functional_wings_type_1" karma="12" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="functional_wings_type_2" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="functional_wings_type_1" />
+			<relevancemod topic="COMBAT"/>
+		</modifications>
+	</quality>
+
+	<quality id="functional_wings_type_2" karma="20" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="functional_wings_type_1" negated="true"/>
+		</requires> 
+		<modifications>
+			<itemmod item="functional_wings_type_2" />
+			<relevancemod topic="COMBAT"/>
+		</modifications>
+	</quality>
+
+	<quality id="gills_air" karma="5" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="gills_freshwater" karma="5" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="gills_saltwater" karma="5" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="glamour" karma="12" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<edgemod skill="con" type="BONUS"/>
+			<edgemod skill="influence" type="BONUS"/>
+			<relevancemod topic="SOCIAL"/>
+		</modifications>
+	</quality>
+
+	<quality id="goring_horns" karma="5" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_goring_horns" />
+		</modifications>
+	</quality>
+
+	<quality id="greasy_skin" karma="5" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="insulating_coat" karma="6" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="keen-eared" karma="4" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<edgemod skill="perception" type="BONUS"/>
+		</modifications>
+	</quality>
+
+	<quality id="larger_tusks" karma="5" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_larger_tusks" />
+		</modifications>
+	</quality>
+
+	<quality id="magnetosense" karma="6" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<edgemod skill="outdoors/navigation" type="BONUS"/>
+		</modifications>
+	</quality>
+
+	<quality id="manasense" karma="8" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="marsupial_pouch" karma="5" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="metagenic_attribute_improvement_bod" karma="15" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="BODY" type="MAX" val="1" />
+		</modifications>
+	</quality>
+
+	<quality id="metagenic_attribute_improvement_agi" karma="15" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="AGILITY" type="MAX" val="1" />
+		</modifications>
+	</quality>
+
+	<quality id="metagenic_attribute_improvement_rea" karma="15" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="REACTION" type="MAX" val="1" />
+		</modifications>
+	</quality>
+
+	<quality id="metagenic_attribute_improvement_str" karma="15" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="STRENGTH" type="MAX" val="1" />
+		</modifications>
+	</quality>
+
+	<quality id="metagenic_attribute_improvement_wil" karma="15" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="WILLPOWER" type="MAX" val="1" />
+		</modifications>
+	</quality>
+
+	<quality id="metagenic_attribute_improvement_log" karma="15" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="LOGIC" type="MAX" val="1" />
+		</modifications>
+	</quality>
+
+	<quality id="metagenic_attribute_improvement_int" karma="15" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="INTUITION" type="MAX" val="1" />
+		</modifications>
+	</quality>
+
+	<quality id="metagenic_attribute_improvement_cha" karma="15" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="CHARISMA" type="MAX" val="1" />
+		</modifications>
+	</quality>
+
+	<quality id="metahuman_traits" karma="5" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<anyreq>
+				<metareq ref="ork"/>
+				<metareq ref="dwarf"/>
+				<metareq ref="elf"/>
+			</anyreq>
+		</requires>
+	</quality>
+
+	<quality id="monkey_paws" karma="5" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<edgemod skill="athletics/climbing" type="BONUS"/>
+			<edgemod skill="athletics/gymnastics" type="BONUS"/>
+		</modifications>
+	</quality>
+
+	<quality id="nasty_vibe" karma="6" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<edgemod skill="influence/intimidation" type="BONUS"/>
+		</modifications>
+	</quality>
+
+	<quality id="nat_ven_cst1" karma="11" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_cst2" negated="true"/><qualreq ref="nat_ven_cst3" negated="true"/><qualreq ref="nat_ven_cst4" negated="true"/>
+			<qualreq ref="nat_ven_csi1" negated="true"/><qualreq ref="nat_ven_csi2" negated="true"/><qualreq ref="nat_ven_csi3" negated="true"/><qualreq ref="nat_ven_csi4" negated="true"/>
+			<qualreq ref="nat_ven_cpt1" negated="true"/><qualreq ref="nat_ven_cpt2" negated="true"/><qualreq ref="nat_ven_cpt3" negated="true"/><qualreq ref="nat_ven_cpt4" negated="true"/>
+			<qualreq ref="nat_ven_cpi1" negated="true"/><qualreq ref="nat_ven_cpi2" negated="true"/><qualreq ref="nat_ven_cpi3" negated="true"/><qualreq ref="nat_ven_cpi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_cst2" karma="13" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_cst1" negated="true"/><qualreq ref="nat_ven_cst3" negated="true"/><qualreq ref="nat_ven_cst4" negated="true"/>
+			<qualreq ref="nat_ven_csi1" negated="true"/><qualreq ref="nat_ven_csi2" negated="true"/><qualreq ref="nat_ven_csi3" negated="true"/><qualreq ref="nat_ven_csi4" negated="true"/>
+			<qualreq ref="nat_ven_cpt1" negated="true"/><qualreq ref="nat_ven_cpt2" negated="true"/><qualreq ref="nat_ven_cpt3" negated="true"/><qualreq ref="nat_ven_cpt4" negated="true"/>
+			<qualreq ref="nat_ven_cpi1" negated="true"/><qualreq ref="nat_ven_cpi2" negated="true"/><qualreq ref="nat_ven_cpi3" negated="true"/><qualreq ref="nat_ven_cpi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_cst3" karma="15" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_cst1" negated="true"/><qualreq ref="nat_ven_cst2" negated="true"/><qualreq ref="nat_ven_cst4" negated="true"/>
+			<qualreq ref="nat_ven_csi1" negated="true"/><qualreq ref="nat_ven_csi2" negated="true"/><qualreq ref="nat_ven_csi3" negated="true"/><qualreq ref="nat_ven_csi4" negated="true"/>
+			<qualreq ref="nat_ven_cpt1" negated="true"/><qualreq ref="nat_ven_cpt2" negated="true"/><qualreq ref="nat_ven_cpt3" negated="true"/><qualreq ref="nat_ven_cpt4" negated="true"/>
+			<qualreq ref="nat_ven_cpi1" negated="true"/><qualreq ref="nat_ven_cpi2" negated="true"/><qualreq ref="nat_ven_cpi3" negated="true"/><qualreq ref="nat_ven_cpi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_cst4" karma="17" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_cst1" negated="true"/><qualreq ref="nat_ven_cst2" negated="true"/><qualreq ref="nat_ven_cst3" negated="true"/>
+			<qualreq ref="nat_ven_csi1" negated="true"/><qualreq ref="nat_ven_csi2" negated="true"/><qualreq ref="nat_ven_csi3" negated="true"/><qualreq ref="nat_ven_csi4" negated="true"/>
+			<qualreq ref="nat_ven_cpt1" negated="true"/><qualreq ref="nat_ven_cpt2" negated="true"/><qualreq ref="nat_ven_cpt3" negated="true"/><qualreq ref="nat_ven_cpt4" negated="true"/>
+			<qualreq ref="nat_ven_cpi1" negated="true"/><qualreq ref="nat_ven_cpi2" negated="true"/><qualreq ref="nat_ven_cpi3" negated="true"/><qualreq ref="nat_ven_cpi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_csi1" karma="13" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_cst1" negated="true"/><qualreq ref="nat_ven_cst2" negated="true"/><qualreq ref="nat_ven_cst3" negated="true"/><qualreq ref="nat_ven_cst4" negated="true"/>
+			<qualreq ref="nat_ven_csi2" negated="true"/><qualreq ref="nat_ven_csi3" negated="true"/><qualreq ref="nat_ven_csi4" negated="true"/>
+			<qualreq ref="nat_ven_cpt1" negated="true"/><qualreq ref="nat_ven_cpt2" negated="true"/><qualreq ref="nat_ven_cpt3" negated="true"/><qualreq ref="nat_ven_cpt4" negated="true"/>
+			<qualreq ref="nat_ven_cpi1" negated="true"/><qualreq ref="nat_ven_cpi2" negated="true"/><qualreq ref="nat_ven_cpi3" negated="true"/><qualreq ref="nat_ven_cpi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_csi2" karma="15" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_cst1" negated="true"/><qualreq ref="nat_ven_cst2" negated="true"/><qualreq ref="nat_ven_cst3" negated="true"/><qualreq ref="nat_ven_cst4" negated="true"/>
+			<qualreq ref="nat_ven_csi1" negated="true"/><qualreq ref="nat_ven_csi3" negated="true"/><qualreq ref="nat_ven_csi4" negated="true"/>
+			<qualreq ref="nat_ven_cpt1" negated="true"/><qualreq ref="nat_ven_cpt2" negated="true"/><qualreq ref="nat_ven_cpt3" negated="true"/><qualreq ref="nat_ven_cpt4" negated="true"/>
+			<qualreq ref="nat_ven_cpi1" negated="true"/><qualreq ref="nat_ven_cpi2" negated="true"/><qualreq ref="nat_ven_cpi3" negated="true"/><qualreq ref="nat_ven_cpi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_csi3" karma="17" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_cst1" negated="true"/><qualreq ref="nat_ven_cst2" negated="true"/><qualreq ref="nat_ven_cst3" negated="true"/><qualreq ref="nat_ven_cst4" negated="true"/>
+			<qualreq ref="nat_ven_csi1" negated="true"/><qualreq ref="nat_ven_csi2" negated="true"/><qualreq ref="nat_ven_csi4" negated="true"/>
+			<qualreq ref="nat_ven_cpt1" negated="true"/><qualreq ref="nat_ven_cpt2" negated="true"/><qualreq ref="nat_ven_cpt3" negated="true"/><qualreq ref="nat_ven_cpt4" negated="true"/>
+			<qualreq ref="nat_ven_cpi1" negated="true"/><qualreq ref="nat_ven_cpi2" negated="true"/><qualreq ref="nat_ven_cpi3" negated="true"/><qualreq ref="nat_ven_cpi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_csi4" karma="19" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_cst1" negated="true"/><qualreq ref="nat_ven_cst2" negated="true"/><qualreq ref="nat_ven_cst3" negated="true"/><qualreq ref="nat_ven_cst4" negated="true"/>
+			<qualreq ref="nat_ven_csi1" negated="true"/><qualreq ref="nat_ven_csi2" negated="true"/><qualreq ref="nat_ven_csi3" negated="true"/>
+			<qualreq ref="nat_ven_cpt1" negated="true"/><qualreq ref="nat_ven_cpt2" negated="true"/><qualreq ref="nat_ven_cpt3" negated="true"/><qualreq ref="nat_ven_cpt4" negated="true"/>
+			<qualreq ref="nat_ven_cpi1" negated="true"/><qualreq ref="nat_ven_cpi2" negated="true"/><qualreq ref="nat_ven_cpi3" negated="true"/><qualreq ref="nat_ven_cpi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_cpt1" karma="13" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_cst1" negated="true"/><qualreq ref="nat_ven_cst2" negated="true"/><qualreq ref="nat_ven_cst3" negated="true"/><qualreq ref="nat_ven_cst4" negated="true"/>
+			<qualreq ref="nat_ven_csi1" negated="true"/><qualreq ref="nat_ven_csi2" negated="true"/><qualreq ref="nat_ven_csi3" negated="true"/><qualreq ref="nat_ven_csi4" negated="true"/>
+			<qualreq ref="nat_ven_cpt2" negated="true"/><qualreq ref="nat_ven_cpt3" negated="true"/><qualreq ref="nat_ven_cpt4" negated="true"/>
+			<qualreq ref="nat_ven_cpi1" negated="true"/><qualreq ref="nat_ven_cpi2" negated="true"/><qualreq ref="nat_ven_cpi3" negated="true"/><qualreq ref="nat_ven_cpi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_cpt2" karma="15" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_cst1" negated="true"/><qualreq ref="nat_ven_cst2" negated="true"/><qualreq ref="nat_ven_cst3" negated="true"/><qualreq ref="nat_ven_cst4" negated="true"/>
+			<qualreq ref="nat_ven_csi1" negated="true"/><qualreq ref="nat_ven_csi2" negated="true"/><qualreq ref="nat_ven_csi3" negated="true"/><qualreq ref="nat_ven_csi4" negated="true"/>
+			<qualreq ref="nat_ven_cpt1" negated="true"/><qualreq ref="nat_ven_cpt3" negated="true"/><qualreq ref="nat_ven_cpt4" negated="true"/>
+			<qualreq ref="nat_ven_cpi1" negated="true"/><qualreq ref="nat_ven_cpi2" negated="true"/><qualreq ref="nat_ven_cpi3" negated="true"/><qualreq ref="nat_ven_cpi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_cpt3" karma="17" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_cst1" negated="true"/><qualreq ref="nat_ven_cst2" negated="true"/><qualreq ref="nat_ven_cst3" negated="true"/><qualreq ref="nat_ven_cst4" negated="true"/>
+			<qualreq ref="nat_ven_csi1" negated="true"/><qualreq ref="nat_ven_csi2" negated="true"/><qualreq ref="nat_ven_csi3" negated="true"/><qualreq ref="nat_ven_csi4" negated="true"/>
+			<qualreq ref="nat_ven_cpt1" negated="true"/><qualreq ref="nat_ven_cpt2" negated="true"/><qualreq ref="nat_ven_cpt4" negated="true"/>
+			<qualreq ref="nat_ven_cpi1" negated="true"/><qualreq ref="nat_ven_cpi2" negated="true"/><qualreq ref="nat_ven_cpi3" negated="true"/><qualreq ref="nat_ven_cpi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_cpt4" karma="19" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_cst1" negated="true"/><qualreq ref="nat_ven_cst2" negated="true"/><qualreq ref="nat_ven_cst3" negated="true"/><qualreq ref="nat_ven_cst4" negated="true"/>
+			<qualreq ref="nat_ven_csi1" negated="true"/><qualreq ref="nat_ven_csi2" negated="true"/><qualreq ref="nat_ven_csi3" negated="true"/><qualreq ref="nat_ven_csi4" negated="true"/>
+			<qualreq ref="nat_ven_cpt1" negated="true"/><qualreq ref="nat_ven_cpt2" negated="true"/><qualreq ref="nat_ven_cpt3" negated="true"/>
+			<qualreq ref="nat_ven_cpi1" negated="true"/><qualreq ref="nat_ven_cpi2" negated="true"/><qualreq ref="nat_ven_cpi3" negated="true"/><qualreq ref="nat_ven_cpi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_cpi1" karma="15" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_cst1" negated="true"/><qualreq ref="nat_ven_cst2" negated="true"/><qualreq ref="nat_ven_cst3" negated="true"/><qualreq ref="nat_ven_cst4" negated="true"/>
+			<qualreq ref="nat_ven_csi1" negated="true"/><qualreq ref="nat_ven_csi2" negated="true"/><qualreq ref="nat_ven_csi3" negated="true"/><qualreq ref="nat_ven_csi4" negated="true"/>
+			<qualreq ref="nat_ven_cpt1" negated="true"/><qualreq ref="nat_ven_cpt2" negated="true"/><qualreq ref="nat_ven_cpt3" negated="true"/><qualreq ref="nat_ven_cpt4" negated="true"/>
+			<qualreq ref="nat_ven_cpi2" negated="true"/><qualreq ref="nat_ven_cpi3" negated="true"/><qualreq ref="nat_ven_cpi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_cpi2" karma="17" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_cst1" negated="true"/><qualreq ref="nat_ven_cst2" negated="true"/><qualreq ref="nat_ven_cst3" negated="true"/><qualreq ref="nat_ven_cst4" negated="true"/>
+			<qualreq ref="nat_ven_csi1" negated="true"/><qualreq ref="nat_ven_csi2" negated="true"/><qualreq ref="nat_ven_csi3" negated="true"/><qualreq ref="nat_ven_csi4" negated="true"/>
+			<qualreq ref="nat_ven_cpt1" negated="true"/><qualreq ref="nat_ven_cpt2" negated="true"/><qualreq ref="nat_ven_cpt3" negated="true"/><qualreq ref="nat_ven_cpt4" negated="true"/>
+			<qualreq ref="nat_ven_cpi1" negated="true"/><qualreq ref="nat_ven_cpi3" negated="true"/><qualreq ref="nat_ven_cpi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_cpi3" karma="19" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_cst1" negated="true"/><qualreq ref="nat_ven_cst2" negated="true"/><qualreq ref="nat_ven_cst3" negated="true"/><qualreq ref="nat_ven_cst4" negated="true"/>
+			<qualreq ref="nat_ven_csi1" negated="true"/><qualreq ref="nat_ven_csi2" negated="true"/><qualreq ref="nat_ven_csi3" negated="true"/><qualreq ref="nat_ven_csi4" negated="true"/>
+			<qualreq ref="nat_ven_cpt1" negated="true"/><qualreq ref="nat_ven_cpt2" negated="true"/><qualreq ref="nat_ven_cpt3" negated="true"/><qualreq ref="nat_ven_cpt4" negated="true"/>
+			<qualreq ref="nat_ven_cpi1" negated="true"/><qualreq ref="nat_ven_cpi2" negated="true"/><qualreq ref="nat_ven_cpi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_cpi4" karma="21" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_cst1" negated="true"/><qualreq ref="nat_ven_cst2" negated="true"/><qualreq ref="nat_ven_cst3" negated="true"/><qualreq ref="nat_ven_cst4" negated="true"/>
+			<qualreq ref="nat_ven_csi1" negated="true"/><qualreq ref="nat_ven_csi2" negated="true"/><qualreq ref="nat_ven_csi3" negated="true"/><qualreq ref="nat_ven_csi4" negated="true"/>
+			<qualreq ref="nat_ven_cpt1" negated="true"/><qualreq ref="nat_ven_cpt2" negated="true"/><qualreq ref="nat_ven_cpt3" negated="true"/><qualreq ref="nat_ven_cpt4" negated="true"/>
+			<qualreq ref="nat_ven_cpi1" negated="true"/><qualreq ref="nat_ven_cpi2" negated="true"/><qualreq ref="nat_ven_cpi3" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_est1" karma="11" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_est2" negated="true"/><qualreq ref="nat_ven_est3" negated="true"/><qualreq ref="nat_ven_est4" negated="true"/>
+			<qualreq ref="nat_ven_esi1" negated="true"/><qualreq ref="nat_ven_esi2" negated="true"/><qualreq ref="nat_ven_esi3" negated="true"/><qualreq ref="nat_ven_esi4" negated="true"/>
+			<qualreq ref="nat_ven_ept1" negated="true"/><qualreq ref="nat_ven_ept2" negated="true"/><qualreq ref="nat_ven_ept3" negated="true"/><qualreq ref="nat_ven_ept4" negated="true"/>
+			<qualreq ref="nat_ven_epi1" negated="true"/><qualreq ref="nat_ven_epi2" negated="true"/><qualreq ref="nat_ven_epi3" negated="true"/><qualreq ref="nat_ven_epi4" negated="true"/>
+		</requires>
+		<modifications><itemmod item="nw_exhale_s1" /></modifications>
+	</quality>
+
+	<quality id="nat_ven_est2" karma="13" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_est1" negated="true"/><qualreq ref="nat_ven_est3" negated="true"/><qualreq ref="nat_ven_est4" negated="true"/>
+			<qualreq ref="nat_ven_esi1" negated="true"/><qualreq ref="nat_ven_esi2" negated="true"/><qualreq ref="nat_ven_esi3" negated="true"/><qualreq ref="nat_ven_esi4" negated="true"/>
+			<qualreq ref="nat_ven_ept1" negated="true"/><qualreq ref="nat_ven_ept2" negated="true"/><qualreq ref="nat_ven_ept3" negated="true"/><qualreq ref="nat_ven_ept4" negated="true"/>
+			<qualreq ref="nat_ven_epi1" negated="true"/><qualreq ref="nat_ven_epi2" negated="true"/><qualreq ref="nat_ven_epi3" negated="true"/><qualreq ref="nat_ven_epi4" negated="true"/>
+		</requires>
+		<modifications><itemmod item="nw_exhale_s2" /></modifications>
+	</quality>
+
+	<quality id="nat_ven_est3" karma="15" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_est1" negated="true"/><qualreq ref="nat_ven_est2" negated="true"/><qualreq ref="nat_ven_est4" negated="true"/>
+			<qualreq ref="nat_ven_esi1" negated="true"/><qualreq ref="nat_ven_esi2" negated="true"/><qualreq ref="nat_ven_esi3" negated="true"/><qualreq ref="nat_ven_esi4" negated="true"/>
+			<qualreq ref="nat_ven_ept1" negated="true"/><qualreq ref="nat_ven_ept2" negated="true"/><qualreq ref="nat_ven_ept3" negated="true"/><qualreq ref="nat_ven_ept4" negated="true"/>
+			<qualreq ref="nat_ven_epi1" negated="true"/><qualreq ref="nat_ven_epi2" negated="true"/><qualreq ref="nat_ven_epi3" negated="true"/><qualreq ref="nat_ven_epi4" negated="true"/>
+		</requires>
+		<modifications><itemmod item="nw_exhale_s3" /></modifications>
+	</quality>
+
+	<quality id="nat_ven_est4" karma="17" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_est1" negated="true"/><qualreq ref="nat_ven_est2" negated="true"/><qualreq ref="nat_ven_est3" negated="true"/>
+			<qualreq ref="nat_ven_esi1" negated="true"/><qualreq ref="nat_ven_esi2" negated="true"/><qualreq ref="nat_ven_esi3" negated="true"/><qualreq ref="nat_ven_esi4" negated="true"/>
+			<qualreq ref="nat_ven_ept1" negated="true"/><qualreq ref="nat_ven_ept2" negated="true"/><qualreq ref="nat_ven_ept3" negated="true"/><qualreq ref="nat_ven_ept4" negated="true"/>
+			<qualreq ref="nat_ven_epi1" negated="true"/><qualreq ref="nat_ven_epi2" negated="true"/><qualreq ref="nat_ven_epi3" negated="true"/><qualreq ref="nat_ven_epi4" negated="true"/>
+		</requires>
+		<modifications><itemmod item="nw_exhale_s4" /></modifications>
+	</quality>
+
+	<quality id="nat_ven_esi1" karma="13" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_est1" negated="true"/><qualreq ref="nat_ven_est2" negated="true"/><qualreq ref="nat_ven_est3" negated="true"/><qualreq ref="nat_ven_est4" negated="true"/>
+			<qualreq ref="nat_ven_esi2" negated="true"/><qualreq ref="nat_ven_esi3" negated="true"/><qualreq ref="nat_ven_esi4" negated="true"/>
+			<qualreq ref="nat_ven_ept1" negated="true"/><qualreq ref="nat_ven_ept2" negated="true"/><qualreq ref="nat_ven_ept3" negated="true"/><qualreq ref="nat_ven_ept4" negated="true"/>
+			<qualreq ref="nat_ven_epi1" negated="true"/><qualreq ref="nat_ven_epi2" negated="true"/><qualreq ref="nat_ven_epi3" negated="true"/><qualreq ref="nat_ven_epi4" negated="true"/>
+		</requires>
+		<modifications><itemmod item="nw_exhale_s1" /></modifications>
+	</quality>
+
+	<quality id="nat_ven_esi2" karma="15" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_est1" negated="true"/><qualreq ref="nat_ven_est2" negated="true"/><qualreq ref="nat_ven_est3" negated="true"/><qualreq ref="nat_ven_est4" negated="true"/>
+			<qualreq ref="nat_ven_esi1" negated="true"/><qualreq ref="nat_ven_esi3" negated="true"/><qualreq ref="nat_ven_esi4" negated="true"/>
+			<qualreq ref="nat_ven_ept1" negated="true"/><qualreq ref="nat_ven_ept2" negated="true"/><qualreq ref="nat_ven_ept3" negated="true"/><qualreq ref="nat_ven_ept4" negated="true"/>
+			<qualreq ref="nat_ven_epi1" negated="true"/><qualreq ref="nat_ven_epi2" negated="true"/><qualreq ref="nat_ven_epi3" negated="true"/><qualreq ref="nat_ven_epi4" negated="true"/>
+		</requires>
+		<modifications><itemmod item="nw_exhale_s2" /></modifications>
+	</quality>
+
+	<quality id="nat_ven_esi3" karma="17" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_est1" negated="true"/><qualreq ref="nat_ven_est2" negated="true"/><qualreq ref="nat_ven_est3" negated="true"/><qualreq ref="nat_ven_est4" negated="true"/>
+			<qualreq ref="nat_ven_esi1" negated="true"/><qualreq ref="nat_ven_esi2" negated="true"/><qualreq ref="nat_ven_esi4" negated="true"/>
+			<qualreq ref="nat_ven_ept1" negated="true"/><qualreq ref="nat_ven_ept2" negated="true"/><qualreq ref="nat_ven_ept3" negated="true"/><qualreq ref="nat_ven_ept4" negated="true"/>
+			<qualreq ref="nat_ven_epi1" negated="true"/><qualreq ref="nat_ven_epi2" negated="true"/><qualreq ref="nat_ven_epi3" negated="true"/><qualreq ref="nat_ven_epi4" negated="true"/>
+		</requires>
+		<modifications><itemmod item="nw_exhale_s3" /></modifications>
+	</quality>
+
+	<quality id="nat_ven_esi4" karma="19" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_est1" negated="true"/><qualreq ref="nat_ven_est2" negated="true"/><qualreq ref="nat_ven_est3" negated="true"/><qualreq ref="nat_ven_est4" negated="true"/>
+			<qualreq ref="nat_ven_esi1" negated="true"/><qualreq ref="nat_ven_esi2" negated="true"/><qualreq ref="nat_ven_esi3" negated="true"/>
+			<qualreq ref="nat_ven_ept1" negated="true"/><qualreq ref="nat_ven_ept2" negated="true"/><qualreq ref="nat_ven_ept3" negated="true"/><qualreq ref="nat_ven_ept4" negated="true"/>
+			<qualreq ref="nat_ven_epi1" negated="true"/><qualreq ref="nat_ven_epi2" negated="true"/><qualreq ref="nat_ven_epi3" negated="true"/><qualreq ref="nat_ven_epi4" negated="true"/>
+		</requires>
+		<modifications><itemmod item="nw_exhale_s4" /></modifications>
+	</quality>
+
+	<quality id="nat_ven_ept1" karma="13" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_est1" negated="true"/><qualreq ref="nat_ven_est2" negated="true"/><qualreq ref="nat_ven_est3" negated="true"/><qualreq ref="nat_ven_est4" negated="true"/>
+			<qualreq ref="nat_ven_esi1" negated="true"/><qualreq ref="nat_ven_esi2" negated="true"/><qualreq ref="nat_ven_esi3" negated="true"/><qualreq ref="nat_ven_esi4" negated="true"/>
+			<qualreq ref="nat_ven_ept2" negated="true"/><qualreq ref="nat_ven_ept3" negated="true"/><qualreq ref="nat_ven_ept4" negated="true"/>
+			<qualreq ref="nat_ven_epi1" negated="true"/><qualreq ref="nat_ven_epi2" negated="true"/><qualreq ref="nat_ven_epi3" negated="true"/><qualreq ref="nat_ven_epi4" negated="true"/>
+		</requires>
+		<modifications><itemmod item="nw_exhale_p1" /></modifications>
+	</quality>
+
+	<quality id="nat_ven_ept2" karma="15" type="POSITIVE" selectable="y">>
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_est1" negated="true"/><qualreq ref="nat_ven_est2" negated="true"/><qualreq ref="nat_ven_est3" negated="true"/><qualreq ref="nat_ven_est4" negated="true"/>
+			<qualreq ref="nat_ven_esi1" negated="true"/><qualreq ref="nat_ven_esi2" negated="true"/><qualreq ref="nat_ven_esi3" negated="true"/><qualreq ref="nat_ven_esi4" negated="true"/>
+			<qualreq ref="nat_ven_ept1" negated="true"/><qualreq ref="nat_ven_ept3" negated="true"/><qualreq ref="nat_ven_ept4" negated="true"/>
+			<qualreq ref="nat_ven_epi1" negated="true"/><qualreq ref="nat_ven_epi2" negated="true"/><qualreq ref="nat_ven_epi3" negated="true"/><qualreq ref="nat_ven_epi4" negated="true"/>
+		</requires>
+		<modifications><itemmod item="nw_exhale_p2" /></modifications>
+	</quality>
+
+	<quality id="nat_ven_ept3" karma="17" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_est1" negated="true"/><qualreq ref="nat_ven_est2" negated="true"/><qualreq ref="nat_ven_est3" negated="true"/><qualreq ref="nat_ven_est4" negated="true"/>
+			<qualreq ref="nat_ven_esi1" negated="true"/><qualreq ref="nat_ven_esi2" negated="true"/><qualreq ref="nat_ven_esi3" negated="true"/><qualreq ref="nat_ven_esi4" negated="true"/>
+			<qualreq ref="nat_ven_ept1" negated="true"/><qualreq ref="nat_ven_ept2" negated="true"/><qualreq ref="nat_ven_ept4" negated="true"/>
+			<qualreq ref="nat_ven_epi1" negated="true"/><qualreq ref="nat_ven_epi2" negated="true"/><qualreq ref="nat_ven_epi3" negated="true"/><qualreq ref="nat_ven_epi4" negated="true"/>
+		</requires>
+		<modifications><itemmod item="nw_exhale_p3" /></modifications>
+	</quality>
+
+	<quality id="nat_ven_ept4" karma="19" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_est1" negated="true"/><qualreq ref="nat_ven_est2" negated="true"/><qualreq ref="nat_ven_est3" negated="true"/><qualreq ref="nat_ven_est4" negated="true"/>
+			<qualreq ref="nat_ven_esi1" negated="true"/><qualreq ref="nat_ven_esi2" negated="true"/><qualreq ref="nat_ven_esi3" negated="true"/><qualreq ref="nat_ven_esi4" negated="true"/>
+			<qualreq ref="nat_ven_ept1" negated="true"/><qualreq ref="nat_ven_ept2" negated="true"/><qualreq ref="nat_ven_ept3" negated="true"/>
+			<qualreq ref="nat_ven_epi1" negated="true"/><qualreq ref="nat_ven_epi2" negated="true"/><qualreq ref="nat_ven_epi3" negated="true"/><qualreq ref="nat_ven_epi4" negated="true"/>
+		</requires>
+		<modifications><itemmod item="nw_exhale_p4" /></modifications>
+	</quality>
+
+	<quality id="nat_ven_epi1" karma="15" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_est1" negated="true"/><qualreq ref="nat_ven_est2" negated="true"/><qualreq ref="nat_ven_est3" negated="true"/><qualreq ref="nat_ven_est4" negated="true"/>
+			<qualreq ref="nat_ven_esi1" negated="true"/><qualreq ref="nat_ven_esi2" negated="true"/><qualreq ref="nat_ven_esi3" negated="true"/><qualreq ref="nat_ven_esi4" negated="true"/>
+			<qualreq ref="nat_ven_ept1" negated="true"/><qualreq ref="nat_ven_ept2" negated="true"/><qualreq ref="nat_ven_ept3" negated="true"/><qualreq ref="nat_ven_ept4" negated="true"/>
+			<qualreq ref="nat_ven_epi2" negated="true"/><qualreq ref="nat_ven_epi3" negated="true"/><qualreq ref="nat_ven_epi4" negated="true"/>
+		</requires>
+		<modifications><itemmod item="nw_exhale_p1" /></modifications>
+	</quality>
+
+	<quality id="nat_ven_epi2" karma="17" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_est1" negated="true"/><qualreq ref="nat_ven_est2" negated="true"/><qualreq ref="nat_ven_est3" negated="true"/><qualreq ref="nat_ven_est4" negated="true"/>
+			<qualreq ref="nat_ven_esi1" negated="true"/><qualreq ref="nat_ven_esi2" negated="true"/><qualreq ref="nat_ven_esi3" negated="true"/><qualreq ref="nat_ven_esi4" negated="true"/>
+			<qualreq ref="nat_ven_ept1" negated="true"/><qualreq ref="nat_ven_ept2" negated="true"/><qualreq ref="nat_ven_ept3" negated="true"/><qualreq ref="nat_ven_ept4" negated="true"/>
+			<qualreq ref="nat_ven_epi1" negated="true"/><qualreq ref="nat_ven_epi3" negated="true"/><qualreq ref="nat_ven_epi4" negated="true"/>
+		</requires>
+		<modifications><itemmod item="nw_exhale_p2" /></modifications>
+	</quality>
+
+	<quality id="nat_ven_epi3" karma="19" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_est1" negated="true"/><qualreq ref="nat_ven_est2" negated="true"/><qualreq ref="nat_ven_est3" negated="true"/><qualreq ref="nat_ven_est4" negated="true"/>
+			<qualreq ref="nat_ven_esi1" negated="true"/><qualreq ref="nat_ven_esi2" negated="true"/><qualreq ref="nat_ven_esi3" negated="true"/><qualreq ref="nat_ven_esi4" negated="true"/>
+			<qualreq ref="nat_ven_ept1" negated="true"/><qualreq ref="nat_ven_ept2" negated="true"/><qualreq ref="nat_ven_ept3" negated="true"/><qualreq ref="nat_ven_ept4" negated="true"/>
+			<qualreq ref="nat_ven_epi1" negated="true"/><qualreq ref="nat_ven_epi2" negated="true"/><qualreq ref="nat_ven_epi4" negated="true"/>
+		</requires>
+		<modifications><itemmod item="nw_exhale_p3" /></modifications>
+	</quality>
+
+	<quality id="nat_ven_epi4" karma="21" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_est1" negated="true"/><qualreq ref="nat_ven_est2" negated="true"/><qualreq ref="nat_ven_est3" negated="true"/><qualreq ref="nat_ven_est4" negated="true"/>
+			<qualreq ref="nat_ven_esi1" negated="true"/><qualreq ref="nat_ven_esi2" negated="true"/><qualreq ref="nat_ven_esi3" negated="true"/><qualreq ref="nat_ven_esi4" negated="true"/>
+			<qualreq ref="nat_ven_ept1" negated="true"/><qualreq ref="nat_ven_ept2" negated="true"/><qualreq ref="nat_ven_ept3" negated="true"/><qualreq ref="nat_ven_ept4" negated="true"/>
+			<qualreq ref="nat_ven_epi1" negated="true"/><qualreq ref="nat_ven_epi2" negated="true"/><qualreq ref="nat_ven_epi3" negated="true"/>
+		</requires>
+		<modifications><itemmod item="nw_exhale_p4" /></modifications>
+	</quality>
+
+	<quality id="nat_ven_ist1" karma="9" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="fangs"/>
+			<qualreq ref="nat_ven_ipi1" negated="true"/><qualreq ref="nat_ven_ipi2" negated="true"/><qualreq ref="nat_ven_ipi3" negated="true"/><qualreq ref="nat_ven_ipi4" negated="true"/>
+			<qualreq ref="nat_ven_ipt1" negated="true"/><qualreq ref="nat_ven_ipt2" negated="true"/><qualreq ref="nat_ven_ipt3" negated="true"/><qualreq ref="nat_ven_ipt4" negated="true"/>
+			<qualreq ref="nat_ven_isi1" negated="true"/><qualreq ref="nat_ven_isi2" negated="true"/><qualreq ref="nat_ven_isi3" negated="true"/><qualreq ref="nat_ven_isi4" negated="true"/>
+			<qualreq ref="nat_ven_ist2" negated="true"/><qualreq ref="nat_ven_ist3" negated="true"/><qualreq ref="nat_ven_ist4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_ist2" karma="11" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="fangs"/>
+			<qualreq ref="nat_ven_ipi1" negated="true"/><qualreq ref="nat_ven_ipi2" negated="true"/><qualreq ref="nat_ven_ipi3" negated="true"/><qualreq ref="nat_ven_ipi4" negated="true"/>
+			<qualreq ref="nat_ven_ipt1" negated="true"/><qualreq ref="nat_ven_ipt2" negated="true"/><qualreq ref="nat_ven_ipt3" negated="true"/><qualreq ref="nat_ven_ipt4" negated="true"/>
+			<qualreq ref="nat_ven_isi1" negated="true"/><qualreq ref="nat_ven_isi2" negated="true"/><qualreq ref="nat_ven_isi3" negated="true"/><qualreq ref="nat_ven_isi4" negated="true"/>
+			<qualreq ref="nat_ven_ist1" negated="true"/><qualreq ref="nat_ven_ist3" negated="true"/><qualreq ref="nat_ven_ist4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_ist3" karma="13" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="fangs"/>
+			<qualreq ref="nat_ven_ipi1" negated="true"/><qualreq ref="nat_ven_ipi2" negated="true"/><qualreq ref="nat_ven_ipi3" negated="true"/><qualreq ref="nat_ven_ipi4" negated="true"/>
+			<qualreq ref="nat_ven_ipt1" negated="true"/><qualreq ref="nat_ven_ipt2" negated="true"/><qualreq ref="nat_ven_ipt3" negated="true"/><qualreq ref="nat_ven_ipt4" negated="true"/>
+			<qualreq ref="nat_ven_isi1" negated="true"/><qualreq ref="nat_ven_isi2" negated="true"/><qualreq ref="nat_ven_isi3" negated="true"/><qualreq ref="nat_ven_isi4" negated="true"/>
+			<qualreq ref="nat_ven_ist1" negated="true"/><qualreq ref="nat_ven_ist2" negated="true"/><qualreq ref="nat_ven_ist4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_ist4" karma="15" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="fangs"/>
+			<qualreq ref="nat_ven_ipi1" negated="true"/><qualreq ref="nat_ven_ipi2" negated="true"/><qualreq ref="nat_ven_ipi3" negated="true"/><qualreq ref="nat_ven_ipi4" negated="true"/>
+			<qualreq ref="nat_ven_ipt1" negated="true"/><qualreq ref="nat_ven_ipt2" negated="true"/><qualreq ref="nat_ven_ipt3" negated="true"/><qualreq ref="nat_ven_ipt4" negated="true"/>
+			<qualreq ref="nat_ven_isi1" negated="true"/><qualreq ref="nat_ven_isi2" negated="true"/><qualreq ref="nat_ven_isi3" negated="true"/><qualreq ref="nat_ven_isi4" negated="true"/>
+			<qualreq ref="nat_ven_ist1" negated="true"/><qualreq ref="nat_ven_ist2" negated="true"/><qualreq ref="nat_ven_ist3" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_isi1" karma="11" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="fangs"/>
+			<qualreq ref="nat_ven_ist1" negated="true"/><qualreq ref="nat_ven_ist2" negated="true"/><qualreq ref="nat_ven_ist3" negated="true"/><qualreq ref="nat_ven_ist4" negated="true"/>
+			<qualreq ref="nat_ven_ipi1" negated="true"/><qualreq ref="nat_ven_ipi2" negated="true"/><qualreq ref="nat_ven_ipi3" negated="true"/><qualreq ref="nat_ven_ipi4" negated="true"/>
+			<qualreq ref="nat_ven_ipt1" negated="true"/><qualreq ref="nat_ven_ipt2" negated="true"/><qualreq ref="nat_ven_ipt3" negated="true"/><qualreq ref="nat_ven_ipt4" negated="true"/>
+			<qualreq ref="nat_ven_isi2" negated="true"/><qualreq ref="nat_ven_isi3" negated="true"/><qualreq ref="nat_ven_isi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_isi2" karma="13" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="fangs"/>
+			<qualreq ref="nat_ven_ist1" negated="true"/><qualreq ref="nat_ven_ist2" negated="true"/><qualreq ref="nat_ven_ist3" negated="true"/><qualreq ref="nat_ven_ist4" negated="true"/>
+			<qualreq ref="nat_ven_ipi1" negated="true"/><qualreq ref="nat_ven_ipi2" negated="true"/><qualreq ref="nat_ven_ipi3" negated="true"/><qualreq ref="nat_ven_ipi4" negated="true"/>
+			<qualreq ref="nat_ven_ipt1" negated="true"/><qualreq ref="nat_ven_ipt2" negated="true"/><qualreq ref="nat_ven_ipt3" negated="true"/><qualreq ref="nat_ven_ipt4" negated="true"/>
+			<qualreq ref="nat_ven_isi1" negated="true"/><qualreq ref="nat_ven_isi3" negated="true"/><qualreq ref="nat_ven_isi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_isi3" karma="15" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="fangs"/>
+			<qualreq ref="nat_ven_ist1" negated="true"/><qualreq ref="nat_ven_ist2" negated="true"/><qualreq ref="nat_ven_ist3" negated="true"/><qualreq ref="nat_ven_ist4" negated="true"/>
+			<qualreq ref="nat_ven_ipi1" negated="true"/><qualreq ref="nat_ven_ipi2" negated="true"/><qualreq ref="nat_ven_ipi3" negated="true"/><qualreq ref="nat_ven_ipi4" negated="true"/>
+			<qualreq ref="nat_ven_ipt1" negated="true"/><qualreq ref="nat_ven_ipt2" negated="true"/><qualreq ref="nat_ven_ipt3" negated="true"/><qualreq ref="nat_ven_ipt4" negated="true"/>
+			<qualreq ref="nat_ven_isi1" negated="true"/><qualreq ref="nat_ven_isi2" negated="true"/><qualreq ref="nat_ven_isi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_isi4" karma="17" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="fangs"/>
+			<qualreq ref="nat_ven_ist1" negated="true"/><qualreq ref="nat_ven_ist2" negated="true"/><qualreq ref="nat_ven_ist3" negated="true"/><qualreq ref="nat_ven_ist4" negated="true"/>
+			<qualreq ref="nat_ven_ipi1" negated="true"/><qualreq ref="nat_ven_ipi2" negated="true"/><qualreq ref="nat_ven_ipi3" negated="true"/><qualreq ref="nat_ven_ipi4" negated="true"/>
+			<qualreq ref="nat_ven_ipt1" negated="true"/><qualreq ref="nat_ven_ipt2" negated="true"/><qualreq ref="nat_ven_ipt3" negated="true"/><qualreq ref="nat_ven_ipt4" negated="true"/>
+			<qualreq ref="nat_ven_isi1" negated="true"/><qualreq ref="nat_ven_isi2" negated="true"/><qualreq ref="nat_ven_isi3" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_ipt1" karma="11" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="fangs"/>
+			<qualreq ref="nat_ven_ist1" negated="true"/><qualreq ref="nat_ven_ist2" negated="true"/><qualreq ref="nat_ven_ist3" negated="true"/><qualreq ref="nat_ven_ist4" negated="true"/>
+			<qualreq ref="nat_ven_isi1" negated="true"/><qualreq ref="nat_ven_isi2" negated="true"/><qualreq ref="nat_ven_isi3" negated="true"/><qualreq ref="nat_ven_isi4" negated="true"/>
+			<qualreq ref="nat_ven_ipi1" negated="true"/><qualreq ref="nat_ven_ipi2" negated="true"/><qualreq ref="nat_ven_ipi3" negated="true"/><qualreq ref="nat_ven_ipi4" negated="true"/>
+			<qualreq ref="nat_ven_ipt2" negated="true"/><qualreq ref="nat_ven_ipt3" negated="true"/><qualreq ref="nat_ven_ipt4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_ipt2" karma="13" type="POSITIVE" selectable="y" >
+		<requires>
+			<qualreq ref="fangs"/>
+			<qualreq ref="nat_ven_ist1" negated="true"/><qualreq ref="nat_ven_ist2" negated="true"/><qualreq ref="nat_ven_ist3" negated="true"/><qualreq ref="nat_ven_ist4" negated="true"/>
+			<qualreq ref="nat_ven_isi1" negated="true"/><qualreq ref="nat_ven_isi2" negated="true"/><qualreq ref="nat_ven_isi3" negated="true"/><qualreq ref="nat_ven_isi4" negated="true"/>
+			<qualreq ref="nat_ven_ipi1" negated="true"/><qualreq ref="nat_ven_ipi2" negated="true"/><qualreq ref="nat_ven_ipi3" negated="true"/><qualreq ref="nat_ven_ipi4" negated="true"/>
+			<qualreq ref="nat_ven_ipt1" negated="true"/><qualreq ref="nat_ven_ipt3" negated="true"/><qualreq ref="nat_ven_ipt4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_ipt3" karma="15" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="fangs"/>
+			<qualreq ref="nat_ven_ist1" negated="true"/><qualreq ref="nat_ven_ist2" negated="true"/><qualreq ref="nat_ven_ist3" negated="true"/><qualreq ref="nat_ven_ist4" negated="true"/>
+			<qualreq ref="nat_ven_isi1" negated="true"/><qualreq ref="nat_ven_isi2" negated="true"/><qualreq ref="nat_ven_isi3" negated="true"/><qualreq ref="nat_ven_isi4" negated="true"/>
+			<qualreq ref="nat_ven_ipi1" negated="true"/><qualreq ref="nat_ven_ipi2" negated="true"/><qualreq ref="nat_ven_ipi3" negated="true"/><qualreq ref="nat_ven_ipi4" negated="true"/>
+			<qualreq ref="nat_ven_ipt1" negated="true"/><qualreq ref="nat_ven_ipt2" negated="true"/><qualreq ref="nat_ven_ipt4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_ipt4" karma="17" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="fangs"/>
+			<qualreq ref="nat_ven_ist1" negated="true"/><qualreq ref="nat_ven_ist2" negated="true"/><qualreq ref="nat_ven_ist3" negated="true"/><qualreq ref="nat_ven_ist4" negated="true"/>
+			<qualreq ref="nat_ven_isi1" negated="true"/><qualreq ref="nat_ven_isi2" negated="true"/><qualreq ref="nat_ven_isi3" negated="true"/><qualreq ref="nat_ven_isi4" negated="true"/>
+			<qualreq ref="nat_ven_ipi1" negated="true"/><qualreq ref="nat_ven_ipi2" negated="true"/><qualreq ref="nat_ven_ipi3" negated="true"/><qualreq ref="nat_ven_ipi4" negated="true"/>
+			<qualreq ref="nat_ven_ipt1" negated="true"/><qualreq ref="nat_ven_ipt2" negated="true"/><qualreq ref="nat_ven_ipt3" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_ipi1" karma="13" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="fangs"/>
+			<qualreq ref="nat_ven_ist1" negated="true"/><qualreq ref="nat_ven_ist2" negated="true"/><qualreq ref="nat_ven_ist3" negated="true"/><qualreq ref="nat_ven_ist4" negated="true"/>
+			<qualreq ref="nat_ven_isi1" negated="true"/><qualreq ref="nat_ven_isi2" negated="true"/><qualreq ref="nat_ven_isi3" negated="true"/><qualreq ref="nat_ven_isi4" negated="true"/>
+			<qualreq ref="nat_ven_ipt1" negated="true"/><qualreq ref="nat_ven_ipt2" negated="true"/><qualreq ref="nat_ven_ipt3" negated="true"/><qualreq ref="nat_ven_ipt4" negated="true"/>
+			<qualreq ref="nat_ven_ipi2" negated="true"/><qualreq ref="nat_ven_ipi3" negated="true"/><qualreq ref="nat_ven_ipi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_ipi2" karma="15" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="fangs"/>
+			<qualreq ref="nat_ven_ist1" negated="true"/><qualreq ref="nat_ven_ist2" negated="true"/><qualreq ref="nat_ven_ist3" negated="true"/><qualreq ref="nat_ven_ist4" negated="true"/>
+			<qualreq ref="nat_ven_isi1" negated="true"/><qualreq ref="nat_ven_isi2" negated="true"/><qualreq ref="nat_ven_isi3" negated="true"/><qualreq ref="nat_ven_isi4" negated="true"/>
+			<qualreq ref="nat_ven_ipt1" negated="true"/><qualreq ref="nat_ven_ipt2" negated="true"/><qualreq ref="nat_ven_ipt3" negated="true"/><qualreq ref="nat_ven_ipt4" negated="true"/>
+			<qualreq ref="nat_ven_ipi1" negated="true"/><qualreq ref="nat_ven_ipi3" negated="true"/><qualreq ref="nat_ven_ipi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_ipi3" karma="17" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="fangs"/>
+			<qualreq ref="nat_ven_ist1" negated="true"/><qualreq ref="nat_ven_ist2" negated="true"/><qualreq ref="nat_ven_ist3" negated="true"/><qualreq ref="nat_ven_ist4" negated="true"/>
+			<qualreq ref="nat_ven_isi1" negated="true"/><qualreq ref="nat_ven_isi2" negated="true"/><qualreq ref="nat_ven_isi3" negated="true"/><qualreq ref="nat_ven_isi4" negated="true"/>
+			<qualreq ref="nat_ven_ipt1" negated="true"/><qualreq ref="nat_ven_ipt2" negated="true"/><qualreq ref="nat_ven_ipt3" negated="true"/><qualreq ref="nat_ven_ipt4" negated="true"/>
+			<qualreq ref="nat_ven_ipi1" negated="true"/><qualreq ref="nat_ven_ipi2" negated="true"/><qualreq ref="nat_ven_ipi4" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_ipi4" karma="19" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="fangs"/>
+			<qualreq ref="nat_ven_ist1" negated="true"/><qualreq ref="nat_ven_ist2" negated="true"/><qualreq ref="nat_ven_ist3" negated="true"/><qualreq ref="nat_ven_ist4" negated="true"/>
+			<qualreq ref="nat_ven_isi1" negated="true"/><qualreq ref="nat_ven_isi2" negated="true"/><qualreq ref="nat_ven_isi3" negated="true"/><qualreq ref="nat_ven_isi4" negated="true"/>
+			<qualreq ref="nat_ven_ipt1" negated="true"/><qualreq ref="nat_ven_ipt2" negated="true"/><qualreq ref="nat_ven_ipt3" negated="true"/><qualreq ref="nat_ven_ipt4" negated="true"/>
+			<qualreq ref="nat_ven_ipi1" negated="true"/><qualreq ref="nat_ven_ipi2" negated="true"/><qualreq ref="nat_ven_ipi3" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nat_ven_sst1" karma="13" type="POSITIVE" selectable="y">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_spi1" negated="true"/><qualreq ref="nat_ven_spi2" negated="true"/><qualreq ref="nat_ven_spi3" negated="true"/><qualreq ref="nat_ven_spi4" negated="true"/>
+			<qualreq ref="nat_ven_spt1" negated="true"/><qualreq ref="nat_ven_spt2" negated="true"/><qualreq ref="nat_ven_spt3" negated="true"/><qualreq ref="nat_ven_spt4" negated="true"/>
+			<qualreq ref="nat_ven_ssi1" negated="true"/><qualreq ref="nat_ven_ssi2" negated="true"/><qualreq ref="nat_ven_ssi3" negated="true"/><qualreq ref="nat_ven_ssi4" negated="true"/>
+			<qualreq ref="nat_ven_sst2" negated="true"/><qualreq ref="nat_ven_sst3" negated="true"/><qualreq ref="nat_ven_sst4" negated="true"/>
+		</requires>
+		<modifications><itemmod item="nw_venom_spittle_stun1"/></modifications>
+	</quality>
+
+	<quality id="nat_ven_sst2" karma="15" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_spi1" negated="true"/><qualreq ref="nat_ven_spi2" negated="true"/><qualreq ref="nat_ven_spi3" negated="true"/><qualreq ref="nat_ven_spi4" negated="true"/>
+			<qualreq ref="nat_ven_spt1" negated="true"/><qualreq ref="nat_ven_spt2" negated="true"/><qualreq ref="nat_ven_spt3" negated="true"/><qualreq ref="nat_ven_spt4" negated="true"/>
+			<qualreq ref="nat_ven_ssi1" negated="true"/><qualreq ref="nat_ven_ssi2" negated="true"/><qualreq ref="nat_ven_ssi3" negated="true"/><qualreq ref="nat_ven_ssi4" negated="true"/>
+			<qualreq ref="nat_ven_sst1" negated="true"/><qualreq ref="nat_ven_sst3" negated="true"/><qualreq ref="nat_ven_sst4" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_venom_spittle_stun2" />
+		</modifications>
+	</quality>
+
+	<quality id="nat_ven_sst3" karma="17" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_spi1" negated="true"/><qualreq ref="nat_ven_spi2" negated="true"/><qualreq ref="nat_ven_spi3" negated="true"/><qualreq ref="nat_ven_spi4" negated="true"/>
+			<qualreq ref="nat_ven_spt1" negated="true"/><qualreq ref="nat_ven_spt2" negated="true"/><qualreq ref="nat_ven_spt3" negated="true"/><qualreq ref="nat_ven_spt4" negated="true"/>
+			<qualreq ref="nat_ven_ssi1" negated="true"/><qualreq ref="nat_ven_ssi2" negated="true"/><qualreq ref="nat_ven_ssi3" negated="true"/><qualreq ref="nat_ven_ssi4" negated="true"/>
+			<qualreq ref="nat_ven_sst1" negated="true"/><qualreq ref="nat_ven_sst2" negated="true"/><qualreq ref="nat_ven_sst4" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_venom_spittle_stun3" />
+		</modifications>
+	</quality>
+
+	<quality id="nat_ven_sst4" karma="19" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_spi1" negated="true"/><qualreq ref="nat_ven_spi2" negated="true"/><qualreq ref="nat_ven_spi3" negated="true"/><qualreq ref="nat_ven_spi4" negated="true"/>
+			<qualreq ref="nat_ven_spt1" negated="true"/><qualreq ref="nat_ven_spt2" negated="true"/><qualreq ref="nat_ven_spt3" negated="true"/><qualreq ref="nat_ven_spt4" negated="true"/>
+			<qualreq ref="nat_ven_ssi1" negated="true"/><qualreq ref="nat_ven_ssi2" negated="true"/><qualreq ref="nat_ven_ssi3" negated="true"/><qualreq ref="nat_ven_ssi4" negated="true"/>
+			<qualreq ref="nat_ven_sst1" negated="true"/><qualreq ref="nat_ven_sst2" negated="true"/><qualreq ref="nat_ven_sst3" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_venom_spittle_stun4" />
+		</modifications>
+	</quality>
+
+	<quality id="nat_ven_ssi1" karma="15" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_sst1" negated="true"/><qualreq ref="nat_ven_sst2" negated="true"/><qualreq ref="nat_ven_sst3" negated="true"/><qualreq ref="nat_ven_sst4" negated="true"/>
+			<qualreq ref="nat_ven_spi1" negated="true"/><qualreq ref="nat_ven_spi2" negated="true"/><qualreq ref="nat_ven_spi3" negated="true"/><qualreq ref="nat_ven_spi4" negated="true"/>
+			<qualreq ref="nat_ven_spt1" negated="true"/><qualreq ref="nat_ven_spt2" negated="true"/><qualreq ref="nat_ven_spt3" negated="true"/><qualreq ref="nat_ven_spt4" negated="true"/>
+			<qualreq ref="nat_ven_ssi2" negated="true"/><qualreq ref="nat_ven_ssi3" negated="true"/><qualreq ref="nat_ven_ssi4" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_venom_spittle_stun1" />
+		</modifications>
+	</quality>
+
+	<quality id="nat_ven_ssi2" karma="17" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_sst1" negated="true"/><qualreq ref="nat_ven_sst2" negated="true"/><qualreq ref="nat_ven_sst3" negated="true"/><qualreq ref="nat_ven_sst4" negated="true"/>
+			<qualreq ref="nat_ven_spi1" negated="true"/><qualreq ref="nat_ven_spi2" negated="true"/><qualreq ref="nat_ven_spi3" negated="true"/><qualreq ref="nat_ven_spi4" negated="true"/>
+			<qualreq ref="nat_ven_spt1" negated="true"/><qualreq ref="nat_ven_spt2" negated="true"/><qualreq ref="nat_ven_spt3" negated="true"/><qualreq ref="nat_ven_spt4" negated="true"/>
+			<qualreq ref="nat_ven_ssi1" negated="true"/><qualreq ref="nat_ven_ssi3" negated="true"/><qualreq ref="nat_ven_ssi4" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_venom_spittle_stun2" />
+		</modifications>
+	</quality>
+
+	<quality id="nat_ven_ssi3" karma="19" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_sst1" negated="true"/><qualreq ref="nat_ven_sst2" negated="true"/><qualreq ref="nat_ven_sst3" negated="true"/><qualreq ref="nat_ven_sst4" negated="true"/>
+			<qualreq ref="nat_ven_spi1" negated="true"/><qualreq ref="nat_ven_spi2" negated="true"/><qualreq ref="nat_ven_spi3" negated="true"/><qualreq ref="nat_ven_spi4" negated="true"/>
+			<qualreq ref="nat_ven_spt1" negated="true"/><qualreq ref="nat_ven_spt2" negated="true"/><qualreq ref="nat_ven_spt3" negated="true"/><qualreq ref="nat_ven_spt4" negated="true"/>
+			<qualreq ref="nat_ven_ssi1" negated="true"/><qualreq ref="nat_ven_ssi2" negated="true"/><qualreq ref="nat_ven_ssi4" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_venom_spittle_stun3" />
+		</modifications>
+	</quality>
+
+	<quality id="nat_ven_ssi4" karma="21" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_sst1" negated="true"/><qualreq ref="nat_ven_sst2" negated="true"/><qualreq ref="nat_ven_sst3" negated="true"/><qualreq ref="nat_ven_sst4" negated="true"/>
+			<qualreq ref="nat_ven_spi1" negated="true"/><qualreq ref="nat_ven_spi2" negated="true"/><qualreq ref="nat_ven_spi3" negated="true"/><qualreq ref="nat_ven_spi4" negated="true"/>
+			<qualreq ref="nat_ven_spt1" negated="true"/><qualreq ref="nat_ven_spt2" negated="true"/><qualreq ref="nat_ven_spt3" negated="true"/><qualreq ref="nat_ven_spt4" negated="true"/>
+			<qualreq ref="nat_ven_ssi1" negated="true"/><qualreq ref="nat_ven_ssi2" negated="true"/><qualreq ref="nat_ven_ssi3" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_venom_spittle_stun4" />
+		</modifications>
+	</quality>
+
+	<quality id="nat_ven_spt1" karma="15" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_sst1" negated="true"/><qualreq ref="nat_ven_sst2" negated="true"/><qualreq ref="nat_ven_sst3" negated="true"/><qualreq ref="nat_ven_sst4" negated="true"/>
+			<qualreq ref="nat_ven_ssi1" negated="true"/><qualreq ref="nat_ven_ssi2" negated="true"/><qualreq ref="nat_ven_ssi3" negated="true"/><qualreq ref="nat_ven_ssi4" negated="true"/>
+			<qualreq ref="nat_ven_spi1" negated="true"/><qualreq ref="nat_ven_spi2" negated="true"/><qualreq ref="nat_ven_spi3" negated="true"/><qualreq ref="nat_ven_spi4" negated="true"/>
+			<qualreq ref="nat_ven_spt2" negated="true"/><qualreq ref="nat_ven_spt3" negated="true"/><qualreq ref="nat_ven_spt4" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_venom_spittle_phys1" />
+		</modifications>
+	</quality>
+
+	<quality id="nat_ven_spt2" karma="17" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_sst1" negated="true"/><qualreq ref="nat_ven_sst2" negated="true"/><qualreq ref="nat_ven_sst3" negated="true"/><qualreq ref="nat_ven_sst4" negated="true"/>
+			<qualreq ref="nat_ven_ssi1" negated="true"/><qualreq ref="nat_ven_ssi2" negated="true"/><qualreq ref="nat_ven_ssi3" negated="true"/><qualreq ref="nat_ven_ssi4" negated="true"/>
+			<qualreq ref="nat_ven_spi1" negated="true"/><qualreq ref="nat_ven_spi2" negated="true"/><qualreq ref="nat_ven_spi3" negated="true"/><qualreq ref="nat_ven_spi4" negated="true"/>
+			<qualreq ref="nat_ven_spt1" negated="true"/><qualreq ref="nat_ven_spt3" negated="true"/><qualreq ref="nat_ven_spt4" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_venom_spittle_phys2" />
+		</modifications>
+	</quality>
+
+	<quality id="nat_ven_spt3" karma="19" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_sst1" negated="true"/><qualreq ref="nat_ven_sst2" negated="true"/><qualreq ref="nat_ven_sst3" negated="true"/><qualreq ref="nat_ven_sst4" negated="true"/>
+			<qualreq ref="nat_ven_ssi1" negated="true"/><qualreq ref="nat_ven_ssi2" negated="true"/><qualreq ref="nat_ven_ssi3" negated="true"/><qualreq ref="nat_ven_ssi4" negated="true"/>
+			<qualreq ref="nat_ven_spi1" negated="true"/><qualreq ref="nat_ven_spi2" negated="true"/><qualreq ref="nat_ven_spi3" negated="true"/><qualreq ref="nat_ven_spi4" negated="true"/>
+			<qualreq ref="nat_ven_spt1" negated="true"/><qualreq ref="nat_ven_spt2" negated="true"/><qualreq ref="nat_ven_spt4" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_venom_spittle_phys3" />
+		</modifications>
+	</quality>
+
+	<quality id="nat_ven_spt4" karma="21" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_sst1" negated="true"/><qualreq ref="nat_ven_sst2" negated="true"/><qualreq ref="nat_ven_sst3" negated="true"/><qualreq ref="nat_ven_sst4" negated="true"/>
+			<qualreq ref="nat_ven_ssi1" negated="true"/><qualreq ref="nat_ven_ssi2" negated="true"/><qualreq ref="nat_ven_ssi3" negated="true"/><qualreq ref="nat_ven_ssi4" negated="true"/>
+			<qualreq ref="nat_ven_spi1" negated="true"/><qualreq ref="nat_ven_spi2" negated="true"/><qualreq ref="nat_ven_spi3" negated="true"/><qualreq ref="nat_ven_spi4" negated="true"/>
+			<qualreq ref="nat_ven_spt1" negated="true"/><qualreq ref="nat_ven_spt2" negated="true"/><qualreq ref="nat_ven_spt3" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_venom_spittle_phys4" />
+		</modifications>
+	</quality>
+
+	<quality id="nat_ven_spi1" karma="17" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_sst1" negated="true"/><qualreq ref="nat_ven_sst2" negated="true"/><qualreq ref="nat_ven_sst3" negated="true"/><qualreq ref="nat_ven_sst4" negated="true"/>
+			<qualreq ref="nat_ven_ssi1" negated="true"/><qualreq ref="nat_ven_ssi2" negated="true"/><qualreq ref="nat_ven_ssi3" negated="true"/><qualreq ref="nat_ven_ssi4" negated="true"/>
+			<qualreq ref="nat_ven_spt1" negated="true"/><qualreq ref="nat_ven_spt2" negated="true"/><qualreq ref="nat_ven_spt3" negated="true"/><qualreq ref="nat_ven_spt4" negated="true"/>
+			<qualreq ref="nat_ven_spi2" negated="true"/><qualreq ref="nat_ven_spi3" negated="true"/><qualreq ref="nat_ven_spi4" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_venom_spittle_phys1" />
+		</modifications>
+	</quality>
+
+	<quality id="nat_ven_spi2" karma="19" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_sst1" negated="true"/><qualreq ref="nat_ven_sst2" negated="true"/><qualreq ref="nat_ven_sst3" negated="true"/><qualreq ref="nat_ven_sst4" negated="true"/>
+			<qualreq ref="nat_ven_ssi1" negated="true"/><qualreq ref="nat_ven_ssi2" negated="true"/><qualreq ref="nat_ven_ssi3" negated="true"/><qualreq ref="nat_ven_ssi4" negated="true"/>
+			<qualreq ref="nat_ven_spt1" negated="true"/><qualreq ref="nat_ven_spt2" negated="true"/><qualreq ref="nat_ven_spt3" negated="true"/><qualreq ref="nat_ven_spt4" negated="true"/>
+			<qualreq ref="nat_ven_spi1" negated="true"/><qualreq ref="nat_ven_spi3" negated="true"/><qualreq ref="nat_ven_spi4" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_venom_spittle_phys2" />
+		</modifications>
+	</quality>
+
+	<quality id="nat_ven_spi3" karma="21" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_sst1" negated="true"/><qualreq ref="nat_ven_sst2" negated="true"/><qualreq ref="nat_ven_sst3" negated="true"/><qualreq ref="nat_ven_sst4" negated="true"/>
+			<qualreq ref="nat_ven_ssi1" negated="true"/><qualreq ref="nat_ven_ssi2" negated="true"/><qualreq ref="nat_ven_ssi3" negated="true"/><qualreq ref="nat_ven_ssi4" negated="true"/>
+			<qualreq ref="nat_ven_spt1" negated="true"/><qualreq ref="nat_ven_spt2" negated="true"/><qualreq ref="nat_ven_spt3" negated="true"/><qualreq ref="nat_ven_spt4" negated="true"/>
+			<qualreq ref="nat_ven_spi1" negated="true"/><qualreq ref="nat_ven_spi2" negated="true"/><qualreq ref="nat_ven_spi4" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_venom_spittle_phys3" />
+		</modifications>
+	</quality>
+
+	<quality id="nat_ven_spi4" karma="23" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="nat_ven_sst1" negated="true"/><qualreq ref="nat_ven_sst2" negated="true"/><qualreq ref="nat_ven_sst3" negated="true"/><qualreq ref="nat_ven_sst4" negated="true"/>
+			<qualreq ref="nat_ven_ssi1" negated="true"/><qualreq ref="nat_ven_ssi2" negated="true"/><qualreq ref="nat_ven_ssi3" negated="true"/><qualreq ref="nat_ven_ssi4" negated="true"/>
+			<qualreq ref="nat_ven_spt1" negated="true"/><qualreq ref="nat_ven_spt2" negated="true"/><qualreq ref="nat_ven_spt3" negated="true"/><qualreq ref="nat_ven_spt4" negated="true"/>
+			<qualreq ref="nat_ven_spi1" negated="true"/><qualreq ref="nat_ven_spi2" negated="true"/><qualreq ref="nat_ven_spi3" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_venom_spittle_phys4" />
+		</modifications>
+	</quality>
+
+	<quality id="ogre_stomach" karma="8" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="tough_gut" negated="true"/>
+		</requires>
+		<modifications>
+			<edgemod attr="DEFENSIVE_POOL_RESIST_TOXIN_DAMAGE" type="BONUS"/>
+		</modifications>
+	</quality>
+
+	<quality id="photometabolism" karma="4" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<edgemod skill="con" type="BONUS"/>
+			<edgemod skill="influence" type="BONUS"/>
+			<relevancemod topic="SOCIAL"/>
+		</modifications>
+	</quality>
+
+	<quality id="proboscis" karma="6" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_proboscis" />
+		</modifications>
+	</quality>
+
+	<quality id="quills" karma="10" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<itemmod item="nw_quills" />
+			<qualitymod ref="unusual_hair" />
+		</modifications>
+	</quality>
+
+	<quality id="satyr_legs" karma="12" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="setae" karma="5" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="shiva_arms" karma="8" type="POSITIVE" selectable="y" max="3">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod type="MAX" attr="BODY" val="1"/>
+			<attrmod type="MAX" attr="STRENGTH" val="1"/>
+			<attrmod attr="MINOR_ACTION" val="1"/>
+			<lifecostmod percent="10"/>
+		</modifications>
+	</quality>
+
+	<quality id="thermal_sense" karma="7" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="tough_gut" karma="8" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="ogre_stomach" negated="true"/>
+		</requires>
+		<modifications>
+			<edgemod attr="DEFENSIVE_POOL_RESIST_TOXIN_DAMAGE" type="BONUS"/>
+		</modifications>
+	</quality>
+
+	<quality id="threesixty_degree_sight1" karma="5" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="threesixty_degree_sight2" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="threesixty_degree_sight2" karma="10" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="threesixty_degree_sight1" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="underwater_vision" karma="6" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="vomeronasal_gland" karma="6" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="webbed_digits" karma="4" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+ 			<skillmod ref="athletics/swimming" val="2"/>
+		</modifications>
+	</quality>
+
+<!-- SURGE Negative Qualities-->
+
+	<quality id="astral_hazing_awakened" karma="15" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<magresreq type="mundane" negated="true"/>
+		</requires>
+	</quality>
+
+
+	<quality id="astral_hazing_mundane" karma="8" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<magresreq type="mundane"/>
+		</requires>
+	</quality>
+
+	<quality id="asymmetric_deformity_picasso_mild" karma="5" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="asymmetric_deformity_quasimodo_severe" karma="15" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod type="AUGMENTED" attr="BODY" val="-1"/>
+			<attrmod type="AUGMENTED" attr="AGILITY" val="-1"/>
+			<attrmod type="AUGMENTED" attr="REACTION" val="-1"/>
+			<attrmod type="AUGMENTED" attr="STRENGTH" val="-1"/>
+			<relevancemod topic="SOCIAL"/>
+		</modifications>
+	</quality>
+
+	<quality id="avian" karma="4" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="berserker" karma="8" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="bioluminescence" karma="5" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="broad_feet" karma="8" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="canine" karma="4" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="cephalopod" karma="6" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="cold-blooded" karma="5" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="critter_spook" karma="6" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="cyclopean_eye" karma="8" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="third_eye" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="feathers" karma="4" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="unusual_hair" negated="true"/>
+			<qualreq ref="unusual_hair_body" negated="true"/>
+			<qualreq ref="unusual_hair_colored_fur" negated="true"/>
+			<qualreq ref="mood_hair" negated="true"/>
+			<qualreq ref="hairless" negated="true"/>
+			<qualreq ref="scales" negated="true"/>
+			<qualreq ref="striking_skin_pigmentation" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="feline" karma="4" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="hairless" karma="4" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="unusual_hair" negated="true"/>
+			<qualreq ref="unusual_hair_body" negated="true"/>
+			<qualreq ref="unusual_hair_colored_fur" negated="true"/>
+			<qualreq ref="mood_hair" negated="true"/>
+			<qualreq ref="feathers" negated="true"/>
+			<qualreq ref="scales" negated="true"/>
+			<qualreq ref="striking_skin_pigmentation" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="insectoid_features" karma="6" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="mad_eyes" karma="4" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="mood_hair" karma="4" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="unusual_hair" negated="true"/>
+			<qualreq ref="unusual_hair_body" negated="true"/>
+			<qualreq ref="unusual_hair_colored_fur" negated="true"/>
+			<qualreq ref="hairless" negated="true"/>
+			<qualreq ref="feathers" negated="true"/>
+			<qualreq ref="scales" negated="true"/>
+			<qualreq ref="striking_skin_pigmentation" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="neoteny" karma="10" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="PHYSICAL_MONITOR" val="-2" type="AUGMENTED"/>
+			<attrmod type="MAX" attr="BODY" val="-1"/>
+			<attrmod type="MAX" attr="AGILITY" val="-1"/>
+			<attrmod type="MAX" attr="REACTION" val="-1"/>
+			<attrmod type="MAX" attr="STRENGTH" val="-1"/>
+			<relevancemod topic="SOCIAL"/>
+		</modifications>
+	</quality>
+
+	<quality id="neuralgia" karma="6" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="nocturnal" karma="8" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="pachy_elephant" karma="5" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="pachy_hippo" karma="5" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="pachy_rhino" karma="5" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="poor_healer" karma="8" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="progeria" karma="10" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod type="AUGMENTED" attr="BODY" val="-2"/>
+			<attrmod type="AUGMENTED" attr="AGILITY" val="-2"/>
+			<attrmod type="AUGMENTED" attr="REACTION" val="-2"/>
+			<attrmod type="AUGMENTED" attr="STRENGTH" val="-2"/>
+			<relevancemod topic="SOCIAL"/>
+		</modifications>
+	</quality>
+
+	<quality id="reflective_eyes" karma="4" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="scales" karma="6" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="unusual_hair" negated="true"/>
+			<qualreq ref="unusual_hair_body" negated="true"/>
+			<qualreq ref="unusual_hair_colored_fur" negated="true"/>
+			<qualreq ref="mood_hair" negated="true"/>
+			<qualreq ref="hairless" negated="true"/>
+			<qualreq ref="feathers" negated="true"/>
+			<qualreq ref="striking_skin_pigmentation" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="scent_gland" karma="4" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="striking_skin_pigmentation" karma="4" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="unusual_hair" negated="true"/>
+			<qualreq ref="unusual_hair_body" negated="true"/>
+			<qualreq ref="unusual_hair_colored_fur" negated="true"/>
+			<qualreq ref="mood_hair" negated="true"/>
+			<qualreq ref="hairless" negated="true"/>
+			<qualreq ref="feathers" negated="true"/>
+			<qualreq ref="scales" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="stubby_arms" karma="10" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="symbiosis" karma="10" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<edgemod skill="outdoors" type="BONUS"/>
+			<edgemod skill="perception" type="BONUS"/>
+		</modifications>
+	</quality>
+
+	<quality id="third_eye" karma="5" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="cyclopean_eye" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="unusual_hair" karma="2" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="unusual_hair_body" negated="true"/>
+			<qualreq ref="unusual_hair_colored_fur" negated="true"/>
+			<qualreq ref="mood_hair" negated="true"/>
+			<qualreq ref="hairless" negated="true"/>
+			<qualreq ref="feathers" negated="true"/>
+			<qualreq ref="scales" negated="true"/>
+			<qualreq ref="striking_skin_pigmentation" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="vestigial_tail" karma="4" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="functional_tail_balance" negated="true"/>
+			<qualreq ref="functional_tail_paddle" negated="true"/>
+			<qualreq ref="functional_tail_thagomizer" negated="true"/>
+			<qualreq ref="functional_tail_whip" negated="true"/>
+			<qualreq ref="functional_tail_prehensile" negated="true"/>
+		</requires>
+	</quality>
+
+<!-- Metasapient/Infected Specific Qualities -->
+
+	<quality id="allergy_iron_medium" karma="0" type="NEGATIVE" selectable="n" />
+
+	<quality id="allergy_pollutants_mild" karma="0" type="NEGATIVE" selectable="n" />
+
+	<quality id="allergy_spices_moderate" karma="0" type="NEGATIVE" selectable="n" />
+
+	<quality id="allergy_sunlight_extreme" karma="0" type="NEGATIVE" selectable="n" />
+
+	<quality id="allergy_sunlight_moderate" karma="0" type="NEGATIVE" selectable="n" />
+
+	<quality id="allergy_sunlight_mild" karma="0" type="NEGATIVE" selectable="n" />
+
+	<quality id="bioluminescence_uv_spectrum" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="dietary_requirement_metahuman_flesh" karma="0" type="NEGATIVE" selectable="n"/>
+
+	<quality id="extravagant_eyes" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="gender_transmorphism" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="ogre_stomach" karma="0" type="POSITIVE" selectable="n" >
+		<modifications>
+			<edgemod attr="DEFENSIVE_POOL_RESIST_TOXIN_DAMAGE" type="BONUS"/>
+		</modifications>
+	</quality>
+
+	<quality id="poor_self_control_vindictive" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="reduced_senses_blind" karma="0" type="NEGATIVE" selectable="n" />
+
+	<quality id="unusual_hair_body" karma="0" type="NEGATIVE" selectable="n" />
+
+	<quality id="unusual_hair_colored_fur" karma="0" type="NEGATIVE" selectable="n" />
+
+	<quality id="shiva_arms_nartaki" karma="8" type="POSITIVE" selectable="n" max="2">
+		<modifications>
+			<attrmod attr="MINOR_ACTION" val="1"/>
+			<lifecostmod percent="10"/>
+		</modifications>
+	</quality>
+
+<!-- Metasapient/Infected Power "Qualities" -->
+
+	<quality id="armor_1" karma="0" type="POSITIVE" selectable="n">
+		<modifications>
+			<itemmod item="armor_power_armor" rating="1"/>
+		</modifications>
+	</quality>
+
+	<quality id="armor_2" karma="0" type="POSITIVE" selectable="n">
+		<modifications>
+			<itemmod item="armor_power_armor" rating="2"/>
+		</modifications>
+	</quality>
+
+	<quality id="astral_perception" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="concealment_self" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="dual_natured" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="enhanced_senses_ghoul" type="POSITIVE" selectable="n" />
+
+	<quality id="guard" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="magic_sense" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="sapience" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="search" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="mimicry" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="vanishing" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="venom" karma="0" type="POSITIVE" selectable="n" />
+
+<!-- Metasapient/Infected Natural Weapon "Qualities" -->
+
+	<quality id="natural_weapon_centaur" karma="0" type="POSITIVE" selectable="n" >
+		<modifications>
+			<itemmod item="natural_weapon_centaur" />
+		</modifications>
+	</quality>
+
+	<quality id="natural_weapon_naga" karma="0" type="POSITIVE" selectable="n" >
+		<modifications>
+			<itemmod item="natural_weapon_naga" />
+		</modifications>
+	</quality>
+
+	<quality id="natural_weapon_sasquatch" karma="0" type="POSITIVE" selectable="n" >
+		<modifications>
+			<itemmod item="natural_weapon_sasquatch" />
+		</modifications>
+	</quality>
+
+	<quality id="natural_weapon_ghoul" karma="0" type="POSITIVE" selectable="n" />
+ 
+ 
+<!-- Metasapient Movement "Qualities" -->
+
+	<quality id="movement_centaur" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="movement_merrow_ground" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="movement_merrow_swimming" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="movement_naga_ground" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="movement_naga_swimming" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="movement_pixie_walk" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="movement_pixie_flight" karma="0" type="POSITIVE" selectable="n" />
+
+	<quality id="movement_sasquatch" karma="0" type="POSITIVE" selectable="n" />
+
+
+</qualities>

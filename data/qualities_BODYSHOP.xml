@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+
+<!-- Positive Transgenic -->
+
+	<quality id="im_into_it" karma="2" type="POSITIVE" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="i_was_a_unicorn" karma="10" type="POSITIVE" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="chimeric_soul" karma="15" type="POSITIVE" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+
+<!-- Negative Transgenic  -->
+
+	<quality id="inhuman1" karma="6" type="NEGATIVE">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="inhuman2" negated="true"/>
+			<qualreq ref="human-looking" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="inhuman2" karma="8" type="NEGATIVE">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="inhuman1" negated="true"/>
+			<qualreq ref="human-looking" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="misaligned_souls" karma="10" type="NEGATIVE" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="lifetime_of_rejection" karma="4" type="NEGATIVE" max="2" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="fine_young_cannibal" karma="4" type="NEGATIVE" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="doesnt_quite_fit" karma="2" type="NEGATIVE" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="sensitive_nose" karma="4" type="NEGATIVE" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+
+<!-- Positive -->
+
+	<quality id="essence_regrowth" karma="5" type="POSITIVE" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="cyber_sing1" karma="10" type="POSITIVE" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="cyber_sing2" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="WILLPOWER" type="AUGMENTED" val="1"/>
+		</modifications>
+	</quality>
+
+	<quality id="cyber_sing2" karma="10" type="POSITIVE">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+			<qualreq ref="cyber_sing1" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="WILLPOWER" type="AUGMENTED" val="2"/>
+		</modifications>
+	</quality>
+
+	<quality id="drug_tolerant" karma="5" type="POSITIVE">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<relevancemod topic="MATRIX"/>
+		</modifications>
+	</quality>
+
+	<quality id="empathic_retention" karma="4" type="POSITIVE" max="2">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<relevancemod topic="MATRIX"/>
+		</modifications>
+	</quality>
+
+	<quality id="redliner" karma="10" type="POSITIVE" max="2">
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="STRENGTH" type="AUGMENTED" val="1"/>
+			<attrmod attr="AGILITY" type="AUGMENTED" val="1"/>
+			<attrmod attr="PHYSICAL_MONITOR" val="-1" type="AUGMENTED" />
+		</modifications>
+	</quality>
+
+
+<!-- Negative -->
+
+	<quality id="leaking_essence" karma="0" type="NEGATIVE" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+	<quality id="divergent_essence" karma="5" type="NEGATIVE" max="3" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+	<quality id="permanent_damage" karma="5" type="NEGATIVE" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="chronic_dissociation_syndrome" karma="10" type="NEGATIVE" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="delusion" karma="10" type="NEGATIVE"/>
+
+	<quality id="dying_cyberware" karma="5" type="NEGATIVE" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="emotional_flatline" karma="5" type="NEGATIVE" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+
+	<quality id="emotion_leak" karma="10" type="NEGATIVE" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="hallucinations" karma="10" type="NEGATIVE"/>
+
+	<quality id="meat_surrogacy" karma="2" type="NEGATIVE" max="2" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="superhuman_ego" karma="12" type="NEGATIVE"/>
+
+	<quality id="tle-x" karma="10" type="NEGATIVE" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="uncontrolled_metastasis" karma="10" type="NEGATIVE" max="2" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+	<quality id="will_to_die" karma="10" type="NEGATIVE" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="DAMAGE_OVERFLOW" val="-2" />
+		</modifications>
+	</quality>
+
+</qualities>

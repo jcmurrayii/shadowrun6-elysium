@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+	<item id="tachammer_blade_augment" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon dmg="3P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="tachammer_spike_augment" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon dmg="3P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+</items>

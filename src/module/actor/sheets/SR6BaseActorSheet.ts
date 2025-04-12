@@ -10,6 +10,7 @@ import { KnowledgeSkillEditSheet } from "../../apps/skills/KnowledgeSkillEditShe
 import { LanguageSkillEditSheet } from "../../apps/skills/LanguageSkillEditSheet";
 import { MoveInventoryDialog } from "../../apps/dialogs/MoveInventoryDialog";
 import { ChummerImportForm } from '../../apps/chummer-import-form';
+import { GenesisImportForm } from '../../apps/genesis-import-form';
 import SR6SheetFilters = Shadowrun.SR6SheetFilters;
 import SR6ActorSheetData = Shadowrun.SR6ActorSheetData;
 import SkillField = Shadowrun.SkillField;
@@ -288,6 +289,9 @@ export class SR6BaseActorSheet extends ActorSheet {
         html.find('.hidden').hide();
         html.find('.has-desc').on('click', this._onListItemToggleDescriptionVisibility.bind(this));
 
+        // Folder toggling
+        html.find('.list-folder-header').on('click', this._onFolderToggle.bind(this));
+
         // General item test rolling...
         html.find('.item-roll').on('click', this._onItemRoll.bind(this));
         html.find('.Roll').on('click', this._onRoll.bind(this));
@@ -366,6 +370,9 @@ export class SR6BaseActorSheet extends ActorSheet {
         // Freshly imported item toggle
         html.find('.toggle-fresh-import-all-off').on('click', async (event) => this._toggleAllFreshImportFlags(event, false));
         html.find('.toggle-fresh-import-all-on').on('click', async (event) => this._toggleAllFreshImportFlags(event, true));
+
+        // Matrix actions
+        html.find('.ensure-matrix-actions').on('click', this._onEnsureMatrixActions.bind(this));
 
         // Reset Actor Run Data
         html.find('.reset-actor-run-data').on('click', this._onResetActorRunData.bind(this));
@@ -1772,16 +1779,49 @@ export class SR6BaseActorSheet extends ActorSheet {
     }
 
     /**
-     * Open the Chummer Character import handling.
+     * Open the Character import handling dialog.
      * @param event
      */
     _onShowImportCharacter(event) {
         event.preventDefault();
-        const options = {
-            name: 'chummer-import',
-            title: 'Chummer Import',
-        };
-        new ChummerImportForm(this.actor, options).render(true);
+
+        // Create a dialog to choose between Chummer and Genesis import
+        const content = `
+            <div style="text-align: center; margin-bottom: 10px;">
+                <p>${game.i18n.localize('SR6.ImportCharacterChoose')}</p>
+            </div>
+            <div style="display: flex; justify-content: space-around;">
+                <button class="chummer-import">${game.i18n.localize('SR6.ChummerImport')}</button>
+                <button class="genesis-import">${game.i18n.localize('SR6.GenesisImport')}</button>
+            </div>
+        `;
+
+        const dialog = new Dialog({
+            title: game.i18n.localize('SR6.ImportCharacter'),
+            content: content,
+            buttons: {},
+            render: html => {
+                html.find('.chummer-import').click(() => {
+                    dialog.close();
+                    const options = {
+                        name: 'chummer-import',
+                        title: game.i18n.localize('SR6.ChummerImport'),
+                    };
+                    new ChummerImportForm(this.actor, options).render(true);
+                });
+
+                html.find('.genesis-import').click(() => {
+                    dialog.close();
+                    const options = {
+                        name: 'genesis-import',
+                        title: game.i18n.localize('SR6.GenesisImport'),
+                    };
+                    new GenesisImportForm(this.actor, options).render(true);
+                });
+            }
+        });
+
+        dialog.render(true);
     }
 
     _setupCustomCheckbox(html) {
@@ -1901,5 +1941,49 @@ export class SR6BaseActorSheet extends ActorSheet {
      */
     get itemEffectApplyTos() {
         return ['actor', 'item', 'test_all', 'test_item', 'modifier'];
+    }
+
+    /**
+     * Handle toggling folder open/closed state
+     * @param event The click event
+     * @private
+     */
+    _onFolderToggle(event) {
+        event.preventDefault();
+
+        // Get the folder element
+        const folderHeader = event.currentTarget;
+        const folder = folderHeader.closest('.list-folder');
+        const folderContent = folder.querySelector('.list-folder-content');
+        const folderToggle = folder.querySelector('.folder-toggle i');
+
+        // Toggle the folder state
+        folder.classList.toggle('collapsed');
+        folderContent.classList.toggle('hidden');
+
+        // Update the folder icon
+        if (folder.classList.contains('collapsed')) {
+            folderToggle.classList.replace('fa-folder-open', 'fa-folder');
+        } else {
+            folderToggle.classList.replace('fa-folder', 'fa-folder-open');
+        }
+
+        // Store the folder state in user flags
+        const folderId = folder.dataset.folderId;
+        if (folderId) {
+            const key = `folders.${folderId}`;
+            const isCollapsed = folder.classList.contains('collapsed');
+            this.actor.setFlag('shadowrun6-elysium', key, isCollapsed);
+        }
+    }
+
+    /**
+     * Ensure the actor has all matrix actions.
+     * @param event
+     */
+    async _onEnsureMatrixActions(event) {
+        event.preventDefault();
+        await this.actor.ensureMatrixActions();
+        ui.notifications?.info(`Matrix actions have been ensured for ${this.actor.name}.`);
     }
 }

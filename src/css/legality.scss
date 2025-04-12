@@ -1,0 +1,29 @@
+/* Styling for legality indicators */
+.legality-tag {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    border-radius: 50%;
+    margin-left: 5px;
+    font-weight: bold;
+    font-size: 12px;
+    vertical-align: middle;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+
+    &.illegal {
+        background-color: $red;
+        color: $white;
+    }
+}
+
+.illegal-action {
+    .item-name {
+        color: $red;
+        font-weight: bold;
+    }
+
+    border-left: 3px solid $red;
+    background-color: rgba($red, 0.05);
+}

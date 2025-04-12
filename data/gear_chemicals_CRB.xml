@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <item avail="2I" cost="8" id="str_bliss" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="2L" cost="5" id="str_cram" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="4I" cost="200" id="str_deepweed" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="2L" cost="38" id="str_jazz" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="3L" cost="50" id="str_kamikaze" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="1" cost="25" id="str_long_haul" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="2L" cost="25" id="str_nitro" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="2L" cost="5" id="str_nova_coke" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="1" cost="100" id="str_psyche" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="3L" cost="3" id="str_zen" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+
+   <item avail="4I" cost="30" id="pha_bliss" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="4L" cost="20" id="pha_cram" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="6I" cost="800" id="pha_deepweed" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="4L" cost="150" id="pha_jazz" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="5L" cost="200" id="pha_kamikaze" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="3" cost="100" id="pha_long_haul" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="4L" cost="100" id="pha_nitro" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="4L" cost="20" id="pha_nova_coke" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="3" cost="400" id="pha_psyche" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="5L" cost="10" id="pha_zen" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+
+   <item avail="5I" cost="150" id="tai_bliss" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="5L" cost="100" id="tai_cram" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="7I" cost="4000" id="tai_deepweed" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="5L" cost="750" id="tai_jazz" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="6L" cost="1000" id="tai_kamikaze" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="4" cost="500" id="tai_long_haul" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="5L" cost="500" id="tai_nitro" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="5L" cost="100" id="tai_nova_coke" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="4" cost="2000" id="tai_psyche" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="6L" cost="50" id="tai_zen" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+</items>

@@ -1,0 +1,903 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Nanoware -->
+
+	<item id="nanohive" avail="4" cost="15000" maxrat="6" rate="true" ratemul="PRICE CAPACITY ESSENCE" multi="true">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.2"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="HEADWARE_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+	<item id="distributed_construction" avail="5L" cost="7000" maxrat="6" rate="true" ratemul="PRICE MODIFIER" multi="true">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="0" slot="HEADWARE_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="0" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="1" cost="500" id="nanite_pilot_program" maxrat="3" rate="true" ratemul="PRICE MODIFIER">
+		<useas type="ACCESSORY" subtype="OTHER_PROGRAMS" slot="SOFTWARE" cap="1" />
+	</item>
+
+	<item avail="0" cost="500" id="precursor_compounds" maxrat="6" rate="true" ratemul="PRICE">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+	<item id="nanoscanner" avail="3" cost="200" maxrat="9" rate="true" ratemul="PRICE" multi="true">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<useas type="ACCESSORY" subtype="SENSOR" slot="SENSOR_FUNCTION" cap="1"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+<!-- Nanotech -->
+
+	<item id="demo_spray_kit" avail="6I" cost="8500" multi="true">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+	<item id="demo_spray_refill" avail="6I" cost="1500" multi="true" count="y">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+	<item id="dyn_handpr_kit" avail="6I" cost="12000" multi="true">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+	<item id="dyn_handpr_refill" avail="6I" cost="2000" multi="true" count="y">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+	<item id="nanocosmet_kit" avail="2" cost="700" multi="true">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+	<item id="nanocosmet_refill" avail="2" cost="100" multi="true" count="y">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+	<item id="nanodisgui_kit" avail="5L" cost="1400" multi="true">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+	<item id="nanodisgui_refill" avail="5L" cost="300" multi="true" count="y">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+	<item id="nanospy_kit" avail="6I" cost="9500" multi="true">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+	<item id="nanospy_refill" avail="6I" cost="1200" multi="true" count="y">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+	<item id="nanotatspr_kit" avail="2" cost="650" multi="true">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+	<item id="nanotatspr_refill" avail="2" cost="100" multi="true" count="y">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+	<item id="savior_med_kit" avail="2" cost="2000" multi="true">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+	<item id="savior_med_refill" avail="2" cost="300" multi="true" count="y">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+	<item id="unisealant_kit" avail="3" cost="1200" multi="true">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+	<item id="unisealant_refill" avail="3" cost="150" multi="true" count="y">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+<!-- Nanites -->
+
+	<item id="nanc_dyn_features" avail="3L" cost="12500">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanp_dyn_features" avail="2L" cost="1200">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanc_dyn_handprints" avail="5I" cost="18000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanp_dyn_handprints" avail="4L" cost="1500">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanc_nanotattoos" avail="2" cost="2500">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanp_nanotattoos" avail="2" cost="300">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanc_anti-rad" avail="3" cost="4000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanp_anti-rad" avail="2" cost="400">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanc_nano_health_suites" avail="3" cost="6000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanp_nano_health_suites" avail="2" cost="600">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanc_oxyrush" avail="3L" cost="2500">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanp_oxyrush" avail="2L" cost="300">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanc_savior_system" avail="4" cost="6500">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanp_savior_system" avail="3" cost="700">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanc_augmented_neural_network" avail="5I" cost="40000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<skillmod ref="piloting" val="1" />
+			<attrmod attr="DEFENSIVE_POOL" type="AUGMENTED" val="1"/>
+		</modifications>
+	</item>
+	<item id="nanp_augmented_neural_network" avail="4I" cost="4000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<skillmod ref="piloting" val="1" />
+			<attrmod attr="DEFENSIVE_POOL" type="AUGMENTED" val="1"/>
+		</modifications>
+	</item>
+	<item id="nanc_bio-response_override" avail="6I" cost="35000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<attrmod val="1" type="AUGMENTED" attr="WILLPOWER" />
+			<attrmod val="1" type="AUGMENTED" attr="STUN_MONITOR" />
+		</modifications>
+	</item>
+	<item id="nanp_bio-response_override" avail="5I" cost="3500">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<attrmod val="1" type="AUGMENTED" attr="WILLPOWER" />
+			<attrmod val="1" type="AUGMENTED" attr="STUN_MONITOR" />
+		</modifications>
+	</item>
+	<item id="nanc_extracellular_reinforcement" avail="5I" cost="25000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<attrmod val="1" type="AUGMENTED" attr="DAMAGE_RESISTANCE" />
+			<attrmod val="1" type="AUGMENTED" attr="PHYSICAL_MONITOR" />
+		</modifications>
+	</item>
+	<item id="nanp_extracellular_reinforcement" avail="4I" cost="2500">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<attrmod val="1" type="AUGMENTED" attr="DAMAGE_RESISTANCE" />
+			<attrmod val="1" type="AUGMENTED" attr="PHYSICAL_MONITOR" />
+		</modifications>
+	</item>
+	<item id="nanc_limbic_neural_amplifier" avail="5I" cost="65000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<skillmod ref="outdoors" val="1" />
+			<skillmod ref="perception" val="1" />
+		</modifications>
+	</item>
+	<item id="nanp_limbic_neural_amplifier" avail="4I" cost="6500">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<skillmod ref="outdoors" val="1" />
+			<skillmod ref="perception" val="1" />
+		</modifications>
+	</item>
+	<item id="nanc_neocortical_neural_amplifier" avail="4I" cost="55000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<skillmod ref="biotech" val="1" />
+			<skillmod ref="cracking" val="1" />
+			<skillmod ref="electronics" val="1" />
+			<skillmod ref="engineering" val="1" />
+			<skillmod ref="influence" val="1" cond="true" />
+		</modifications>
+	</item>
+	<item id="nanp_neocortical_neural_amplifier" avail="3I" cost="5500">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<skillmod ref="biotech" val="1" />
+			<skillmod ref="cracking" val="1" />
+			<skillmod ref="electronics" val="1" />
+			<skillmod ref="engineering" val="1" />
+			<skillmod ref="influence" val="1" cond="true" />
+		</modifications>
+	</item>
+	<item id="nanc_neural_pattern_reinforcement" avail="6I" cost="70000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<skillmod ref="athletics" val="1" />
+			<skillmod ref="close_combat" val="1" />
+			<skillmod ref="exotic_weapons" val="1" />
+			<skillmod ref="firearms" val="1" />
+			<skillmod ref="stealth" val="1" />
+		</modifications>
+	</item>
+	<item id="nanp_neural_pattern_reinforcement" avail="5I" cost="7000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<skillmod ref="athletics" val="1" />
+			<skillmod ref="close_combat" val="1" />
+			<skillmod ref="exotic_weapons" val="1" />
+			<skillmod ref="firearms" val="1" />
+			<skillmod ref="stealth" val="1" />
+		</modifications>
+	</item>
+	<item id="nanc_neurochemical_regulator" avail="6I" cost="45000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<attrmod val="1" type="AUGMENTED" attr="CHARISMA" />
+		</modifications>
+	</item>
+	<item id="nanp_neurochemical_regulator" avail="5I" cost="4500">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<attrmod val="1" type="AUGMENTED" attr="CHARISMA" />
+		</modifications>
+	</item>
+	<item id="nanc_neuromuscular_amplifier" avail="5I" cost="15000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<attrmod val="1" type="AUGMENTED" attr="MELEE_DAMAGE" />
+			<itemattrmod attr="DAMAGE" val="1" type="WEAPON_CLOSE_COMBAT" />
+		</modifications>
+	</item>
+	<item id="nanp_neuromuscular_amplifier" avail="4I" cost="1500">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<attrmod val="1" type="AUGMENTED" attr="MELEE_DAMAGE" />
+			<itemattrmod attr="DAMAGE" val="1" type="WEAPON_CLOSE_COMBAT" />
+		</modifications>
+	</item>
+	<item id="nanc_control_rig_booster" avail="4L" cost="12000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<skillmod ref="piloting" val="1" />
+			<skillmod ref="engineering" val="1" cond="true" />
+		</modifications>
+	</item>
+	<item id="nanp_control_rig_booster" avail="3L" cost="1000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+		<modifications>
+			<skillmod ref="piloting" val="1" />
+			<skillmod ref="engineering" val="1" cond="true" />
+		</modifications>
+	</item>
+	<item id="nanc_demolishers" avail="5I" cost="14000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanp_demolishers" avail="4I" cost="1500">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanc_gastrocutter" avail="4L" cost="6500">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanp_gastrocutter" avail="3L" cost="600">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanc_implant_medic" avail="4" cost="12000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanp_implant_medic" avail="3" cost="1200">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanc_nanite_hunter" avail="5L" cost="7000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanp_nanite_hunter" avail="4L" cost="700">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanc_tech_blast" avail="6I" cost="30000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanp_tech_blast" avail="5I" cost="3000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanc_tech_infestation" avail="6I" cost="35000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanp_tech_infestation" avail="5I" cost="3500">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanc_toughskin" avail="4" cost="12000">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanp_toughskin" avail="3" cost="1200">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanp_etchers" avail="3L" cost="1200">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanp_markers" avail="5I" cost="2500">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+	<item id="nanp_taggants" avail="3" cost="800">
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+<!-- Non-Implant Gene Treatments -->
+
+	<item id="revital_initial" avail="7" cost="40000" subtype="BIOTECH" type="BIOLOGY" count="y"/>
+
+	<item id="revital_followup" avail="7" cost="10000" subtype="BIOTECH" type="BIOLOGY" count="y"/>
+
+	<item id="gen_cellular_repair" avail="4" cost="20000" subtype="BIOTECH" type="BIOLOGY" count="y"/>
+
+	<item id="gen_regen" avail="3" cost="40000" subtype="BIOTECH" type="BIOLOGY" count="y"/>
+
+	<item id="gen_regen_implant" avail="4" cost="50000" subtype="BIOTECH" type="BIOLOGY" count="y"/>
+
+<!-- Therapeutic Geneware -->
+
+	<item id="cancer_prevention" avail="4" cost="5000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.05"/>
+	</item>
+	<item id="genetherapy1" avail="4" cost="5000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+	</item>
+	<item id="genetherapy2" avail="5" cost="22500">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+	</item>
+	<item id="genetherapy3" avail="6" cost="50000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+	</item>
+	<item id="genetherapy4" avail="7" cost="90000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+	</item>
+
+	<item id="leonization" avail="8L" cost="2000000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.5"/>
+	</item>
+	<item id="lifespan_extension" avail="7L" cost="300000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.2"/>
+	</item>
+	<item id="physical_vigor" avail="6" cost="250000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.3"/>
+	</item>
+
+	<item id="gen_optimized_trauma_response" avail="3" cost="15000" maxrat="4" rate="true" ratemul="PRICE ESSENCE">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.05"/>
+	</item>
+
+	<item id="gen_adapsin_therapy" avail="5L" cost="30000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="gen_adapsin_essence" avail="0" cost="0" maxrat="20" rate="true" ratemul="ESSENCE" multi="true">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="-0.1"/>
+	</item>
+	<item id="gen_allergen_tolerance" avail="4" cost="25000" maxrat="4" rate="true" ratemul="PRICE ESSENCE" choice="NAME" multi="true">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="gen_cold_adaptation" avail="5L" cost="35000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="gen_heat_adaptation" avail="5L" cost="35000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="gen_high_altitude_adaptation" avail="4" cost="15000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="gen_patres_general" avail="5" cost="30000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="gen_patres_specific" avail="4L" cost="15000" choice="NAME" multi="true">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="gen_radiation_tolerance" avail="4" cost="25000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="gen_toxres_general" avail="5" cost="30000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="gen_toxres_specific" avail="4L" cost="15000" choice="NAME" multi="true">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+<!-- DNA Masking -->
+
+	<item id="dna_geneclear" avail="6I" cost="35000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="dna_masque" avail="4I" cost="28000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="dna_reprint" avail="5I" cost="23000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="dna_shuffle" avail="4I" cost="18000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+<!-- Augmentic Geneware -->
+
+	<item id="cosmetic_alteration" avail="4" cost="20000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0"/>
+	</item>
+	<item id="cosmetic_body_makeover" avail="5" cost="35000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0"/>
+	</item>
+	<item id="metaposer" avail="4" cost="25000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="print_removal" avail="6I" cost="20000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="genopt_at_body" avail="7L" cost="45000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<attrmod val="1" type="MAX" attr="BODY" />
+		</modifications>
+	</item>
+	<item id="genopt_at_agility" avail="7L" cost="45000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<attrmod val="1" type="MAX" attr="AGILITY" />
+		</modifications>
+	</item>
+	<item id="genopt_at_reaction" avail="7L" cost="45000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<attrmod val="1" type="MAX" attr="REACTION" />
+		</modifications>
+	</item>
+	<item id="genopt_at_strength" avail="7L" cost="45000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<attrmod val="1" type="MAX" attr="STRENGTH" />
+		</modifications>
+	</item>
+	<item id="genopt_at_willpower" avail="7L" cost="45000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<attrmod val="1" type="MAX" attr="WILLPOWER" />
+		</modifications>
+	</item>
+	<item id="genopt_at_logic" avail="7L" cost="45000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<attrmod val="1" type="MAX" attr="LOGIC" />
+		</modifications>
+	</item>
+	<item id="genopt_at_intuition" avail="7L" cost="45000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<attrmod val="1" type="MAX" attr="INTUITION" />
+		</modifications>
+	</item>
+	<item id="genopt_at_charisma" avail="7L" cost="45000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<attrmod val="1" type="MAX" attr="CHARISMA" />
+		</modifications>
+	</item>
+	<item id="genopt_skill" avail="7L" cost="60000" choice="PHYSICAL_SKILL">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.3"/>
+		<modifications>
+			<skillmod val="1" modType="MAX"/>
+		</modifications>
+	</item>
+
+	<item id="gen_alpha_factor" avail="6I" cost="45000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<attrmod val="1" type="AUGMENTED" attr="CHARISMA" />
+			<skillmod ref="conjuring" val="-1" />
+			<skillmod ref="enchanting" val="-1" />
+			<skillmod ref="sorcery" val="-1" />
+		</modifications>
+	</item>
+	<item id="gen_arcane_inhibitor" avail="5L" cost="15000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="gen_daredrenaline_ii" avail="6I" cost="35000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<attrmod val="1" type="AUGMENTED" attr="WILLPOWER" />
+			<attrmod val="1" type="AUGMENTED" attr="STUN_MONITOR" />
+		</modifications>
+	</item>
+	<item id="gen_fear_d_basic" avail="4L" cost="15000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="gen_fear_d_enhanced" avail="5L" cost="25000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+	</item>
+	<item id="gen_hyper-glucagon" avail="5L" cost="12000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.05"/>
+	</item>
+	<item id="gen_increased_myelination" avail="4L" cost="14000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="gen_myostatin_inhibitor" avail="4L" cost="15000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.05"/>
+		<modifications>
+			<skillmod ref="athletics" val="1" cond="true"/>
+			<itemattrmod attr="ATTACK_RATING" val="1" type="WEAPON_CLOSE_COMBAT" />
+		</modifications>
+	</item>
+	<item id="gen_narco" avail="4I" cost="20000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="gen_nde" avail="6I" cost="75000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<skillmod ref="athletics" val="1" />
+			<skillmod ref="close_combat" val="1" />
+			<skillmod ref="exotic_weapons" val="1" />
+			<skillmod ref="firearms" val="1" />
+			<skillmod ref="stealth" val="1" />
+		</modifications>
+	</item>
+	<item id="gen_neoelastian" avail="4I" cost="30000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<attrmod val="1" type="AUGMENTED" attr="BODY" />
+			<attrmod val="1" type="AUGMENTED" attr="PHYSICAL_MONITOR" />
+		</modifications>
+	</item>
+	<item id="gen_pushed" avail="5I" cost="60000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<skillmod ref="biotech" val="1" />
+			<skillmod ref="cracking" val="1" />
+			<skillmod ref="electronics" val="1" />
+			<skillmod ref="engineering" val="1" />
+			<skillmod ref="influence" val="1" cond="true" />
+		</modifications>
+	</item>
+	<item id="gen_qualia" avail="5I" cost="65000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<skillmod ref="outdoors" val="1" />
+			<skillmod ref="perception" val="1" />
+		</modifications>
+	</item>
+	<item id="gen_reakt" avail="4I" cost="45000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<skillmod ref="piloting" val="1" />
+		</modifications>
+	</item>
+
+	<item id="enh_sense_sight" avail="3" cost="12000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.05"/>
+	</item>
+	<item id="enh_sense_hearing" avail="3" cost="12000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.05"/>
+	</item>
+	<item id="enh_sense_smell" avail="3" cost="12000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.05"/>
+	</item>
+	<item id="enh_sense_touch" avail="3" cost="12000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.05"/>
+	</item>
+	<item id="enh_sense_taste" avail="3" cost="12000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.05"/>
+	</item>
+	<item id="ex_vision_lowlight" avail="3" cost="15000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.05"/>
+	</item>
+	<item id="ex_vision_thermographic" avail="3" cost="15000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.05"/>
+	</item>
+	<item id="pentachromacy" avail="4" cost="20000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="synch" avail="5" cost="25000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+		<modifications>
+			<skillmod ref="perception" val="1" />
+		</modifications>
+	</item>
+	
+	<item id="cerebellum_booster_enhancer" avail="5L" cost="55000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<attrmod val="1" type="AUGMENTED" attr="INTUITION" />
+		</modifications>
+	</item>
+	<item id="cerebral_booster_enhancer" avail="5L" cost="40000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<attrmod val="1" type="AUGMENTED" attr="LOGIC" />
+		</modifications>
+	</item>
+	<item id="synaptic_acceleration" avail="6L" cost="90000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.5"/>
+	</item>
+
+<!-- Transgenic Bioware -->
+
+	<item id="gen_dietware" avail="3" cost="700">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+	</item>
+	<item id="gen_balance_receptor_alteration" avail="4" cost="1400">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+	</item>
+	<item id="gen_gills_air" avail="3" cost="5600">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.3"/>
+	</item>
+	<item id="gen_gills_freshwater" avail="3" cost="5600">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.3"/>
+	</item>
+	<item id="gen_gills_saltwater" avail="3" cost="5600">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.3"/>
+	</item>
+	<item id="gen_frog_tongue" avail="0" cost="0">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.3"/>
+		<modifications>
+			<itemmod item="bio_frog_tongue"/>
+		</modifications>
+	</item>
+	<item id="gen_webbed_hands" avail="3" cost="700">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.075"/>
+		<modifications>
+			<skillmod ref="athletics" val="1" cond="true"/>
+		</modifications>
+	</item>
+	<item id="gen_webbed_feet" avail="3" cost="700">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.075"/>
+		<modifications>
+			<skillmod ref="athletics" val="1" cond="true"/>
+		</modifications>
+	</item>
+	<item id="gen_nictitating_membranes" avail="2" cost="700">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.075"/>
+	</item>
+	<item id="gen_tail_balance" avail="6" cost="1750">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+		<modifications>
+			<edgemod type="BONUS" skill="athletics"/>
+		</modifications>
+	</item>
+	<item id="gen_tail_paddle" avail="6" cost="1750">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+		<modifications>
+			<edgemod type="BONUS" skill="athletics"/>
+		</modifications>
+	</item>
+	<item id="gen_tail_prehensile" avail="6" cost="3500">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.375"/>
+	</item>
+	<item id="gen_tail_thagomizer" avail="6" cost="4900">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.3"/>
+		<modifications>
+			<itemmod item="bio_thagomizer"/>
+		</modifications>
+	</item>
+	<item id="gen_tail_whip" avail="6" cost="6300">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.75"/>
+		<modifications>
+			<itemmod item="bio_whip_tail"/>
+		</modifications>
+	</item>
+	<item id="gen_tailored_critter_pheromones" avail="2" cost="1400" maxrat="3" rate="true" ratemul="PRICE ESSENCE">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+		<modifications>
+			<skillmod ref="con" val="1" cond="true"/>
+			<skillmod ref="influence" val="1" cond="true"/>
+		</modifications>
+	</item>
+	<item id="gen_awareness_basic" avail="4" cost="8400">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+	</item>
+	<item id="gen_awareness_tactical" avail="6" cost="10500" maxrat="3" rate="true" ratemul="PRICE ESSENCE">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.3"/>
+		<modifications>
+			<attrmod attr="DEFENSIVE_POOL" val="1" type="AUGMENTED" />
+		</modifications>
+	</item>
+	<item id="gen_echolocation" avail="6" cost="10500">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+	</item>
+	<item id="gen_electrosense" avail="5" cost="3500">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+	</item>
+	<item id="gen_technosense" avail="6" cost="7700">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.3"/>
+	</item>
+	<item id="gen_hearing_enhancement" avail="4" cost="2800">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+	</item>
+	<item id="gen_chemgl" avail="5L" cost="14000">
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.15"/>
+	</item>
+	<item id="gen_chemgl_exhalation_spray" avail="8L" cost="18200">
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.15"/>
+	</item>
+	<item id="gen_chemgl_spit" avail="8L" cost="18200">
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.15"/>
+	</item>
+	<item id="gen_fangs_non-retract_augment" avail="3" cost="700">
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.075"/>
+		<modifications>
+			<itemmod item="bio_fangs_non-retract"/>
+		</modifications>
+	</item>
+	<item id="gen_fangs_retract_augment" avail="4" cost="1050">
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.225"/>
+		<modifications>
+			<itemmod item="bio_fangs_retract"/>
+		</modifications>
+	</item>
+	<item id="gen_natural_venom" avail="5" cost="10500">
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.3"/>
+		<modifications>
+			<itemmod item="bio_natural_venom"/>
+		</modifications>
+	</item>
+	<item id="gen_stinger_tiny" avail="3" cost="350">
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.075"/>
+		<modifications>
+			<itemmod item="bio_sting_tiny"/>
+		</modifications>
+	</item>
+	<item id="gen_stinger_medium" avail="4" cost="1750">
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.15"/>
+		<modifications>
+			<itemmod item="bio_sting_medium"/>
+		</modifications>
+	</item>
+	<item id="gen_stinger_large" avail="5" cost="5600">
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.225"/>
+		<modifications>
+			<itemmod item="bio_sting_large"/>
+		</modifications>
+	</item>
+	<item id="gen_tusk_small" avail="2" cost="70">
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0"/>
+		<modifications>
+			<itemmod item="bio_tusk_small"/>
+		</modifications>
+	</item>
+	<item id="gen_tusk_medium" avail="4" cost="350">
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.15"/>
+		<modifications>
+			<itemmod item="bio_tusk_medium"/>
+		</modifications>
+	</item>
+	<item id="gen_tusk_large" avail="8L" cost="700">
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.225"/>
+		<modifications>
+			<itemmod item="bio_tusk_large"/>
+		</modifications>
+	</item>
+	<item id="gen_horns" avail="3" cost="350">
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.15"/>
+		<modifications>
+			<itemmod item="bio_horns"/>
+		</modifications>
+	</item>
+	<item id="gen_camouflage" avail="4" cost="1050">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+		<modifications>
+			<skillmod ref="stealth" val="1" cond="true"/>
+		</modifications>
+	</item>
+	<item id="gen_chamel_basic" avail="6" cost="1400">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.3"/>
+		<modifications>
+			<skillmod ref="stealth" val="1" cond="true"/>
+		</modifications>
+	</item>
+	<item id="gen_chamel_dynamic" avail="7" cost="2800">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.45"/>
+		<modifications>
+			<skillspecmod spec="camouflage" val="1" />
+		</modifications>
+	</item>
+	<item id="gen_bark_skin" avail="4" cost="1050">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+		<requires>
+			<itemreq item="bio_rhino" negated="true"/>
+			<itemreq item="bio_bark" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="DEFENSE_RATING" val="2" type="AUGMENTED" />
+		</modifications>
+	</item>
+	<item id="gen_climat_cold" avail="3" cost="4200">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+		<modifications>
+			<edgemod type="BONUS" skill="outdoors"/>
+		</modifications>
+	</item>
+	<item id="gen_climat_hot" avail="3" cost="4200">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+		<modifications>
+			<edgemod type="BONUS" skill="outdoors"/>
+		</modifications>
+	</item>
+
+
+<!-- Infusion Geneware -->
+
+	<item id="inf_cosmetic_minor" avail="4" cost="35000" choice="NAME">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0"/>
+	</item>
+	<item id="inf_cosmetic_moderate" avail="5" cost="55000" choice="NAME">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+	</item>
+	<item id="inf_aggression_pack" avail="6L" cost="85000" choice="NAME">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.6"/>
+	</item>
+	<item id="inf_animal_olfaction" avail="3" cost="40000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+	<item id="inf_catlike_reflexes" avail="4" cost="60000" choice="NAME">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.3"/>
+	</item>
+	<item id="inf_claws" avail="5" cost="6500">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+	</item>
+	<item id="inf_talons" avail="5" cost="6500">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+	</item>
+	<item id="inf_digitigrade_legs" avail="6L" cost="110000" choice="NAME">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="1.2"/>
+	</item>
+	<item id="inf_skeletal_pneumaticity" avail="5" cost="50000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="1"/>
+	</item>
+	<item id="inf_solus" avail="5" cost="90000">
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.6"/>
+	</item>
+
+<!-- BIOWARE_CULTURED -->
+	
+	<item id="sym_leech_carapace" avail="8" cost="30000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.2"/>
+	</item>
+	<item id="sym_leech_cleaner" avail="2" cost="100">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0"/>
+	</item>
+	<item id="sym_leech_cypher" avail="5" cost="35000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.2"/>
+	</item>
+	<item id="sym_leech_glow" avail="6" cost="40000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+	</item>
+	<item id="sym_leech_sac" avail="6" cost="30000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+	</item>
+	<item id="sym_endo_booster" avail="6" cost="30000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+	</item>
+	<item id="sym_endo_digester" avail="5" cost="20000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+	</item>
+	<item id="sym_endo_electrocore" avail="5" cost="20000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.05"/>
+	</item>
+	<item id="sym_endo_el_receptor" avail="4" cost="20000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.05"/>
+	</item>
+	<item id="sym_endo_gain" avail="5" cost="15000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.05"/>
+	</item>
+	<item id="sym_endo_halcyon" avail="7" cost="25000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+	</item>
+	<item id="sym_endo_mender" avail="5" cost="10000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+	</item>
+	<item id="sym_endo_slimworm" avail="2" cost="1000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.05"/>
+	</item>
+	<item id="sym_endo_stalwart" avail="7" cost="25000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+	</item>
+
+</items>

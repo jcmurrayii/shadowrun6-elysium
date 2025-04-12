@@ -1,0 +1,12 @@
+<div class="flexcol">
+    <div class="attributes">
+        {{#each system.attributes as |attribute a|}} {{#unless attribute.hidden}}
+            {{> "systems/shadowrun6-elysium/dist/mod_templates/actor/parts/attributes/Attribute.html"
+                    rollId=(concatStrings "attribute." a)
+                    attributeId=a
+                    attribute=attribute
+                    disableBase=../autoBase
+            }}
+        {{/unless}} {{/each}}
+    </div>
+</div>

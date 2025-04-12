@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+   <quality id="bayou_born" karma="10" type="POSITIVE" />
+   <quality id="carib_league_pipeline" karma="3" type="POSITIVE" />
+   <quality id="soul_of_jazz" karma="12" type="POSITIVE" />
+   <quality id="boutique_bougie" karma="6" type="NEGATIVE" />
+   <quality id="former_zombie" karma="6" type="NEGATIVE" />
+   <quality id="thick_accent" karma="6" type="NEGATIVE" />
+</qualities>

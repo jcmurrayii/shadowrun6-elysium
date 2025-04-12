@@ -8813,6 +8813,7 @@ var preloadHandlebarsTemplates = /* @__PURE__ */ __name(async () => {
     "systems/shadowrun6-elysium/dist/templates/actor/parts/matrix/SpritePowerList.html",
     "systems/shadowrun6-elysium/dist/templates/actor/parts/matrix/DeviceRating.html",
     "systems/shadowrun6-elysium/dist/templates/actor/parts/matrix/Marks.html",
+    "systems/shadowrun6-elysium/dist/templates/actor/parts/matrix/MatrixActionList.html",
     // attributes
     "systems/shadowrun6-elysium/dist/templates/actor/parts/attributes/Attribute.html",
     "systems/shadowrun6-elysium/dist/templates/actor/parts/attributes/FakeAttribute.html",
@@ -10120,7 +10121,7 @@ var SR6ItemDataWrapper = class extends DataWrapper {
 };
 
 // src/module/rules/MatrixRules.ts
-var MatrixRules = class _MatrixRules {
+var MatrixRules2 = class _MatrixRules {
   static {
     __name(this, "MatrixRules");
   }
@@ -10190,6 +10191,68 @@ var MatrixRules = class _MatrixRules {
    */
   static hostMatrixAttributeRatings(hostRating) {
     return [0, 1, 2, 3].map((rating) => rating + hostRating);
+  }
+  /**
+   * Determine if a program is a hacking program
+   * @param program The program item to check
+   * @returns True if the program is a hacking program
+   */
+  static isHackingProgram(program) {
+    if (program.type !== "program") return false;
+    if (program.system?.type === "hacking_program") return true;
+    return false;
+  }
+  /**
+   * Check if a matrix action test should accrue overwatch
+   * @param categories The action categories to check
+   * @returns True if the action is a matrix action
+   */
+  static isMatrixAction(categories) {
+    if (!categories || !categories.length) return false;
+    const matrixCategories = [
+      "matrix",
+      "matrix_action",
+      "matrix_defense",
+      "matrix_initiative",
+      "matrix_perception",
+      "matrix_search",
+      "hack_on_the_fly",
+      "brute_force",
+      "data_spike",
+      "crack_file",
+      "matrix_stealth",
+      "matrix_confuse_persona",
+      "matrix_jump_into_rigged_device",
+      "matrix_control_device",
+      "matrix_format_device",
+      "matrix_reboot_device",
+      "matrix_full_matrix_defense",
+      "matrix_hide",
+      "matrix_jack_out",
+      "matrix_jam_signals",
+      "matrix_spoof_command",
+      "matrix_trace_icon"
+    ];
+    return categories.some((category3) => matrixCategories.includes(category3));
+  }
+  /**
+   * Check if a matrix action is illegal based on its legality attribute
+   * @param action The action data to check
+   * @returns True if the action is an illegal matrix action
+   */
+  static isIllegalMatrixAction(action) {
+    if (action.legality === "illegal") return true;
+    if (action.categories && action.categories.length > 0) {
+      const illegalCategories = [
+        "hack_on_the_fly",
+        "brute_force",
+        "data_spike",
+        "crack_file",
+        "matrix_stealth"
+      ];
+      return action.categories.some((category3) => illegalCategories.includes(category3));
+    }
+    return false;
   }
 };
 
@@ -10823,9 +10886,14 @@ var SR6 = {
   actionTypes: {
     none: "SR6.ActionTypeNone",
     free: "SR6.ActionTypeFree",
-    simple: "SR6.ActionTypeSimple",
-    complex: "SR6.ActionTypeComplex",
+    minor: "SR6.ActionTypeMinor",
+    major: "SR6.ActionTypeMajor",
     varies: "SR6.ActionTypeVaries"
+  },
+  initiativeTiming: {
+    none: "SR6.InitiativeTimingNone",
+    initiative: "SR6.InitiativeTimingInOrder",
+    anytime: "SR6.InitiativeTimingAnyTime"
   },
   // Use within action damage calculation (base <operator> attribute) => value
   actionDamageFormulaOperators: {
@@ -12860,7 +12928,7 @@ var HostPrep = class {
    */
   static prepareMatrixAttributes(system) {
     const { customAttributes } = system;
-    const hostAttributeRatings = MatrixRules.hostMatrixAttributeRatings(system.rating);
+    const hostAttributeRatings = MatrixRules2.hostMatrixAttributeRatings(system.rating);
     Object.values(system.atts).forEach((attribute) => {
       attribute.value = customAttributes ? attribute.value : hostAttributeRatings.pop();
       attribute.editable = customAttributes;
@@ -17324,11 +17392,44 @@ var SuccessTest = class _SuccessTest {
     } else {
       await this.afterFailure();
     }
+    await this.checkMatrixActionOverwatch();
     if (this.autoExecuteFollowupTest) {
       await this.executeFollowUpTest();
     }
     if (this.extended) {
       await this.executeAsExtended();
+    }
+  }
+  /**
+   * Check if this is a matrix action and if the actor has an active hacking program
+   * If both conditions are met, increment the overwatch score by 1
+   * Also check if this is an illegal matrix action and add overwatch equal to hits scored against the actor
+   */
+  async checkMatrixActionOverwatch() {
+    if (!this.actor) return;
+    const isMatrixAction = this.data.action?.categories && MatrixRules2.isMatrixAction(this.data.action.categories);
+    if (!isMatrixAction) return;
+    let totalOverwatchAdded = 0;
+    let overwatchReasons = [];
+    if (this.actor.hasActiveHackingProgram()) {
+      totalOverwatchAdded += 1;
+      overwatchReasons.push(game.i18n.localize("SR6.MatrixAction.HackingProgramReason"));
+    }
+    const isIllegalAction = this.data.action && MatrixRules2.isIllegalMatrixAction(this.data.action);
+    if (isIllegalAction && this.opposed) {
+    } else if (isIllegalAction) {
+      totalOverwatchAdded += 1;
+      overwatchReasons.push(game.i18n.localize("SR6.MatrixAction.IllegalActionReason"));
+    }
+    if (totalOverwatchAdded > 0) {
+      const currentOS = this.actor.getOverwatchScore();
+      await this.actor.setOverwatchScore(currentOS + totalOverwatchAdded);
+      ui.notifications?.info(game.i18n.format("SR6.MatrixAction.OverwatchAccrued", {
+        name: this.actor.name,
+        amount: totalOverwatchAdded,
+        reasons: overwatchReasons.join(", ")
+      }));
+      console.debug(`Shadowrun 6e | Added ${totalOverwatchAdded} Overwatch Score to ${this.actor.name} for matrix action`);
     }
   }
   /**
@@ -17931,6 +18032,27 @@ var OpposedTest = class _OpposedTest extends SuccessTest {
     if (actor === void 0) return;
     await this.effects.createTargetActorEffects(actor);
   }
+  /**
+   * After the test is complete, check if this is an opposed test against an illegal matrix action
+   * If so, add overwatch equal to the hits scored against the actor
+   */
+  async afterTestComplete() {
+    await super.afterTestComplete();
+    if (!this.against || !this.against.data.action) return;
+    const isIllegalMatrixAction = MatrixRules.isIllegalMatrixAction(this.against.data.action);
+    if (!isIllegalMatrixAction) return;
+    const originalActor = this.against.actor;
+    if (!originalActor) return;
+    const hitsAgainst = this.hits.value;
+    if (hitsAgainst <= 0) return;
+    const currentOS = originalActor.getOverwatchScore();
+    await originalActor.setOverwatchScore(currentOS + hitsAgainst);
+    ui.notifications?.info(game.i18n.format("SR6.MatrixAction.IllegalActionOpposedOverwatch", {
+      name: originalActor.name,
+      amount: hitsAgainst
+    }));
+    console.debug(`Shadowrun 6e | Added ${hitsAgainst} Overwatch Score to ${originalActor.name} for opposed hits against illegal matrix action`);
+  }
 };
 
 // src/module/tests/DefenseTest.ts
@@ -18243,7 +18365,7 @@ var ActionResultFlow = class _ActionResultFlow {
    * Matrix Marks are placed on either actors (persona, ic) or items (device, host, technology).
    */
   static async placeMatrixMarks(active3, targets, marks) {
-    if (!MatrixRules.isValidMarksCount(marks)) {
+    if (!MatrixRules2.isValidMarksCount(marks)) {
       return ui.notifications?.warn(game.i18n.localize("SR6.Warnings.InvalidMarksCount"));
     }
     for (const target of targets) {
@@ -20352,6 +20474,16 @@ var SR6Item = class _SR6Item extends Item {
     }
     return 0;
   }
+  /**
+   * Determine if a melee weapon uses agility instead of strength
+   * @returns True if the weapon uses agility, false if it uses strength
+   */
+  usesAgility() {
+    if (!this.isMeleeWeapon) return false;
+    const system = this.system;
+    if (system.melee.attribute === "agility") return true;
+    return false;
+  }
   getCondition() {
     const technology = this.getTechnologyData();
     if (technology && "condition_monitor" in technology)
@@ -20447,7 +20579,7 @@ var SR6Item = class _SR6Item extends Item {
     const host = this.asHost;
     if (!host) return;
     const currentMarks = options?.overwrite ? 0 : this.getMarksById(markId);
-    host.system.marks[markId] = MatrixRules.getValidMarksCount(currentMarks + marks);
+    host.system.marks[markId] = MatrixRules2.getValidMarksCount(currentMarks + marks);
     await this.update({ "system.marks": host.system.marks });
   }
   getMarksById(markId) {
@@ -22399,12 +22531,12 @@ var ICPrep = class _ICPrep {
     ModifiersPrep.setupModifiers(system, modifiers);
   }
   static prepareMatrix(system) {
-    system.matrix.rating = MatrixRules.getICDeviceRating(system.host.rating);
+    system.matrix.rating = MatrixRules2.getICDeviceRating(system.host.rating);
   }
   static prepareMatrixTrack(system) {
     const { modifiers, track, matrix } = system;
-    matrix.condition_monitor.max = Number(modifiers["matrix_track"]) + MatrixRules.getConditionMonitor(matrix.rating);
-    track.matrix.base = MatrixRules.getConditionMonitor(matrix.rating);
+    matrix.condition_monitor.max = Number(modifiers["matrix_track"]) + MatrixRules2.getConditionMonitor(matrix.rating);
+    track.matrix.base = MatrixRules2.getConditionMonitor(matrix.rating);
     track.matrix.mod = PartsList.AddUniquePart(track.matrix.mod, "SR6.Bonus", Number(modifiers["matrix_track"]));
     track.matrix.max = matrix.condition_monitor.max;
     track.matrix.label = SR6.damageTypes.matrix;
@@ -22412,9 +22544,9 @@ var ICPrep = class _ICPrep {
   static prepareMatrixInit(system) {
     const { initiative, modifiers, host } = system;
     initiative.perception = "matrix";
-    initiative.matrix.base.base = MatrixRules.getICInitiativeBase(host.rating);
+    initiative.matrix.base.base = MatrixRules2.getICInitiativeBase(host.rating);
     initiative.matrix.base.mod = PartsList.AddUniquePart(initiative.matrix.base.mod, "SR6.Bonus", Number(modifiers["matrix_initiative"]));
-    initiative.matrix.dice.base = MatrixRules.getICInitiativeDice();
+    initiative.matrix.dice.base = MatrixRules2.getICInitiativeDice();
     initiative.matrix.dice.mod = PartsList.AddUniquePart(initiative.matrix.dice.mod, "SR6.Bonus", Number(modifiers["matrix_initiative_dice"]));
   }
   /**
@@ -22453,7 +22585,7 @@ var ICPrep = class _ICPrep {
       const attribute = attributes[id];
       attribute.base = 0;
       const parts = new PartsList(attribute.mod);
-      parts.addPart("SR6.Host.Rating", MatrixRules.getICMeatAttributeBase(host.rating));
+      parts.addPart("SR6.Host.Rating", MatrixRules2.getICMeatAttributeBase(host.rating));
       attribute.mod = parts.list;
       AttributesPrep.prepareAttribute(id, attribute);
     }
@@ -22936,6 +23068,9 @@ var SR6Actor = class _SR6Actor extends Actor {
         ICPrep.prepareDerivedData(this.system, itemDataWrappers);
         break;
     }
+    if (game.user?.isGM && this.isOwner && (this.isCharacter() || this.isSprite() || this.isIC())) {
+      setTimeout(() => this.ensureMatrixActions(), 500);
+    }
   }
   /**
    * NOTE: This method is unused at the moment, keep it for future inspiration.
@@ -23060,6 +23195,16 @@ var SR6Actor = class _SR6Actor extends Actor {
     if (!("matrix" in this.system)) return;
     const matrix = this.system.matrix;
     if (matrix.device) return this.items.get(matrix.device);
+  }
+  /**
+   * Check if the actor has a matrix device with an active hacking program
+   * @returns True if the actor has a matrix device with an active hacking program
+   */
+  hasActiveHackingProgram() {
+    const matrixDevice = this.getMatrixDevice();
+    if (!matrixDevice) return false;
+    const programs = this.items.filter((item) => item.type === "program");
+    return programs.some((program) => MatrixRules2.isHackingProgram(program));
   }
   getFullDefenseAttribute() {
     if (this.isVehicle()) {
@@ -24325,7 +24470,7 @@ var SR6Actor = class _SR6Actor extends Actor {
     const matrixData = this.matrixData;
     if (!matrixData) return;
     const currentMarks = options?.overwrite ? 0 : this.getMarksById(markId);
-    matrixData.marks[markId] = MatrixRules.getValidMarksCount(currentMarks + marks);
+    matrixData.marks[markId] = MatrixRules2.getValidMarksCount(currentMarks + marks);
     await this.update({ "system.matrix.marks": matrixData.marks });
   }
   /**
@@ -24486,6 +24631,37 @@ var SR6Actor = class _SR6Actor extends Actor {
     }
     if (this.isMatrixActor) await this.setMatrixDamage(0);
     if (updateData) await this.update(updateData);
+  }
+  /**
+   * Ensures that the actor has access to all matrix actions from the matrix-actions compendium.
+   * This method will add any missing matrix actions to the actor.
+   *
+   * @returns {Promise<void>}
+   */
+  async ensureMatrixActions() {
+    console.log(`Shadowrun 6e | Ensuring matrix actions for actor ${this.name} (${this.id})`);
+    const matrixPack = game.packs.get("shadowrun6-elysium.matrix-actions");
+    if (!matrixPack) {
+      console.error("Shadowrun 6e | Matrix Actions compendium not found");
+      return;
+    }
+    await matrixPack.getIndex();
+    const matrixActions = await Promise.all(
+      Array.from(matrixPack.index).map((i2) => matrixPack.getDocument(i2._id))
+    );
+    const existingNames = this.items.filter((i2) => i2.type === "action").map((i2) => i2.name.toLowerCase());
+    const actionsToAdd = matrixActions.filter(
+      (a2) => !existingNames.includes(a2.name.toLowerCase())
+    );
+    if (actionsToAdd.length === 0) {
+      console.log(`Shadowrun 6e | ${this.name} already has all matrix actions`);
+      return;
+    }
+    await this.createEmbeddedDocuments(
+      "Item",
+      actionsToAdd.map((a2) => a2.toObject())
+    );
+    console.log(`Shadowrun 6e | Added ${actionsToAdd.length} matrix actions to ${this.name}`);
   }
   async newSceneSetup() {
     const updateData = {};
@@ -25501,6 +25677,58 @@ function formatStrict(stringId, data) {
 __name(formatStrict, "formatStrict");
 
 // src/module/handlebars/ItemLineHelpers.ts
+function formatActionTypeWithClasses(actionType, initiativeTiming) {
+  let typeCode = "";
+  let typeClass = "";
+  let timingCode = "";
+  let timingClass = "";
+  if (actionType) {
+    switch (actionType) {
+      case "major":
+        typeCode = "M";
+        typeClass = "action-major";
+        break;
+      case "minor":
+        typeCode = "m";
+        typeClass = "action-minor";
+        break;
+      case "free":
+        typeCode = "F";
+        typeClass = "action-free";
+        break;
+      case "varies":
+        typeCode = "V";
+        typeClass = "action-varies";
+        break;
+      case "none":
+      default:
+        typeCode = "";
+        typeClass = "";
+        break;
+    }
+  }
+  if (initiativeTiming) {
+    switch (initiativeTiming) {
+      case "initiative":
+        timingCode = "(I)";
+        timingClass = "timing-initiative";
+        break;
+      case "anytime":
+        timingCode = "(A)";
+        timingClass = "timing-anytime";
+        break;
+      case "none":
+      default:
+        timingCode = "";
+        timingClass = "";
+        break;
+    }
+  }
+  if (!typeCode) return "";
+  const classes = ["action-type", typeClass, timingClass].filter(Boolean).join(" ");
+  return `<span class="${classes}">${typeCode}${timingCode}</span>`;
+}
+__name(formatActionTypeWithClasses, "formatActionTypeWithClasses");
 var registerItemLineHelpers = /* @__PURE__ */ __name(() => {
   Handlebars.registerHelper("InventoryHeaderIcons", function(section) {
     var icons = Handlebars.helpers["ItemHeaderIcons"](section.type);
@@ -25656,12 +25884,6 @@ var registerItemLineHelpers = /* @__PURE__ */ __name(() => {
           {
             text: {
               text: game.i18n.localize("SR6.Attribute"),
-              cssClass: "six"
-            }
-          },
-          {
-            text: {
-              text: game.i18n.localize("SR6.Limit"),
               cssClass: "six"
             }
           },
@@ -25871,9 +26093,10 @@ var registerItemLineHelpers = /* @__PURE__ */ __name(() => {
         const textLimit = textLimitParts.join(" + ");
         return [
           {
-            text: {
-              // Instead of 'complex' only show C. This might break in some languages. At that point, you can call me lazy.
-              text: item.system.action.type ? game.i18n.localize(SR6.actionTypes[item.system.action.type] ?? "")[0] : ""
+            html: {
+              // Use HTML to add classes for styling
+              text: formatActionTypeWithClasses(item.system.action.type, item.system.action.initiative_timing),
+              cssClass: "action-type-container"
             }
           },
           {
@@ -25893,12 +26116,6 @@ var registerItemLineHelpers = /* @__PURE__ */ __name(() => {
             text: {
               // Legacy actions could have both skill and attribute2 set, which would show both information, when it shouldn't.
               text: wrapper.getActionSkill() ? "" : game.i18n.localize(SR6.attributes[wrapper.getActionAttribute2() ?? ""]),
-              cssClass: "six"
-            }
-          },
-          {
-            text: {
-              text: textLimit,
               cssClass: "six"
             }
           },
@@ -26280,6 +26497,45 @@ var registerItemLineHelpers = /* @__PURE__ */ __name(() => {
     };
     return [incrementIcon, decrementIcon];
   });
+  Handlebars.registerHelper("formatActionType", function(actionType, initiativeTiming) {
+    let typeCode = "";
+    let timingCode = "";
+    if (actionType) {
+      switch (actionType) {
+        case "major":
+          typeCode = "M";
+          break;
+        case "minor":
+          typeCode = "m";
+          break;
+        case "free":
+          typeCode = "F";
+          break;
+        case "varies":
+          typeCode = "V";
+          break;
+        case "none":
+        default:
+          typeCode = "";
+          break;
+      }
+    }
+    if (initiativeTiming) {
+      switch (initiativeTiming) {
+        case "initiative":
+          timingCode = "(I)";
+          break;
+        case "anytime":
+          timingCode = "(A)";
+          break;
+        case "none":
+        default:
+          timingCode = "";
+          break;
+      }
+    }
+    return typeCode + timingCode;
+  });
   Handlebars.registerHelper("MarkListHeaderRightSide", () => {
     return [
       {
@@ -26328,6 +26584,29 @@ var registerItemLineHelpers = /* @__PURE__ */ __name(() => {
       text: game.i18n.localize("SR6.Del"),
       cssClass: "network-clear"
     }];
+  });
+  Handlebars.registerHelper("contains", function(str, substring) {
+    if (!str || !substring) return false;
+    return String(str).toLowerCase().includes(String(substring).toLowerCase());
+  });
+  Handlebars.registerHelper("or", function() {
+    for (let i2 = 0; i2 < arguments.length - 1; i2++) {
+      if (arguments[i2]) return true;
+    }
+    return false;
+  });
+  Handlebars.registerHelper("json", function(context) {
+    if (typeof context === "string") {
+      try {
+        return JSON.stringify(context);
+      } catch (e2) {
+        return context;
+      }
+    }
+    return JSON.stringify(context);
+  });
+  Handlebars.registerHelper("eq", function(a2, b2) {
+    return a2 === b2;
   });
 }, "registerItemLineHelpers");
 
@@ -27913,6 +28192,191 @@ var Version0_16_0 = class _Version0_16_0 extends VersionMigration {
   }
 };
 
+// src/module/migrator/versions/Version0_24_0.ts
+var Version0_24_0 = class _Version0_24_0 extends VersionMigration {
+  static {
+    __name(this, "Version0_24_0");
+  }
+  static {
+    this.TargetVersion = "0.24.0";
+  }
+  get SourceVersion() {
+    return "0.23.2";
+  }
+  get TargetVersion() {
+    return _Version0_24_0.TargetVersion;
+  }
+  /**
+   * Migrate a single Item entity to the new data model.
+   * @param item The item data to migrate
+   * @return The updated item data
+   */
+  async MigrateItemData(item) {
+    const updateData = {
+      data: {}
+    };
+    if (item.system.action) {
+      const currentActionType = item.system.action.type;
+      let newActionType = currentActionType;
+      if (currentActionType === "complex") {
+        newActionType = "major";
+        updateData.data["action.type"] = newActionType;
+      } else if (currentActionType === "simple") {
+        newActionType = "minor";
+        updateData.data["action.type"] = newActionType;
+      }
+      let initiativeTiming = "none";
+      if (newActionType === "major" || newActionType === "minor") {
+        initiativeTiming = "initiative";
+      } else if (newActionType === "free") {
+        initiativeTiming = "anytime";
+      }
+      updateData.data["action.initiative_timing"] = initiativeTiming;
+    }
+    return updateData;
+  }
+  /**
+   * Migrate a single Scene entity to use the new data model.
+   * @param scene The Scene data to migrate
+   * @return The updated Scene data
+   */
+  async MigrateSceneData(scene) {
+    const tokens = scene.tokens.map((token) => {
+      const t2 = token.toObject();
+      if (t2.actorLink && t2.actorId) {
+        t2.actorData = {};
+      }
+      return t2;
+    });
+    return { tokens };
+  }
+  /**
+   * If the migration should also handle this document
+   * @param item
+   */
+  async ShouldMigrateItemData(item) {
+    return item.system.action !== void 0;
+  }
+};
+
+// src/module/migrator/versions/Version0_24_1.ts
+var Version0_24_1 = class _Version0_24_1 extends VersionMigration {
+  static {
+    __name(this, "Version0_24_1");
+  }
+  static {
+    this.TargetVersion = "0.24.1";
+  }
+  get SourceVersion() {
+    return "0.24.0";
+  }
+  get TargetVersion() {
+    return _Version0_24_1.TargetVersion;
+  }
+  /**
+   * Migrate a single Item entity to the new data model.
+   * @param item The item data to migrate
+   * @return The updated item data
+   */
+  async MigrateItemData(item) {
+    const updateData = {
+      data: {}
+    };
+    if (item.type === "action" && item.system.action) {
+      if (this.isMatrixAction(item)) {
+        const isIllegal = this.isIllegalMatrixAction(item);
+        updateData.data["action.legality"] = isIllegal ? "illegal" : "legal";
+        console.log(`SR6: Setting matrix action ${item.name} legality to ${isIllegal ? "illegal" : "legal"}`);
+      }
+    }
+    return updateData;
+  }
+  /**
+   * Determine if an item is a matrix action
+   * @param item The item to check
+   * @returns True if the item is a matrix action
+   */
+  isMatrixAction(item) {
+    const matrixCategories = [
+      "matrix_action",
+      "matrix_defense",
+      "matrix_initiative",
+      "matrix_perception",
+      "matrix_search",
+      "hack_on_the_fly",
+      "brute_force",
+      "data_spike",
+      "crack_file",
+      "matrix_stealth",
+      "matrix_confuse_persona",
+      "matrix_jump_into_rigged_device",
+      "matrix_control_device",
+      "matrix_format_device",
+      "matrix_reboot_device",
+      "matrix_full_matrix_defense",
+      "matrix_hide",
+      "matrix_jack_out",
+      "matrix_jam_signals",
+      "matrix_spoof_command",
+      "matrix_trace_icon"
+    ];
+    if (item.system?.action?.categories) {
+      const categories = item.system.action.categories;
+      if (categories.some((category3) => matrixCategories.includes(category3))) {
+        return true;
+      }
+    }
+    const matrixTerms = ["matrix", "hack", "cyberdeck", "deck", "icon", "host", "persona", "grid", "commlink"];
+    const actionName = item.name.toLowerCase();
+    return matrixTerms.some((term) => actionName.includes(term));
+  }
+  /**
+   * Determine if a matrix action is illegal (cracking-based) or legal (electronics-based)
+   * @param item The matrix action item
+   * @returns True if the action is illegal (cracking-based)
+   */
+  isIllegalMatrixAction(item) {
+    const illegalCategories = [
+      "hack_on_the_fly",
+      "brute_force",
+      "data_spike",
+      "crack_file",
+      "matrix_stealth"
+    ];
+    if (item.system?.action?.categories) {
+      const categories = item.system.action.categories;
+      if (categories.some((category3) => illegalCategories.includes(category3))) {
+        return true;
+      }
+    }
+    const illegalTerms = ["hack", "crack", "brute force", "data spike", "spoof", "sneak", "stealth"];
+    const actionName = item.name.toLowerCase();
+    return illegalTerms.some((term) => actionName.includes(term));
+  }
+  /**
+   * Migrate a single Scene entity to use the new data model.
+   * @param scene The Scene data to migrate
+   * @return The updated Scene data
+   */
+  async MigrateSceneData(scene) {
+    const tokens = scene.tokens.map((token) => {
+      const t2 = token.toObject();
+      if (t2.actorLink && t2.actorId) {
+        t2.actorData = {};
+      }
+      return t2;
+    });
+    return { tokens };
+  }
+  /**
+   * If the migration should also handle this document
+   * @param item
+   */
+  async ShouldMigrateItemData(item) {
+    return item.type === "action";
+  }
+};
+
 // src/module/migrator/Migrator.ts
 var Migrator = class _Migrator {
   static {
@@ -27923,7 +28387,9 @@ var Migrator = class _Migrator {
     this.s_Versions = [
       { versionNumber: Version0_8_0.TargetVersion, migration: new Version0_8_0() },
       { versionNumber: Version0_18_0.TargetVersion, migration: new Version0_18_0() },
-      { versionNumber: Version0_16_0.TargetVersion, migration: new Version0_16_0() }
+      { versionNumber: Version0_16_0.TargetVersion, migration: new Version0_16_0() },
+      { versionNumber: Version0_24_0.TargetVersion, migration: new Version0_24_0() },
+      { versionNumber: Version0_24_1.TargetVersion, migration: new Version0_24_1() }
     ];
   }
   /**
@@ -30245,6 +30711,10 @@ var MeleeParser = class extends WeaponParserBase {
   Parse(jsonData, item, jsonTranslation) {
     item = super.Parse(jsonData, item, jsonTranslation);
     item.system.melee.reach = ImportHelper.IntValue(jsonData, "reach");
+    const attribute = ImportHelper.StringValue(jsonData, "attribute");
+    if (attribute === "agility") {
+      item.system.melee.attribute = "agility";
+    }
     return item;
   }
 };
@@ -34193,6 +34663,1559 @@ var ChummerImportForm = class extends FormApplication {
   }
 };
 
+// src/module/apps/importer/actorImport/characterImporter/GenesisInfoUpdater.js
+var GenesisInfoUpdater = class extends CharacterInfoUpdater {
+  static {
+    __name(this, "GenesisInfoUpdater");
+  }
+  /**
+   * Updates the actor data with Genesis character information.
+   * @param {*} actorData The actor data to update.
+   * @param {*} genesisCharacter The Genesis character data.
+   * @returns The updated actor data.
+   */
+  update(actorData, genesisCharacter) {
+    console.log("Updating actor data with Genesis character information");
+    const updatedData = duplicate(actorData);
+    this.updateBasicInfo(updatedData, genesisCharacter);
+    this.updateAttributes(updatedData, genesisCharacter);
+    this.updateSkills(updatedData, genesisCharacter);
+    this.updateDerivedStats(updatedData, genesisCharacter);
+    if (genesisCharacter.matrix) {
+      this.updateMatrixStats(updatedData, genesisCharacter);
+    }
+    if (genesisCharacter.magic) {
+      this.updateMagicStats(updatedData, genesisCharacter);
+    }
+    return updatedData;
+  }
+  /**
+   * Updates basic character information.
+   * @param {*} actorData The actor data to update.
+   * @param {*} genesisCharacter The Genesis character data.
+   */
+  updateBasicInfo(actorData, genesisCharacter) {
+    actorData.name = genesisCharacter.name || actorData.name;
+    if (genesisCharacter.description) {
+      actorData.system.description.value = genesisCharacter.description;
+    }
+    if (genesisCharacter.streetName) {
+      actorData.system.alias = genesisCharacter.streetName;
+    }
+    if (genesisCharacter.metaType) {
+      const formattedMetatype = genesisCharacter.metaType.charAt(0).toUpperCase() + genesisCharacter.metaType.slice(1).toLowerCase();
+      actorData.system.metatype = formattedMetatype;
+    }
+    if (genesisCharacter.gender) {
+      actorData.system.gender = genesisCharacter.gender;
+    }
+    if (genesisCharacter.age) {
+      actorData.system.age = genesisCharacter.age;
+    }
+    if (genesisCharacter.size) {
+      actorData.system.height = genesisCharacter.size + " cm";
+    }
+    if (genesisCharacter.weight) {
+      actorData.system.weight = genesisCharacter.weight + " kg";
+    }
+    if (genesisCharacter.nuyen) {
+      actorData.system.nuyen = genesisCharacter.nuyen;
+    }
+    if (genesisCharacter.karma) {
+      actorData.system.karma.value = genesisCharacter.karma;
+    }
+    if (genesisCharacter.reputation !== void 0) {
+      actorData.system.street_cred = genesisCharacter.reputation;
+    }
+    if (genesisCharacter.heat !== void 0) {
+      actorData.system.notoriety = genesisCharacter.heat;
+    }
+  }
+  /**
+   * Updates character attributes.
+   * @param {*} actorData The actor data to update.
+   * @param {*} genesisCharacter The Genesis character data.
+   */
+  updateAttributes(actorData, genesisCharacter) {
+    if (!genesisCharacter.attributes) return;
+    const attributeMap = {
+      "BODY": "body",
+      "AGILITY": "agility",
+      "REACTION": "reaction",
+      "STRENGTH": "strength",
+      "WILLPOWER": "willpower",
+      "LOGIC": "logic",
+      "INTUITION": "intuition",
+      "CHARISMA": "charisma",
+      "EDGE": "edge",
+      "MAGIC": "magic",
+      "RESONANCE": "resonance"
+    };
+    for (const attribute of genesisCharacter.attributes) {
+      const foundryAttr = attributeMap[attribute.id];
+      if (foundryAttr && actorData.system.attributes[foundryAttr]) {
+        actorData.system.attributes[foundryAttr].base = attribute.points || 0;
+      }
+    }
+    actorData.system.attributes.essence.base = 6;
+    if (genesisCharacter.augmentations && genesisCharacter.augmentations.length > 0) {
+      let essenceLoss = 0;
+      for (const aug of genesisCharacter.augmentations) {
+        essenceLoss += parseFloat(aug.essence) || 0;
+      }
+      actorData.system.attributes.essence.base = Math.max(0, 6 - essenceLoss);
+    }
+  }
+  /**
+   * Updates character skills.
+   * @param {*} actorData The actor data to update.
+   * @param {*} genesisCharacter The Genesis character data.
+   */
+  updateSkills(actorData, genesisCharacter) {
+    if (!genesisCharacter.skills) return;
+    const skillMap = {
+      "biotech": "biotech",
+      "electronics": "electronics",
+      "engineering": "engineering",
+      "firearms": "firearms",
+      "stealth": "stealth",
+      "piloting": "pilot_ground_craft",
+      "perception": "perception",
+      "close_combat": "close_combat",
+      "athletics": "athletics",
+      "influence": "influence",
+      "conjuring": "conjuring",
+      "sorcery": "sorcery",
+      "enchanting": "enchanting",
+      "tasking": "tasking",
+      "astral": "astral",
+      "cracking": "cracking",
+      "exotic_weapons": "exotic_weapons"
+    };
+    for (const skill of genesisCharacter.skills) {
+      if (skill.id === "knowledge" || skill.id === "language") {
+        continue;
+      }
+      const foundrySkill = skillMap[skill.id] || skill.id;
+      if (actorData.system.skills.active[foundrySkill]) {
+        actorData.system.skills.active[foundrySkill].base = skill.rating || 0;
+        if (skill.specializations && skill.specializations.length > 0) {
+          actorData.system.skills.active[foundrySkill].specs = skill.specializations.map((spec) => spec.name);
+        }
+      } else if (skill.id === "piloting" && skill.specializations) {
+        const hasAircraft = skill.specializations.some((spec) => spec.id === "aircraft");
+        if (hasAircraft && actorData.system.skills.active["pilot_aircraft"]) {
+          actorData.system.skills.active["pilot_aircraft"].base = skill.rating || 0;
+        }
+      }
+    }
+    this.updateKnowledgeSkills(actorData, genesisCharacter);
+    this.updateLanguageSkills(actorData, genesisCharacter);
+  }
+  /**
+   * Updates character knowledge skills.
+   * @param {*} actorData The actor data to update.
+   * @param {*} genesisCharacter The Genesis character data.
+   */
+  updateKnowledgeSkills(actorData, genesisCharacter) {
+    actorData.system.skills.knowledge.academic.value = {};
+    actorData.system.skills.knowledge.street.value = {};
+    actorData.system.skills.knowledge.professional.value = {};
+    actorData.system.skills.knowledge.interests.value = {};
+    const knowledgeSkills = genesisCharacter.skills.filter((skill) => skill.id === "knowledge");
+    for (const skill of knowledgeSkills) {
+      const id = randomID(16);
+      const skillName = skill.name;
+      let category3 = actorData.system.skills.knowledge.professional.value;
+      if (skillName.includes("Academic") || skillName.includes("Science")) {
+        category3 = actorData.system.skills.knowledge.academic.value;
+      } else if (skillName.includes("Street") || skillName.includes("Gang")) {
+        category3 = actorData.system.skills.knowledge.street.value;
+      } else if (skillName.includes("Interest") || skillName.includes("Hobby")) {
+        category3 = actorData.system.skills.knowledge.interests.value;
+      }
+      category3[id] = {
+        name: skillName,
+        base: skill.rating || 0,
+        specs: (skill.specializations || []).map((spec) => spec.name)
+      };
+    }
+  }
+  /**
+   * Updates character language skills.
+   * @param {*} actorData The actor data to update.
+   * @param {*} genesisCharacter The Genesis character data.
+   */
+  updateLanguageSkills(actorData, genesisCharacter) {
+    actorData.system.skills.language.value = {};
+    const languageSkills = genesisCharacter.skills.filter((skill) => skill.id === "language");
+    for (const skill of languageSkills) {
+      const id = randomID(16);
+      actorData.system.skills.language.value[id] = {
+        name: skill.name,
+        base: skill.rating || 0,
+        specs: (skill.specializations || []).map((spec) => spec.name)
+      };
+    }
+  }
+  /**
+   * Updates character derived stats.
+   * @param {*} actorData The actor data to update.
+   * @param {*} genesisCharacter The Genesis character data.
+   */
+  updateDerivedStats(actorData, genesisCharacter) {
+    if (genesisCharacter.initiatives) {
+      const physicalInit = genesisCharacter.initiatives.find((init) => init.id === "INITIATIVE_PHYSICAL");
+      if (physicalInit) {
+        const diceMatch = physicalInit.dice.match(/\+(\d+)D6/);
+        if (diceMatch && diceMatch[1]) {
+          actorData.system.initiative.dice = parseInt(diceMatch[1]);
+        }
+      }
+    }
+    const bodyAttr = genesisCharacter.attributes.find((attr) => attr.id === "BODY");
+    if (bodyAttr) {
+      const bodyValue = bodyAttr.points || 0;
+      actorData.system.track.physical.max = 8 + Math.ceil(bodyValue / 2);
+      actorData.system.track.physical.value = 0;
+    }
+    const willpowerAttr = genesisCharacter.attributes.find((attr) => attr.id === "WILLPOWER");
+    if (willpowerAttr) {
+      const willpowerValue = willpowerAttr.points || 0;
+      actorData.system.track.stun.max = 8 + Math.ceil(willpowerValue / 2);
+      actorData.system.track.stun.value = 0;
+    }
+    if (bodyAttr) {
+      const bodyValue = bodyAttr.points || 0;
+      actorData.system.track.physical.overflow.max = bodyValue;
+      actorData.system.track.physical.overflow.value = 0;
+    }
+  }
+  /**
+   * Updates character matrix stats.
+   * @param {*} actorData The actor data to update.
+   * @param {*} genesisCharacter The Genesis character data.
+   */
+  updateMatrixStats(actorData, genesisCharacter) {
+    if (!genesisCharacter.matrix) return;
+    if (genesisCharacter.matrix.attributes) {
+      actorData.system.matrix.attack = genesisCharacter.matrix.attributes.attack || 0;
+      actorData.system.matrix.sleaze = genesisCharacter.matrix.attributes.sleaze || 0;
+      actorData.system.matrix.data_processing = genesisCharacter.matrix.attributes.data_processing || 0;
+      actorData.system.matrix.firewall = genesisCharacter.matrix.attributes.firewall || 0;
+    }
+    if (genesisCharacter.matrix.condition_monitor) {
+      actorData.system.matrix.condition_monitor.max = genesisCharacter.matrix.condition_monitor.max || 0;
+      actorData.system.matrix.condition_monitor.value = genesisCharacter.matrix.condition_monitor.value || 0;
+    }
+  }
+  /**
+   * Updates character magic stats.
+   * @param {*} actorData The actor data to update.
+   * @param {*} genesisCharacter The Genesis character data.
+   */
+  updateMagicStats(actorData, genesisCharacter) {
+    if (!genesisCharacter.magic) return;
+    if (genesisCharacter.magic.tradition) {
+      actorData.system.magic.tradition = genesisCharacter.magic.tradition;
+    }
+    actorData.system.magic.magic = genesisCharacter.attributes.magic || 0;
+    if (genesisCharacter.magic.drain_attribute) {
+      actorData.system.magic.drain_attribute = genesisCharacter.magic.drain_attribute;
+    }
+  }
+};
+
+// src/module/apps/importer/actorImport/characterImporter/GenesisItemsParser.js
+var GenesisItemsParser = class extends ItemsParser {
+  static {
+    __name(this, "GenesisItemsParser");
+  }
+  /**
+   * Parses items from a Genesis character file.
+   * @param {*} genesisCharacter The Genesis character data.
+   * @param {*} importOptions Import options.
+   * @returns An array of items.
+   */
+  parse(genesisCharacter, importOptions) {
+    console.log("Parsing items from Genesis character");
+    const items = [];
+    if (importOptions.weapons && genesisCharacter.longRangeWeapons) {
+      this.parseWeapons(items, genesisCharacter.longRangeWeapons, importOptions);
+    }
+    if (importOptions.weapons && genesisCharacter.closeCombatWeapons) {
+      this.parseCloseCombatWeapons(items, genesisCharacter.closeCombatWeapons, importOptions);
+    }
+    if (importOptions.armor && genesisCharacter.armors) {
+      this.parseArmor(items, genesisCharacter.armors, importOptions);
+    }
+    if (importOptions.cyberware && genesisCharacter.augmentations) {
+      this.parseCyberware(items, genesisCharacter.augmentations, importOptions);
+    }
+    if (importOptions.equipment && genesisCharacter.items) {
+      this.parseEquipment(items, genesisCharacter.items, importOptions);
+    }
+    if (importOptions.equipment && genesisCharacter.matrixItems) {
+      this.parseMatrixDevices(items, genesisCharacter.matrixItems, importOptions);
+    }
+    if (importOptions.qualities && genesisCharacter.qualities) {
+      this.parseQualities(items, genesisCharacter.qualities, importOptions);
+    }
+    if (importOptions.powers && genesisCharacter.adeptPowers) {
+      this.parsePowers(items, genesisCharacter.adeptPowers, importOptions);
+    }
+    if (importOptions.spells && genesisCharacter.spells) {
+      this.parseSpells(items, genesisCharacter.spells, importOptions);
+    }
+    if (importOptions.contacts && genesisCharacter.contacts) {
+      this.parseContacts(items, genesisCharacter.contacts, importOptions);
+    }
+    if (importOptions.lifestyles && genesisCharacter.lifestyles) {
+      this.parseLifestyles(items, genesisCharacter.lifestyles, importOptions);
+    }
+    if (importOptions.equipment && genesisCharacter.sins) {
+      this.parseSINs(items, genesisCharacter.sins, genesisCharacter.licenses, importOptions);
+    }
+    return items;
+  }
+  /**
+   * Parses weapons from a Genesis character file.
+   * @param {*} items The array to add items to.
+   * @param {*} weapons The weapons data.
+   * @param {*} importOptions Import options.
+   */
+  parseWeapons(items, weapons3, importOptions) {
+    for (const weapon of weapons3) {
+      let weaponType = "ranged";
+      let weaponCategory = "";
+      if (weapon.subtype === "PISTOLS_HEAVY") {
+        weaponCategory = "heavy_pistol";
+      } else if (weapon.subtype === "PISTOLS_LIGHT") {
+        weaponCategory = "light_pistol";
+      } else if (weapon.subtype === "RIFLES_ASSAULT") {
+        weaponCategory = "assault_rifle";
+      } else if (weapon.subtype === "RIFLES_SNIPER") {
+        weaponCategory = "sniper_rifle";
+      } else if (weapon.subtype === "SHOTGUNS") {
+        weaponCategory = "shotgun";
+      } else if (weapon.subtype === "SMGS") {
+        weaponCategory = "smg";
+      } else if (weapon.subtype === "MACHINE_GUNS") {
+        weaponCategory = "machine_gun";
+      }
+      let damageValue = 0;
+      let damageType = "physical";
+      if (weapon.damage) {
+        const damageMatch = weapon.damage.match(/(\d+)([PS])/);
+        if (damageMatch) {
+          damageValue = parseInt(damageMatch[1]) || 0;
+          damageType = damageMatch[2] === "P" ? "physical" : "stun";
+        }
+      }
+      let attackRating = { close: 0, near: 0, medium: 0, far: 0, extreme: 0 };
+      if (weapon.attackRating) {
+        const arValues = weapon.attackRating.split("/");
+        if (arValues.length >= 5) {
+          attackRating.close = parseInt(arValues[0]) || 0;
+          attackRating.near = parseInt(arValues[1]) || 0;
+          attackRating.medium = parseInt(arValues[2]) || 0;
+          attackRating.far = parseInt(arValues[3]) || 0;
+          attackRating.extreme = parseInt(arValues[4]) || 0;
+        }
+      }
+      let fireModes = [];
+      if (weapon.mode) {
+        if (weapon.mode.includes("SA")) fireModes.push("single_shot");
+        if (weapon.mode.includes("BF")) fireModes.push("burst_fire");
+        if (weapon.mode.includes("FA")) fireModes.push("full_auto");
+      }
+      const weaponItem = {
+        name: weapon.name,
+        type: "weapon",
+        img: importOptions.assignIcons ? "systems/shadowrun6-elysium/dist/icons/redist/gun.svg" : "icons/svg/item-bag.svg",
+        system: {
+          description: {
+            value: weapon.description || ""
+          },
+          technology: {
+            rating: 0,
+            availability: {
+              value: 0,
+              mod: ""
+            },
+            cost: 0
+          },
+          action: {
+            type: "major",
+            attribute: "agility",
+            skill: weapon.skill || "firearms",
+            test: "ranged_attack",
+            limit: {
+              value: 0,
+              attribute: ""
+            }
+          },
+          range: {
+            category: "standard",
+            ranges: {
+              short: { value: attackRating.close },
+              medium: { value: attackRating.near },
+              long: { value: attackRating.medium },
+              extreme: { value: attackRating.far }
+            }
+          },
+          damage: {
+            type: {
+              value: damageType
+            },
+            element: {
+              value: ""
+            },
+            value: damageValue,
+            ap: {
+              value: 0
+            }
+          },
+          category: weaponCategory,
+          type: weaponType,
+          firingModes: fireModes,
+          ammo: {
+            current: weapon.ammunition ? parseInt(weapon.ammunition) || 0 : 0,
+            max: weapon.ammunition ? parseInt(weapon.ammunition) || 0 : 0
+          },
+          roll_mode: "publicroll",
+          source: weapon.source || "",
+          importFlags: {
+            isImported: true
+          }
+        }
+      };
+      if (weapon.accessories && weapon.accessories.length > 0) {
+        weaponItem.system.accessories = [];
+        for (const accessory of weapon.accessories) {
+          weaponItem.system.accessories.push({
+            name: accessory.name,
+            rating: accessory.rating || 0,
+            description: accessory.description || "",
+            equipped: true
+          });
+        }
+      }
+      items.push(weaponItem);
+    }
+  }
+  /**
+   * Parses close combat weapons from a Genesis character file.
+   * @param {*} items The array to add items to.
+   * @param {*} weapons The weapons data.
+   * @param {*} importOptions Import options.
+   */
+  parseCloseCombatWeapons(items, weapons3, importOptions) {
+    for (const weapon of weapons3) {
+      let weaponType = "melee";
+      let weaponCategory = "";
+      if (weapon.subtype === "UNARMED") {
+        weaponCategory = "unarmed";
+      } else if (weapon.subtype === "BLADES") {
+        weaponCategory = "blade";
+      } else if (weapon.subtype === "CLUBS") {
+        weaponCategory = "club";
+      } else {
+        weaponCategory = "other";
+      }
+      let damageValue = 0;
+      let damageType = "physical";
+      if (weapon.damage) {
+        const damageMatch = weapon.damage.match(/(\d+)([PS])/);
+        if (damageMatch) {
+          damageValue = parseInt(damageMatch[1]) || 0;
+          damageType = damageMatch[2] === "P" ? "physical" : "stun";
+        }
+      }
+      let attackRating = { close: 0, near: 0, medium: 0, far: 0, extreme: 0 };
+      if (weapon.attackRating) {
+        const arValues = weapon.attackRating.split("/");
+        if (arValues.length >= 1) {
+          attackRating.close = parseInt(arValues[0]) || 0;
+        }
+      }
+      const weaponItem = {
+        name: weapon.name,
+        type: "weapon",
+        img: importOptions.assignIcons ? "systems/shadowrun6-elysium/dist/icons/redist/melee.svg" : "icons/svg/item-bag.svg",
+        system: {
+          description: {
+            value: weapon.description || ""
+          },
+          technology: {
+            rating: 0,
+            availability: {
+              value: 0,
+              mod: ""
+            },
+            cost: 0
+          },
+          action: {
+            type: "major",
+            attribute: "agility",
+            skill: weapon.skill || "close_combat",
+            test: "melee_attack",
+            limit: {
+              value: 0,
+              attribute: ""
+            }
+          },
+          range: {
+            category: "melee",
+            ranges: {
+              short: { value: attackRating.close },
+              medium: { value: 0 },
+              long: { value: 0 },
+              extreme: { value: 0 }
+            }
+          },
+          damage: {
+            type: {
+              value: damageType
+            },
+            element: {
+              value: ""
+            },
+            value: damageValue,
+            ap: {
+              value: 0
+            }
+          },
+          category: weaponCategory,
+          type: weaponType,
+          roll_mode: "publicroll",
+          source: weapon.source || "",
+          importFlags: {
+            isImported: true
+          }
+        }
+      };
+      if (weapon.accessories && weapon.accessories.length > 0) {
+        weaponItem.system.accessories = [];
+        for (const accessory of weapon.accessories) {
+          weaponItem.system.accessories.push({
+            name: accessory.name,
+            rating: accessory.rating || 0,
+            description: accessory.description || "",
+            equipped: true
+          });
+        }
+      }
+      items.push(weaponItem);
+    }
+  }
+  /**
+   * Parses armor from a Genesis character file.
+   * @param {*} items The array to add items to.
+   * @param {*} armors The armor data.
+   * @param {*} importOptions Import options.
+   */
+  parseArmor(items, armors, importOptions) {
+    for (const armor3 of armors) {
+      if (armor3.isIgnored) continue;
+      const armorItem = {
+        name: armor3.name,
+        type: "armor",
+        img: importOptions.assignIcons ? "systems/shadowrun6-elysium/dist/icons/redist/armor.svg" : "icons/svg/item-bag.svg",
+        system: {
+          description: {
+            value: armor3.description || ""
+          },
+          technology: {
+            rating: armor3.rating || 0,
+            availability: {
+              value: 0,
+              mod: ""
+            },
+            cost: 0
+          },
+          armor: {
+            value: armor3.rating || 0,
+            base: armor3.rating || 0,
+            mod: 0
+          },
+          source: armor3.source || "",
+          importFlags: {
+            isImported: true
+          }
+        }
+      };
+      items.push(armorItem);
+    }
+  }
+  /**
+   * Parses cyberware from a Genesis character file.
+   * @param {*} items The array to add items to.
+   * @param {*} cyberware The cyberware data.
+   * @param {*} importOptions Import options.
+   */
+  parseCyberware(items, cyberware, importOptions) {
+    for (const ware of cyberware) {
+      const cyberwareItem = {
+        name: ware.name,
+        type: "cyberware",
+        img: importOptions.assignIcons ? "systems/shadowrun6-elysium/dist/icons/redist/cyberware.svg" : "icons/svg/item-bag.svg",
+        system: {
+          description: {
+            value: ware.description || ""
+          },
+          technology: {
+            rating: ware.level ? parseInt(ware.level) || 0 : 0,
+            availability: {
+              value: 0,
+              mod: ""
+            },
+            cost: 0
+          },
+          essence: ware.essence || 0,
+          grade: ware.quality ? ware.quality.toLowerCase() : "standard",
+          source: ware.source || "",
+          importFlags: {
+            isImported: true
+          }
+        }
+      };
+      items.push(cyberwareItem);
+    }
+  }
+  /**
+   * Parses equipment from a Genesis character file.
+   * @param {*} items The array to add items to.
+   * @param {*} equipment The equipment data.
+   * @param {*} importOptions Import options.
+   */
+  parseEquipment(items, equipment, importOptions) {
+    for (const gear of equipment) {
+      const gearItem = {
+        name: gear.name,
+        type: "equipment",
+        img: importOptions.assignIcons ? "systems/shadowrun6-elysium/dist/icons/redist/gear.svg" : "icons/svg/item-bag.svg",
+        system: {
+          description: {
+            value: gear.description || ""
+          },
+          technology: {
+            rating: gear.rating || 0,
+            availability: {
+              value: 0,
+              mod: ""
+            },
+            cost: 0
+          },
+          quantity: gear.count || 1,
+          source: gear.source || "",
+          importFlags: {
+            isImported: true
+          }
+        }
+      };
+      items.push(gearItem);
+    }
+  }
+  /**
+   * Parses qualities from a Genesis character file.
+   * @param {*} items The array to add items to.
+   * @param {*} qualities The qualities data.
+   * @param {*} importOptions Import options.
+   */
+  parseQualities(items, qualities, importOptions) {
+    for (const quality of qualities) {
+      const qualityItem = {
+        name: quality.name,
+        type: "quality",
+        img: importOptions.assignIcons ? quality.positive ? "systems/shadowrun6-elysium/dist/icons/redist/quality-positive.svg" : "systems/shadowrun6-elysium/dist/icons/redist/quality-negative.svg" : "icons/svg/item-bag.svg",
+        system: {
+          description: {
+            value: quality.description || ""
+          },
+          type: quality.positive ? "positive" : "negative",
+          rating: quality.rating || 1,
+          source: quality.source || "",
+          importFlags: {
+            isImported: true
+          }
+        }
+      };
+      items.push(qualityItem);
+    }
+  }
+  /**
+   * Parses powers from a Genesis character file.
+   * @param {*} items The array to add items to.
+   * @param {*} powers The powers data.
+   * @param {*} importOptions Import options.
+   */
+  parsePowers(items, powers, importOptions) {
+    for (const power of powers) {
+      const powerItem = {
+        name: power.name,
+        type: "adept_power",
+        img: importOptions.assignIcons ? "systems/shadowrun6-elysium/dist/icons/redist/adept.svg" : "icons/svg/item-bag.svg",
+        system: {
+          description: {
+            value: power.description || ""
+          },
+          action: {
+            type: "major",
+            skill: "",
+            attribute: ""
+          },
+          pp: power.pp || 0,
+          rating: power.rating || 1,
+          source: power.source || "",
+          importFlags: {
+            isImported: true
+          }
+        }
+      };
+      items.push(powerItem);
+    }
+  }
+  /**
+   * Parses spells from a Genesis character file.
+   * @param {*} items The array to add items to.
+   * @param {*} spells The spells data.
+   * @param {*} importOptions Import options.
+   */
+  parseSpells(items, spells, importOptions) {
+    for (const spell of spells) {
+      const spellItem = {
+        name: spell.name,
+        type: "spell",
+        img: importOptions.assignIcons ? "systems/shadowrun6-elysium/dist/icons/redist/spell.svg" : "icons/svg/item-bag.svg",
+        system: {
+          description: {
+            value: spell.description || ""
+          },
+          action: {
+            type: "major",
+            skill: "spellcasting",
+            attribute: "magic"
+          },
+          drain: spell.drain || 0,
+          category: spell.category || "combat",
+          type: spell.type || "physical",
+          range: spell.range || "los",
+          duration: spell.duration || "instant",
+          source: spell.source || "",
+          importFlags: {
+            isImported: true
+          }
+        }
+      };
+      items.push(spellItem);
+    }
+  }
+  /**
+   * Parses contacts from a Genesis character file.
+   * @param {*} items The array to add items to.
+   * @param {*} contacts The contacts data.
+   * @param {*} importOptions Import options.
+   */
+  parseContacts(items, contacts, importOptions) {
+    for (const contact of contacts) {
+      const contactItem = {
+        name: contact.name,
+        type: "contact",
+        img: importOptions.assignIcons ? "systems/shadowrun6-elysium/dist/icons/redist/contact.svg" : "icons/svg/item-bag.svg",
+        system: {
+          description: {
+            value: contact.description || ""
+          },
+          connection: contact.influence || 1,
+          loyalty: contact.loyalty || 1,
+          type: contact.type || "",
+          source: contact.source || "",
+          importFlags: {
+            isImported: true
+          }
+        }
+      };
+      items.push(contactItem);
+    }
+  }
+  /**
+   * Parses lifestyles from a Genesis character file.
+   * @param {*} items The array to add items to.
+   * @param {*} lifestyles The lifestyles data.
+   * @param {*} importOptions Import options.
+   */
+  parseLifestyles(items, lifestyles, importOptions) {
+    for (const lifestyle of lifestyles) {
+      let lifestyleType = "medium";
+      if (lifestyle.type === "STREET") {
+        lifestyleType = "street";
+      } else if (lifestyle.type === "SQUATTER") {
+        lifestyleType = "squatter";
+      } else if (lifestyle.type === "LOW") {
+        lifestyleType = "low";
+      } else if (lifestyle.type === "MEDIUM") {
+        lifestyleType = "medium";
+      } else if (lifestyle.type === "HIGH") {
+        lifestyleType = "high";
+      } else if (lifestyle.type === "LUXURY") {
+        lifestyleType = "luxury";
+      }
+      const lifestyleItem = {
+        name: lifestyle.customName || lifestyle.name,
+        type: "lifestyle",
+        img: importOptions.assignIcons ? "systems/shadowrun6-elysium/dist/icons/redist/lifestyle.svg" : "icons/svg/item-bag.svg",
+        system: {
+          description: {
+            value: lifestyle.description || ""
+          },
+          nuyen: lifestyle.cost || 0,
+          type: lifestyleType,
+          months: lifestyle.paidMonths || 1,
+          source: lifestyle.source || "",
+          importFlags: {
+            isImported: true
+          }
+        }
+      };
+      items.push(lifestyleItem);
+    }
+  }
+  /**
+   * Parses matrix devices from a Genesis character file.
+   * @param {*} items The array to add items to.
+   * @param {*} matrixItems The matrix items data.
+   * @param {*} importOptions Import options.
+   */
+  parseMatrixDevices(items, matrixItems, importOptions) {
+    for (const device of matrixItems) {
+      let deviceType = "device";
+      let deviceCategory = "";
+      let deviceIcon = "systems/shadowrun6-elysium/dist/icons/redist/commlink.svg";
+      if (device.subType === "RIGGER_CONSOLE") {
+        deviceCategory = "rigger_console";
+        deviceIcon = "systems/shadowrun6-elysium/dist/icons/redist/rigger-console.svg";
+      } else if (device.subType === "CYBERDECK") {
+        deviceCategory = "cyberdeck";
+        deviceIcon = "systems/shadowrun6-elysium/dist/icons/redist/cyberdeck.svg";
+      } else if (device.subType === "COMMLINK") {
+        deviceCategory = "commlink";
+        deviceIcon = "systems/shadowrun6-elysium/dist/icons/redist/commlink.svg";
+      }
+      const deviceItem = {
+        name: device.name,
+        type: "device",
+        img: importOptions.assignIcons ? deviceIcon : "icons/svg/item-bag.svg",
+        system: {
+          description: {
+            value: device.description || ""
+          },
+          technology: {
+            rating: device.deviceRating || 0,
+            availability: {
+              value: 0,
+              mod: ""
+            },
+            cost: 0
+          },
+          category: deviceCategory,
+          type: deviceType,
+          matrix: {
+            attack: device.attack || 0,
+            sleaze: device.sleaze || 0,
+            data_processing: device.dataProcessing || 0,
+            firewall: device.firewall || 0
+          },
+          programs: {
+            max: device.concurrentPrograms || 0,
+            value: []
+          },
+          roll_mode: "publicroll",
+          importFlags: {
+            isImported: true
+          }
+        }
+      };
+      if (device.accessories && device.accessories.length > 0) {
+        for (const accessory of device.accessories) {
+          if (accessory.subType === "RIGGER_PROGRAM" || accessory.subType === "HACKING_PROGRAM" || accessory.subType === "COMMON_PROGRAM" || accessory.subType === "OTHER_PROGRAMS") {
+            deviceItem.system.programs.value.push({
+              name: accessory.name,
+              rating: accessory.rating || 0,
+              equipped: true
+            });
+          }
+        }
+      }
+      items.push(deviceItem);
+    }
+  }
+  /**
+   * Parses SINs and licenses from a Genesis character file.
+   * @param {*} items The array to add items to.
+   * @param {*} sins The SINs data.
+   * @param {*} licenses The licenses data.
+   * @param {*} importOptions Import options.
+   */
+  parseSINs(items, sins, licenses, importOptions) {
+    for (const sin of sins) {
+      let sinRating = 0;
+      if (sin.quality === "STANDARD") {
+        sinRating = 2;
+      } else if (sin.quality === "NATIONAL") {
+        sinRating = 3;
+      } else if (sin.quality === "CRIMINAL") {
+        sinRating = 4;
+      } else if (sin.quality === "CORPORATE_LIMITED") {
+        sinRating = 5;
+      } else if (sin.quality === "CORPORATE") {
+        sinRating = 6;
+      }
+      const sinItem = {
+        name: sin.name,
+        type: "sin",
+        img: importOptions.assignIcons ? "systems/shadowrun6-elysium/dist/icons/redist/sin.svg" : "icons/svg/item-bag.svg",
+        system: {
+          description: {
+            value: sin.description || ""
+          },
+          rating: sinRating,
+          licenses: [],
+          source: sin.source || "",
+          importFlags: {
+            isImported: true
+          }
+        }
+      };
+      if (licenses) {
+        const sinLicenses = licenses.filter((license) => license.sin === sin.name);
+        for (const license of sinLicenses) {
+          let licenseRating = 0;
+          if (license.rating === "STANDARD") {
+            licenseRating = 2;
+          } else if (license.rating === "SUPERFICIALLY_PLAUSIBLE") {
+            licenseRating = 4;
+          } else if (license.rating === "COMPLETELY_LEGITIMATE") {
+            licenseRating = 6;
+          }
+          sinItem.system.licenses.push({
+            name: license.name,
+            rating: licenseRating,
+            type: license.type || ""
+          });
+        }
+      }
+      items.push(sinItem);
+    }
+  }
+  // Vehicle and drone parsing methods have been moved to GenesisImporter.js
+};
+
+// src/module/apps/importer/actorImport/characterImporter/GenesisImporter.js
+var GenesisImporter = class {
+  static {
+    __name(this, "GenesisImporter");
+  }
+  /**
+   * Imports a Genesis character into an existing actor. The actor will be updated. This might lead to duplicate items.
+   * @param {*} actor The actor that will be updated with the Genesis character.
+   * @param {*} genesisFile The complete Genesis file as json object.
+   * @param {*} importOptions Additional import option that specify what parts of the Genesis file will be imported.
+   */
+  async importGenesisCharacter(actor, genesisFile, importOptions) {
+    console.log("Importing the following Genesis character file content:");
+    console.log(genesisFile);
+    console.log("Using the following import options:");
+    console.log(importOptions);
+    if (!genesisFile) {
+      console.log("Did not find a valid character to import - aborting import");
+      return;
+    }
+    await this.resetCharacter(actor);
+    const genesisCharacter = genesisFile;
+    const infoUpdater = new GenesisInfoUpdater();
+    const updatedActorData = infoUpdater.update(actor._source, genesisCharacter);
+    const items = new GenesisItemsParser().parse(genesisCharacter, importOptions);
+    if (genesisCharacter.vehicles && importOptions.vehicles) {
+      await this.createVehicleActors(genesisCharacter.vehicles, actor);
+    }
+    if (genesisCharacter.drones && importOptions.vehicles) {
+      await this.createDroneActors(genesisCharacter.drones, actor);
+    }
+    await actor.update(await updatedActorData);
+    await actor.createEmbeddedDocuments("Item", await items);
+  }
+  async resetCharacter(actor) {
+    let toDeleteItems = actor.items?.filter((item) => item.type !== "action").filter((item) => item.system.importFlags != void 0).filter((item) => item.system.importFlags.isImported).filter((item) => item.effects.size == 0).map((item) => item.id);
+    let deletedItems = actor.deleteEmbeddedDocuments("Item", toDeleteItems);
+    let removed = {
+      "system.skills.language.-=value": null,
+      "system.skills.knowledge.academic.-=value": null,
+      "system.skills.knowledge.interests.-=value": null,
+      "system.skills.knowledge.professional.-=value": null,
+      "system.skills.knowledge.street.-=value": null
+    };
+    let removeSkills = actor.update(removed);
+    await deletedItems;
+    await removeSkills;
+  }
+  /**
+   * Creates vehicle actors from Genesis vehicle data.
+   * @param {*} vehicles The Genesis vehicles data.
+   * @param {*} ownerActor The actor that owns the vehicles.
+   */
+  async createVehicleActors(vehicles, ownerActor) {
+    for (const vehicle of vehicles) {
+      console.log("Creating vehicle from Genesis data:", vehicle);
+      let vehicleCategory = "ground";
+      if (vehicle.subtype === "WATER") {
+        vehicleCategory = "water";
+      } else if (vehicle.subtype === "AIR") {
+        vehicleCategory = "air";
+      }
+      const vehicleData = {
+        name: vehicle.name,
+        type: "vehicle",
+        img: "systems/shadowrun6-elysium/dist/icons/redist/vehicle.svg",
+        system: {
+          description: {
+            value: vehicle.description || ""
+          },
+          handling: {
+            base: this.extractNumericValue(vehicle.handlOn),
+            off_road: this.extractNumericValue(vehicle.handlOff)
+          },
+          speed: {
+            base: this.extractNumericValue(vehicle.speed)
+          },
+          acceleration: {
+            base: this.extractNumericValue(vehicle.accelOn),
+            off_road: this.extractNumericValue(vehicle.accelOff)
+          },
+          body: this.extractNumericValue(vehicle.body),
+          armor: this.extractNumericValue(vehicle.armor),
+          pilot: this.extractNumericValue(vehicle.pilot),
+          sensor: this.extractNumericValue(vehicle.sensor),
+          seats: this.extractNumericValue(vehicle.seats),
+          mod_slots: {
+            power: this.extractNumericValue(vehicle.powerTrainSlots),
+            protection: this.extractNumericValue(vehicle.protectionSlots),
+            weapon: this.extractNumericValue(vehicle.weaponSlots),
+            body: this.extractNumericValue(vehicle.bodySlots),
+            electromagnetic: this.extractNumericValue(vehicle.electronicSlots),
+            cosmetic: this.extractNumericValue(vehicle.cosmeticSlots)
+          },
+          category: vehicleCategory,
+          isDrone: false,
+          // Explicitly mark as not a drone
+          owner: ownerActor.id,
+          source: vehicle.source || ""
+        },
+        folder: await this.getOrCreateFolder("Vehicles"),
+        permission: { default: 0 }
+      };
+      vehicleData.permission[ownerActor.id] = 3;
+      const createdVehicle = await Actor.create(vehicleData);
+      if (vehicle.accessories && vehicle.accessories.length > 0) {
+        const modItems = [];
+        for (const accessory of vehicle.accessories) {
+          modItems.push({
+            name: accessory.name,
+            type: "modification",
+            // Use modification type
+            img: "systems/shadowrun6-elysium/dist/icons/redist/vehicle-mod.svg",
+            system: {
+              description: {
+                value: accessory.description || ""
+              },
+              technology: {
+                rating: this.extractNumericValue(accessory.rating),
+                availability: {
+                  value: 0,
+                  mod: ""
+                },
+                cost: 0
+              },
+              category: "vehicle_mod",
+              // Set category to vehicle_mod
+              equipped: true,
+              source: accessory.source || "",
+              importFlags: {
+                isImported: true
+              }
+            }
+          });
+        }
+        await createdVehicle.createEmbeddedDocuments("Item", modItems);
+      }
+      const weaponAccessories = vehicle.accessories ? vehicle.accessories.filter((acc) => acc.subType === "WEAPON" || acc.subType === "MOD_WEAPON") : [];
+      if (vehicle.weapons && vehicle.weapons.length > 0 || weaponAccessories.length > 0) {
+        const weaponItems = [];
+        if (vehicle.weapons && vehicle.weapons.length > 0) {
+          for (const weapon of vehicle.weapons) {
+            let damageValue = 0;
+            let damageType = "physical";
+            if (weapon.damage) {
+              const damageMatch = weapon.damage.match(/(\d+)([PS])/);
+              if (damageMatch) {
+                damageValue = parseInt(damageMatch[1]) || 0;
+                damageType = damageMatch[2] === "P" ? "physical" : "stun";
+              }
+            }
+            weaponItems.push({
+              name: weapon.name,
+              type: "weapon",
+              img: "systems/shadowrun6-elysium/dist/icons/redist/vehicle-weapon.svg",
+              system: {
+                description: {
+                  value: weapon.description || ""
+                },
+                technology: {
+                  rating: 0,
+                  availability: {
+                    value: 0,
+                    mod: ""
+                  },
+                  cost: 0
+                },
+                action: {
+                  type: "major",
+                  attribute: "agility",
+                  skill: "gunnery",
+                  test: "vehicle_weapon",
+                  limit: {
+                    value: 0,
+                    attribute: ""
+                  }
+                },
+                range: {
+                  category: "standard",
+                  ranges: {
+                    short: { value: 0 },
+                    medium: { value: 0 },
+                    long: { value: 0 },
+                    extreme: { value: 0 }
+                  }
+                },
+                damage: {
+                  type: {
+                    value: damageType
+                  },
+                  element: {
+                    value: ""
+                  },
+                  value: damageValue,
+                  ap: {
+                    value: this.extractNumericValue(weapon.ap)
+                  }
+                },
+                category: "vehicle_weapon",
+                type: "vehicle",
+                roll_mode: "publicroll",
+                source: weapon.source || "",
+                importFlags: {
+                  isImported: true
+                }
+              }
+            });
+          }
+        }
+        for (const weaponAcc of weaponAccessories) {
+          weaponItems.push({
+            name: weaponAcc.name,
+            type: "weapon",
+            img: "systems/shadowrun6-elysium/dist/icons/redist/vehicle-weapon.svg",
+            system: {
+              description: {
+                value: weaponAcc.description || ""
+              },
+              technology: {
+                rating: this.extractNumericValue(weaponAcc.rating),
+                availability: {
+                  value: 0,
+                  mod: ""
+                },
+                cost: 0
+              },
+              action: {
+                type: "major",
+                attribute: "agility",
+                skill: "gunnery",
+                test: "vehicle_weapon",
+                limit: {
+                  value: 0,
+                  attribute: ""
+                }
+              },
+              range: {
+                category: "standard",
+                ranges: {
+                  short: { value: 0 },
+                  medium: { value: 0 },
+                  long: { value: 0 },
+                  extreme: { value: 0 }
+                }
+              },
+              damage: {
+                type: {
+                  value: "physical"
+                },
+                element: {
+                  value: ""
+                },
+                value: 0,
+                ap: {
+                  value: 0
+                }
+              },
+              category: "vehicle_weapon",
+              type: "vehicle",
+              roll_mode: "publicroll",
+              source: weaponAcc.source || "",
+              importFlags: {
+                isImported: true
+              }
+            }
+          });
+        }
+        await createdVehicle.createEmbeddedDocuments("Item", weaponItems);
+      }
+    }
+  }
+  /**
+   * Creates drone actors from Genesis drone data.
+   * @param {*} drones The Genesis drones data.
+   * @param {*} ownerActor The actor that owns the drones.
+   */
+  async createDroneActors(drones, ownerActor) {
+    for (const drone of drones) {
+      console.log("Creating drone from Genesis data:", drone);
+      const droneCategory = this.getDroneCategory(drone);
+      const droneData = {
+        name: drone.name,
+        type: "vehicle",
+        // Use vehicle type for drones
+        img: "systems/shadowrun6-elysium/dist/icons/redist/drone.svg",
+        system: {
+          description: {
+            value: drone.description || ""
+          },
+          handling: {
+            base: this.extractNumericValue(drone.handlOn),
+            off_road: this.extractNumericValue(drone.handlOff)
+          },
+          speed: {
+            base: this.extractNumericValue(drone.speed)
+          },
+          acceleration: {
+            base: this.extractNumericValue(drone.accelOn),
+            off_road: this.extractNumericValue(drone.accelOff)
+          },
+          body: this.extractNumericValue(drone.body),
+          armor: this.extractNumericValue(drone.armor),
+          pilot: this.extractNumericValue(drone.pilot),
+          sensor: this.extractNumericValue(drone.sensor),
+          mod_slots: {
+            power: this.extractNumericValue(drone.powerTrainSlots),
+            protection: this.extractNumericValue(drone.protectionSlots),
+            weapon: this.extractNumericValue(drone.weaponSlots),
+            body: this.extractNumericValue(drone.bodySlots),
+            electromagnetic: this.extractNumericValue(drone.electronicSlots),
+            cosmetic: this.extractNumericValue(drone.cosmeticSlots)
+          },
+          category: droneCategory,
+          // Use the drone category as the vehicle category
+          isDrone: true,
+          // Explicitly mark as a drone
+          owner: ownerActor.id,
+          source: drone.source || ""
+        },
+        folder: await this.getOrCreateFolder("Drones"),
+        permission: { default: 0 }
+      };
+      droneData.permission[ownerActor.id] = 3;
+      const createdDrone = await Actor.create(droneData);
+      if (drone.accessories && drone.accessories.length > 0) {
+        const modItems = [];
+        for (const accessory of drone.accessories) {
+          modItems.push({
+            name: accessory.name,
+            type: "modification",
+            // Use modification type
+            img: "systems/shadowrun6-elysium/dist/icons/redist/drone-mod.svg",
+            system: {
+              description: {
+                value: accessory.description || ""
+              },
+              technology: {
+                rating: this.extractNumericValue(accessory.rating),
+                availability: {
+                  value: 0,
+                  mod: ""
+                },
+                cost: 0
+              },
+              category: "drone_mod",
+              // Set category to drone_mod
+              equipped: true,
+              source: accessory.source || "",
+              importFlags: {
+                isImported: true
+              }
+            }
+          });
+        }
+        await createdDrone.createEmbeddedDocuments("Item", modItems);
+      }
+      const weaponAccessories = drone.accessories ? drone.accessories.filter((acc) => acc.subType === "WEAPON" || acc.subType === "MOD_WEAPON") : [];
+      if (drone.weapons && drone.weapons.length > 0 || weaponAccessories.length > 0) {
+        const weaponItems = [];
+        if (drone.weapons && drone.weapons.length > 0) {
+          for (const weapon of drone.weapons) {
+            let damageValue = 0;
+            let damageType = "physical";
+            if (weapon.damage) {
+              const damageMatch = weapon.damage.match(/(\d+)([PS])/);
+              if (damageMatch) {
+                damageValue = parseInt(damageMatch[1]) || 0;
+                damageType = damageMatch[2] === "P" ? "physical" : "stun";
+              }
+            }
+            weaponItems.push({
+              name: weapon.name,
+              type: "weapon",
+              img: "systems/shadowrun6-elysium/dist/icons/redist/drone-weapon.svg",
+              system: {
+                description: {
+                  value: weapon.description || ""
+                },
+                technology: {
+                  rating: 0,
+                  availability: {
+                    value: 0,
+                    mod: ""
+                  },
+                  cost: 0
+                },
+                action: {
+                  type: "major",
+                  attribute: "agility",
+                  skill: "gunnery",
+                  test: "vehicle_weapon",
+                  limit: {
+                    value: 0,
+                    attribute: ""
+                  }
+                },
+                range: {
+                  category: "standard",
+                  ranges: {
+                    short: { value: 0 },
+                    medium: { value: 0 },
+                    long: { value: 0 },
+                    extreme: { value: 0 }
+                  }
+                },
+                damage: {
+                  type: {
+                    value: damageType
+                  },
+                  element: {
+                    value: ""
+                  },
+                  value: damageValue,
+                  ap: {
+                    value: this.extractNumericValue(weapon.ap)
+                  }
+                },
+                category: "drone_weapon",
+                type: "vehicle",
+                roll_mode: "publicroll",
+                source: weapon.source || "",
+                importFlags: {
+                  isImported: true
+                }
+              }
+            });
+          }
+        }
+        for (const weaponAcc of weaponAccessories) {
+          weaponItems.push({
+            name: weaponAcc.name,
+            type: "weapon",
+            img: "systems/shadowrun6-elysium/dist/icons/redist/drone-weapon.svg",
+            system: {
+              description: {
+                value: weaponAcc.description || ""
+              },
+              technology: {
+                rating: this.extractNumericValue(weaponAcc.rating),
+                availability: {
+                  value: 0,
+                  mod: ""
+                },
+                cost: 0
+              },
+              action: {
+                type: "major",
+                attribute: "agility",
+                skill: "gunnery",
+                test: "vehicle_weapon",
+                limit: {
+                  value: 0,
+                  attribute: ""
+                }
+              },
+              range: {
+                category: "standard",
+                ranges: {
+                  short: { value: 0 },
+                  medium: { value: 0 },
+                  long: { value: 0 },
+                  extreme: { value: 0 }
+                }
+              },
+              damage: {
+                type: {
+                  value: "physical"
+                },
+                element: {
+                  value: ""
+                },
+                value: 0,
+                ap: {
+                  value: 0
+                }
+              },
+              category: "drone_weapon",
+              type: "vehicle",
+              roll_mode: "publicroll",
+              source: weaponAcc.source || "",
+              importFlags: {
+                isImported: true
+              }
+            }
+          });
+        }
+        await createdDrone.createEmbeddedDocuments("Item", weaponItems);
+      }
+    }
+  }
+  /**
+   * Gets the drone category based on the drone type.
+   * @param {*} drone The drone data.
+   * @returns The drone category.
+   */
+  getDroneCategory(drone) {
+    console.log("Getting drone category for:", drone);
+    if (drone.subtype) {
+      if (drone.subtype === "AIR") {
+        return "air";
+      } else if (drone.subtype === "GROUND") {
+        return "ground";
+      } else if (drone.subtype === "WATER") {
+        return "water";
+      } else if (drone.subtype === "ANTHROFORM") {
+        return "anthroform";
+      }
+    }
+    const name3 = (drone.name || "").toLowerCase();
+    const description = (drone.description || "").toLowerCase();
+    if (name3.includes("air") || name3.includes("fly") || name3.includes("copter") || description.includes("air") || description.includes("fly") || description.includes("copter")) {
+      return "air";
+    } else if (name3.includes("water") || name3.includes("boat") || name3.includes("submarine") || description.includes("water") || description.includes("boat") || description.includes("submarine")) {
+      return "water";
+    } else if (name3.includes("anthro") || name3.includes("humanoid") || description.includes("anthro") || description.includes("humanoid")) {
+      return "anthroform";
+    } else {
+      return "ground";
+    }
+  }
+  /**
+   * Gets or creates a folder for the given name.
+   * @param {*} folderName The name of the folder.
+   * @returns The folder ID.
+   */
+  async getOrCreateFolder(folderName) {
+    const folder = game.folders.find((f2) => f2.name === folderName && f2.type === "Actor");
+    if (folder) {
+      return folder.id;
+    }
+    const createdFolder = await Folder.create({
+      name: folderName,
+      type: "Actor",
+      parent: null
+    });
+    return createdFolder.id;
+  }
+  /**
+   * Extracts a numeric value from a string or returns a default value.
+   * @param {*} value The value to extract a number from.
+   * @param {number} defaultValue The default value to return if extraction fails.
+   * @returns The extracted number or the default value.
+   */
+  extractNumericValue(value, defaultValue = 0) {
+    if (value === void 0 || value === null) {
+      return defaultValue;
+    }
+    if (typeof value === "number") {
+      return value;
+    }
+    if (typeof value === "string") {
+      const match = value.match(/-?\d+/);
+      if (match) {
+        return parseInt(match[0]);
+      }
+    }
+    return defaultValue;
+  }
+};
+
+// src/module/apps/genesis-import-form.js
+var GenesisImportForm = class extends FormApplication {
+  static {
+    __name(this, "GenesisImportForm");
+  }
+  static get defaultOptions() {
+    const options = super.defaultOptions;
+    options.id = "genesis-import";
+    options.classes = ["shadowrun6-elysium"];
+    options.title = "Genesis Import";
+    options.template = "systems/shadowrun6-elysium/dist/templates/apps/genesis-import.html";
+    options.width = 600;
+    options.height = "auto";
+    return options;
+  }
+  getData() {
+    return {};
+  }
+  activateListeners(html) {
+    html.find(".submit-genesis-import").click(async (event) => {
+      event.preventDefault();
+      const genesisFile = JSON.parse($(".genesis-text").val());
+      const importOptions = {
+        weapons: $(".weapons").is(":checked"),
+        armor: $(".armor").is(":checked"),
+        cyberware: $(".cyberware").is(":checked"),
+        equipment: $(".gear").is(":checked"),
+        qualities: $(".qualities").is(":checked"),
+        powers: $(".powers").is(":checked"),
+        spells: $(".spells").is(":checked"),
+        contacts: $(".contacts").is(":checked"),
+        lifestyles: $(".lifestyles").is(":checked"),
+        vehicles: $(".vehicles").is(":checked"),
+        assignIcons: $(".assignIcons").is(":checked")
+      };
+      const importer = new GenesisImporter();
+      await importer.importGenesisCharacter(this.object, genesisFile, importOptions);
+      ui.notifications?.info(
+        "Genesis import complete! Please check everything to ensure it was imported correctly."
+      );
+      this.close();
+    });
+  }
+};
+
 // src/module/actor/sheets/SR6BaseActorSheet.ts
 var globalSkillAppId = -1;
 var sortByName = /* @__PURE__ */ __name((a2, b2) => {
@@ -34352,6 +36375,7 @@ var SR6BaseActorSheet = class extends ActorSheet {
     html.find(".item-equip-toggle").on("click", this._onListItemToggleEquipped.bind(this));
     html.find(".hidden").hide();
     html.find(".has-desc").on("click", this._onListItemToggleDescriptionVisibility.bind(this));
+    html.find(".list-folder-header").on("click", this._onFolderToggle.bind(this));
     html.find(".item-roll").on("click", this._onItemRoll.bind(this));
     html.find(".Roll").on("click", this._onRoll.bind(this));
     html.find(".inventory-inline-create").on("click", this._onInventoryCreate.bind(this));
@@ -34405,6 +36429,7 @@ var SR6BaseActorSheet = class extends ActorSheet {
     html.find(".show-situation-modifiers-application").on("click", this._onShowSituationModifiersApplication.bind(this));
     html.find(".toggle-fresh-import-all-off").on("click", async (event) => this._toggleAllFreshImportFlags(event, false));
     html.find(".toggle-fresh-import-all-on").on("click", async (event) => this._toggleAllFreshImportFlags(event, true));
+    html.find(".ensure-matrix-actions").on("click", this._onEnsureMatrixActions.bind(this));
     html.find(".reset-actor-run-data").on("click", this._onResetActorRunData.bind(this));
   }
   /**
@@ -35491,16 +37516,44 @@ var SR6BaseActorSheet = class extends ActorSheet {
     await this.actor.updateEmbeddedDocuments("Item", [data]);
   }
   /**
-   * Open the Chummer Character import handling.
+   * Open the Character import handling dialog.
    * @param event
    */
   _onShowImportCharacter(event) {
     event.preventDefault();
-    const options = {
-      name: "chummer-import",
-      title: "Chummer Import"
-    };
-    new ChummerImportForm(this.actor, options).render(true);
+    const content = `
+            <div style="text-align: center; margin-bottom: 10px;">
+                <p>${game.i18n.localize("SR6.ImportCharacterChoose")}</p>
+            </div>
+            <div style="display: flex; justify-content: space-around;">
+                <button class="chummer-import">${game.i18n.localize("SR6.ChummerImport")}</button>
+                <button class="genesis-import">${game.i18n.localize("SR6.GenesisImport")}</button>
+            </div>
+        `;
+    const dialog = new Dialog({
+      title: game.i18n.localize("SR6.ImportCharacter"),
+      content,
+      buttons: {},
+      render: /* @__PURE__ */ __name((html) => {
+        html.find(".chummer-import").click(() => {
+          dialog.close();
+          const options = {
+            name: "chummer-import",
+            title: game.i18n.localize("SR6.ChummerImport")
+          };
+          new ChummerImportForm(this.actor, options).render(true);
+        });
+        html.find(".genesis-import").click(() => {
+          dialog.close();
+          const options = {
+            name: "genesis-import",
+            title: game.i18n.localize("SR6.GenesisImport")
+          };
+          new GenesisImportForm(this.actor, options).render(true);
+        });
+      }, "render")
+    });
+    dialog.render(true);
   }
   _setupCustomCheckbox(html) {
     const setContent = /* @__PURE__ */ __name((el) => {
@@ -35609,6 +37662,40 @@ var SR6BaseActorSheet = class extends ActorSheet {
    */
   get itemEffectApplyTos() {
     return ["actor", "item", "test_all", "test_item", "modifier"];
+  }
+  /**
+   * Handle toggling folder open/closed state
+   * @param event The click event
+   * @private
+   */
+  _onFolderToggle(event) {
+    event.preventDefault();
+    const folderHeader = event.currentTarget;
+    const folder = folderHeader.closest(".list-folder");
+    const folderContent = folder.querySelector(".list-folder-content");
+    const folderToggle = folder.querySelector(".folder-toggle i");
+    folder.classList.toggle("collapsed");
+    folderContent.classList.toggle("hidden");
+    if (folder.classList.contains("collapsed")) {
+      folderToggle.classList.replace("fa-folder-open", "fa-folder");
+    } else {
+      folderToggle.classList.replace("fa-folder", "fa-folder-open");
+    }
+    const folderId = folder.dataset.folderId;
+    if (folderId) {
+      const key = `folders.${folderId}`;
+      const isCollapsed = folder.classList.contains("collapsed");
+      this.actor.setFlag("shadowrun6-elysium", key, isCollapsed);
+    }
+  }
+  /**
+   * Ensure the actor has all matrix actions.
+   * @param event
+   */
+  async _onEnsureMatrixActions(event) {
+    event.preventDefault();
+    await this.actor.ensureMatrixActions();
+    ui.notifications?.info(`Matrix actions have been ensured for ${this.actor.name}.`);
   }
 };
 
@@ -35972,7 +38059,64 @@ var SR6CharacterSheet = class extends SR6BaseActorSheet {
     const data = await super.getData(options);
     super._prepareMatrixAttributes(data);
     data["markedDocuments"] = this.actor.getAllMarkedDocuments();
+    this._prepareActions(data);
     return data;
+  }
+  /**
+   * Separate matrix actions from regular actions
+   * @param sheetData The data for the actor sheet
+   * @private
+   */
+  _prepareActions(sheetData) {
+    if (!sheetData.itemType) {
+      sheetData.itemType = {};
+    }
+    const actions = sheetData.itemType.action || [];
+    console.log("SR6: Total actions before filtering:", actions.length);
+    const matrixActions = [];
+    const nonMatrixActions = [];
+    for (const action of actions) {
+      const isMatrixAction = this._isMatrixAction(action);
+      if (isMatrixAction) {
+        matrixActions.push(action);
+      } else {
+        nonMatrixActions.push(action);
+      }
+    }
+    console.log("SR6: Matrix actions:", matrixActions.length);
+    console.log("SR6: Non-matrix actions:", nonMatrixActions.length);
+    sheetData.matrixActions = matrixActions;
+    sheetData.nonMatrixActions = nonMatrixActions;
+    sheetData.itemType.action = nonMatrixActions;
+    console.log("SR6: Actions after filtering:", sheetData.itemType.action.length);
+    console.log("SR6: Matrix actions array:", sheetData.matrixActions.length);
+  }
+  /**
+   * Get the saved state of a folder
+   * @param folderId The ID of the folder
+   * @param defaultState The default state if no saved state is found
+   * @returns {boolean} True if the folder is collapsed
+   * @private
+   */
+  _getFolderState(folderId, defaultState = false) {
+    const key = `folders.${folderId}`;
+    const state = this.actor.getFlag("shadowrun6-elysium", key);
+    return state !== void 0 ? state : defaultState;
+  }
+  /**
+   * Determine if an action is a matrix action
+   * @param action The action item
+   * @returns {boolean} True if the action is a matrix action
+   * @private
+   */
+  _isMatrixAction(action) {
+    const matrixCategories = [
+      "matrix"
+    ];
+    if (action.system?.action?.categories) {
+      const categories = action.system.action.categories;
+      return categories.some((category3) => matrixCategories.includes(category3));
+    }
   }
   /**
    * Inject special case handling for call in action items, only usable by character actors.
@@ -36801,6 +38945,40 @@ var MeleeAttackTest = class extends SuccessTest {
   _prepareData(data, options) {
     data = super._prepareData(data, options);
     data.damage = data.damage || DataDefaults.damageData();
+    data.attackerAR = data.attackerAR || 0;
+    data.attackerEdge = data.attackerEdge || false;
+    data.defenders = data.defenders || [];
+    if (data.defenders.length === 0 && this.actor) {
+      console.log("Shadowrun 6e | Getting user targets for melee attack");
+      const targets = Helpers.getUserTargets(game.user);
+      console.log("Shadowrun 6e | Found targets:", targets);
+      if (targets && targets.length > 0) {
+        data.defenders = targets.map((token) => {
+          const targetActor = token.actor;
+          if (!targetActor) return null;
+          let dr = 5;
+          const targetArmor = targetActor.system.armor;
+          dr = targetArmor?.defense_rating?.value || 5;
+          console.log("Shadowrun 6e | Target DR Calculation:", {
+            name: targetActor.name,
+            armor: targetArmor,
+            dr
+          });
+          return {
+            actorUuid: targetActor.uuid,
+            dr,
+            name: token.name || "",
+            isWinner: false,
+            edgeAwarded: false,
+            hasSignificantAdvantage: false,
+            edgeReason: ""
+          };
+        }).filter((defender) => defender !== null);
+        console.log("Shadowrun 6e | Final defenders data:", data.defenders);
+      } else {
+        console.log("Shadowrun 6e | No targets found for this test");
+      }
+    }
     return data;
   }
   /**
@@ -36818,6 +38996,9 @@ var MeleeAttackTest = class extends SuccessTest {
   get _dialogTemplate() {
     return "systems/shadowrun6-elysium/dist/templates/apps/dialogs/melee-attack-test-dialog.html";
   }
+  get _chatMessageTemplate() {
+    return "systems/shadowrun6-elysium/dist/templates/rolls/success-test-message.html";
+  }
   get showSuccessLabel() {
     return this.success;
   }
@@ -36825,7 +39006,77 @@ var MeleeAttackTest = class extends SuccessTest {
     if (!this.item || !this.item.isMeleeWeapon) return;
     this.data.reach = this.item.getReach();
     this.data.reach += this.actor?.system.modifiers.reach || 0;
+    this.calculateAR();
+    this.prepareTargets();
     await super.prepareDocumentData();
+  }
+  /**
+   * Prepare targets for the chat message
+   */
+  prepareTargets() {
+    if (!this.data.defenders || this.data.defenders.length === 0) return;
+    this.targets = [];
+    for (const defender of this.data.defenders) {
+      const actor = game.actors?.get(defender.actorUuid.split(".").pop());
+      if (!actor) continue;
+      const token = actor.getActiveTokens()[0];
+      if (!token) continue;
+      this.targets.push(token);
+    }
+    console.log("Shadowrun 6e | Prepared targets for melee attack test:", this.targets);
+  }
+  /**
+   * Calculate the Attack Rating (AR) for melee weapons
+   * If the melee attack is using strength, then Agility is used as the AR calculation
+   * If the melee attack uses agility, then Strength is used for calculating the AR
+   * Melee AR calculation is AR stat + weapon AR
+   */
+  calculateAR() {
+    if (!this.actor || !this.item) return 0;
+    let arStat = 0;
+    let weaponAR = 0;
+    if (this.item.system.action?.damage?.value) {
+      weaponAR = this.item.system.action.damage.value;
+    }
+    if (this.item.usesAgility()) {
+      const strengthAttr = this.actor.findAttribute("strength");
+      if (strengthAttr) {
+        arStat = strengthAttr.value;
+      }
+    } else {
+      const agilityAttr = this.actor.findAttribute("agility");
+      if (agilityAttr) {
+        arStat = agilityAttr.value;
+      }
+    }
+    if (this.item.system.category === "unarmed") {
+      const strengthAttr = this.actor.findAttribute("strength");
+      const reactionAttr = this.actor.findAttribute("reaction");
+      arStat = (strengthAttr ? strengthAttr.value : 0) + (reactionAttr ? reactionAttr.value : 0);
+      weaponAR = 0;
+    }
+    this.data.attackerAR = arStat + weaponAR;
+    let statName = this.item.usesAgility() ? "Strength" : "Agility";
+    if (this.item.system.category === "unarmed") {
+      statName = "Strength + Reaction";
+    }
+    const logMessage = `Melee AR Calculation for ${this.actor.name} using ${this.item.name}:
+${statName} (${arStat}) + Weapon AR (${weaponAR}) = ${this.data.attackerAR}`;
+    console.log(logMessage);
+    console.log("Shadowrun 6e | Melee AR Calculation Details:", {
+      actor: this.actor.name,
+      weapon: this.item.name,
+      statName,
+      arStat,
+      weaponAR,
+      formula: `${arStat} + ${weaponAR} = ${this.data.attackerAR}`,
+      totalAR: this.data.attackerAR
+    });
+    ChatMessage.create({
+      content: `<div class="sr6 chat-card roll-card"><div class="card-content"><b>Melee AR Calculation for ${this.item.name}:</b><br>${statName} (${arStat}) + Weapon AR (${weaponAR}) = ${this.data.attackerAR}</div></div>`,
+      speaker: ChatMessage.getSpeaker({ actor: this.actor })
+    });
+    return this.data.attackerAR;
   }
   /**
    * Remove unneeded environmental modifier categories for melee tests.
@@ -36873,6 +39124,127 @@ var MeleeAttackTest = class extends SuccessTest {
       ui.notifications?.warn("SR6.MissingRessource.SomeAmmoMelee", { localize: true });
     }
     await this.item.useAmmo(1);
+    return true;
+  }
+  async processResults() {
+    console.log("Shadowrun 6e | Processing melee attack test results");
+    await super.processResults();
+    console.log("Shadowrun 6e | Starting edge award calculations");
+    await this.calculateEdgeAwards();
+    console.log("Shadowrun 6e | Finished edge award calculations");
+  }
+  /**
+   * Calculate edge awards based on Attack Rating vs Defense Rating
+   * Edge is awarded when there is a significant advantage (AR vs DR difference >= 4)
+   */
+  async calculateEdgeAwards() {
+    if (!this.actor) {
+      console.log("Shadowrun 6e | Cannot calculate edge awards: No actor found");
+      return;
+    }
+    console.log(`Shadowrun 6e | Calculating edge awards for combat between ${this.actor.name} and ${this.data.defenders.length} defender(s)`);
+    for (const defender of this.data.defenders) {
+      console.log("Shadowrun 6e | Processing defender:", {
+        name: defender.name,
+        uuid: defender.actorUuid,
+        dr: defender.dr
+      });
+      const attackerWins = this.data.attackerAR >= defender.dr;
+      const hasSignificantAdvantage = Math.abs(this.data.attackerAR - defender.dr) >= 4;
+      defender.isWinner = !attackerWins;
+      defender.hasSignificantAdvantage = hasSignificantAdvantage;
+      defender.edgeReason = "";
+      if (!attackerWins && hasSignificantAdvantage) {
+        console.log(`Shadowrun 6e | ${defender.name} (DR: ${defender.dr}) has significant advantage over ${this.actor.name} (AR: ${this.data.attackerAR})`);
+        try {
+          const defenderActor = await fromUuid(defender.actorUuid);
+          if (defenderActor instanceof SR6Actor) {
+            const edge = defenderActor.getEdge();
+            const edgeGainedThisRound = defenderActor.getFlag(SYSTEM_NAME, "edgeGainedThisRound") || 0;
+            if (!edge) {
+              defender.edgeReason = `${defenderActor.name} has no Edge attribute`;
+            } else if (edgeGainedThisRound >= 2) {
+              defender.edgeReason = `${defenderActor.name} has already gained the maximum Edge (${edgeGainedThisRound}) this round`;
+            } else if (edge.uses >= 7) {
+              defender.edgeReason = `${defenderActor.name} is already at maximum Edge (${edge.uses})`;
+            }
+            const canGainEdge = edge && edgeGainedThisRound < 2 && edge.uses < 7;
+            console.log("Shadowrun 6e | Edge check for defender:", {
+              hasEdge: !!edge,
+              edgeValue: edge?.uses,
+              edgeGainedThisRound,
+              canGainEdge
+            });
+            if (canGainEdge) {
+              console.log("Shadowrun 6e | Attempting to award edge to defender");
+              defender.edgeAwarded = await this.awardEdge(defenderActor);
+            }
+          } else {
+            defender.edgeReason = "Invalid actor type for Edge calculation";
+            console.log("Shadowrun 6e | Defender actor is not an SR6Actor:", defenderActor);
+          }
+        } catch (error) {
+          defender.edgeReason = "Error processing Edge calculation";
+          console.error("Shadowrun 6e | Error processing defender:", error);
+        }
+      }
+    }
+  }
+  /**
+   * Award edge to an actor
+   * @param actor The actor to award edge to
+   * @returns True if edge was awarded, false otherwise
+   */
+  async awardEdge(actor) {
+    const edge = actor.getEdge();
+    if (!edge) {
+      console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: No edge attribute found`);
+      await ChatMessage.create({
+        content: `${actor.name} cannot gain Edge (no Edge attribute found)`,
+        speaker: ChatMessage.getSpeaker({ actor })
+      });
+      return false;
+    }
+    const edgeGainedThisRound = actor.getFlag(SYSTEM_NAME, "edgeGainedThisRound") || 0;
+    if (edgeGainedThisRound >= 2) {
+      console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: Maximum edge gained this round (${edgeGainedThisRound})`);
+      await ChatMessage.create({
+        content: `${actor.name} has already gained maximum Edge this round (${edgeGainedThisRound})`,
+        speaker: ChatMessage.getSpeaker({ actor })
+      });
+      return false;
+    }
+    const newEdgeUses = Math.min(7, edge.uses + 1);
+    if (newEdgeUses <= edge.uses) {
+      console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: Already at maximum edge (${edge.uses})`);
+      await ChatMessage.create({
+        content: `${actor.name} is already at maximum Edge (${edge.uses})`,
+        speaker: ChatMessage.getSpeaker({ actor })
+      });
+      return false;
+    }
+    await actor.update({
+      "system.attributes.edge.uses": newEdgeUses
+    });
+    await actor.setFlag(SYSTEM_NAME, "edgeGainedThisRound", edgeGainedThisRound + 1);
+    const token = actor.token || actor.getActiveTokens()[0];
+    if (token) {
+      canvas.interface?.createScrollingText(token.center, `Edge +1`, {
+        anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
+        direction: CONST.TEXT_ANCHOR_POINTS.TOP,
+        distance: 20,
+        fontSize: 24,
+        fill: "#00FF00",
+        stroke: "#000000",
+        strokeThickness: 4,
+        duration: 1e3
+      });
+    }
+    await ChatMessage.create({
+      content: `${actor.name} gains Edge (+1)`,
+      speaker: ChatMessage.getSpeaker({ actor })
+    });
+    console.log(`Shadowrun 6e | Edge awarded to ${actor.name}: ${edge.uses} \u2192 ${newEdgeUses}`);
     return true;
   }
 };
@@ -36950,7 +39322,41 @@ var SpellCastingTest = class extends SuccessTest {
     data.force = data.force || 0;
     data.drain = data.drain || 0;
     data.reckless = data.reckless || false;
+    data.attackerAR = data.attackerAR || 0;
+    data.attackerEdge = data.attackerEdge || false;
+    data.defenders = data.defenders || [];
     data.drainDamage = data.drainDamage || DataDefaults.damageData();
+    if (data.defenders.length === 0 && this.actor) {
+      console.log("Shadowrun 6e | Getting user targets for spell casting");
+      const targets = Helpers.getUserTargets(game.user);
+      console.log("Shadowrun 6e | Found targets:", targets);
+      if (targets && targets.length > 0) {
+        data.defenders = targets.map((token) => {
+          const targetActor = token.actor;
+          if (!targetActor) return null;
+          let dr = 5;
+          const targetArmor = targetActor.system.armor;
+          dr = targetArmor?.defense_rating?.value || 5;
+          console.log("Shadowrun 6e | Target DR Calculation:", {
+            name: targetActor.name,
+            armor: targetArmor,
+            dr
+          });
+          return {
+            actorUuid: targetActor.uuid,
+            dr,
+            name: token.name || "",
+            isWinner: false,
+            edgeAwarded: false,
+            hasSignificantAdvantage: false,
+            edgeReason: ""
+          };
+        }).filter((defender) => defender !== null);
+        console.log("Shadowrun 6e | Final defenders data:", data.defenders);
+      } else {
+        console.log("Shadowrun 6e | No targets found for this test");
+      }
+    }
     return data;
   }
   get _dialogTemplate() {
@@ -36998,7 +39404,66 @@ var SpellCastingTest = class extends SuccessTest {
   }
   async prepareDocumentData() {
     this.prepareInitialForceValue();
+    this.calculateAR();
+    this.prepareTargets();
     await super.prepareDocumentData();
+  }
+  /**
+   * Prepare targets for the chat message
+   */
+  prepareTargets() {
+    if (!this.data.defenders || this.data.defenders.length === 0) return;
+    this.targets = [];
+    for (const defender of this.data.defenders) {
+      const actor = game.actors?.get(defender.actorUuid.split(".").pop());
+      if (!actor) continue;
+      const token = actor.getActiveTokens()[0];
+      if (!token) continue;
+      this.targets.push(token);
+    }
+    console.log("Shadowrun 6e | Prepared targets for spell casting test:", this.targets);
+  }
+  /**
+   * Calculate the Attack Rating (AR) for magical attacks
+   * For magical attack rating, the AR is the Magic + tradition attribute
+   * The tradition attribute comes from the drain attribute setting
+   */
+  calculateAR() {
+    if (!this.actor) return 0;
+    const magicAttr = this.actor.findAttribute("magic");
+    if (!magicAttr) return 0;
+    let drainAttr = "charisma";
+    console.log("Shadowrun 6e | Actor magic data:", {
+      actorName: this.actor.name,
+      magicData: this.actor.system.magic,
+      drainAttribute: this.actor.system.magic?.attribute
+    });
+    if (this.actor.system.magic?.attribute) {
+      drainAttr = this.actor.system.magic.attribute;
+      console.log(`Shadowrun 6e | Using drain attribute from actor: ${drainAttr}`);
+    } else {
+      console.log(`Shadowrun 6e | No drain attribute found, using default: ${drainAttr}`);
+    }
+    const drainAttrValue = this.actor.findAttribute(drainAttr)?.value || 0;
+    this.data.attackerAR = magicAttr.value + drainAttrValue;
+    const logMessage = `Magical AR Calculation for ${this.actor.name}:
+Magic (${magicAttr.value}) + ${drainAttr.charAt(0).toUpperCase() + drainAttr.slice(1)} (${drainAttrValue}) = ${this.data.attackerAR}`;
+    console.log(logMessage);
+    console.log("Shadowrun 6e | Magical AR Calculation Details:", {
+      actor: this.actor.name,
+      magic: magicAttr.value,
+      drainAttribute: drainAttr,
+      drainValue: drainAttrValue,
+      formula: `${magicAttr.value} + ${drainAttrValue} = ${this.data.attackerAR}`,
+      totalAR: this.data.attackerAR
+    });
+    if (this.item) {
+      ChatMessage.create({
+        content: `<div class="sr6 chat-card roll-card"><div class="card-content"><b>Spell AR Calculation for ${this.item.name}:</b><br>Magic (${magicAttr.value}) + ${drainAttr.charAt(0).toUpperCase() + drainAttr.slice(1)} (${drainAttrValue}) = ${this.data.attackerAR}</div></div>`,
+        speaker: ChatMessage.getSpeaker({ actor: this.actor })
+      });
+    }
+    return this.data.attackerAR;
   }
   /**
    * Set a force value based on the items history or viable suggestions.
@@ -37047,6 +39512,123 @@ var SpellCastingTest = class extends SuccessTest {
   async processResults() {
     this.calcDrainDamage();
     await super.processResults();
+    console.log("Shadowrun 6e | Starting edge award calculations");
+    await this.calculateEdgeAwards();
+    console.log("Shadowrun 6e | Finished edge award calculations");
+  }
+  /**
+   * Calculate edge awards based on Attack Rating vs Defense Rating
+   * Edge is awarded when there is a significant advantage (AR vs DR difference >= 4)
+   */
+  async calculateEdgeAwards() {
+    if (!this.actor) {
+      console.log("Shadowrun 6e | Cannot calculate edge awards: No actor found");
+      return;
+    }
+    console.log(`Shadowrun 6e | Calculating edge awards for combat between ${this.actor.name} and ${this.data.defenders.length} defender(s)`);
+    for (const defender of this.data.defenders) {
+      console.log("Shadowrun 6e | Processing defender:", {
+        name: defender.name,
+        uuid: defender.actorUuid,
+        dr: defender.dr
+      });
+      const attackerWins = this.data.attackerAR >= defender.dr;
+      const hasSignificantAdvantage = Math.abs(this.data.attackerAR - defender.dr) >= 4;
+      defender.isWinner = !attackerWins;
+      defender.hasSignificantAdvantage = hasSignificantAdvantage;
+      defender.edgeReason = "";
+      if (!attackerWins && hasSignificantAdvantage) {
+        console.log(`Shadowrun 6e | ${defender.name} (DR: ${defender.dr}) has significant advantage over ${this.actor.name} (AR: ${this.data.attackerAR})`);
+        try {
+          const defenderActor = await fromUuid(defender.actorUuid);
+          if (defenderActor instanceof SR6Actor) {
+            const edge = defenderActor.getEdge();
+            const edgeGainedThisRound = defenderActor.getFlag(SYSTEM_NAME, "edgeGainedThisRound") || 0;
+            if (!edge) {
+              defender.edgeReason = `${defenderActor.name} has no Edge attribute`;
+            } else if (edgeGainedThisRound >= 2) {
+              defender.edgeReason = `${defenderActor.name} has already gained the maximum Edge (${edgeGainedThisRound}) this round`;
+            } else if (edge.uses >= 7) {
+              defender.edgeReason = `${defenderActor.name} is already at maximum Edge (${edge.uses})`;
+            }
+            const canGainEdge = edge && edgeGainedThisRound < 2 && edge.uses < 7;
+            console.log("Shadowrun 6e | Edge check for defender:", {
+              hasEdge: !!edge,
+              edgeValue: edge?.uses,
+              edgeGainedThisRound,
+              canGainEdge
+            });
+            if (canGainEdge) {
+              console.log("Shadowrun 6e | Attempting to award edge to defender");
+              defender.edgeAwarded = await this.awardEdge(defenderActor);
+            }
+          } else {
+            defender.edgeReason = "Invalid actor type for Edge calculation";
+            console.log("Shadowrun 6e | Defender actor is not an SR6Actor:", defenderActor);
+          }
+        } catch (error) {
+          defender.edgeReason = "Error processing Edge calculation";
+          console.error("Shadowrun 6e | Error processing defender:", error);
+        }
+      }
+    }
+  }
+  /**
+   * Award edge to an actor
+   * @param actor The actor to award edge to
+   * @returns True if edge was awarded, false otherwise
+   */
+  async awardEdge(actor) {
+    const edge = actor.getEdge();
+    if (!edge) {
+      console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: No edge attribute found`);
+      await ChatMessage.create({
+        content: `${actor.name} cannot gain Edge (no Edge attribute found)`,
+        speaker: ChatMessage.getSpeaker({ actor })
+      });
+      return false;
+    }
+    const edgeGainedThisRound = actor.getFlag(SYSTEM_NAME, "edgeGainedThisRound") || 0;
+    if (edgeGainedThisRound >= 2) {
+      console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: Maximum edge gained this round (${edgeGainedThisRound})`);
+      await ChatMessage.create({
+        content: `${actor.name} has already gained maximum Edge this round (${edgeGainedThisRound})`,
+        speaker: ChatMessage.getSpeaker({ actor })
+      });
+      return false;
+    }
+    const newEdgeUses = Math.min(7, edge.uses + 1);
+    if (newEdgeUses <= edge.uses) {
+      console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: Already at maximum edge (${edge.uses})`);
+      await ChatMessage.create({
+        content: `${actor.name} is already at maximum Edge (${edge.uses})`,
+        speaker: ChatMessage.getSpeaker({ actor })
+      });
+      return false;
+    }
+    await actor.update({
+      "system.attributes.edge.uses": newEdgeUses
+    });
+    await actor.setFlag(SYSTEM_NAME, "edgeGainedThisRound", edgeGainedThisRound + 1);
+    const token = actor.token || actor.getActiveTokens()[0];
+    if (token) {
+      canvas.interface?.createScrollingText(token.center, `Edge +1`, {
+        anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
+        direction: CONST.TEXT_ANCHOR_POINTS.TOP,
+        distance: 20,
+        fontSize: 24,
+        fill: "#00FF00",
+        stroke: "#000000",
+        strokeThickness: 4,
+        duration: 1e3
+      });
+    }
+    await ChatMessage.create({
+      content: `${actor.name} gains Edge (+1)`,
+      speaker: ChatMessage.getSpeaker({ actor })
+    });
+    console.log(`Shadowrun 6e | Edge awarded to ${actor.name}: ${edge.uses} \u2192 ${newEdgeUses}`);
+    return true;
   }
   /**
    * Allow the currently used force value of this spell item to be reused next time.
@@ -38726,54 +41308,54 @@ var shadowrunMatrix = /* @__PURE__ */ __name((context) => {
   describe("Matrix Rules", () => {
     it("calculate IC device rating", () => {
       let hostRating = 5;
-      assert.strictEqual(MatrixRules.getICDeviceRating(hostRating), hostRating);
+      assert.strictEqual(MatrixRules2.getICDeviceRating(hostRating), hostRating);
       hostRating = -1;
-      assert.strictEqual(MatrixRules.getICDeviceRating(hostRating), 0);
+      assert.strictEqual(MatrixRules2.getICDeviceRating(hostRating), 0);
     });
     it("calculate IC condition monitor", () => {
-      assert.strictEqual(MatrixRules.getConditionMonitor(0), 8);
-      assert.strictEqual(MatrixRules.getConditionMonitor(1), 9);
-      assert.strictEqual(MatrixRules.getConditionMonitor(4), 10);
-      assert.strictEqual(MatrixRules.getConditionMonitor(-1), 8);
+      assert.strictEqual(MatrixRules2.getConditionMonitor(0), 8);
+      assert.strictEqual(MatrixRules2.getConditionMonitor(1), 9);
+      assert.strictEqual(MatrixRules2.getConditionMonitor(4), 10);
+      assert.strictEqual(MatrixRules2.getConditionMonitor(-1), 8);
     });
     it("calculate IC matrix initiative base", () => {
-      assert.strictEqual(MatrixRules.getICInitiativeBase(0), 0);
-      assert.strictEqual(MatrixRules.getICInitiativeBase(-3), 0);
-      assert.strictEqual(MatrixRules.getICInitiativeBase(1), 2);
-      assert.strictEqual(MatrixRules.getICInitiativeBase(2), 4);
-      assert.strictEqual(MatrixRules.getICInitiativeBase(3), 6);
-      assert.strictEqual(MatrixRules.getICInitiativeBase(12), 24);
+      assert.strictEqual(MatrixRules2.getICInitiativeBase(0), 0);
+      assert.strictEqual(MatrixRules2.getICInitiativeBase(-3), 0);
+      assert.strictEqual(MatrixRules2.getICInitiativeBase(1), 2);
+      assert.strictEqual(MatrixRules2.getICInitiativeBase(2), 4);
+      assert.strictEqual(MatrixRules2.getICInitiativeBase(3), 6);
+      assert.strictEqual(MatrixRules2.getICInitiativeBase(12), 24);
     });
     it("calculate IC matrix initiative dice", () => {
-      assert.strictEqual(MatrixRules.getICInitiativeDice(), 4);
+      assert.strictEqual(MatrixRules2.getICInitiativeDice(), 4);
     });
     it("calculate meat attribute base with the host rating", () => {
-      assert.strictEqual(MatrixRules.getICMeatAttributeBase(0), 0);
-      assert.strictEqual(MatrixRules.getICMeatAttributeBase(-3), 0);
-      assert.strictEqual(MatrixRules.getICMeatAttributeBase(3), 3);
-      assert.strictEqual(MatrixRules.getICMeatAttributeBase(27), 27);
+      assert.strictEqual(MatrixRules2.getICMeatAttributeBase(0), 0);
+      assert.strictEqual(MatrixRules2.getICMeatAttributeBase(-3), 0);
+      assert.strictEqual(MatrixRules2.getICMeatAttributeBase(3), 3);
+      assert.strictEqual(MatrixRules2.getICMeatAttributeBase(27), 27);
     });
     it("disallow invalid marks counters", () => {
-      assert.isTrue(MatrixRules.isValidMarksCount(0));
-      assert.isTrue(MatrixRules.isValidMarksCount(1));
-      assert.isTrue(MatrixRules.isValidMarksCount(2));
-      assert.isTrue(MatrixRules.isValidMarksCount(3));
-      assert.isFalse(MatrixRules.isValidMarksCount(-1));
-      assert.isFalse(MatrixRules.isValidMarksCount(4));
-      assert.isFalse(MatrixRules.isValidMarksCount(1.5));
+      assert.isTrue(MatrixRules2.isValidMarksCount(0));
+      assert.isTrue(MatrixRules2.isValidMarksCount(1));
+      assert.isTrue(MatrixRules2.isValidMarksCount(2));
+      assert.isTrue(MatrixRules2.isValidMarksCount(3));
+      assert.isFalse(MatrixRules2.isValidMarksCount(-1));
+      assert.isFalse(MatrixRules2.isValidMarksCount(4));
+      assert.isFalse(MatrixRules2.isValidMarksCount(1.5));
     });
     it("return valid marks counts", () => {
-      assert.strictEqual(MatrixRules.getValidMarksCount(-1), MatrixRules.minMarksCount());
-      assert.strictEqual(MatrixRules.getValidMarksCount(0), 0);
-      assert.strictEqual(MatrixRules.getValidMarksCount(1), 1);
-      assert.strictEqual(MatrixRules.getValidMarksCount(2), 2);
-      assert.strictEqual(MatrixRules.getValidMarksCount(3), 3);
-      assert.strictEqual(MatrixRules.getValidMarksCount(4), MatrixRules.maxMarksCount());
+      assert.strictEqual(MatrixRules2.getValidMarksCount(-1), MatrixRules2.minMarksCount());
+      assert.strictEqual(MatrixRules2.getValidMarksCount(0), 0);
+      assert.strictEqual(MatrixRules2.getValidMarksCount(1), 1);
+      assert.strictEqual(MatrixRules2.getValidMarksCount(2), 2);
+      assert.strictEqual(MatrixRules2.getValidMarksCount(3), 3);
+      assert.strictEqual(MatrixRules2.getValidMarksCount(4), MatrixRules2.maxMarksCount());
     });
     it("return expected host matrix attribute ratings", () => {
-      assert.deepEqual(MatrixRules.hostMatrixAttributeRatings(1), [1, 2, 3, 4]);
-      assert.deepEqual(MatrixRules.hostMatrixAttributeRatings(2), [2, 3, 4, 5]);
-      assert.deepEqual(MatrixRules.hostMatrixAttributeRatings(10), [10, 11, 12, 13]);
+      assert.deepEqual(MatrixRules2.hostMatrixAttributeRatings(1), [1, 2, 3, 4]);
+      assert.deepEqual(MatrixRules2.hostMatrixAttributeRatings(2), [2, 3, 4, 5]);
+      assert.deepEqual(MatrixRules2.hostMatrixAttributeRatings(10), [10, 11, 12, 13]);
     });
   });
 }, "shadowrunMatrix");

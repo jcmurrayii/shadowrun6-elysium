@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item avail="5"  cost="3500" id="horizon_mapmaster" type="DRONE_MINI" subtype="AIR">
+      <vehicle han="3" acc="15" spdi="15" tspd="40" bod="1" arm="0" pil="2" sen="2" />
+   </item>
+   <item avail="3" cost="300" id="horizon_mapmaster_system" maxrat="6" rate="true" ratemul="PRICE">
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+</items>

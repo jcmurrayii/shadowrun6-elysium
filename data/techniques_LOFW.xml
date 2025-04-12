@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<techniques>
+
+	<technique cat="STRIKING" id="rake" />
+
+	<technique cat="GRAPPLING" id="arm_bar_breaker" >
+		<requires>
+				<techreq ref="bending_of_the_reed_melee"/>
+		</requires>
+	</technique>
+
+	<technique cat="RANGED" id="barrel_strike" />
+
+	<technique cat="STRIKING" id="steel_typhoon" />
+
+	<technique cat="STRIKING" id="soul_breaking" >
+		<requires>
+			<techreq ref="tameshiwari"/>
+		</requires>
+	</technique>
+
+	<technique cat="GENERAL" id="limb_dropping" />
+
+	<technique cat="GENERAL" id="plasteel_shirt" >
+		<modifications>
+			<attrmod attr="DAMAGE_RESISTANCE" type="AUGMENTED" val="2"/>
+		</modifications>
+	</technique>
+
+	<technique cat="MOBILITY" id="sense_the_breeze" />
+
+</techniques>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+    <item id="fangs" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon  dmg="2P" attack="5,,,," skill="close_combat" spec="close_combat/unarmed"/>
+    </item>
+    <item id="functional_wings_type_1" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon  dmg="1P" attack="4,,,," skill="close_combat" spec="close_combat/unarmed"/>
+    </item>
+    <item id="functional_wings_type_2" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon  dmg="3P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed"/>
+    </item>
+    <item id="natural_weapon_centaur" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon  dmg="3S" attack="10,,,," skill="close_combat" spec="close_combat/unarmed"/>
+    </item>
+    <item id="natural_weapon_naga" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon  dmg="3P" attack="8,,,," skill="close_combat" spec="close_combat/unarmed"/>
+    </item>
+    <item id="natural_weapon_sasquatch" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon  dmg="3P" attack="10,,,," skill="close_combat" spec="close_combat/unarmed"/>
+    </item>
+	<item id="natural_weapon_ghoul_claws" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon  dmg="3P" attack="9,,,," skill="close_combat" spec="close_combat/unarmed"/>
+    </item>
+	<item id="natural_weapon_ghoul_bite" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon  dmg="4P" attack="9,,,," skill="close_combat" spec="close_combat/unarmed"/>
+    </item>
+    <item avail="0" cost="0" id="armor_power_armor" rate="true" ratemul="MODIFIER" modonly="true">
+		<useas type="ARMOR" subtype="ARMOR_BODY" />
+		<armor rating="1" add="true"/>
+    </item>
+
+    <item id="nw_quills" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="3P" attack="6,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_corrosive_spit1" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="2P" attack="4,6,4,," mode="SS" skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_corrosive_spit2" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="4P" attack="4,6,4,," mode="SS" skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_corrosive_spit3" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="6P" attack="4,6,4,," mode="SS" skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_corrosive_spit4" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="8P" attack="4,6,4,," mode="SS" skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_venom_spittle_stun1" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="2S" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_venom_spittle_stun2" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="4S" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_venom_spittle_stun3" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="6S" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_venom_spittle_stun4" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="8S" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_venom_spittle_phys1" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="2P" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_venom_spittle_phys2" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="4P" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_venom_spittle_phys3" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="6P" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_venom_spittle_phys4" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="8P" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_claws_dig" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon  dmg="1P" attack="4,,,," skill="close_combat" spec="close_combat/unarmed" />
+    </item>
+    <item id="nw_claws_razor" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon  dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/unarmed" />
+    </item>
+    <item id="nw_claws_retract" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon  dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/unarmed" />
+    </item>
+    <item id="nw_frog_tongue" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="0P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_tail_thagomizer" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="3P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_tail_whip" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_CLOSE_COMBAT" subtype="WHIPS"/>
+                <weapon dmg="1P" attack="6,,,,"  skill="exotic_weapons" spec="exotic_weapons/whips" />
+    </item>
+    <item id="nw_raptor_beak" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon  dmg="2P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed" />
+    </item>
+    <item id="nw_bone_spikes" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon  dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/blades"/>
+    </item>
+    <item id="nw_goring_horns" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon  dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/unarmed"/>
+    </item>
+    <item id="nw_larger_tusks" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon  dmg="2P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed" />
+    </item>
+    <item id="nw_proboscis" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="2S" attack="0,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_thorns" avail="0" cost="0" modonly="true">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon  dmg="2P" attack="1,,,," skill="close_combat" spec="close_combat/unarmed"/>
+    </item>
+    <item id="nw_exhale_s1" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="2S" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_exhale_s2" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="4S" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_exhale_s3" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="6S" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_exhale_s4" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="8S" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_exhale_p1" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="2P" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_exhale_p2" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="4P" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_exhale_p3" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="6P" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+    <item id="nw_exhale_p4" avail="0" cost="0" modonly="true">
+                <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+		<weapon  dmg="8P" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/other" />
+    </item>
+
+</items>

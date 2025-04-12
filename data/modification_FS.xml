@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<itemenhancements>
+	<itemenhancement id="paint_grenade_tracking_dye" avail="0" cost="20" size="0">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="GRENADES"/>
+	    </anyreq>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="paint_grenade_glitter" avail="0" cost="15" size="0">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="GRENADES"/>
+	    </anyreq>
+	  </requires>
+	</itemenhancement>
+</itemenhancements>

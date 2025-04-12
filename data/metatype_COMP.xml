@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metatypes>
+    <metatype id="dour" variantof="dwarf" karma="10">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="7"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="6"/>
+            <attrmod type="MAX"      attr="REACTION"  val="8"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="6"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="7"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="7"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="6"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="allergy_sunlight_extreme"/>
+            <qualitymod ref="low-light_vision"/>
+            <qualitymod ref="thermographic_vision"/>
+            <qualitymod ref="toxin_resistance"/>
+            <qualitymod ref="unusual_hair"/>
+         </modifications>
+    </metatype>
+<metatype id="gnome" variantof="dwarf" karma="5">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="4"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="6"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="4"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="7"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="7"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="6"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="magic_resistance" val="1"/>
+            <qualitymod ref="neoteny"/>
+            <qualitymod ref="thermographic_vision"/>
+            <qualitymod ref="toxin_resistance"/>
+         </modifications>
+    </metatype>
+    <metatype id="hanuman" variantof="dwarf" karma="5">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="6"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="7"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="7"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="7"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="6"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="low-light_vision"/>
+            <qualitymod ref="monkey_paws"/>
+            <qualitymod ref="functional_tail_prehensile"/>
+            <qualitymod ref="toxin_resistance"/>
+            <qualitymod ref="unusual_hair_body"/>
+         </modifications>
+    </metatype>
+    <metatype id="koborokuru" variantof="dwarf" karma="5">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="7"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="6"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="7"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="7"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="6"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="celerity"/>
+            <qualitymod ref="thermographic_vision"/>
+            <qualitymod ref="toxin_resistance"/>
+            <qualitymod ref="unusual_hair"/>
+         </modifications>
+    </metatype>
+    <metatype id="menehune" variantof="dwarf" karma="5">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="7"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="7"/>
+            <attrmod type="MAX"      attr="REACTION"  val="5"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="7"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="6"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="thermographic_vision"/>
+            <qualitymod ref="toxin_resistance"/>
+            <qualitymod ref="underwater_vision"/>
+            <qualitymod ref="webbed_digits"/>
+         </modifications>
+    </metatype>
+    <metatype id="dalakitnon" variantof="elf" karma="5">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="6"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="7"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="6"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="8"/>
+            <attrmod type="MAX"      attr="INTUITION" val="7"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="8"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="allergy_spices_moderate"/>
+            <qualitymod ref="gender_transmorphism"/>
+            <qualitymod ref="low-light_vision"/>
+         </modifications>
+    </metatype>
+    <metatype id="dryad" variantof="elf" karma="5">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="6"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="7"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="5"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="8"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="glamour"/>
+            <qualitymod ref="low-light_vision"/>
+            <qualitymod ref="symbiosis"/>
+         </modifications>
+    </metatype>
+    <metatype id="nocturna" variantof="elf" karma="5">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="5"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="8"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="6"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="7"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="allergy_sunlight_mild"/>
+            <qualitymod ref="low-light_vision"/>
+            <qualitymod ref="keen-eared"/>
+            <qualitymod ref="nocturnal"/>
+            <qualitymod ref="unusual_hair_colored_fur"/>
+         </modifications>
+    </metatype>
+    <metatype id="wakyambi" variantof="elf" karma="10">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="6"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="7"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="6"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="7"/>
+            <attrmod type="MAX"      attr="EDGE"      val="7"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="celerity"/>
+            <qualitymod ref="elongated_limbs"/>
+            <qualitymod ref="low-light_vision"/>
+         </modifications>
+    </metatype>
+    <metatype id="xapiri_thepe" variantof="elf" karma="5">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="6"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="7"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="6"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="7"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="allergy_pollutants_mild"/>
+            <qualitymod ref="bioluminescence_uv_spectrum"/>
+            <qualitymod ref="low-light_vision"/>
+            <qualitymod ref="photometabolism"/>
+         </modifications>
+    </metatype>
+    <metatype id="nartaki_1" variantof="human" karma="5">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="7"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="6"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="7"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="6"/>
+            <attrmod type="MAX"      attr="EDGE"      val="7"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="shiva_arms_nartaki" val="1"/>
+            <qualitymod ref="striking_skin_pigmentation"/>
+         </modifications>
+    </metatype>
+    <metatype id="nartaki_2" variantof="human" karma="10">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="8"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="6"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="8"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="6"/>
+            <attrmod type="MAX"      attr="EDGE"      val="7"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="shiva_arms_nartaki" val="2"/>
+            <qualitymod ref="striking_skin_pigmentation"/>
+         </modifications>
+    </metatype>
+    <metatype id="valkyrie" variantof="human" karma="15">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="7"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="6"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="7"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="6"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="functional_wings_type_2"/>
+         </modifications>
+    </metatype>
+    <metatype id="hobgoblin" variantof="ork" karma="5">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="6"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="6"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="7"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="7"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="fangs"/>
+            <qualitymod ref="low-light_vision"/>
+            <qualitymod ref="extravagant_eyes"/>
+            <qualitymod ref="poor_self_control_vindictive"/>
+         </modifications>
+    </metatype>
+    <metatype id="ogre" variantof="ork" karma="5">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="9"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="6"/>
+            <attrmod type="MAX"      attr="REACTION"  val="5"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="8"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="7"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="6"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="low-light_vision"/>
+            <qualitymod ref="ogre_stomach"/>
+         </modifications>
+    </metatype>
+    <metatype id="oni" variantof="ork" karma="5">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="8"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="7"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="7"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="7"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="low-light_vision"/>
+            <qualitymod ref="striking_skin_pigmentation"/>
+         </modifications>
+    </metatype>
+    <metatype id="satyr" variantof="ork" karma="10">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="7"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="6"/>
+            <attrmod type="MAX"      attr="REACTION"  val="7"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="7"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="6"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="low-light_vision"/>
+            <qualitymod ref="satyr_legs"/>
+         </modifications>
+    </metatype>
+    <metatype id="centaur" variantof="troll" karma="15">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="8"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="6"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="9"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="6"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="low-light_vision"/>
+            <qualitymod ref="magic_sense"/>
+            <qualitymod ref="search"/>
+            <qualitymod ref="thermographic_vision"/>
+            <qualitymod ref="natural_weapon_centaur"/>
+            <qualitymod ref="movement_centaur"/>
+         </modifications>
+    </metatype>
+    <metatype id="merrow" variantof="troll" karma="15">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="9"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="6"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="9"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="6"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="biosonar"/>
+            <qualitymod ref="built_tough" val="2"/>
+            <qualitymod ref="dual_natured"/>
+            <allowmod skill="astral" />
+            <qualitymod ref="low-light_vision"/>
+            <qualitymod ref="movement_merrow_ground"/>
+            <qualitymod ref="movement_merrow_swimming"/>
+            <qualitymod ref="underwater_vision"/>
+         </modifications>
+    </metatype>
+    <metatype id="naga" variantof="troll" karma="15">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="8"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="7"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="9"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="7"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="7"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="armor_1" val="4"/>
+            <qualitymod ref="built_tough" val="2"/>
+            <qualitymod ref="cold-blooded"/>
+            <qualitymod ref="dual_natured"/>
+            <allowmod skill="astral" />
+            <qualitymod ref="guard"/>
+            <qualitymod ref="movement_naga_ground"/>
+            <qualitymod ref="movement_naga_swimming"/>
+            <qualitymod ref="natural_weapon_naga"/>
+            <qualitymod ref="venom"/>
+         </modifications>
+    </metatype>
+    <metatype id="pixie" variantof="troll" karma="10">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="3"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="8"/>
+            <attrmod type="MAX"      attr="REACTION"  val="8"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="2"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="8"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="7"/>
+            <attrmod type="MAX"      attr="INTUITION" val="7"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="8"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="astral_perception"/>
+	    <allowmod skill="astral" />
+            <qualitymod ref="allergy_iron_medium"/>
+            <qualitymod ref="concealment_self"/>
+            <qualitymod ref="movement_pixie_walk"/>
+            <qualitymod ref="movement_pixie_flight"/>
+            <qualitymod ref="vanishing"/>
+         </modifications>
+    </metatype>
+    <metatype id="sasquatch" variantof="troll" karma="10">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="10"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="6"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="10"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="6"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="dual_natured"/>
+            <allowmod skill="astral" />
+            <qualitymod ref="mimicry"/>
+            <qualitymod ref="movement_sasquatch"/>
+            <qualitymod ref="natural_weapon_sasquatch"/>
+         </modifications>
+    </metatype>
+</metatypes>

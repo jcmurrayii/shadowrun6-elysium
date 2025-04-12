@@ -1,0 +1,41 @@
+<form class="{{cssClass}} wholesheet" autocomplete="off">
+    {{> "systems/shadowrun6-elysium/dist/mod_templates/item/parts/header.html" }}
+    <nav class="tabs" data-group="primary">
+        <a class="item" data-tab="description">{{localize "SR6.Description"}}</a>
+        <!--<a class="item" data-tab="info">{{localize "SR6.Information"}}</a>-->
+        <a class="item" data-tab="action">{{localize "SR6.Action"}}</a>
+        <a class="item" data-tab="effects">{{ localize "SR6.Effects" }}</a>
+    </nav>
+    <section class="sheetbody">
+        <div class="tab" data-group="primary" data-tab="description">
+            <div class="flexrow align-start nowrap full-height">
+                {{> "systems/shadowrun6-elysium/dist/mod_templates/item/parts/description.html"}}
+            </div>
+        </div>
+        <div class="tab" data-group="primary" data-tab="action">
+            <div class="tabbody">
+                <div class="inventory">
+                    <div class="scroll-area">
+                        {{> "systems/shadowrun6-elysium/dist/mod_templates/item/parts/action.html" header="Test Details"}}
+                        {{> "systems/shadowrun6-elysium/dist/mod_templates/item/parts/modifier.html" header="SR6.Labels.Action.Modifiers"}}
+                        {{> "systems/shadowrun6-elysium/dist/mod_templates/item/parts/damage.html" header="Damage"}}
+                        {{> "systems/shadowrun6-elysium/dist/mod_templates/item/parts/opposed.html" header="Opposed Test"}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--
+        <div class="tab" data-group="primary" data-tab="info">
+            <div class="tabbody">
+                <div class="inventory">
+                    <div class="scroll-area">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+        {{> "systems/shadowrun6-elysium/dist/mod_templates/actor/tabs/EffectsTab.html"}}
+    </section>
+</form>

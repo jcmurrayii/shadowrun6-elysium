@@ -6,16 +6,36 @@
             rightSide=(ItemHeaderRightSide 'action')
             itemId='action'
     }}
-    {{#each itemType.action as |item iid|}}
-    {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListItem.html'
-    img=item.img
-    name=item.name
-    itemId=item._id
-    icons=(ItemIcons item)
-    rightSide=(ItemRightSide item)
-    hasDesc="true"
-    hasRoll="true"
-    description=item.description.value
-    }}
-    {{/each}}
+
+    {{!-- Regular Actions --}}
+    {{#if nonMatrixActions}}
+        {{#each nonMatrixActions as |item iid|}}
+        {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListItem.html'
+        img=item.img
+        name=item.name
+        itemId=item._id
+        icons=(ItemIcons item)
+        rightSide=(ItemRightSide item)
+        hasDesc="true"
+        hasRoll="true"
+        description=item.description.value
+        }}
+        {{/each}}
+    {{else}}
+        {{!-- Fallback to using itemType.action if nonMatrixActions is not available --}}
+        {{#each itemType.action as |item iid|}}
+            {{#unless (contains item.name "Matrix")}} {{!-- Skip items with Matrix in the name --}}
+            {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListItem.html'
+            img=item.img
+            name=item.name
+            itemId=item._id
+            icons=(ItemIcons item)
+            rightSide=(ItemRightSide item)
+            hasDesc="true"
+            hasRoll="true"
+            description=item.description.value
+            }}
+            {{/unless}}
+        {{/each}}
+    {{/if}}
 </div>

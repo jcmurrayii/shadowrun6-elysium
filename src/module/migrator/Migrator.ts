@@ -2,6 +2,8 @@ import { VersionMigration } from './VersionMigration';
 import {Version0_8_0} from "./versions/Version0_8_0";
 import { Version0_18_0 } from './versions/Version0_18_0';
 import { Version0_16_0 } from './versions/Version0_16_0';
+import { Version0_24_0 } from './versions/Version0_24_0';
+import { Version0_24_1 } from './versions/Version0_24_1';
 
 type VersionDefinition = {
     versionNumber: string;
@@ -12,7 +14,9 @@ export class Migrator {
     private static readonly s_Versions: VersionDefinition[] = [
         { versionNumber: Version0_8_0.TargetVersion, migration: new Version0_8_0() },
         { versionNumber: Version0_18_0.TargetVersion, migration: new Version0_18_0() },
-        { versionNumber: Version0_16_0.TargetVersion, migration: new Version0_16_0() }
+        { versionNumber: Version0_16_0.TargetVersion, migration: new Version0_16_0() },
+        { versionNumber: Version0_24_0.TargetVersion, migration: new Version0_24_0() },
+        { versionNumber: Version0_24_1.TargetVersion, migration: new Version0_24_1() }
     ];
 
     /**

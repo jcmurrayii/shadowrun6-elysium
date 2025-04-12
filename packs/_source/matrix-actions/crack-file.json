@@ -1,32 +1,32 @@
 {
   "name": "Crack File",
   "type": "action",
-  "flags": {},
-  "img": "systems/shadowrun6-elysium/dist/icons/compact-disc.svg",
-  "effects": [],
-  "_id": "EcRsJOjgnhnVj2XX",
+  "_id": "O0PSD0gPwTr1LMQD",
+  "img": "icons/svg/item-bag.svg",
   "system": {
     "description": {
       "value": "",
       "chat": "",
-      "source": "SR5 238"
+      "source": ""
     },
     "action": {
-      "type": "complex",
+      "type": "major",
       "test": "SuccessTest",
-      "categories": ["matrix"],
-      "attribute": "logic",
+      "categories": [
+        "magic"
+      ],
+      "attribute": "magic",
       "attribute2": "",
-      "skill": "hacking",
+      "skill": "cracking",
       "armor": false,
       "spec": false,
       "mod": null,
       "mod_description": "",
+      "roll_mode": "",
       "limit": {
         "value": 0,
         "base": 0,
-        "attribute": "attack",
-        "mod": []
+        "attribute": ""
       },
       "threshold": {
         "value": 0,
@@ -46,8 +46,7 @@
         "base": 0,
         "ap": {
           "value": 0,
-          "base": 0,
-          "mod": []
+          "base": 0
         },
         "base_formula_operator": "add",
         "attribute": "",
@@ -56,14 +55,13 @@
           "itemId": "",
           "itemType": "",
           "itemName": ""
-        },
-        "mod": []
+        }
       },
       "opposed": {
-        "type": "custom",
-        "test": "OpposedTest",
-        "attribute": "firewall",
-        "attribute2": "firewall",
+        "type": "",
+        "test": "",
+        "attribute": "",
+        "attribute2": "",
         "skill": "",
         "armor": false,
         "mod": 0,
@@ -85,13 +83,8 @@
         "armor": false,
         "mod": 0
       },
-      "modifiers": [
-        "noise",
-        "global",
-        "wounds"
-      ],
-      "alt_mod": 0,
-      "dice_pool_mod": []
+      "modifiers": [],
+      "initiative_timing": "initiative"
     },
     "result": {
       "success": {
@@ -99,20 +92,31 @@
           "placeMarks": false
         }
       }
+    },
+    "importFlags": {
+      "name": "",
+      "type": "",
+      "subType": "",
+      "isFreshImport": false,
+      "isImported": false
     }
   },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
   "ownership": {
     "default": 0
   },
-  "folder": null,
-  "sort": 0,
+  "flags": {},
   "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "shadowrun6-elysium",
-    "systemVersion": "0.8.6",
-    "coreVersion": "10.291",
-    "createdTime": null,
-    "modifiedTime": 1670064675058,
+    "systemVersion": "0.23.2",
+    "createdTime": 1744066678186,
+    "modifiedTime": 1744077316215,
     "lastModifiedBy": "sr5ebuilder"
   },
-  "_key": "!items!EcRsJOjgnhnVj2XX"
+  "_key": "!items!O0PSD0gPwTr1LMQD"
 }

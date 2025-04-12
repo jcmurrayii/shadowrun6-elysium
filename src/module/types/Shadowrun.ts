@@ -20,7 +20,12 @@ declare namespace Shadowrun {
     /**
      * Types of actions that can be taken during the combat action phase.
      */
-    export type ActionType = 'free'|'simple'|'complex';
+    export type ActionType = 'free'|'minor'|'major'|'none'|'varies';
+
+    /**
+     * When an action can be taken in relation to initiative order.
+     */
+    export type InitiativeTiming = 'none'|'initiative'|'anytime';
 
     export type NumberOrEmpty = number | '';
 

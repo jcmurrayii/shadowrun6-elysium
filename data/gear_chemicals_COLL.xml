@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item avail="6I" cost="60" id="asphyxia_spores" count="y">
+      <useas type="CHEMICALS" subtype="TOXINS"/>
+   </item>
+   <item avail="5I" cost="90" id="hyperallergen" count="y">
+      <useas type="CHEMICALS" subtype="TOXINS"/>
+   </item>
+</items>

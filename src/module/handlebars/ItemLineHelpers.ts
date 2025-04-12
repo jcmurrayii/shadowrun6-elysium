@@ -5,6 +5,74 @@ import MarkedDocument = Shadowrun.MarkedDocument;
 import { InventorySheetDataByType } from '../actor/sheets/SR6BaseActorSheet';
 import { SR6ActiveEffect } from '../effect/SR6ActiveEffect';
 import { formatStrict } from '../utils/strings';
+import ActionType = Shadowrun.ActionType;
+import InitiativeTiming = Shadowrun.InitiativeTiming;
+
+/**
+ * Format action type and initiative timing with appropriate classes for styling
+ * @param actionType The action type (major, minor, free, etc.)
+ * @param initiativeTiming The initiative timing (initiative, anytime, etc.)
+ * @returns HTML string with appropriate classes
+ */
+function formatActionTypeWithClasses(actionType: ActionType, initiativeTiming: InitiativeTiming): string {
+    let typeCode = '';
+    let typeClass = '';
+    let timingCode = '';
+    let timingClass = '';
+
+    // Get the type code and class
+    if (actionType) {
+        switch(actionType) {
+            case 'major':
+                typeCode = 'M';
+                typeClass = 'action-major';
+                break;
+            case 'minor':
+                typeCode = 'm';
+                typeClass = 'action-minor';
+                break;
+            case 'free':
+                typeCode = 'F';
+                typeClass = 'action-free';
+                break;
+            case 'varies':
+                typeCode = 'V';
+                typeClass = 'action-varies';
+                break;
+            case 'none':
+            default:
+                typeCode = '';
+                typeClass = '';
+                break;
+        }
+    }
+
+    // Get the timing code and class
+    if (initiativeTiming) {
+        switch(initiativeTiming) {
+            case 'initiative':
+                timingCode = '(I)';
+                timingClass = 'timing-initiative';
+                break;
+            case 'anytime':
+                timingCode = '(A)';
+                timingClass = 'timing-anytime';
+                break;
+            case 'none':
+            default:
+                timingCode = '';
+                timingClass = '';
+                break;
+        }
+    }
+
+    // If we have no type code, return an empty string
+    if (!typeCode) return '';
+
+    // Combine the codes with appropriate classes
+    const classes = ['action-type', typeClass, timingClass].filter(Boolean).join(' ');
+    return `<span class="${classes}">${typeCode}${timingCode}</span>`;
+}
 
 /**
  * Typing around the legacy item list helper.
@@ -204,12 +272,6 @@ export const registerItemLineHelpers = () => {
                     {
                         text: {
                             text: game.i18n.localize('SR6.Attribute'),
-                            cssClass: 'six',
-                        },
-                    },
-                    {
-                        text: {
-                            text: game.i18n.localize('SR6.Limit'),
                             cssClass: 'six',
                         },
                     },
@@ -440,9 +502,10 @@ export const registerItemLineHelpers = () => {
 
                 return [
                     {
-                        text: {
-                            // Instead of 'complex' only show C. This might break in some languages. At that point, you can call me lazy.
-                            text: item.system.action.type ? game.i18n.localize(SR6.actionTypes[item.system.action.type] ?? '')[0] : ''
+                        html: {
+                            // Use HTML to add classes for styling
+                            text: formatActionTypeWithClasses(item.system.action.type, item.system.action.initiative_timing),
+                            cssClass: 'action-type-container'
                         },
                     },
                     {
@@ -462,12 +525,6 @@ export const registerItemLineHelpers = () => {
                         text: {
                             // Legacy actions could have both skill and attribute2 set, which would show both information, when it shouldn't.
                             text: wrapper.getActionSkill() ? '' : game.i18n.localize(SR6.attributes[wrapper.getActionAttribute2() ?? '']),
-                            cssClass: 'six',
-                        },
-                    },
-                    {
-                        text: {
-                            text: textLimit,
                             cssClass: 'six',
                         },
                     },
@@ -909,6 +966,52 @@ export const registerItemLineHelpers = () => {
         return [incrementIcon, decrementIcon];
     });
 
+    /**
+     * Helper to convert action types to their abbreviated form with initiative timing
+     * Format: [Type][Timing]
+     *
+     * Type:
+     * - Major: 'M'
+     * - Minor: 'm'
+     * - Free: 'F'
+     * - None: ''
+     * - Varies: 'V'
+     *
+     * Timing (in parentheses):
+     * - In Initiative: '(I)'
+     * - Any Time: '(A)'
+     * - None: '' (no parentheses)
+     */
+    Handlebars.registerHelper('formatActionType', function(actionType: ActionType, initiativeTiming: InitiativeTiming) {
+        let typeCode = '';
+        let timingCode = '';
+
+        // Get the type code
+        if (actionType) {
+            switch(actionType) {
+                case 'major': typeCode = 'M'; break;
+                case 'minor': typeCode = 'm'; break;
+                case 'free': typeCode = 'F'; break;
+                case 'varies': typeCode = 'V'; break;
+                case 'none':
+                default: typeCode = ''; break;
+            }
+        }
+
+        // Get the timing code
+        if (initiativeTiming) {
+            switch(initiativeTiming) {
+                case 'initiative': timingCode = '(I)'; break;
+                case 'anytime': timingCode = '(A)'; break;
+                case 'none':
+                default: timingCode = ''; break;
+            }
+        }
+
+        // Combine the codes
+        return typeCode + timingCode;
+    });
+
     Handlebars.registerHelper('MarkListHeaderRightSide', () => {
         return [
             {
@@ -958,5 +1061,44 @@ export const registerItemLineHelpers = () => {
             text: game.i18n.localize('SR6.Del'),
             cssClass: 'network-clear'
         }];
-    })
+    });
+
+    /**
+     * Helper to check if a string contains a substring
+     */
+    Handlebars.registerHelper('contains', function(str, substring) {
+        if (!str || !substring) return false;
+        return String(str).toLowerCase().includes(String(substring).toLowerCase());
+    });
+
+    /**
+     * Helper for logical OR operation
+     */
+    Handlebars.registerHelper('or', function() {
+        for (let i = 0; i < arguments.length - 1; i++) {
+            if (arguments[i]) return true;
+        }
+        return false;
+    });
+
+    /**
+     * Helper to convert a JSON string to an object
+     */
+    Handlebars.registerHelper('json', function(context) {
+        if (typeof context === 'string') {
+            try {
+                return JSON.stringify(context);
+            } catch (e) {
+                return context;
+            }
+        }
+        return JSON.stringify(context);
+    });
+
+    /**
+     * Helper for equality comparison
+     */
+    Handlebars.registerHelper('eq', function(a, b) {
+        return a === b;
+    });
 };

@@ -245,4 +245,39 @@ export class OpposedTest<T extends OpposedTestData = OpposedTestData> extends Su
 
         await this.effects.createTargetActorEffects(actor);
     }
+
+    /**
+     * After the test is complete, check if this is an opposed test against an illegal matrix action
+     * If so, add overwatch equal to the hits scored against the actor
+     */
+    override async afterTestComplete() {
+        await super.afterTestComplete();
+
+        // Only proceed if we have the original test and it has action data
+        if (!this.against || !this.against.data.action) return;
+
+        // Check if the original test was an illegal matrix action
+        const isIllegalMatrixAction = MatrixRules.isIllegalMatrixAction(this.against.data.action);
+        if (!isIllegalMatrixAction) return;
+
+        // Get the actor from the original test
+        const originalActor = this.against.actor;
+        if (!originalActor) return;
+
+        // Get the hits scored against the actor (our hits)
+        const hitsAgainst = this.hits.value;
+        if (hitsAgainst <= 0) return;
+
+        // Add overwatch equal to the hits scored against the actor
+        const currentOS = originalActor.getOverwatchScore();
+        await originalActor.setOverwatchScore(currentOS + hitsAgainst);
+
+        // Notify the user
+        ui.notifications?.info(game.i18n.format('SR6.MatrixAction.IllegalActionOpposedOverwatch', {
+            name: originalActor.name,
+            amount: hitsAgainst
+        }));
+
+        console.debug(`Shadowrun 6e | Added ${hitsAgainst} Overwatch Score to ${originalActor.name} for opposed hits against illegal matrix action`);
+    }
 }

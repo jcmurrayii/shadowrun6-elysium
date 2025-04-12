@@ -227,7 +227,7 @@
         {{else}}
         <div class="sr6 chat-card roll-card">
             <div class="card-content">
-                <b>{{defender.name}} could not gain Edge: {{defender.edgeReason}}</b>
+                <b>Edge Not Gained:</b> {{defender.edgeReason}}
             </div>
         </div>
         {{/if}}
@@ -235,7 +235,7 @@
         {{#if (not defender.edgeAwarded)}}
         <div class="sr6 chat-card roll-card">
             <div class="card-content">
-                <b>{{../speaker.actor.name}} could not gain Edge: {{defender.edgeReason}}</b>
+                <b>Edge Not Gained:</b> {{defender.edgeReason}}
             </div>
         </div>
         {{/if}}

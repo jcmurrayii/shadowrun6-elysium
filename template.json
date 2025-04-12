@@ -889,6 +889,8 @@
                     "mod": 0,
                     "mod_description": "",
                     "roll_mode": "",
+                    "initiative_timing": "",
+                    "legality": "legal",
                     "limit": {
                         "value": 0,
                         "base": 0,

@@ -1,0 +1,52 @@
+<div class="scroll-area">
+    {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListHeader.html'
+            name=(localize 'SR6.MatrixActions')
+            itemId='action'
+            icons=(ItemHeaderIcons 'action')
+            rightSide=(ItemHeaderRightSide 'action')
+            itemId='action'
+    }}
+
+    {{#if matrixActions}}
+        {{#each matrixActions as |item iid|}}
+        {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListItem.html'
+            img=item.img
+            name=item.name
+            itemId=item._id
+            icons=(ItemIcons item)
+            rightSide=(ItemRightSide item)
+            hasDesc="true"
+            hasRoll="true"
+            description=item.system.description.value
+            itemCssClass="{{#if (eq item.system.action.legality 'illegal')}}illegal-action{{/if}}"
+        }}
+        {{/each}}
+    {{else}}
+        {{!-- Fallback to using itemType.action if matrixActions is not available --}}
+        {{#each itemType.action as |item iid|}}
+            {{#if (or (contains item.name "Matrix") (contains item.name "Hack") (contains item.name "Deck"))}}
+            {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListItem.html'
+                img=item.img
+                name=item.name
+                itemId=item._id
+                icons=(ItemIcons item)
+                rightSide=(ItemRightSide item)
+                hasDesc="true"
+                hasRoll="true"
+                description=item.system.description.value
+                itemCssClass="{{#if (eq item.system.action.legality 'illegal')}}illegal-action{{/if}}"
+            }}
+            {{/if}}
+        {{/each}}
+    {{/if}}
+
+    <div class="list-item">
+        <div class="list-item-content">
+            <div class="item-left">
+                <button type="button" class="ensure-matrix-actions" title="{{localize 'SR6.EnsureMatrixActionsTitle'}}">
+                    <i class="fas fa-sync-alt"></i> {{localize "SR6.EnsureMatrixActions"}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Armor -->
+
+	<item id="barding_light" avail="6" cost="500" maxrat="8" rate="true" ratemul="PRICE CAPACITY" >
+		<useas type="ARMOR" subtype="ARMOR_BODY" /><armor rating="1"/>
+		<modifications>
+			<itemhookmod hook="ARMOR" capacity="1"/>
+		</modifications>
+	</item>
+
+	<item id="barding_heavy" avail="6" cost="1000" maxrat="16" rate="true" ratemul="PRICE CAPACITY" >
+		<useas type="ARMOR" subtype="ARMOR_BODY" /><armor rating="4"/>
+		<modifications>
+			<itemhookmod hook="ARMOR" capacity="2"/>
+		</modifications>
+	</item>
+
+	<item id="smartcloth_full" avail="2" cost="250" maxrat="16" rate="true" ratemul="PRICE" >
+		<useas type="ARMOR" subtype="ARMOR_CLOTHES" />
+		<armor rating="0"/>
+		<modifications>
+			<itemhookmod capacity="0" hook="ARMOR"/>
+			<accessorymod hook="ARMOR" item="electrochromic_feature" included="true"/>
+			<nuyenmod value="-1500"/>
+		</modifications>
+	</item>
+	<item id="smartcloth_half" avail="2" cost="125" maxrat="16" rate="true" ratemul="PRICE" >
+		<useas type="ARMOR" subtype="ARMOR_CLOTHES" />
+		<armor rating="0"/>
+		<modifications>
+			<itemhookmod capacity="0" hook="ARMOR"/>
+			<accessorymod hook="ARMOR" item="electrochromic_feature" included="true"/>
+			<nuyenmod value="-1500"/>
+		</modifications>
+	</item>
+	<item id="smartcloth_quarter" avail="2" cost="62" maxrat="16" rate="true" ratemul="PRICE" >
+		<useas type="ARMOR" subtype="ARMOR_CLOTHES" />
+		<armor rating="0"/>
+		<modifications>
+			<itemhookmod capacity="0" hook="ARMOR"/>
+			<accessorymod hook="ARMOR" item="electrochromic_feature" included="true"/>
+			<nuyenmod value="-1500"/>
+		</modifications>
+	</item>
+
+	<item id="trode_patch" avail="2" cost="300" >
+		<useas type="ACCESSORY" subtype="ELECTRONIC_ACCESSORIES"  slot="ELECTRONIC_ACCESSORY" />
+		<useas type="ACCESSORY" subtype="ELECTRONIC_ACCESSORIES" cap="0" slot="HELMET_ACCESSORY" />
+		<useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	</item>
+
+	<item id="myomeric_smart_harness" avail="4" cost="1500">
+		<useas type="ARMOR" subtype="ARMOR_CLOTHES"/>
+		<armor rating="0" social="0" />
+	</item>
+
+	<item id="smart_manacles" avail="4" cost="5000" subtype="SECURITY" type="ELECTRONICS" count="y"/>
+
+	<item id="stun_cage_standard" avail="6" cost="7500" subtype="SECURITY" type="ELECTRONICS" count="y"/>
+
+	<item id="stun_cage_troll" avail="6" cost="10000" subtype="SECURITY" type="ELECTRONICS" count="y"/>
+
+
+</items>

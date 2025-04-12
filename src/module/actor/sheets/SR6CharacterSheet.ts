@@ -74,7 +74,88 @@ export class SR6CharacterSheet extends SR6BaseActorSheet {
         super._prepareMatrixAttributes(data);
         data['markedDocuments'] = this.actor.getAllMarkedDocuments();
 
+        // Separate matrix actions from regular actions
+        this._prepareActions(data);
+
         return data;
+    }
+
+    /**
+     * Separate matrix actions from regular actions
+     * @param sheetData The data for the actor sheet
+     * @private
+     */
+    _prepareActions(sheetData) {
+        // Initialize the data structure if it doesn't exist
+        if (!sheetData.itemType) {
+            sheetData.itemType = {};
+        }
+
+        // Get all actions
+        const actions = sheetData.itemType.action || [];
+        console.log('SR6: Total actions before filtering:', actions.length);
+
+        // Separate matrix actions from regular actions
+        const matrixActions = [];
+        const nonMatrixActions = [];
+
+        // Categorize actions
+        for (const action of actions) {
+            // Check if this is a matrix action
+            const isMatrixAction = this._isMatrixAction(action);
+
+            if (isMatrixAction) {
+                matrixActions.push(action);
+            } else {
+                nonMatrixActions.push(action);
+            }
+        }
+
+        console.log('SR6: Matrix actions:', matrixActions.length);
+        console.log('SR6: Non-matrix actions:', nonMatrixActions.length);
+
+        // Add actions to sheet data
+        sheetData.matrixActions = matrixActions;
+        sheetData.nonMatrixActions = nonMatrixActions;
+
+        // Replace the original action array with only non-matrix actions
+        // This ensures matrix actions don't show up in the Actions tab
+        sheetData.itemType.action = nonMatrixActions;
+
+        console.log('SR6: Actions after filtering:', sheetData.itemType.action.length);
+        console.log('SR6: Matrix actions array:', sheetData.matrixActions.length);
+    }
+
+    /**
+     * Get the saved state of a folder
+     * @param folderId The ID of the folder
+     * @param defaultState The default state if no saved state is found
+     * @returns {boolean} True if the folder is collapsed
+     * @private
+     */
+    _getFolderState(folderId, defaultState = false) {
+        const key = `folders.${folderId}`;
+        const state = this.actor.getFlag('shadowrun6-elysium', key);
+        return state !== undefined ? state : defaultState;
+    }
+
+    /**
+     * Determine if an action is a matrix action
+     * @param action The action item
+     * @returns {boolean} True if the action is a matrix action
+     * @private
+     */
+    _isMatrixAction(action) {
+        // Check action categories for matrix-related categories
+        const matrixCategories = [
+            'matrix'
+        ];
+
+        // Check if action has any matrix categories
+        if (action.system?.action?.categories) {
+            const categories = action.system.action.categories;
+            return categories.some(category => matrixCategories.includes(category));
+        }
     }
 
     /**

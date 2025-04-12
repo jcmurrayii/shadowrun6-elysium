@@ -1,0 +1,24 @@
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item id="survival_knife" avail="2" cost="220">
+      <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="4" cost="220"/>
+      <weapon  dmg="3P" attack="8,2,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="extendable_baton" avail="2" cost="50" >
+      <useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+      <useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="4" cost="50"/>
+      <weapon dmg="2S" attack="5,,,,"  skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   <item id="staff" avail="1" cost="150">
+      <useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+      <useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="3" cost="150"/>
+      <weapon dmg="4S" attack="8,,,,"  skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   <item id="telescopic_staff" avail="2" cost="250">
+      <useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+      <useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="4" cost="250"/>
+      <weapon dmg="4S" attack="8,,,,"  skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+</items>

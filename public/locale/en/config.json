@@ -90,11 +90,27 @@
         "Summoning": "Summoning Actions"
     },
     "SR6.ActionType": "Type",
-    "SR6.ActionTypeComplex": "Complex",
     "SR6.ActionTypeFree": "Free",
+    "SR6.ActionTypeMinor": "Minor",
+    "SR6.ActionTypeMajor": "Major",
     "SR6.ActionTypeNone": "None",
-    "SR6.ActionTypeSimple": "Simple",
     "SR6.ActionTypeVaries": "Varies",
+
+    "SR6.InitiativeTiming": "Initiative Timing",
+    "SR6.InitiativeTimingNone": "None",
+    "SR6.InitiativeTimingInOrder": "In Initiative Order",
+    "SR6.InitiativeTimingAnyTime": "Any Time",
+
+    "SR6.Tooltips.Item.InitiativeTiming": "When this action can be taken in relation to initiative order",
+
+    "SR6.Legality": "Legality",
+    "SR6.Legal": "Legal",
+    "SR6.Illegal": "Illegal",
+    "SR6.Tooltips.Item.Legality": "Whether this matrix action is legal or illegal",
+
+    "SR6.EnsureMatrixActions": "Ensure Matrix Actions",
+    "SR6.EnsureMatrixActionsTitle": "Add any missing matrix actions to this character",
+    "SR6.MatrixActions": "Matrix Actions",
     "SR6.Actions": "Actions",
     "SR6.Active": "Active",
     "SR6.ActiveDefense": "Active Defense",
@@ -512,6 +528,9 @@
         }
     },
     "SR6.ImportCharacter": "Import Character",
+    "SR6.ImportCharacterChoose": "Choose an import format",
+    "SR6.ChummerImport": "Chummer Import",
+    "SR6.GenesisImport": "Genesis Import",
     "SR6.Incoming": "Incoming",
     "SR6.IncomingDamage": "Incoming Damage",
     "SR6.IncomingDrain": "Incoming Drain",
@@ -1494,6 +1513,11 @@
     "TYPES.Item.sin": "SIN",
     "TYPES.Item.spell": "Spell",
     "TYPES.Item.sprite_power": "Sprite Power",
-    "TYPES.Item.weapon": "Weapon"
+    "TYPES.Item.weapon": "Weapon",
+    "SR6.MatrixAction.HackingProgramOverwatch": "{name} accrued 1 Overwatch Score for using a matrix action with an active hacking program.",
+    "SR6.MatrixAction.HackingProgramReason": "active hacking program",
+    "SR6.MatrixAction.IllegalActionReason": "illegal matrix action",
+    "SR6.MatrixAction.OverwatchAccrued": "{name} accrued {amount} Overwatch Score ({reasons}).",
+    "SR6.MatrixAction.IllegalActionOpposedOverwatch": "{name} accrued {amount} Overwatch Score from hits scored against them during an illegal matrix action."
 }
 

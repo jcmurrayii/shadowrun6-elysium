@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metatypes>
+    <metatype id="pilot" variantof="ork">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="6"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="7"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="7"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="5"/>
+            <attrmod type="MAX"      attr="INTUITION" val="8"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="5"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="pilot_origins" val="1" />
+            <qualitymod ref="sensor_upgrade" val="1" />
+         </modifications>
+    </metatype>
+    <metatype id="agent" variantof="ork">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="6"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="8"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="7"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="6"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="photographic_memory"/>
+         </modifications>
+    </metatype>
+    <metatype id="foundation" variantof="ork">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="7"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="6"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="7"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="7"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="7"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="5"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="photographic_memory"/>
+            <qualitymod ref="real_world_naivete"/>
+         </modifications>
+    </metatype>
+    <metatype id="realm" variantof="ork">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="6"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="5"/>
+            <attrmod type="MAX"      attr="REACTION"  val="8"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="6"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="5"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="7"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="7"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="hello_world"/>
+            <qualitymod ref="photographic_memory"/>
+            <qualitymod ref="real_world_naivete"/>
+         </modifications>
+    </metatype>
+</metatypes>

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Cyberware Preload -->
+
+	<item id="cyb_thagomizer" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="4P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/close"/>
+	</item>
+	<item id="cyb_climbing_claws" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon dmg="2P" attack="4,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="he_finger_grenade" modonly="true" cost="0">
+		<useas type="AMMUNITION" subtype="GRENADES" />
+		<ammo gz="16P" close="10P" near="4P" blast="15" />
+	</item>
+	<item id="cyb_buzzsaw" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon dmg="4P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="cyb_crabclaw" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="5P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed"/>
+	</item>
+	<item id="cyb_fangs" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="2P" attack="3,,,," skill="close_combat" spec="close_combat/unarmed"/>
+	</item>
+	<item id="cyb_goring_horns" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="3P" attack="8,,,," skill="close_combat" spec="close_combat/unarmed"/>
+	</item>
+	<item id="cyb_oral_slasher" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="2P" attack="2,,,," skill="exotic_weapons" spec="exotic_weapons/close"/>
+	</item>
+	<item id="cyb_shotgun_knee" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="5P" attack="2,,,," skill="close_combat" spec="close_combat/unarmed"/>
+	</item>
+	<item id="cyb_wrecker" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+		<weapon dmg="6S" attack="7,,,," skill="close_combat" spec="close_combat/clubs"/>
+	</item>
+	<item id="cyb_wrist_bash" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+		<weapon dmg="3S" attack="6,,,," skill="close_combat" spec="close_combat/clubs"/>
+	</item>
+	<item id="cyb_wrist_slash" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon dmg="2P" attack="6,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="cyb_raptor_foot" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon dmg="2P" attack="6,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="cyb_flametosser" modonly="true" cost="0">
+		<useas type="WEAPON_SPECIAL" subtype="THROWERS"/>
+		<weapon dmg="5P(f)" attack="14,12,,," skill="exotic_weapons" spec="exotic_weapons/spray"/>
+	</item>
+	<item id="cyb_tesla_coil" modonly="true" cost="0">
+		<useas type="WEAPON_SPECIAL" subtype="THROWERS"/>
+		<weapon dmg="5S(e)" attack="8,10,,," skill="exotic_weapons" spec="exotic_weapons/spray"/>
+	</item>
+	<item avail="4" cost="500" id="biowaste_storage" maxrat="7" rate="true" ratemul="PRICE CAPACITY ESSENCE">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.1" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+<!-- Modular Mount Preload -->
+
+	<item avail="3" cost="250" id="modular_connector" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="3" cost="2000" id="mount_shoulder" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.4" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+	<item avail="3" cost="2000" id="mount_elbow" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.4" />
+	</item>
+	<item avail="3" cost="2000" id="mount_elb_obvious" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="12" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+	<item avail="3" cost="2000" id="mount_elb_synthetic" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="7" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+	<item avail="3" cost="2000" id="mount_elb_primitive" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="17" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+	<item avail="3" cost="2000" id="mount_wrist" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.4" />
+	</item>
+	<item avail="3" cost="2000" id="mount_wri_obvious" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="6" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+	<item avail="3" cost="2000" id="mount_wri_synthetic" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="4" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+	<item avail="3" cost="2000" id="mount_hip" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.4" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+	<item avail="3" cost="2000" id="mount_knee" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.4" />
+	</item>
+	<item avail="3" cost="2000" id="mount_kne_obvious" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="14" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+	<item avail="3" cost="2000" id="mount_kne_synthetic" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="8" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+	<item avail="3" cost="2000" id="mount_kne_primitive" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="17" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+	<item avail="3" cost="2000" id="mount_ankle" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.4" />
+	</item>
+	<item avail="3" cost="2000" id="mount_ank_obvious" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="6" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+	<item avail="3" cost="2000" id="mount_ank_synthetic" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="4" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="1" cost="5000" id="attr_incr_bod" maxrat="13" rate="true" ratemul="AVAIL CAPACITY PRICE MODIFIER">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ENHANCEMENT" cap="1" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<attrmod attr="BODY" type="ALTERNATE" val="1" cyber="true"/>
+		</modifications>
+	</item>
+	<item avail="1" cost="5000" id="attr_incr_rea" maxrat="13" rate="true" ratemul="AVAIL CAPACITY PRICE MODIFIER">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ENHANCEMENT" cap="1" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<attrmod attr="REACTION" type="ALTERNATE" val="1" cyber="true"/>
+		</modifications>
+	</item>
+
+
+<!-- Bioware Preload -->
+
+	<item id="bio_granite_skin" type="ARMOR" subtype="ARMOR_BODY" modonly="true" cost="0">
+		<armor rating="6"/>
+	</item>
+
+	<item id="biospike_blade" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/unarmed" />
+	</item>
+
+	<item id="biospike_claws" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="2P" attack="7,,,," skill="close_combat" spec="close_combat/unarmed" />
+	</item>
+
+	<item id="biosprayer_blind" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="0" attack="4,1,,," skill="exotic_weapons" spec="exotic_weapons/spray" />
+	</item>
+
+	<item id="biosprayer_confused" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="0" attack="4,1,,," skill="exotic_weapons" spec="exotic_weapons/spray" />
+	</item>
+
+	<item id="biosprayer_dazed" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="0" attack="4,1,,," skill="exotic_weapons" spec="exotic_weapons/spray" />
+	</item>
+
+	<item id="biosprayer_nauseated" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="0" attack="4,1,,," skill="exotic_weapons" spec="exotic_weapons/spray" />
+	</item>
+
+	<item id="bio_corrosive_spit" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="2P" attack="4,,,," skill="exotic_weapons" spec="exotic_weapons/spray" />
+	</item>
+
+	<item id="bio_fangs_non-retract" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="2P" attack="2,,,," skill="close_combat" spec="close_combat/unarmed" />
+	</item>
+
+	<item id="bio_fangs_retract" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="2P" attack="3,,,," skill="close_combat" spec="close_combat/unarmed" />
+	</item>
+
+	<item id="bio_frog_tongue" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="0" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/whips" />
+	</item>
+
+	<item id="bio_horns" avail="3" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/unarmed" />
+	</item>
+
+	<item id="bio_natural_venom" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="0" attack="" skill="close_combat" spec="close_combat/unarmed" />
+	</item>
+
+	<item id="bio_quills" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="3P" attack="6,,,," skill="exotic_weapons" spec="exotic_weapons/close" />
+	</item>
+
+	<item id="bio_sting_tiny" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="1P" attack="4,,,," skill="close_combat" spec="close_combat/unarmed" />
+	</item>
+
+	<item id="bio_sting_medium" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="2P" attack="5,,,," skill="close_combat" spec="close_combat/unarmed" />
+	</item>
+
+	<item id="bio_sting_large" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="3P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed" />
+	</item>
+
+	<item id="bio_striking_callus" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="0" attack=",,,," skill="close_combat" spec="close_combat/unarmed" />
+	</item>
+
+	<item id="bio_thagomizer" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="3P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/close" />
+	</item>
+
+	<item id="bio_tusk_small" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="1P" attack="2,,,," skill="close_combat" spec="close_combat/unarmed" />
+	</item>
+
+	<item id="bio_tusk_medium" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="1P" attack="3,,,," skill="close_combat" spec="close_combat/unarmed" />
+	</item>
+
+	<item id="bio_tusk_large" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon dmg="2P" attack="4,,,," skill="close_combat" spec="close_combat/unarmed" />
+	</item>
+
+	<item id="bio_whip_tail" modonly="true" cost="0">
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="WHIPS"/>
+		<weapon dmg="1P" attack="6,,,," skill="exotic_weapons" spec="exotic_weapons/whips" />
+	</item>
+
+</items>

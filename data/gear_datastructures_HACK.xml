@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <item avail="1" cost="5000" id="ds_admonisher" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_bandersnatch" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_code_shell" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_data_blade" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_drone_whisperer" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_eavesdropper" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_echo_chamber" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_extra_life" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_grounding_rod" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_link_light" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_logic_virus" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_master_key" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_meat_cleaver" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_oracle" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_phase_shifter" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_resonance_focus" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_resonance_shield" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_sprite_caller_assassin" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_sprite_caller_courier" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_sprite_caller_crack" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_sprite_caller_data" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_sprite_caller_defender" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_sprite_caller_fault" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_sprite_caller_machine" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_sprite_caller_modular" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_sprite_caller_music" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+   <item avail="1" cost="5000" id="ds_sprite_caller_primal" maxrat="12" rate="true" ratemul="AVAIL PRICE MODIFIER" >
+     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+   </item>
+</items>

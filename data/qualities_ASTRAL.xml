@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+
+	<quality id="saurian" karma="6" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="DEFENSE_RATING" type="NATURAL" val="2" />
+		</modifications>
+	</quality>
+
+	<quality id="tough_skin" karma="0" type="POSITIVE" selectable="n" />
+
+</qualities>

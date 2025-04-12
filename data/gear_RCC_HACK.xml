@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item avail="1" cost="0" devrat="5" id="machinist_rcc" > <!-- Set "devrat" to Resonance -->
+      <useas type="ELECTRONICS" subtype="RIGGER_CONSOLE"       />
+      <requires>
+         <qualreq ref="stream-machinists" />
+         <magresreq type="technomancer"/>
+      </requires>
+      <modifications>
+         <itemhookmod hook="SOFTWARE" capacity="99"/>
+         <itemhookmod hook="SOFTWARE_RIGGER" capacity="99"/>
+         <itemhookmod hook="SOFTWARE_DRONE" capacity="99"/>
+         <itemhookmod hook="SOFTWARE_TACNET" capacity="99"/>
+      </modifications>
+      <cyberdeck d="6" f="8" programs="6"/> <!-- Set "f" to Firewall, set "d" and "programs" to Data Processing -->
+   </item>
+   <item avail="1" cost="0" devrat="5" id="living_console_rcc" > <!-- Set "devrat" to Resonance -->
+      <useas type="ELECTRONICS" subtype="RIGGER_CONSOLE"       />
+      <requires>
+         <magresreq type="technomancer"/>
+      </requires>
+      <modifications>
+         <itemhookmod hook="SOFTWARE" capacity="99"/>
+         <itemhookmod hook="SOFTWARE_RIGGER" capacity="99"/>
+         <itemhookmod hook="SOFTWARE_DRONE" capacity="99"/>
+         <itemhookmod hook="SOFTWARE_TACNET" capacity="99"/>
+      </modifications>
+      <cyberdeck d="6" f="8" programs="6"/> <!-- Set "f" to Firewall, set "d" and "programs" to Data Processing -->
+   </item>
+   <item avail="1" cost="0" devrat="5" id="codemod_rcc" maxrat="8" rate="true" ratemul="MODIFIER" >
+      <useas type="ELECTRONICS" subtype="RIGGER_CONSOLE"       />
+      <requires>
+         <anyreq>
+            <metareq ref="pilot"/>
+            <metareq ref="agent"/>
+            <metareq ref="foundation"/>
+            <metareq ref="realm"/>
+         </anyreq>
+      </requires>
+      <modifications>
+         <itemhookmod hook="SOFTWARE" capacity="99"/>
+         <itemhookmod hook="SOFTWARE_RIGGER" capacity="99"/>
+         <itemhookmod hook="SOFTWARE_DRONE" capacity="99"/>
+         <itemhookmod hook="SOFTWARE_TACNET" capacity="99"/>
+      </modifications>
+      <cyberdeck d="6" f="8" programs="6"/> <!-- Set "f" to Firewall, set "d" to Data Processing, set "programs" to Rating -->
+   </item>
+   <item avail="1" cost="0" devrat="1" id="pilot_origins_autosofts" >
+      <useas type="ELECTRONICS" subtype="RIGGER_CONSOLE"       />
+      <requires>
+        <qualreq ref="pilot_origins" />
+        <anyreq>
+            <metareq ref="pilot"/>
+            <metareq ref="agent"/>
+            <metareq ref="foundation"/>
+            <metareq ref="realm"/>
+         </anyreq>
+      </requires>
+      <modifications>
+         <itemhookmod hook="SOFTWARE_DRONE" capacity="99"/>
+      </modifications>
+   </item>
+   <item avail="1" cost="0" devrat="5" id="software_emulator_deck" > <!-- Set "devrat" to Resonance -->
+      <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"       />
+      <requires>
+         <magresreq type="technomancer"/>
+      </requires>
+      <modifications>
+         <itemhookmod hook="SOFTWARE" capacity="99" />
+         <itemhookmod hook="SOFTWARE_RIGGER" capacity="99" />
+         <itemhookmod hook="SOFTWARE_DRONE" capacity="99" />
+         <itemhookmod hook="SOFTWARE_TACNET" capacity="99"/>
+      </modifications>
+      <cyberdeck d="6" f="8" programs="3"/> <!-- Set "f" to Firewall, set "d" and "programs" to Resonance/2 -->
+   </item>
+   <item avail="1" cost="0" devrat="5" id="transcendent_network_ttoc" > <!-- Set "devrat" to Resonance -->
+      <useas type="ELECTRONICS" subtype="TAC_NET" />
+      <requires>
+         <magresreq type="technomancer"/>
+      </requires>
+      <cyberdeck d="6" f="8"/> <!-- Set "f" to Firewall, set "d" to Data Processing -->
+   </item>
+</items>

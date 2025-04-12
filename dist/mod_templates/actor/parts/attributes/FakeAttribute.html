@@ -1,0 +1,36 @@
+{{#> "systems/shadowrun6-elysium/dist/mod_templates/common/Attribute.html" dataName="attribute" dataId=attributeId}}
+    <div class="attribute-name roll {{#if rollId}}Roll{{/if}}">
+        {{#if label}}
+            {{localize label}}
+        {{else}}
+            {{localize attribute.label}}
+        {{/if}}
+    </div>
+    <div class="attribute-value value">
+        <span class="attribute-value-total">{{attribute.value}}</span>
+        {{> "systems/shadowrun6-elysium/dist/mod_templates/common/ValueModifiers.html" value=attribute}}
+    </div>
+    <div class="track center {{#if disableBase}}{{#if disableManual}}invisible{{/if}}{{/if}}">
+        <div class="attribute-input-container">
+            {{> 'systems/shadowrun6-elysium/dist/mod_templates/common/ValueInput.html'
+                    cssClass="attribute-input short"
+                    title="SR6.BaseValue"
+                    size="2"
+                    maxLength="2"
+                    value=attribute.base
+                    name=baseInputName
+            }}
+        </div>
+        <!--
+        <div class="track-plus"></div>
+        <div class="attribute-input-container">
+            {{> 'systems/shadowrun6-elysium/dist/mod_templates/common/ValueInput.html'
+                    cssClass="attribute-input short"
+                    title="SR6.TemporaryModifiers"
+                    size="2"
+                    maxLength="2"
+                    disabled=true
+            }}
+        </div> -->
+    </div>
+{{/"systems/shadowrun6-elysium/dist/mod_templates/common/Attribute.html"}}

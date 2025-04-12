@@ -1,0 +1,1520 @@
+{
+  "system": "SHADOWRUN6",
+  "version": "3.2.0",
+  "name": "Dominic Calder",
+  "streetName": "Blackout",
+  "metaType": "Dwarf",
+  "size": 120,
+  "weight": 40,
+  "age": "25",
+  "gender": "male",
+  "heat": 0,
+  "reputation": 0,
+  "karma": 33,
+  "freeKarma": 23,
+  "nuyen": 500,
+  "initiation": 0,
+  "submersion": 0,
+  "attributes": [
+    {
+      "name": "Body",
+      "id": "BODY",
+      "points": 2,
+      "modifiedValue": 2
+    },
+    {
+      "name": "Agility",
+      "id": "AGILITY",
+      "points": 3,
+      "modifiedValue": 3
+    },
+    {
+      "name": "Reaction",
+      "id": "REACTION",
+      "points": 4,
+      "modifiedValue": 4
+    },
+    {
+      "name": "Strength",
+      "id": "STRENGTH",
+      "points": 2,
+      "modifiedValue": 2
+    },
+    {
+      "name": "Willpower",
+      "id": "WILLPOWER",
+      "points": 3,
+      "modifiedValue": 3
+    },
+    {
+      "name": "Logic",
+      "id": "LOGIC",
+      "points": 3,
+      "modifiedValue": 5
+    },
+    {
+      "name": "Intuition",
+      "id": "INTUITION",
+      "points": 4,
+      "modifiedValue": 4
+    },
+    {
+      "name": "Charisma",
+      "id": "CHARISMA",
+      "points": 4,
+      "modifiedValue": 4
+    },
+    {
+      "name": "Edge",
+      "id": "EDGE",
+      "points": 5,
+      "modifiedValue": 5
+    },
+    {
+      "name": "Magic",
+      "id": "MAGIC",
+      "points": 0,
+      "modifiedValue": -3
+    },
+    {
+      "name": "Resonance",
+      "id": "RESONANCE",
+      "points": 0,
+      "modifiedValue": -3
+    },
+    {
+      "name": "Power Points",
+      "id": "POWER_POINTS",
+      "points": 0,
+      "modifiedValue": -3
+    },
+    {
+      "name": "Defense",
+      "id": "DEFENSIVE_POOL",
+      "points": 0,
+      "modifiedValue": 8
+    },
+    {
+      "name": "Composure",
+      "id": "COMPOSURE",
+      "points": 0,
+      "modifiedValue": 7
+    },
+    {
+      "name": "Judge Intentions",
+      "id": "JUDGE_INTENTIONS",
+      "points": 0,
+      "modifiedValue": 7
+    },
+    {
+      "name": "Memory",
+      "id": "MEMORY",
+      "points": 0,
+      "modifiedValue": 9
+    },
+    {
+      "name": "Lift / Carry",
+      "id": "LIFT_CARRY",
+      "points": 0,
+      "modifiedValue": 5
+    }
+  ],
+  "initiatives": [
+    {
+      "name": "Initiative (Astral)",
+      "id": "INITIATIVE_ASTRAL",
+      "value": 9,
+      "dice": "+2D6"
+    },
+    {
+      "name": "Initiative",
+      "id": "INITIATIVE_PHYSICAL",
+      "value": 8,
+      "dice": "+1D6"
+    },
+    {
+      "name": "Initiative (Matrix AR)",
+      "id": "INITIATIVE_MATRIX",
+      "value": 8,
+      "dice": "+1D6"
+    },
+    {
+      "name": "Initiative (Matrix VR)",
+      "id": "INITIATIVE_MATRIX_VR_COLD",
+      "value": 9,
+      "dice": "+3D6"
+    },
+    {
+      "name": "Initiative (Matrix Hot)",
+      "id": "INITIATIVE_MATRIX_VR_HOT",
+      "value": 9,
+      "dice": "+4D6"
+    }
+  ],
+  "qualities": [
+    {
+      "name": "Toxin Resistance",
+      "id": "toxin_resistance",
+      "choice": null,
+      "positive": true,
+      "rating": 0,
+      "page": "CRB 73",
+      "description": ""
+    },
+    {
+      "name": "Thermographic Vision",
+      "id": "thermographic_vision",
+      "choice": null,
+      "positive": true,
+      "rating": 0,
+      "page": "CRB 73",
+      "description": ""
+    },
+    {
+      "name": "Bad Memories",
+      "id": "bad_memories",
+      "choice": "Leaving people behind in combat",
+      "positive": false,
+      "rating": 0,
+      "page": "FS 129",
+      "description": ""
+    },
+    {
+      "name": "Firearm Diplomacy",
+      "id": "firearm_diplomacy",
+      "choice": null,
+      "positive": false,
+      "rating": 0,
+      "page": "PP 40",
+      "description": ""
+    },
+    {
+      "name": "Flashbacks",
+      "id": "flashbacks",
+      "choice": null,
+      "positive": false,
+      "rating": 0,
+      "page": "FS 130",
+      "description": ""
+    },
+    {
+      "name": "Distinctive Style",
+      "id": "distinctive_style",
+      "choice": null,
+      "positive": false,
+      "rating": 0,
+      "page": "CRB 76",
+      "description": ""
+    },
+    {
+      "name": "Maybe You Missed Something",
+      "id": "maybe_you_missed_something",
+      "choice": null,
+      "positive": false,
+      "rating": 0,
+      "page": "FS 130",
+      "description": ""
+    },
+    {
+      "name": "Analytical Mind",
+      "id": "analytical_mind",
+      "choice": null,
+      "positive": true,
+      "rating": 0,
+      "page": "CRB 70",
+      "description": ""
+    },
+    {
+      "name": "Transhumanist Grade 1",
+      "id": "transhuman1",
+      "choice": null,
+      "positive": false,
+      "rating": 0,
+      "page": "COMP 146",
+      "description": ""
+    }
+  ],
+  "skills": [
+    {
+      "name": "Biotech",
+      "id": "biotech",
+      "attribute": "Logic",
+      "rating": 3,
+      "pool": 8,
+      "specializations": [],
+      "influencedBy": [
+        "Analytical Mind"
+      ],
+      "description": ""
+    },
+    {
+      "name": "Electronics",
+      "id": "electronics",
+      "attribute": "Logic",
+      "rating": 3,
+      "pool": 8,
+      "specializations": [],
+      "influencedBy": [
+        "Analytical Mind"
+      ],
+      "description": ""
+    },
+    {
+      "name": "Engineering",
+      "id": "engineering",
+      "attribute": "Logic",
+      "rating": 5,
+      "pool": 10,
+      "specializations": [
+        {
+          "name": "Gunnery",
+          "id": "gunnery",
+          "expertise": false,
+          "attribute": "Logic",
+          "pool": 12,
+          "description": ""
+        }
+      ],
+      "influencedBy": [
+        "Analytical Mind",
+        "Control Rig"
+      ],
+      "description": ""
+    },
+    {
+      "name": "Firearms",
+      "id": "firearms",
+      "attribute": "Agility",
+      "rating": 3,
+      "pool": 6,
+      "specializations": [],
+      "influencedBy": [
+        "Bad Memories"
+      ],
+      "description": ""
+    },
+    {
+      "name": "Small Unit Tactics",
+      "id": "knowledge",
+      "attribute": "Logic",
+      "rating": 1,
+      "pool": 6,
+      "specializations": [],
+      "influencedBy": [],
+      "description": ""
+    },
+    {
+      "name": "Underground Racing Circuits",
+      "id": "knowledge",
+      "attribute": "Logic",
+      "rating": 1,
+      "pool": 6,
+      "specializations": [],
+      "influencedBy": [],
+      "description": ""
+    },
+    {
+      "name": "Knowledge",
+      "id": "knowledge",
+      "attribute": "Logic",
+      "rating": 1,
+      "pool": 6,
+      "specializations": [],
+      "influencedBy": [],
+      "description": ""
+    },
+    {
+      "name": "English",
+      "id": "language",
+      "attribute": "Logic",
+      "rating": 4,
+      "pool": 9,
+      "specializations": [],
+      "influencedBy": [],
+      "description": ""
+    },
+    {
+      "name": "Perception",
+      "id": "perception",
+      "attribute": "Intuition",
+      "rating": 2,
+      "pool": 6,
+      "specializations": [],
+      "influencedBy": [
+        "Control Rig"
+      ],
+      "description": ""
+    },
+    {
+      "name": "Piloting",
+      "id": "piloting",
+      "attribute": "Reaction",
+      "rating": 6,
+      "pool": 10,
+      "specializations": [
+        {
+          "name": "Aircraft",
+          "id": "aircraft",
+          "expertise": false,
+          "attribute": "Reaction",
+          "pool": 12,
+          "description": ""
+        }
+      ],
+      "influencedBy": [
+        "Control Rig"
+      ],
+      "description": ""
+    },
+    {
+      "name": "Stealth",
+      "id": "stealth",
+      "attribute": "Agility",
+      "rating": 1,
+      "pool": 4,
+      "specializations": [
+        {
+          "name": "Sneaking",
+          "id": "sneaking",
+          "expertise": false,
+          "attribute": "Agility",
+          "pool": 6,
+          "description": ""
+        }
+      ],
+      "influencedBy": [
+        "Control Rig"
+      ],
+      "description": ""
+    }
+  ],
+  "spells": [],
+  "rituals": [],
+  "metamagic": null,
+  "echoes": null,
+  "complexForms": [],
+  "adeptPowers": [],
+  "longRangeWeapons": [
+    {
+      "name": "Ares Predator VI",
+      "type": "WEAPON_FIREARMS",
+      "subtype": "PISTOLS_HEAVY",
+      "skill": "firearms",
+      "pool": 6,
+      "damage": "3P",
+      "attackRating": "6/5/12/-/-",
+      "mode": "SA/BF",
+      "ammunition": "15(c)",
+      "wifi": [
+        "Digital ammunition counter and an ARO that tells you the ammo type loaded. ",
+        "If equipped with DNI, you gain a bonus Minor Action any turn when you eject a clip (for weapons that have them) or change fire modes."
+      ],
+      "accessories": [
+        {
+          "name": "Ranger Arms “Eagle Eye” Targeting Sensor Suite",
+          "type": "ACCESSORY",
+          "subType": "FIREARMS_ACCESSORY",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Ultrasound link",
+          "type": "ACCESSORY",
+          "subType": "OPTICAL",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Concealable Quick Draw Holster",
+          "type": "ACCESSORY",
+          "subType": "FIREARMS_ACCESSORY",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Silencer",
+          "type": "ACCESSORY",
+          "subType": "FIREARMS_ACCESSORY",
+          "rating": 0,
+          "description": ""
+        }
+      ],
+      "page": "CRB 253",
+      "description": "",
+      "primary": false
+    }
+  ],
+  "closeCombatWeapons": [
+    {
+      "name": "Unarmed",
+      "type": "WEAPON_CLOSE_COMBAT",
+      "subtype": "UNARMED",
+      "skill": "close_combat",
+      "pool": 2,
+      "damage": "2S",
+      "attackRating": "6/-/-/-/-",
+      "wifi": [],
+      "accessories": [],
+      "page": "CRB 67",
+      "description": "",
+      "primary": false
+    }
+  ],
+  "armors": [
+    {
+      "name": "Ballistic Mask",
+      "rating": 1,
+      "socialrating": -2,
+      "accessories": [
+        {
+          "name": "Audio enhancement",
+          "type": "ACCESSORY",
+          "subType": "AUDIO_ENHANCEMENT",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Spatial recognizer",
+          "type": "ACCESSORY",
+          "subType": "AUDIO_ENHANCEMENT",
+          "rating": 0,
+          "description": ""
+        }
+      ],
+      "isIgnored": false,
+      "page": "FS 47",
+      "description": "",
+      "primary": false
+    },
+    {
+      "name": "Lined coat",
+      "rating": 3,
+      "socialrating": -2,
+      "accessories": [
+        {
+          "name": "Chemical Protection",
+          "type": "ACCESSORY",
+          "subType": "ARMOR_BODY",
+          "rating": 1,
+          "description": ""
+        },
+        {
+          "name": "Cold Resistance",
+          "type": "ACCESSORY",
+          "subType": "ARMOR_BODY",
+          "rating": 2,
+          "description": ""
+        },
+        {
+          "name": "Electricity Resistance",
+          "type": "ACCESSORY",
+          "subType": "ARMOR_BODY",
+          "rating": 2,
+          "description": ""
+        },
+        {
+          "name": "Fire Resistance",
+          "type": "ACCESSORY",
+          "subType": "ARMOR_BODY",
+          "rating": 2,
+          "description": ""
+        }
+      ],
+      "isIgnored": false,
+      "page": "CRB 265",
+      "description": "",
+      "primary": true
+    },
+    {
+      "name": "Urban Explorer jumpsuit",
+      "rating": 3,
+      "socialrating": -2,
+      "accessories": [],
+      "isIgnored": true,
+      "page": "CRB 265",
+      "description": "",
+      "primary": false
+    }
+  ],
+  "items": [
+    {
+      "name": "Antidote patch",
+      "count": 1,
+      "rating": 0,
+      "type": "BIOLOGY",
+      "subType": "SLAP_PATCHES",
+      "page": "CRB 282",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Autopicker",
+      "count": 1,
+      "rating": 0,
+      "type": "ELECTRONICS",
+      "subType": "BREAKING",
+      "page": "CRB 278",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Biomonitor",
+      "count": 1,
+      "rating": 0,
+      "type": "BIOLOGY",
+      "subType": "BIOTECH",
+      "page": "CRB 281",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Catalyst stick",
+      "count": 1,
+      "rating": 0,
+      "type": "SURVIVAL",
+      "subType": "GRAPPLE_GUN",
+      "page": "CRB 281",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Credstick Ebony",
+      "count": 1,
+      "rating": 0,
+      "type": "ELECTRONICS",
+      "subType": "ID_CREDIT",
+      "page": "CRB 272",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Credstick Silver",
+      "count": 1,
+      "rating": 0,
+      "type": "ELECTRONICS",
+      "subType": "ID_CREDIT",
+      "page": "CRB 272",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Earbuds",
+      "count": 1,
+      "rating": 3,
+      "type": "ELECTRONICS",
+      "subType": "AUDIO",
+      "page": "CRB 275",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Flashlight",
+      "count": 1,
+      "rating": 0,
+      "type": "SURVIVAL",
+      "subType": "SURVIVAL_GEAR",
+      "page": "CRB 279",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Gecko tape gloves",
+      "count": 1,
+      "rating": 0,
+      "type": "SURVIVAL",
+      "subType": "SURVIVAL_GEAR",
+      "page": "CRB 280",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Grapple Gun",
+      "count": 1,
+      "rating": 0,
+      "type": "SURVIVAL",
+      "subType": "GRAPPLE_GUN",
+      "page": "CRB 280",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Heavy Pistol/SMG (10x) (Explosive (Caseless))",
+      "count": 5,
+      "rating": 0,
+      "type": "AMMUNITION",
+      "subType": "AMMUNITION",
+      "page": "CRB 262",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Jammer (Area)",
+      "count": 1,
+      "rating": 6,
+      "type": "ELECTRONICS",
+      "subType": "COMMUNICATION",
+      "page": "CRB 270",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Keycard copier",
+      "count": 1,
+      "rating": 0,
+      "type": "ELECTRONICS",
+      "subType": "BREAKING",
+      "page": "CRB 278",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Machine Gun (10x) (Explosive (Caseless))",
+      "count": 5,
+      "rating": 0,
+      "type": "AMMUNITION",
+      "subType": "AMMUNITION",
+      "page": "CRB 262",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Machine Gun (10x) (Gel (Caseless))",
+      "count": 5,
+      "rating": 0,
+      "type": "AMMUNITION",
+      "subType": "AMMUNITION",
+      "page": "CRB 262",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Medkit",
+      "count": 1,
+      "rating": 6,
+      "type": "BIOLOGY",
+      "subType": "BIOTECH",
+      "page": "CRB 281",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Medkit supplies",
+      "count": 1,
+      "rating": 0,
+      "type": "BIOLOGY",
+      "subType": "BIOTECH",
+      "page": "CRB 281",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Micro-transceiver",
+      "count": 1,
+      "rating": 0,
+      "type": "ELECTRONICS",
+      "subType": "COMMUNICATION",
+      "page": "CRB 270",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Microwire",
+      "count": 1,
+      "rating": 0,
+      "type": "SURVIVAL",
+      "subType": "GRAPPLE_GUN",
+      "page": "CRB 280",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Miniwelder",
+      "count": 1,
+      "rating": 0,
+      "type": "ELECTRONICS",
+      "subType": "BREAKING",
+      "page": "CRB 278",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Miniwelder fuel",
+      "count": 2,
+      "rating": 0,
+      "type": "ELECTRONICS",
+      "subType": "BREAKING",
+      "page": "CRB 278",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Respirator",
+      "count": 1,
+      "rating": 6,
+      "type": "SURVIVAL",
+      "subType": "SURVIVAL_GEAR",
+      "page": "CRB 280",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Rifles (10x) (Explosive (Caseless))",
+      "count": 5,
+      "rating": 0,
+      "type": "AMMUNITION",
+      "subType": "AMMUNITION",
+      "page": "CRB 262",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Rifles (10x) (Explosive (Caseless))",
+      "count": 5,
+      "rating": 0,
+      "type": "AMMUNITION",
+      "subType": "AMMUNITION",
+      "page": "CRB 262",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Standard RFID Tag (10x)",
+      "count": 1,
+      "rating": 0,
+      "type": "ELECTRONICS",
+      "subType": "RFID",
+      "page": "CRB 269",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Stealth rope",
+      "count": 1,
+      "rating": 0,
+      "type": "SURVIVAL",
+      "subType": "GRAPPLE_GUN",
+      "page": "CRB 281",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Stealth tag",
+      "count": 10,
+      "rating": 0,
+      "type": "ELECTRONICS",
+      "subType": "RFID",
+      "page": "CRB 269",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Stim patch",
+      "count": 1,
+      "rating": 6,
+      "type": "BIOLOGY",
+      "subType": "SLAP_PATCHES",
+      "page": "CRB 282",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Subvocal microphone",
+      "count": 1,
+      "rating": 0,
+      "type": "ELECTRONICS",
+      "subType": "ELECTRONIC_ACCESSORIES",
+      "page": "CRB 268",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Survival kit",
+      "count": 1,
+      "rating": 0,
+      "type": "SURVIVAL",
+      "subType": "SURVIVAL_GEAR",
+      "page": "CRB 280",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Tools - Kit (Engineering)",
+      "count": 1,
+      "rating": 0,
+      "type": "TOOLS",
+      "subType": "TOOLS",
+      "page": "CRB 273",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Trauma patch",
+      "count": 1,
+      "rating": 0,
+      "type": "BIOLOGY",
+      "subType": "SLAP_PATCHES",
+      "page": "CRB 282",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "Trid projector",
+      "count": 1,
+      "rating": 0,
+      "type": "ELECTRONICS",
+      "subType": "ELECTRONIC_ACCESSORIES",
+      "page": "CRB 268",
+      "accessories": [],
+      "description": ""
+    },
+    {
+      "name": "White noise generator",
+      "count": 1,
+      "rating": 6,
+      "type": "ELECTRONICS",
+      "subType": "COMMUNICATION",
+      "page": "CRB 270",
+      "accessories": [],
+      "description": ""
+    }
+  ],
+  "augmentations": [
+    {
+      "name": "Cerebral booster",
+      "level": "2",
+      "essence": 0.4,
+      "page": "CRB 293",
+      "quality": "STANDARD",
+      "description": "",
+      "accessories": []
+    },
+    {
+      "name": "Control Rig",
+      "level": "2",
+      "essence": 2.0,
+      "page": "CRB 283",
+      "quality": "STANDARD",
+      "description": "",
+      "accessories": []
+    },
+    {
+      "name": "Cybereyes, Rating 3",
+      "level": "-",
+      "essence": 0.3,
+      "page": "CRB 285",
+      "quality": "STANDARD",
+      "description": "",
+      "accessories": [
+        {
+          "name": "Smartlink",
+          "type": "ACCESSORY",
+          "subType": "CYBER_EYEWARE",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Thermographic vision",
+          "type": "ACCESSORY",
+          "subType": "CYBER_EYEWARE",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Low-light vision",
+          "type": "ACCESSORY",
+          "subType": "CYBER_EYEWARE",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Flare compensation",
+          "type": "ACCESSORY",
+          "subType": "CYBER_EYEWARE",
+          "rating": 0,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "Datajack",
+      "level": "-",
+      "essence": 0.1,
+      "page": "CRB 283",
+      "quality": "STANDARD",
+      "description": "",
+      "accessories": []
+    },
+    {
+      "name": "Datajack",
+      "level": "-",
+      "essence": 0.1,
+      "page": "CRB 283",
+      "quality": "STANDARD",
+      "description": "",
+      "accessories": []
+    },
+    {
+      "name": "Medullan Parallel Processors",
+      "level": "1",
+      "essence": 0.5,
+      "page": "DC 145",
+      "quality": "STANDARD",
+      "description": "",
+      "accessories": []
+    }
+  ],
+  "vehicles": [
+    {
+      "name": "Ford Bison III",
+      "type": "VEHICLES",
+      "subtype": "VANS",
+      "handlOn": 5,
+      "handlOff": 5,
+      "pilot": 3,
+      "body": 18,
+      "accelOn": 20,
+      "accelOff": 20,
+      "speedIntOn": 35,
+      "speedIntOff": 35,
+      "speed": 140,
+      "armor": 14,
+      "sensor": 3,
+      "seats": 10,
+      "accessories": [
+        {
+          "name": "Metahuman adjustments (pilot) Dwarf",
+          "type": "ACCESSORY",
+          "subType": "MOD_INTERIOR",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Rigger interface",
+          "type": "ACCESSORY",
+          "subType": "MOD_MISC",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "x Guide Override",
+          "type": "ACCESSORY",
+          "subType": "MOD_PILOT",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Smart Tires",
+          "type": "ACCESSORY",
+          "subType": "TIRES",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Spoof Kit",
+          "type": "ACCESSORY",
+          "subType": "VEHICLE_ACCESSORY",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Drone rack - Large",
+          "type": "ACCESSORY",
+          "subType": "MOD_RACK",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Drone rack - Medium",
+          "type": "ACCESSORY",
+          "subType": "MOD_RACK",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Drone rack - Small",
+          "type": "ACCESSORY",
+          "subType": "MOD_RACK",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Rigger Cocoon",
+          "type": "ACCESSORY",
+          "subType": "MOD_CARGO",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Valkyrie Module",
+          "type": "ACCESSORY",
+          "subType": "MOD_CARGO",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Living Space (Middle)",
+          "type": "ACCESSORY",
+          "subType": "MOD_CARGO",
+          "rating": 1,
+          "description": ""
+        }
+      ],
+      "page": "DC 30",
+      "description": ""
+    },
+    {
+      "name": "Suzuki Mirage",
+      "type": "VEHICLES",
+      "subtype": "BIKES",
+      "handlOn": 2,
+      "handlOff": 6,
+      "pilot": 1,
+      "body": 4,
+      "accelOn": 34,
+      "accelOff": 34,
+      "speedIntOn": 40,
+      "speedIntOff": 40,
+      "speed": 260,
+      "armor": 2,
+      "sensor": 1,
+      "seats": 1,
+      "accessories": [
+        {
+          "name": "Metahuman adjustments (pilot) Dwarf",
+          "type": "ACCESSORY",
+          "subType": "MOD_INTERIOR",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Rigger interface",
+          "type": "ACCESSORY",
+          "subType": "MOD_MISC",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "x Guide Override",
+          "type": "ACCESSORY",
+          "subType": "MOD_PILOT",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Spoof Kit",
+          "type": "ACCESSORY",
+          "subType": "VEHICLE_ACCESSORY",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Electrochromic Paint",
+          "type": "ACCESSORY",
+          "subType": "MOD_COAT",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Smart Tires",
+          "type": "ACCESSORY",
+          "subType": "TIRES",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Drone rack - Micro/Mini",
+          "type": "ACCESSORY",
+          "subType": "MOD_RACK",
+          "rating": 0,
+          "description": ""
+        }
+      ],
+      "page": "CRB 295",
+      "description": ""
+    }
+  ],
+  "drones": [
+    {
+      "name": "Esprit Foxhound",
+      "type": "DRONE_MEDIUM",
+      "subtype": "GROUND",
+      "count": 1,
+      "handlOn": 3,
+      "handlOff": 3,
+      "accelOn": 10,
+      "accelOff": 10,
+      "speedIntOn": 15,
+      "speedIntOff": 15,
+      "speed": 70,
+      "body": 8,
+      "armor": 6,
+      "pilot": 4,
+      "sensor": 3,
+      "page": "DC 97",
+      "accessories": [
+        {
+          "name": "Retrans Unit",
+          "type": "ACCESSORY",
+          "subType": "MOD_MISC",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Maneuvering",
+          "type": "ACCESSORY",
+          "subType": "AUTOSOFT",
+          "rating": 5,
+          "description": ""
+        },
+        {
+          "name": "Targeting (Ingram Smartgun XI)",
+          "type": "ACCESSORY",
+          "subType": "AUTOSOFT",
+          "rating": 5,
+          "description": ""
+        }
+      ],
+      "description": ""
+    },
+    {
+      "name": "Federated-Boeing Sky Commander",
+      "type": "DRONE_SMALL",
+      "subtype": "AIR",
+      "count": 1,
+      "handlOn": 4,
+      "handlOff": 4,
+      "accelOn": 20,
+      "accelOff": 20,
+      "speedIntOn": 30,
+      "speedIntOff": 30,
+      "speed": 190,
+      "body": 4,
+      "armor": 2,
+      "pilot": 4,
+      "sensor": 5,
+      "page": "DC 106",
+      "accessories": [
+        {
+          "name": "Maneuvering",
+          "type": "ACCESSORY",
+          "subType": "AUTOSOFT",
+          "rating": 5,
+          "description": ""
+        },
+        {
+          "name": "Stealth",
+          "type": "ACCESSORY",
+          "subType": "AUTOSOFT",
+          "rating": 5,
+          "description": ""
+        }
+      ],
+      "description": ""
+    },
+    {
+      "name": "MCT Gnat",
+      "type": "DRONE_MICRO",
+      "subtype": "AIR",
+      "count": 1,
+      "handlOn": 3,
+      "handlOff": 3,
+      "accelOn": 4,
+      "accelOff": 4,
+      "speedIntOn": 10,
+      "speedIntOff": 10,
+      "speed": 30,
+      "body": 0,
+      "armor": 0,
+      "pilot": 2,
+      "sensor": 1,
+      "page": "CRB 299",
+      "accessories": [
+        {
+          "name": "Maneuvering",
+          "type": "ACCESSORY",
+          "subType": "AUTOSOFT",
+          "rating": 5,
+          "description": ""
+        }
+      ],
+      "description": ""
+    },
+    {
+      "name": "Steel Lynx Combat Drone",
+      "type": "DRONE_LARGE",
+      "subtype": "GROUND",
+      "count": 1,
+      "handlOn": 3,
+      "handlOff": 5,
+      "accelOn": 15,
+      "accelOff": 15,
+      "speedIntOn": 15,
+      "speedIntOff": 15,
+      "speed": 80,
+      "body": 12,
+      "armor": 16,
+      "pilot": 4,
+      "sensor": 4,
+      "page": "CRB 300",
+      "accessories": [
+        {
+          "name": "Maneuvering",
+          "type": "ACCESSORY",
+          "subType": "AUTOSOFT",
+          "rating": 5,
+          "description": ""
+        },
+        {
+          "name": "Targeting (Ares Alpha)",
+          "type": "ACCESSORY",
+          "subType": "AUTOSOFT",
+          "rating": 5,
+          "description": ""
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "lifestyles": [
+    {
+      "customName": "The Crib",
+      "name": "Middle",
+      "cost": 5000,
+      "paidMonths": 1,
+      "sin": "Vincent Ferguson",
+      "options": [],
+      "description": ""
+    }
+  ],
+  "sins": [
+    {
+      "name": "Vincent Ferguson",
+      "description": "Day-to-Day",
+      "quality": 4
+    },
+    {
+      "name": "Jeffrey Fernandez",
+      "description": "Shady",
+      "quality": 2
+    },
+    {
+      "name": "Kirk Bauer",
+      "description": "GTH identity",
+      "quality": 4
+    }
+  ],
+  "contacts": [
+    {
+      "name": "Countdown",
+      "type": "Fixer",
+      "loyalty": 4,
+      "influence": 4,
+      "description": "Countdown may look like an average corporate suit, but that\u0027s exactly why he\u0027s so good at his job. At just sixteen, he carries himself with the\nconfident ease of a much older professional, his calm demeanor punctuated by the subtle weight of the holstered pistol he always keeps at his\nside. Despite his youth, Countdown has rapidly earned a reputation in the shadows as a reliable and efficient fixer, known for connecting\nrunners with precisely the resources, gear, and information they need—always right on schedule, down to the second.\n\nHis loyalty to Dominic \u0027Blackout\u0027 Calder is built on mutual respect and shared professional precision. Having proven himself consistently\ntrustworthy and discreet, Countdown views Calder not just as another runner but as a dependable ally worth investing in. This young fixer\u0027s\nnetwork is solid and growing steadily, capable of sourcing mid-tier corporate intel, specialized gear, and secure contacts that most runners\nhis age could only dream of accessing. While not at the apex of influence, Countdown’s careful blend of efficiency, youthful audacity, and\nloyalty makes him an invaluable resource—and one worth protecting.",
+      "favors": 0
+    },
+    {
+      "name": "Hammerlock",
+      "type": "Ares Quartermaster",
+      "loyalty": 4,
+      "influence": 4,
+      "description": "Hammerlock is a seasoned quartermaster within Ares\u0027 private military and security divisions, known just as much for his resourcefulness as for\nhis slightly questionable methods. A grizzled veteran with a perpetual mischievous glint in his eyes, Hammerlock somehow always manages to\nprocure gear that shouldn\u0027t technically exist on the inventory sheets—from specialized rigging setups to restricted milspec hardware.\nColleagues often joke that if you can\u0027t find something officially, Hammerlock probably has two hidden under his desk.\n\nDominic \u0027Blackout\u0027 Calder maintains Hammerlock as one of his few reliable contacts within Ares, fully aware of the quartermaster\u0027s penchant\nfor side deals and subtle scheming. Their relationship dates back to a particularly messy corporate operation years ago, during which Calder\npulled Hammerlock out of harm\u0027s way—a debt the quartermaster gladly repays with occasional off-the-books deals. Hammerlock\u0027s shifting\neyes and ever-present grin hint at ongoing plans and opportunities, but Calder has learned to trust that, beneath the schemes, the\nquartermaster’s loyalty is genuine. The careful balance of personal debt, shared misadventure, and Hammerlock’s relentless opportunism\nmakes him an invaluable—and endlessly interesting—ally.",
+      "favors": 0
+    },
+    {
+      "name": "Sylvara",
+      "type": "Combat Mage and Magical Security Consultant",
+      "loyalty": 4,
+      "influence": 4,
+      "description": "Sylvara is an elegant elven mage who once served in Ares\u0027 elite Firewatch teams, renowned for her precision, resilience, and mastery over\ncombat magic. After leaving the corporate military behind, she transitioned seamlessly into shadowrunning circles, leveraging her extensive\nmagical and tactical expertise as a freelance magical consultant and security specialist. Operating out of a discreet shop tucked away in the\nshadows of Seattle, Sylvara now assists clients in magical threat assessment, arcane security measures, and—when necessary—offensive\nmagical support.\n\nDominic \u0027Blackout\u0027 Calder values Sylvara as a crucial contact due to her exceptional magical knowledge and the quiet intensity she brings to\nany job. Their relationship began when Calder helped extract her from a dangerous corporate situation, allowing her to break cleanly from\nAres. This act forged a bond of trust and mutual respect between them. Sylvara appreciates Calder\u0027s resourcefulness and discretion, often\nproviding him rare magical insights or arcane intelligence inaccessible to mundane channels. Despite her professional independence, Sylvara\nmaintains a loyalty to Calder rooted deeply in gratitude and mutual benefit, making her an indispensable ally in magical and arcane matters.",
+      "favors": 0
+    }
+  ],
+  "licenses": [
+    {
+      "name": "Rigger Remote Console 4",
+      "sin": "Vincent Ferguson",
+      "type": "Rigger Remote Console",
+      "rating": "SUPERFICIALLY_PLAUSIBLE"
+    },
+    {
+      "name": "Firearms License 4",
+      "sin": "Vincent Ferguson",
+      "type": "Firearms License",
+      "rating": "SUPERFICIALLY_PLAUSIBLE"
+    },
+    {
+      "name": "Smartgun/Smartlink 4",
+      "sin": "Vincent Ferguson",
+      "type": "Smartgun/Smartlink",
+      "rating": "SUPERFICIALLY_PLAUSIBLE"
+    },
+    {
+      "name": "Driver 4",
+      "sin": "Vincent Ferguson",
+      "type": "Driver",
+      "rating": "SUPERFICIALLY_PLAUSIBLE"
+    },
+    {
+      "name": "Concealed Carry License 4",
+      "sin": "Vincent Ferguson",
+      "type": "Concealed Carry License",
+      "rating": "SUPERFICIALLY_PLAUSIBLE"
+    },
+    {
+      "name": "Cyberware 4",
+      "sin": "Vincent Ferguson",
+      "type": "Cyberware",
+      "rating": "SUPERFICIALLY_PLAUSIBLE"
+    }
+  ],
+  "matrixItems": [
+    {
+      "name": "Proteus Poseidon",
+      "dataProcessing": 5,
+      "firewall": 6,
+      "attack": 0,
+      "sleaze": 0,
+      "deviceRating": 5,
+      "type": "ELECTRONICS",
+      "subType": "RIGGER_CONSOLE",
+      "page": "CRB 197",
+      "concurrentPrograms": 5,
+      "accessories": [
+        {
+          "name": "Armor",
+          "type": "ACCESSORY",
+          "subType": "RIGGER_PROGRAM",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Encryption",
+          "type": "ACCESSORY",
+          "subType": "RIGGER_PROGRAM",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Signal Scrubber",
+          "type": "ACCESSORY",
+          "subType": "RIGGER_PROGRAM",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Swarm",
+          "type": "ACCESSORY",
+          "subType": "RIGGER_PROGRAM",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Toolbox",
+          "type": "ACCESSORY",
+          "subType": "RIGGER_PROGRAM",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Stealth",
+          "type": "ACCESSORY",
+          "subType": "RIGGER_PROGRAM",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Smartsoft",
+          "type": "ACCESSORY",
+          "subType": "RIGGER_PROGRAM",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Virtual Machine",
+          "type": "ACCESSORY",
+          "subType": "RIGGER_PROGRAM",
+          "rating": 0,
+          "description": ""
+        },
+        {
+          "name": "Crash and Burn",
+          "type": "ACCESSORY",
+          "subType": "ESOFT",
+          "rating": 6,
+          "description": ""
+        },
+        {
+          "name": "Clearsight ",
+          "type": "ACCESSORY",
+          "subType": "AUTOSOFT",
+          "rating": 5,
+          "description": ""
+        },
+        {
+          "name": "Electronic Warfare",
+          "type": "ACCESSORY",
+          "subType": "SKILLSOFT",
+          "rating": 5,
+          "description": ""
+        },
+        {
+          "name": "Evasion",
+          "type": "ACCESSORY",
+          "subType": "AUTOSOFT",
+          "rating": 5,
+          "description": ""
+        }
+      ],
+      "programs": [],
+      "description": ""
+    },
+    {
+      "name": "Meta Link",
+      "dataProcessing": 1,
+      "firewall": 0,
+      "attack": 0,
+      "sleaze": 0,
+      "deviceRating": 1,
+      "type": "ELECTRONICS",
+      "subType": "COMMLINK",
+      "page": "CRB 267",
+      "concurrentPrograms": 0,
+      "accessories": [],
+      "programs": [],
+      "description": ""
+    },
+    {
+      "name": "Transys Avalon",
+      "dataProcessing": 3,
+      "firewall": 1,
+      "attack": 0,
+      "sleaze": 0,
+      "deviceRating": 6,
+      "type": "ELECTRONICS",
+      "subType": "COMMLINK",
+      "page": "CRB 267",
+      "concurrentPrograms": 3,
+      "accessories": [
+        {
+          "name": "[Commlink] Personal Assistant",
+          "type": "ACCESSORY",
+          "subType": "OTHER_PROGRAMS",
+          "rating": 6,
+          "description": ""
+        },
+        {
+          "name": "[Commlink] P-ICE: Spines",
+          "type": "ACCESSORY",
+          "subType": "OTHER_PROGRAMS",
+          "rating": 0,
+          "description": ""
+        }
+      ],
+      "programs": [],
+      "description": ""
+    }
+  ],
+  "martialArts": [],
+  "signatureManeuvers": [],
+  "notes": null
+}

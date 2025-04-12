@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Cosmetic bioware -->
+
+	<item id="gender_modification" avail="5" cost="20000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD"/>
+	</item>
+
+	<item id="ethnicity_modification" avail="5" cost="20000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD"/>
+	</item>
+
+	<item id="minor_modification" avail="2" cost="100" maxrat="20" rate="true" ratemul="PRICE" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD"/>
+	</item>
+
+	<item id="moderate_modification" avail="3" cost="1000" maxrat="5" rate="true" ratemul="PRICE" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD"/>
+	</item>
+
+	<item id="severe_modification" avail="4" cost="10000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD"/>
+	</item>
+
+	<item id="metatype_change" avail="5" cost="25000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.25"/>
+	</item>
+
+	<item id="troll_reduction" avail="4" cost="15000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.25"/>
+	</item>
+
+	<item id="ork_reduction" avail="4" cost="15000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.25"/>
+	</item>
+
+	<item id="clean_metabolism" avail="3" cost="1000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.05"/>
+	</item>
+
+	<item id="dietware" avail="3" cost="1000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="hair_growth_head" avail="2" cost="500" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD"/>
+	</item>
+
+	<item id="hair_growth_body" avail="3" cost="1500" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD"/>
+	</item>
+
+	<item id="metahuman_glamor" avail="4" cost="15000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.25"/>
+		<modifications>
+			<edgemod skill="con" type="BONUS"/>
+			<edgemod skill="influence" type="BONUS"/>
+		</modifications>
+	</item>
+
+	<item id="perfect_eyes" avail="3" cost="500" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD"/>
+	</item>
+
+	<item id="skinpigmen_permanent" avail="3" cost="1000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD"/>
+	</item>
+
+	<item id="skinpigmen_temporary" avail="2" cost="100" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD"/>
+	</item>
+
+<!-- Standard bioware -->
+
+	<item id="amplified_immune_system" avail="3" cost="4000" maxrat="4" rate="true" ratemul="AVAIL PRICE ESSENCE" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="balance_receptor_alteration" avail="4" cost="2000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="chemgland" avail="5L" cost="20000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="chemgland_exhalation_spray" avail="8L" cost="6000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="chemgland_spit" avail="8L" cost="6000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="chemgland_weapon_reservoir" avail="7L" cost="4000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="chemgland_expanded_reservoir" avail="6L" cost="2000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="expanded_volume" avail="2" cost="2000" maxrat="4" rate="true" ratemul="AVAIL PRICE ESSENCE" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="false_front" avail="2I" cost="12000" maxrat="4" rate="true" ratemul="AVAIL PRICE ESSENCE" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<edgemod type="BONUS" skill="con"/>
+			<skillmod ref="con" val="1" cond="true" condindex="1"/>
+		</modifications>
+	</item>
+
+	<item id="false_front_mimic" avail="2I" cost="10000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD"/>
+	</item>
+
+	<item id="gills_freshwater" avail="3" cost="8000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+	</item>
+
+	<item id="gills_saltwater" avail="3" cost="8000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+	</item>
+
+	<item id="gills_air" avail="3" cost="8000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+	</item>
+
+	<item id="hand_webbing" avail="3" cost="1000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.05"/>
+		<modifications>
+			<skillmod ref="athletics" val="1" cond="true" condindex="1"/>
+		</modifications>
+	</item>
+
+	<item id="foot_webbing" avail="3" cost="1000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.05"/>
+		<modifications>
+			<skillmod ref="athletics" val="1" cond="true" condindex="1"/>
+		</modifications>
+	</item>
+
+	<item id="joint_replacement" avail="2" cost="1000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD"/>
+	</item>
+
+	<item id="metabolic_arrester" avail="3" cost="10000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.3"/>
+		<modifications>
+			<attrmod attr="DAMAGE_OVERFLOW" type="AUGMENTED" val="2"/>
+		</modifications>
+	</item>
+
+	<item id="nephritic_screen" avail="1" cost="8000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+	</item>
+
+	<item id="nictitating_membrane" avail="2" cost="1000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.05"/>
+	</item>
+
+	<item id="quadmod" avail="4" cost="7500" maxrat="3" rate="true" ratemul="PRICE ESSENCE" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+		<modifications>
+			<skillmod ref="athletics" val="1" cond="true" condindex="1"/>
+		</modifications>
+	</item>
+
+	<item id="type-o_finger" avail="1" cost="1000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.01"/>
+	</item>
+
+	<item id="type-o_toe" avail="1" cost="1000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.01"/>
+	</item>
+
+	<item id="type-o_hand" avail="2" cost="10000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.05"/>
+	</item>
+
+	<item id="type-o_foot" avail="2" cost="10000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.05"/>
+	</item>
+
+	<item id="type-o_part_arm" avail="3" cost="20000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="type-o_part_leg" avail="3" cost="20000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="type-o_full_arm" avail="4" cost="40000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+	</item>
+
+	<item id="type-o_full_leg" avail="4" cost="40000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+	</item>
+
+	<item id="spidersilk_gland" avail="6" cost="35000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.3"/>
+	</item>
+
+	<item id="spinal_realignment" avail="2" cost="4000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="bio_balance_tail" avail="6" cost="2500" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+		<modifications>
+			<edgemod type="BONUS" skill="athletics"/>
+		</modifications>
+	</item>
+
+	<item id="bio_paddle_tail" avail="6" cost="2500" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+		<modifications>
+			<edgemod type="BONUS" skill="athletics"/>
+		</modifications>
+	</item>
+
+	<item id="bio_prehensile_tail" avail="6" cost="5000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.25"/>
+	</item>
+
+	<item id="bio_thagomizer_augment" avail="6" cost="7000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<itemmod item="bio_thagomizer"/>
+		</modifications>
+	</item>
+
+	<item id="bio_whip_tail_augment" avail="6" cost="9000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.5"/>
+		<modifications>
+			<itemmod item="bio_whip_tail"/>
+		</modifications>
+	</item>
+
+	<item id="tailored_critter_pheromones" avail="2" cost="2000" choice="NAME" maxrat="3" rate="true" ratemul="AVAIL PRICE ESSENCE MODIFIER" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+		<modifications>
+			<skillmod ref="con" val="1" cond="true" condindex="1"/>
+			<skillmod ref="influence" val="1" cond="true" condindex="2"/>
+		</modifications>
+	</item>
+
+	<item id="vocalmod_banshee" avail="5" cost="20000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.5"/>
+	</item>
+
+	<item id="vocalmod_growler" avail="6" cost="5000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+		<modifications>
+			<edgemod type="BONUS" skill="influence"/>
+		</modifications>
+	</item>
+
+	<item id="vocalmod_enhancer" avail="6" cost="10000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+		<modifications>
+			<edgemod type="BONUS" skill="con"/>
+		</modifications>
+	</item>
+
+	<item id="vocalmod_extender" avail="6L" cost="30000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<edgemod type="BONUS" skill="con"/>
+			<skillmod ref="con" val="1" cond="true" condindex="1"/>
+		</modifications>
+	</item>
+
+<!-- SURGE bioware -->
+
+	<item id="bio_bark" avail="4" cost="1500" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+		<requires>
+			<itemreq item="bio_rhino" negated="true"/>
+			<itemreq item="gen_bark_skin" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="DEFENSE_RATING" val="2" type="AUGMENTED" />
+		</modifications>
+	</item>
+
+	<item id="bio_blubber" avail="5" cost="100" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="bio_camouflage" avail="4" cost="1500" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+		<modifications>
+			<skillmod ref="stealth" val="1" cond="true" condindex="1"/>
+		</modifications>
+	</item>
+
+	<item id="bio_cham_basic" avail="6" cost="2000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<skillmod ref="stealth" val="1" cond="true" condindex="1"/>
+		</modifications>
+	</item>
+
+	<item id="bio_cham_dynamic" avail="7" cost="4000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.3"/>
+		<modifications>
+			<skillmod ref="stealth" val="1" cond="true" condindex="1"/>
+		</modifications>
+	</item>
+
+	<item id="bio_chemical_repulsion" avail="8L" cost="20000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.25"/>
+	</item>
+
+	<item id="bio_chloroplast" avail="4" cost="2500" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+		<modifications>
+			<edgemod type="BONUS" skill="con"/>
+			<edgemod type="BONUS" skill="influence"/>
+		</modifications>
+	</item>
+
+	<item id="bioclimate_cold" avail="3" cost="6000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+		<modifications>
+			<edgemod type="BONUS" skill="outdoor"/>
+		</modifications>
+	</item>
+
+	<item id="bioclimate_hot" avail="3" cost="6000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+		<modifications>
+			<edgemod type="BONUS" skill="outdoor"/>
+		</modifications>
+	</item>
+
+	<item id="bio_defensive_secretion" avail="5" cost="5000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="bio_dragon_hide" avail="4" cost="2000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="bio_granite_augment" avail="6L" cost="50000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.25"/>
+		<modifications>
+			<itemmod item="bio_granite_skin" />
+		</modifications>
+	</item>
+
+	<item id="bio_greasy_skin" avail="5" cost="2000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="bio_insulation_coat" avail="5" cost="8000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="bio_rhino" avail="4" cost="3000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+		<requires>
+			<itemreq item="bio_bark" negated="true"/>
+			<itemreq item="gen_bark_skin" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="DEFENSE_RATING" val="3" type="AUGMENTED" />
+		</modifications>
+	</item>
+
+	<item id="bio_thorns" avail="4" cost="2500" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+		<modifications>
+			<attrmod attr="ATTACK_RATING" val="1"/>
+			<dmgtypemod type="PHYSICAL"/>
+			<skillmod ref="athletics" val="-1"/>
+			<skillmod ref="stealth" val="-1"/>
+		</modifications>
+	</item>
+
+<!-- Cultured Bioware -->
+
+	<item id="biolink" avail="4" cost="5000" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.5"/>
+	</item>
+
+	<item id="cerebellum_booster" avail="3" cost="50000" maxrat="3" rate="true" ratemul="AVAIL PRICE ESSENCE MODIFIER" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.2"/>
+		<modifications>
+			<attrmod attr="INTUITION"     val="1"/>
+		</modifications>
+	</item>
+
+	<item id="knowledge_infusion" avail="3" cost="2000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+		<modifications>
+			<skillmod ref="knowledge" val="1" modType="ALTERNATE"/>
+		</modifications>
+	</item>
+
+	<item id="language_infusion" avail="3" cost="2000">
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+		<modifications>
+			<skillmod ref="language" val="1" modType="ALTERNATE"/>
+		</modifications>
+	</item>
+
+	<item id="cultured_finger" avail="4" cost="1500" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED"/>
+	</item>
+
+	<item id="cultured_nose" avail="4" cost="1500" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED"/>
+	</item>
+
+	<item id="cultured_toe" avail="4" cost="1500" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED"/>
+	</item>
+
+	<item id="cultured_hand" avail="5" cost="15000" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED"/>
+	</item>
+
+	<item id="cultured_foot" avail="5" cost="15000" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED"/>
+	</item>
+
+	<item id="cultured_parm" avail="5" cost="30000" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED"/>
+	</item>
+
+	<item id="cultured_pleg" avail="5" cost="30000" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED"/>
+	</item>
+
+	<item id="cultured_farm" avail="5" cost="60000" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED"/>
+	</item>
+
+	<item id="cultured_fleg" avail="5" cost="60000" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED"/>
+	</item>
+
+	<item id="myonuclear_permanence" avail="4" cost="12000" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+	</item>
+
+	<item id="neuro-retention_amplification" avail="3" cost="10000" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+	</item>
+
+	<item id="pulmonary_arcane_arrester" avail="6" cost="12500" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.25"/>
+	</item>
+
+	<item id="reception_enhancer" avail="2" cost="10000" maxrat="3" rate="true" ratemul="AVAIL PRICE ESSENCE MODIFIER" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.2"/>
+		<modifications>
+			<skillmod ref="perception" val="1"/>
+		</modifications>
+	</item>
+
+	<item id="reproductive_replacement" avail="3" cost="15000" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED"/>
+	</item>
+
+	<item id="tough_gut" avail="4" cost="10000" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.15"/>
+	</item>
+
+	<item id="tremor_reducer" avail="2" cost="10000" maxrat="3" rate="true" ratemul="AVAIL PRICE ESSENCE" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+	</item>
+
+	<item id="bio_wings" avail="6" cost="100000" >
+		<useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="1.5"/>
+	</item>
+
+<!-- BioSenses -->
+
+	<item id="awareness_basic" avail="4" cost="12000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="awareness_tactical" avail="6" cost="15000" maxrat="3" rate="true" ratemul="PRICE ESSENCE MODIFIER" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+		<modifications>
+			<attrmod attr="DEFENSIVE_POOL" val="1" type="AUGMENTED" />
+		</modifications>
+	</item>
+
+	<item id="cognitive_shield" avail="6" cost="25000" maxrat="3" rate="true" ratemul="PRICE" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+	</item>
+
+	<item id="echolocation" avail="6" cost="15000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="electrosense_organs" avail="5" cost="5000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="technosense_organs" avail="6" cost="11000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+	</item>
+
+	<item id="hearing_enhancement" avail="2" cost="4000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="hearing_expansion" avail="4" cost="4000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="magnetosense_organ" avail="4" cost="5000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="manasense" avail="6" cost="5000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.15"/>
+	</item>
+
+	<item id="setae_hands" avail="5" cost="12000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+		<modifications>
+			<skillmod ref="athletics" val="2" cond="true" condindex="1"/>
+		</modifications>
+	</item>
+
+	<item id="setae_feet" avail="5" cost="12000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+		<modifications>
+			<skillmod ref="athletics" val="2" cond="true" condindex="1"/>
+		</modifications>
+	</item>
+
+	<item id="tactile_sensitivity" avail="4" cost="2500" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+		<modifications>
+			<edgemod type="BONUS" skill="perception"/>
+		</modifications>
+	</item>
+
+	<item id="thermosense_organs" avail="6" cost="5000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="troll_eyes" avail="4" cost="4000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+	<item id="vomeronasal_gland" avail="6" cost="8000" >
+		<useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+	</item>
+
+<!-- BIOWARE_IMPLANT_WEAPONs -->
+
+	<item id="biospike_blade_augment" avail="4" cost="7500" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.15"/>
+		<modifications>
+			<itemmod item="biospike_blade"/>
+		</modifications>
+	</item>
+
+	<item id="biospike_claws_augment" avail="4" cost="5000" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.1"/>
+		<modifications>
+			<itemmod item="biospike_claws"/>
+		</modifications>
+	</item>
+
+	<item id="biosprayer_blind_augment" avail="6" cost="25000" maxrat="3" rate="true" ratemul="PRICE ESSENCE" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.35"/>
+		<modifications>
+			<itemmod item="biosprayer_blind"/>
+		</modifications>
+	</item>
+
+	<item id="biosprayer_confused_augment" avail="6" cost="25000" maxrat="3" rate="true" ratemul="PRICE ESSENCE" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.35"/>
+		<modifications>
+			<itemmod item="biosprayer_confused"/>
+		</modifications>
+	</item>
+
+	<item id="biosprayer_dazed_augment" avail="6" cost="25000" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.35"/>
+		<modifications>
+			<itemmod item="biosprayer_dazed"/>
+		</modifications>
+	</item>
+
+	<item id="biosprayer_nauseated_augment" avail="6" cost="25000" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.35"/>
+		<modifications>
+			<itemmod item="biosprayer_nauseated"/>
+		</modifications>
+	</item>
+
+	<item id="corrosive_spit_augment" avail="5" cost="5000" maxrat="3" rate="true" ratemul="PRICE ESSENCE" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.1"/>
+		<modifications>
+			<itemmod item="bio_corrosive_spit"/>
+		</modifications>
+	</item>
+
+	<item id="fangs_non-retract_augment" avail="3" cost="1000" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.05"/>
+		<modifications>
+			<itemmod item="bio_fangs_non-retract"/>
+		</modifications>
+	</item>
+
+	<item id="fangs_retract_augment" avail="4" cost="1500" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.15"/>
+		<modifications>
+			<itemmod item="bio_fangs_retract"/>
+		</modifications>
+	</item>
+
+	<item id="frog_tongue_augment" avail="0" cost="0" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.2"/>
+		<modifications>
+			<itemmod item="bio_frog_tongue"/>
+		</modifications>
+	</item>
+
+	<item id="horns_augment" avail="3" cost="500" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.1"/>
+		<modifications>
+			<itemmod item="bio_horns"/>
+		</modifications>
+	</item>
+
+	<item id="natural_venom_augment" avail="5" cost="15000" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.2"/>
+		<modifications>
+			<itemmod item="bio_natural_venom"/>
+		</modifications>
+	</item>
+
+	<item id="quills_augment" avail="6" cost="2500" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.25"/>
+		<modifications>
+			<itemmod item="bio_quills"/>
+		</modifications>
+	</item>
+
+	<item id="stinger_tiny_augment" avail="3" cost="500" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.05"/>
+		<modifications>
+			<itemmod item="bio_sting_tiny"/>
+		</modifications>
+	</item>
+
+	<item id="stinger_medium_augment" avail="4" cost="2500" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.1"/>
+		<modifications>
+			<itemmod item="bio_sting_medium"/>
+		</modifications>
+	</item>
+
+	<item id="stinger_large_augment" avail="5" cost="8000" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.15"/>
+		<modifications>
+			<itemmod item="bio_sting_large"/>
+		</modifications>
+	</item>
+
+	<item id="striking_callus" avail="2" cost="500" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.05"/>
+		<modifications>
+			<itemmod item="bio_striking_callus"/>
+		</modifications>
+	</item>
+
+	<item id="tusk_small_augment" avail="2" cost="100" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON"/>
+		<modifications>
+			<itemmod item="bio_tusk_small"/>
+		</modifications>
+	</item>
+
+	<item id="tusk_medium_augment" avail="4" cost="500" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.1"/>
+		<modifications>
+			<itemmod item="bio_tusk_medium"/>
+		</modifications>
+	</item>
+
+	<item id="tusk_large_augment" avail="8L" cost="1000" >
+		<useas type="BIOWARE" subtype="BIOWARE_IMPLANT_WEAPON" ess="0.15"/>
+		<modifications>
+			<itemmod item="bio_tusk_large"/>
+		</modifications>
+	</item>
+
+</items>

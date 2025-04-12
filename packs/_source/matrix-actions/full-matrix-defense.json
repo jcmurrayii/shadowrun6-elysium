@@ -1,33 +1,32 @@
 {
   "name": "Full Matrix Defense",
   "type": "action",
-  "flags": {},
-  "img": "systems/shadowrun6-elysium/dist/icons/bell-shield.svg",
-  "effects": [],
-  "_id": "tFFSQBU0TSfsd9xR",
+  "_id": "8WVJwMCgasUJMu47",
+  "img": "icons/svg/item-bag.svg",
   "system": {
     "description": {
       "value": "",
       "chat": "",
-      "source": "SR5 240"
+      "source": ""
     },
     "action": {
-      "type": "",
+      "type": "major",
       "test": "SuccessTest",
-      "categories": ["matrix"],
-      "attribute": "",
+      "categories": [
+        "matrix"
+      ],
+      "attribute": "logic",
       "attribute2": "",
-      "skill": "",
+      "skill": "electronics",
       "armor": false,
       "spec": false,
-      "mod": 0,
+      "mod": null,
       "mod_description": "",
       "roll_mode": "",
       "limit": {
         "value": 0,
         "base": 0,
-        "attribute": "",
-        "mod": []
+        "attribute": ""
       },
       "threshold": {
         "value": 0,
@@ -47,8 +46,7 @@
         "base": 0,
         "ap": {
           "value": 0,
-          "base": 0,
-          "mod": []
+          "base": 0
         },
         "base_formula_operator": "add",
         "attribute": "",
@@ -57,8 +55,7 @@
           "itemId": "",
           "itemType": "",
           "itemName": ""
-        },
-        "mod": []
+        }
       },
       "opposed": {
         "type": "",
@@ -87,8 +84,7 @@
         "mod": 0
       },
       "modifiers": [],
-      "alt_mod": 0,
-      "dice_pool_mod": []
+      "initiative_timing": "initiative"
     },
     "result": {
       "success": {
@@ -101,21 +97,26 @@
       "name": "",
       "type": "",
       "subType": "",
-      "isFreshImport": false
+      "isFreshImport": false,
+      "isImported": false
     }
   },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
   "ownership": {
     "default": 0
   },
-  "folder": null,
-  "sort": 0,
+  "flags": {},
   "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
     "systemId": "shadowrun6-elysium",
-    "systemVersion": "0.13.0",
-    "coreVersion": "10.303",
-    "createdTime": null,
-    "modifiedTime": 1697731123891,
+    "systemVersion": "0.23.2",
+    "createdTime": 1744067002971,
+    "modifiedTime": 1744077316209,
     "lastModifiedBy": "sr5ebuilder"
   },
-  "_key": "!items!tFFSQBU0TSfsd9xR"
+  "_key": "!items!8WVJwMCgasUJMu47"
 }

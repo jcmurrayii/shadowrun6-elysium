@@ -1,0 +1,1364 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Minor Prosthetics -->
+
+	<item avail="4L" cost="200" id="pros_eye" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0" />
+	</item>
+	<item avail="4L" cost="200" id="pros_nose" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0" />
+	</item>
+	<item avail="4L" cost="200" id="pros_ear" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0" />
+	</item>
+	<item avail="4L" cost="200" id="pros_skin" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0" />
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0" />
+	</item>
+	<item avail="4L" cost="50" id="pros_foot" maxrat="6" rate="true" ratemul="PRICE" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0" />
+	</item>
+	<item avail="4L" cost="50" id="pros_leg" maxrat="6" rate="true" ratemul="PRICE" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0" />
+	</item>
+	<item avail="4L" cost="50" id="pros_tail1" maxrat="6" rate="true" ratemul="PRICE" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0" />
+	</item>
+	<item avail="4L" cost="50" id="pros_wing" maxrat="6" rate="true" ratemul="PRICE" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0" />
+	</item>
+	<item avail="4L" cost="50" id="pros_hand" maxrat="10" rate="true" ratemul="PRICE" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0" />
+	</item>
+	<item avail="4L" cost="50" id="pros_arm" maxrat="10" rate="true" ratemul="PRICE" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0" />
+	</item>
+	<item avail="4L" cost="50" id="pros_trunk" maxrat="10" rate="true" ratemul="PRICE" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0" />
+	</item>
+	<item avail="4L" cost="50" id="pros_tail2" maxrat="10" rate="true" ratemul="PRICE" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0" />
+	</item>
+
+<!-- Cybernetic Restraints -->
+
+	<item avail="4L" cost="100" id="cyb_anti-tamper" maxrat="6" rate="true" ratemul="PRICE CAPACITY">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0" />
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="HEADWARE_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="4L" cost="300" id="cyb_kill_switch">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0" />
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="HEADWARE_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="6I" cost="10000" id="cortex_kink_bomb" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0"/>
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="HEADWARE_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="6I" cost="25000" id="cortex_microbomb" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0"/>
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="HEADWARE_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="6I" cost="40000" id="cortex_area_bomb" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0"/>
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="3" slot="HEADWARE_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="3" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+<!-- Cosmetic Cyberware -->
+
+	<item avail="1" cost="250" id="casemodding" maxrat="4" rate="true" ratemul="PRICE MODIFIER" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="0" slot="HEADWARE_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="0" slot="CYBERLIMB_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_EARWARE" cap="0" slot="CYBEREAR_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_EYEWARE" cap="0" slot="CYBEREYE_IMPLANT"/>
+	</item>
+
+	<item avail="1" cost="1000" id="cosmetic_implants" select="NAME" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.2"/>
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.2" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="HEADWARE_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="3000" id="cyb_electrochromic_hair">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.1" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="HEADWARE_IMPLANT"/>
+	</item>
+
+	<item avail="6L" cost="20000" id="false_face">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.5"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="8" slot="HEADWARE_IMPLANT"/>
+		<modifications>
+			<edgemod type="BONUS" skill="con"/>
+			<skillmod ref="con" val="2" cond="true"/>
+		</modifications>
+	</item>
+
+	<item avail="4I" cost="1500" id="flex_hands" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.15" />
+	</item>
+
+	<item avail="4I" cost="1000" id="keypad_sequencing_fingers" maxrat="6" rate="true" ratemul="PRICE" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.3" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="4" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="3" cost="4000" id="cyb_camouflage_fur">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.4" />
+	</item>
+
+	<item avail="3" cost="6000" id="cyb_insulating_coat">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.6" />
+	</item>
+
+	<item avail="3" cost="10000" id="cyb_quills">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="1" />
+		<modifications>
+			<itemmod item="nw_quills" />
+		</modifications>
+	</item>
+
+	<item avail="3" cost="10000" id="cyb_bone_spikes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="1" />
+		<modifications>
+			<itemmod item="nw_bone_spikes" />
+		</modifications>
+	</item>
+
+	<item avail="3" cost="4000" id="cyb_striking_skin_pigmentation">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.4" />
+	</item>
+
+	<item avail="3" cost="2000" id="cyb_unusual_hair">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.2" />
+	</item>
+
+	<item avail="3" cost="4000" id="cyb_feathers">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.4" />
+	</item>
+
+	<item avail="3" cost="6000" id="cyb_insectoid_features">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.6" />
+	</item>
+
+	<item avail="3" cost="6000" id="cyb_scales">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.6" />
+	</item>
+
+	<item avail="5I" cost="10000" id="morphing_fingerprints" maxrat="6" rate="true" ratemul="PRICE" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.2" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="4I" cost="10000" id="sensor_dazzler" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.3" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="4" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="2000" id="skin_toner">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.5" />
+	</item>
+
+	<item avail="6L" cost="8000" id="chameleon_processor">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.3" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<edgemod type="BONUS" skill="con"/>
+		</modifications>
+	</item>
+
+<!-- Earware -->
+
+	<item avail="1" cost="1000" id="antennae">
+		<useas type="CYBERWARE" subtype="CYBER_EARWARE" ess="0.2" />
+		<useas type="ACCESSORY" subtype="CYBER_EARWARE" cap="2" slot="CYBEREAR_IMPLANT"/>
+	</item>
+
+	<item avail="3" cost="1000" id="increased_spectrum_hearing">
+		<useas type="CYBERWARE" subtype="CYBER_EARWARE" ess="0.1" />
+		<useas type="ACCESSORY" subtype="CYBER_EARWARE" cap="1" slot="CYBEREAR_IMPLANT"/>
+		<modifications>
+			<edgemod type="BONUS" skill="perception"/>
+		</modifications>
+	</item>
+
+	<item avail="2" cost="500" id="orientation_system">
+		<useas type="CYBERWARE" subtype="CYBER_EARWARE" ess="0.2" />
+		<useas type="ACCESSORY" subtype="CYBER_EARWARE" cap="1" slot="CYBEREAR_IMPLANT"/>
+		<modifications>
+			<skillmod ref="outdoors" cond="true"/>
+		</modifications>
+	</item>
+
+	<item avail="2" cost="500" id="perfect_pitch">
+		<useas type="CYBERWARE" subtype="CYBER_EARWARE" ess="0.1" />
+		<useas type="ACCESSORY" subtype="CYBER_EARWARE" cap="1" slot="CYBEREAR_IMPLANT"/>
+		<modifications>
+			<edgemod type="BONUS" skill="con"/>
+		</modifications>
+	</item>
+
+	<item avail="1" cost="500" id="rolling_audio_recorder">
+		<useas type="ACCESSORY" subtype="CYBER_EARWARE" cap="1" slot="CYBEREAR_IMPLANT"/>
+	</item>
+
+	<item avail="4" cost="4000" id="translation_ear">
+		<useas type="CYBERWARE" subtype="CYBER_EARWARE" ess="0.1" />
+		<useas type="ACCESSORY" subtype="CYBER_EARWARE" cap="1" slot="CYBEREAR_IMPLANT"/>
+	</item>
+
+	<item avail="1" cost="1000" id="vestibular_stabilizer">
+		<useas type="CYBERWARE" subtype="CYBER_EARWARE" ess="0.1" />
+		<useas type="ACCESSORY" subtype="CYBER_EARWARE" cap="1" slot="CYBEREAR_IMPLANT"/>
+	</item>
+
+<!-- Eyeware -->
+
+	<item avail="1" cost="500" id="light_emitters" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.1" />
+		<useas type="ACCESSORY" subtype="CYBER_EYEWARE" cap="2" slot="CYBEREYE_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="1000" id="microscopic_lenses">
+		<useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.3" />
+		<useas type="ACCESSORY" subtype="CYBER_EYEWARE" cap="3" slot="CYBEREYE_IMPLANT"/>
+	</item>
+
+	<item avail="1" cost="500" id="rolling_video_recorder">
+		<useas type="ACCESSORY" subtype="CYBER_EYEWARE" cap="1" slot="CYBEREYE_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="500" id="single_eye1" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.05" />
+		<modifications>
+			<itemhookmod capacity="1" hook="CYBEREYE_IMPLANT"/>
+			<accessorymod hook="CYBEREYE_IMPLANT" item="image_link" included="true"/>
+			<accessorymod hook="CYBEREYE_IMPLANT" item="camera" included="true"/>
+		</modifications>
+	</item>
+
+	<item avail="2" cost="2000" id="single_eye2" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.1" />
+		<modifications>
+			<itemhookmod capacity="2" hook="CYBEREYE_IMPLANT"/>
+			<accessorymod hook="CYBEREYE_IMPLANT" item="image_link" included="true"/>
+			<accessorymod hook="CYBEREYE_IMPLANT" item="camera" included="true"/>
+		</modifications>
+	</item>
+
+	<item avail="3" cost="3000" id="single_eye3" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.15" />
+		<modifications>
+			<itemhookmod capacity="4" hook="CYBEREYE_IMPLANT"/>
+			<accessorymod hook="CYBEREYE_IMPLANT" item="image_link" included="true"/>
+			<accessorymod hook="CYBEREYE_IMPLANT" item="camera" included="true"/>
+		</modifications>
+	</item>
+
+	<item avail="3" cost="5000" id="single_eye4" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.2" />
+		<modifications>
+			<itemhookmod capacity="6" hook="CYBEREYE_IMPLANT"/>
+			<accessorymod hook="CYBEREYE_IMPLANT" item="image_link" included="true"/>
+			<accessorymod hook="CYBEREYE_IMPLANT" item="camera" included="true"/>
+		</modifications>
+	</item>
+
+	<item avail="3" cost="8000" id="single_eye5" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.25" />
+		<modifications>
+			<itemhookmod capacity="8" hook="CYBEREYE_IMPLANT"/>
+			<accessorymod hook="CYBEREYE_IMPLANT" item="image_link" included="true"/>
+			<accessorymod hook="CYBEREYE_IMPLANT" item="camera" included="true"/>
+		</modifications>
+	</item>
+
+	<item avail="3" cost="2000" id="spider_eyes">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.2" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="HEADWARE_IMPLANT"/>
+	</item>
+
+<!-- Headware -->
+
+	<item avail="3" cost="25000" id="active_control_rig" maxrat="2" rate="true" ratemul="PRICE CAPACITY ESSENCE">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.8" />
+		<modifications>
+			<edgemod type="BONUS" skill="perception"/>
+			<edgemod type="BONUS" skill="piloting"/>
+			<edgemod type="BONUS" skill="stealth"/>
+			<edgemod type="BONUS" skill="cracking"/>
+			<edgemod type="BONUS" skill="engineering"/>
+		</modifications>
+	</item>
+
+	<item avail="4L" cost="5000" id="attention_coprocessor" maxrat="4" rate="true" ratemul="PRICE CAPACITY ESSENCE MODIFIER">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.3" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="HEADWARE_IMPLANT"/>
+		<modifications>
+			<attrmod attr="DEFENSIVE_POOL" type="AUGMENTED" val="1"/>
+		</modifications>
+	</item>
+
+	<item avail="3" cost="2500" id="cranial_sculpting">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.3" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="HEADWARE_IMPLANT"/>
+	</item>
+
+	<item avail="4" cost="1000" id="dream_link">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1" />
+	</item>
+
+	<item avail="1I" cost="5000" id="infrasound_emitter" maxrat="4" rate="true" ratemul="PRICE CAPACITY ESSENCE">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="HEADWARE_IMPLANT"/>
+	</item>
+
+	<item avail="4" cost="2500" id="math_spu">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="HEADWARE_IMPLANT"/>
+		<modifications>
+			<edgemod type="BONUS" skill="cracking"/>
+			<edgemod type="BONUS" skill="electronics"/>
+		</modifications>
+	</item>
+
+	<item avail="4" cost="25000" id="math_spu_srm">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.25" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="HEADWARE_IMPLANT"/>
+		<modifications>
+			<edgemod type="BONUS" skill="cracking"/>
+			<edgemod type="BONUS" skill="electronics"/>
+		</modifications>
+	</item>
+
+	<item avail="4" cost="2000" id="matrix_visualizer">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1" />
+	</item>
+
+	<item avail="6L" cost="15000" id="radar_sensor">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="1" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="4" slot="HEADWARE_IMPLANT"/>
+	</item>
+
+<!-- Bodyware -->
+
+	<item avail="1" cost="500" id="auto-injector" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.05" />
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.05" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="0" slot="CYBERLIMB_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="0" slot="HEADWARE_IMPLANT"/>
+	</item>
+
+	<item avail="1" cost="250" id="injector_expanded_reservoir" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0" />
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="0" slot="CYBERLIMB_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="0" slot="HEADWARE_IMPLANT"/>
+	</item>
+
+	<item avail="4I" cost="750" id="killswitch_injector" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0" />
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="0" slot="CYBERLIMB_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="0" slot="HEADWARE_IMPLANT"/>
+	</item>
+
+	<item avail="3" cost="5000" id="cyb_biomonitor">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.1" />
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="HEADWARE_IMPLANT"/>
+	</item>
+
+	<item avail="4" cost="500" id="cyberfin_single" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.1" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<edgemod type="BONUS" skill="athletics"/>
+		</modifications>
+	</item>
+
+	<item avail="2" cost="2000" id="cybergills">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.25" />
+	</item>
+
+	<item avail="4" cost="2000" id="cyb_balance_tail">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.25" />
+		<modifications>
+			<edgemod type="BONUS" skill="athletics"/>
+		</modifications>
+	</item>
+	<item avail="4" cost="5000" id="cyb_prehensile_tail">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.5" />
+		<modifications>
+			<itemhookmod capacity="0" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="1" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="1" cyber="true" modType="ABSOLUTE"/>
+		</modifications>
+	</item>
+	<item avail="4" cost="5000" id="cyb_proboscis">
+		<useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.5" />
+		<modifications>
+			<itemhookmod capacity="0" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="1" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="1" cyber="true" modType="ABSOLUTE"/>
+		</modifications>
+	</item>
+	<item avail="4" cost="2000" id="cyb_swimming_tail">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.25" />
+		<modifications>
+			<skillmod ref="athletics" val="2" cond="true"/>
+		</modifications>
+	</item>
+
+	<item avail="5I" cost="5000" id="cyb_thagomizer_augment">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.5" />
+		<modifications>
+			<attrmod attr="DEFENSE_RATING" type="NATURAL" val="3"/>
+			<itemmod item="cyb_thagomizer"/>
+		</modifications>
+	</item>
+
+	<item avail="6L" cost="50000" id="cyberwings_augment">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="2" />
+	</item>
+
+	<item avail="5L" cost="2000" id="foot_anchor" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.25" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="2000" id="gastric_pulverizer">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.2" />
+	</item>
+
+	<item avail="5L" cost="10000" id="grey_mana_armor" maxrat="4" rate="true" ratemul="PRICE ESSENCE">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.1" />
+		<requires>
+			<itemreq item="dermal_plating"/>
+		</requires>
+	</item>
+
+	<item avail="2" cost="2000" id="internal_router" maxrat="4" rate="true" ratemul="PRICE ESSENCE">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.2" /> <!-- no matrix defensive pool attribute in Genesis to modify -->
+	</item>
+
+	<item avail="4" cost="1000" id="magnetic_system" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.25" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="4I" cost="125000" id="mbw_system_1">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="3" />
+		<requires>
+			<itemreq item="mbw_system_2" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="AGILITY"  type="AUGMENTED" val="2"/>
+			<attrmod attr="REACTION" type="AUGMENTED" val="2"/>
+			<attrmod attr="MINOR_ACTION" val="2"/>
+		</modifications>
+	</item>
+
+	<item avail="6I" cost="205000" id="mbw_system_2">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="4" />
+		<requires>
+			<itemreq item="mbw_system_1" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="AGILITY"  type="AUGMENTED" val="4"/>
+			<attrmod attr="REACTION" type="AUGMENTED" val="4"/>
+			<attrmod attr="MINOR_ACTION" val="4"/>
+		</modifications>
+	</item>
+
+	<item avail="2" cost="500" id="nutrition_storage_system" maxrat="6" rate="true" ratemul="PRICE ESSENCE">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.1" />
+	</item>
+
+	<item avail="4" cost="2000" id="retractable_climbing_claws" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.2" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemmod item="cyb_climbing_claws"/>
+		</modifications>
+	</item>
+
+	<item avail="4" cost="8000" id="skill_hardwires" maxrat="6" rate="true" ratemul="PRICE ESSENCE" multi="yes" choice="PHYSICAL_SKILL">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.05" />
+		<modifications>
+			<skillmod val="1" modType="ALTERNATE"/>
+		</modifications>
+	</item>
+
+	<item avail="4I" cost="25000" id="speed_booster" maxrat="2" rate="true" ratemul="PRICE ESSENCE">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.5" />
+	</item>
+
+	<item avail="1" cost="250" id="touchlink">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.1" />
+	</item>
+
+
+<!-- Cyberlimbs -->
+
+	<item avail="6" cost="20000" id="add_cyberarm_synthetic">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="1.2" />
+		<modifications>
+			<itemhookmod capacity="8" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="1"/>
+			<attrmod attr="MINOR_ACTION" val="500"/>
+		</modifications>
+	</item>
+	<item avail="5" cost="15000" id="add_cyberarm_obvious">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="1.2" />
+		<modifications>
+			<itemhookmod capacity="15" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="1"/>
+			<attrmod attr="MINOR_ACTION" val="500"/>
+		</modifications>
+	</item>
+
+	<item avail="4" cost="20000" id="digigrade_synthetic"> <!-- digigrade cyberlegs -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="1.25" />
+		<modifications>
+			<itemhookmod capacity="10" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="1"/>
+			<skillmod ref="athletics" val="4" cond="true" condindex="1"/>
+		</modifications>
+	</item>
+	<item avail="4" cost="20000" id="mod_digigr_synthetic"> <!-- extra modular digigrade cyberlegs -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="1.25" />
+		<requires>
+			<itemreq item="mount_hip"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="10" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="1"/>
+			<skillmod ref="athletics" val="4" cond="true" condindex="1"/>
+		</modifications>
+	</item>
+
+	<item avail="4" cost="25000" id="digigrade_obvious"> <!-- digigrade cyberlegs -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="1.25" />
+		<modifications>
+			<itemhookmod capacity="20" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="1"/>
+			<skillmod ref="athletics" val="4" cond="true" condindex="1"/>
+		</modifications>
+	</item>
+	<item avail="4" cost="25000" id="mod_digigr_obvious"> <!-- extra modular digigrade cyberlegs -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="mount_hip"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="20" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="1"/>
+			<skillmod ref="athletics" val="4" cond="true" condindex="1"/>
+		</modifications>
+	</item>
+
+	<item avail="4" cost="15250" id="mod_arm_obvious"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="mount_shoulder"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="13" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="1"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+	<item avail="4" cost="20250" id="mod_arm_synthetic"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="mount_shoulder"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="6" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="1"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+
+	<item avail="3" cost="10250" id="mod_farm_obvious"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="mount_elb_obvious"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="8" hook="CYBERLIMB_IMPLANT"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+	<item avail="3" cost="12250" id="mod_farm_synthetic"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="mount_elb_synthetic"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="3" hook="CYBERLIMB_IMPLANT"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+
+	<item avail="3" cost="5250" id="mod_hand_obvious"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="mount_wri_obvious"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="2" hook="CYBERLIMB_IMPLANT"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+	<item avail="3" cost="6250" id="mod_hand_synthetic"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="mount_wri_synthetic"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="0" hook="CYBERLIMB_IMPLANT"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+
+	<item avail="4" cost="15250" id="mod_leg_obvious" subtype="CYBER_LIMBS" type="CYBERWARE"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="mount_hip"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="18" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="1"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+	<item avail="4" cost="20250" id="mod_leg_synthetic" subtype="CYBER_LIMBS" type="CYBERWARE"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="mount_hip"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="8" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="1"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+
+	<item avail="4" cost="10250" id="mod_fleg_obvious"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="mount_kne_obvious"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="10" hook="CYBERLIMB_IMPLANT"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+	<item avail="4" cost="12250" id="mod_fleg_synthetic"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="mount_kne_synthetic"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="4" hook="CYBERLIMB_IMPLANT"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+
+	<item avail="5" cost="5250" id="mod_foot_obvious"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="mount_ank_obvious"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="2" hook="CYBERLIMB_IMPLANT"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+	<item avail="5" cost="6250" id="mod_foot_synthetic"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="mount_ank_synthetic"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="0" hook="CYBERLIMB_IMPLANT"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+
+	<item avail="1" cost="5000" id="prcyb_arm">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="1.5" />
+		<modifications>
+			<itemhookmod capacity="20" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="1"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="hardening"/>
+		</modifications>
+	</item>
+	<item avail="1" cost="5000" id="prcyb_mod_arm"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="mount_shoulder"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="18" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="1"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="hardening"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+
+	<item avail="1" cost="2500" id="prcyb_forearm">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.5" />
+		<modifications>
+			<itemhookmod capacity="15" hook="CYBERLIMB_IMPLANT"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="hardening"/>
+		</modifications>
+	</item>
+	<item avail="1" cost="2500" id="prcyb_mod_forearm"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="mount_elb_primitive"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="13" hook="CYBERLIMB_IMPLANT"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="hardening"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+
+	<item avail="1" cost="5000" id="prcyb_leg">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="1.5" />
+		<modifications>
+			<itemhookmod capacity="25" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="1"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="hardening"/>
+		</modifications>
+	</item>
+	<item avail="1" cost="5000" id="prcyb_mod_leg"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="mount_hip"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="23" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="1"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="hardening"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+
+	<item avail="1" cost="2500" id="prcyb_lower_leg">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.5" />
+		<modifications>
+			<itemhookmod capacity="15" hook="CYBERLIMB_IMPLANT"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="hardening"/>
+		</modifications>
+	</item>
+	<item avail="1" cost="2500" id="prcyb_mod_lower_leg"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="mount_kne_primitive"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="13" hook="CYBERLIMB_IMPLANT"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="hardening"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+
+	<item avail="5" cost="40000" id="lbr_centaur">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="2.5" />
+		<modifications>
+			<itemhookmod capacity="40" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="4"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="biowaste_storage" rating="1"/>
+		</modifications>
+	</item>
+	<item avail="4" cost="15500" id="lbr_mod_centaur" subtype="CYBER_LIMBS" type="CYBERWARE"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="4" slot="CYBERLIMB_IMPLANT"/>
+		<requires>
+			<itemreq item="lower_body_modular_mount"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="36" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+
+	<item avail="5" cost="40000" id="lbr_serpentine">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="2.5" />
+		<modifications>
+			<itemhookmod capacity="40" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="4"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="biowaste_storage" rating="1"/>
+		</modifications>
+	</item>
+	<item avail="4" cost="15500" id="lbr_mod_serpentine" subtype="CYBER_LIMBS" type="CYBERWARE"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="lower_body_modular_mount"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="36" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+
+	<item avail="5" cost="40000" id="lbr_wheeled">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="2.5" />
+		<modifications>
+			<itemhookmod capacity="40" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="4"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="biowaste_storage" rating="1"/>
+		</modifications>
+	</item>
+	<item avail="4" cost="15500" id="lbr_mod_wheeled" subtype="CYBER_LIMBS" type="CYBERWARE"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="lower_body_modular_mount"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="36" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+
+	<item avail="5" cost="40000" id="lbr_spider">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="2.5" />
+		<modifications>
+			<itemhookmod capacity="40" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="AUGMENTED" val="4"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="biowaste_storage" rating="1"/>
+			<edgemod type="BONUS" skill="athletics"/>
+		</modifications>
+	</item>
+	<item avail="4" cost="15500" id="lbr_mod_spider" subtype="CYBER_LIMBS" type="CYBERWARE"> <!-- modular extra limb -->
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<requires>
+			<itemreq item="lower_body_modular_mount"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="36" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="AGILITY"  type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="2" cyber="true" modType="ABSOLUTE"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="modular_connector"/>
+		</modifications>
+	</item>
+
+	<item avail="3" cost="4000" id="lower_body_modular_mount">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.8" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="4" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemhookmod hook="CYBERLIMB_IMPLANT"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="mount_hip"/>
+			<accessorymod hook="CYBERLIMB_IMPLANT" item="mount_hip"/>
+		</modifications>
+	</item>
+
+<!-- Cyberlimb Accessories -->
+
+	<item avail="3L" cost="10000" id="art_weapon_mount" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.5" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="4" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemhookmod hook="VEHICLE_WEAPON" capacity="1"/>
+		</modifications>
+	</item>
+
+	<item avail="4" cost="1000" id="built-in_medkit" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.4" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="4" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="1000" id="built-in_utility_kit" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.4" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="500" id="bulk_modification" maxrat="4" rate="true" ratemul="CAPACITY PRICE">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ENHANCEMENT" cap="-1" slot="CYBERLIMB_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="-1" slot="HEADWARE_IMPLANT"/>
+	</item>
+
+	<item avail="1" cost="7000" id="att_cust_agi" maxrat="9" rate="true" ratemul="PRICE MODIFIER">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ENHANCEMENT" cap="2" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<attrmod attr="AGILITY" type="ALTERNATE" val="1" cyber="true"/>
+		</modifications>
+	</item>
+	<item avail="1" cost="7000" id="att_cust_str" maxrat="9" rate="true" ratemul="PRICE MODIFIER">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ENHANCEMENT" cap="2" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="1" cyber="true"/>
+		</modifications>
+	</item>
+
+	<item avail="1" cost="5000" id="att_enha_agi" maxrat="4" rate="true" ratemul="AVAIL CAPACITY PRICE MODIFIER">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ENHANCEMENT" cap="1" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<attrmod attr="AGILITY" type="ALTERNATE" val="1" cyber="true"/>
+		</modifications>
+	</item>
+	<item avail="1" cost="5000" id="att_enha_str" maxrat="4" rate="true" ratemul="AVAIL CAPACITY PRICE MODIFIER">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ENHANCEMENT" cap="1" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="1" cyber="true"/>
+		</modifications>
+	</item>
+
+	<item avail="2" cost="500" id="cyb_finger_gun" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.05" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemhookmod hook="MOUNTED_HOLDOUT"/>
+		</modifications>
+	</item>
+
+	<item avail="2" cost="500" id="cyb_finger_key" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.05" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="500" id="cyb_finger_lighter" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.05" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="500" id="cyb_finger_frag" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.05" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemmod item="he_finger_grenade"/>
+		</modifications>
+	</item>
+
+	<item avail="2" cost="500" id="cyb_ftorch_standard" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.05" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="500" id="cyb_ftorch_blacklight" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.05" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="500" id="cyb_ftorch_lowlight" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.05" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="500" id="cyb_ftorch_thermal" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.05" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="1" cost="500" id="cyb_gecko_tips" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.2" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="3L" cost="2000" id="cyb_grapple_hand" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.45" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="10" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="4" cost="5000" id="prehensile_foot" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.3" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="4" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="250" id="retractable_skates" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.5" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="500" id="simian_modification">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="3" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="500" id="sinister_dexter_coprocessor">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="3" cost="1000" id="snake_fingers">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="4" cost="500" id="telescoping_modification" maxrat="4" rate="true" ratemul="CAPACITY PRICE">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="4" cost="2000" id="tentacle_modification">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="5" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="3" cost="1000" id="water_jet">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="4" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+
+<!-- Implant tools -->
+
+	<item avail="2" cost="100" id="cyb_atmosphere_sensor" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="HEADWARE_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="100" id="cyb_cyberware_scanner" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="100" id="cyb_geiger_counter" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="HEADWARE_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="100" id="cyb_laser_range_finder" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="100" id="cyb_mad_scanner" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="3" cost="200" id="cyb_bug_scanner" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2" cost="300" id="cyb_data_tap" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="4L" cost="200" id="cyb_jammer_area" maxrat="6" rate="true" ratemul="PRICE" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="HEADWARE_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="4L" cost="200" id="cyb_jammer_directed" maxrat="6" rate="true" ratemul="PRICE" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="HEADWARE_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="4L" cost="500" id="cyb_autopicker" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="1" cost="100" id="cyb_micro-transceiver" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="HEADWARE_IMPLANT"/>
+	</item>
+
+	<item avail="3" cost="450" id="cyb_tag_eraser" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="3" cost="50" id="cyb_white_noise_generator" maxrat="6" rate="true" ratemul="PRICE" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="HEADWARE_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="1" cost="250" id="cyb_miniwelder" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="3" cost="500" id="cyb_monofilament_chainsaw" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="4" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="1" cost="150" id="cyb_glue_sprayer" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="1" cost="25" id="cyb_torch_standard" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="HEADWARE_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="1" cost="25" id="cyb_torch_low-light" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="HEADWARE_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="1" cost="25" id="cyb_torch_thermographic" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="HEADWARE_IMPLANT"/>
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="1" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+<!-- Implant Weapons -->
+
+	<item avail="3I" cost="2000" id="cyb_buzzsaw_augment" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.5" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="8" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemmod item="cyb_buzzsaw"/>
+		</modifications>
+	</item>
+
+	<item avail="3I" cost="2000" id="cyb_crabclaw_augment" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.5" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="8" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemmod item="cyb_crabclaw"/>
+		</modifications>
+	</item>
+
+	<item avail="4L" cost="16000" id="cyb_drone_mini_micro" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="1.2" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="6" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemmod item="drone_rack_micromini"/>
+		</modifications>
+	</item>
+
+	<item avail="6L" cost="17000" id="cyb_drone_small" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="5" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="25" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemmod item="drone_rack_small"/>
+		</modifications>
+	</item>
+
+	<item avail="4L" cost="16000" id="srm_drone_mini_micro" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.6" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="6" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemmod item="drone_rack_micromini"/>
+		</modifications>
+	</item>
+
+	<item avail="6L" cost="17000" id="srm_drone_small" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="1.2" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="12" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemmod item="drone_rack_small"/>
+		</modifications>
+	</item>
+
+	<item avail="3L" cost="500" id="cyb_fangs_augment">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.1" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="3" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemmod item="cyb_fangs"/>
+		</modifications>
+	</item>
+
+	<item avail="6I" cost="4000" id="cyb_flametosser_augment" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="1" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="8" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemmod item="cyb_flametosser"/>
+		</modifications>
+	</item>
+
+	<item avail="6I" cost="500" id="cyb_flame_fuelcap" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.2" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="2" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+
+	<item avail="2L" cost="500" id="cyb_goring_horns_augment">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.2" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="3" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemmod item="cyb_goring_horns"/>
+		</modifications>
+	</item>
+
+	<item avail="6I" cost="4000" id="heavy_implanted_weapon_augment" multi="yes">
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="16" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemhookmod hook="VEHICLE_WEAPON_LARGE" capacity="1"/>
+		</modifications>
+	</item>
+
+	<item avail="6I" cost="1000" id="cyb_oral_slasher_augment">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.25" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="3" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemmod item="cyb_oral_slasher"/>
+		</modifications>
+	</item>
+
+	<item avail="3I" cost="1000" id="shotgun_knee_augment" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.6" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="5" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemmod item="cyb_shotgun_knee"/>
+		</modifications>
+	</item>
+
+	<item avail="7I" cost="15000" id="cyb_tesla_coil_augment" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="1" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="8" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemmod item="cyb_tesla_coil"/>
+		</modifications>
+	</item>
+
+	<item avail="1I" cost="500" id="cyb_wrecker_augment" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.4" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="6" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemmod item="cyb_wrecker"/>
+		</modifications>
+	</item>
+
+	<item avail="5L" cost="2000" id="cyb_wrist_shield_augment" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_BODYWARE" ess="0.5" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="10" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<attrmod attr="DEFENSE_RATING" type="NATURAL" val="4"/>
+			<itemmod item="cyb_wrist_bash"/>
+			<itemmod item="cyb_wrist_slash"/>
+		</modifications>
+	</item>
+
+	<item avail="4L" cost="5000" id="raptorfoot_augment" multi="yes">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0.3" />
+		<useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="4" slot="CYBERLIMB_IMPLANT"/>
+		<modifications>
+			<itemmod item="cyb_raptor_foot"/>
+		</modifications>
+	</item>
+
+<!-- Cyborgs -->
+
+	<item avail="6" cost="220000" id="cyber_ccu">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="5.9" />
+		<modifications>
+			<itemmod item="cyberjack4"/>
+			<itemmod item="simrig" rating="5"/>
+			<itemmod item="skilljack" rating="5"/>
+			<itemmod item="skillwires" rating="5"/>
+			<itemmod item="control_rig" rating="2"/>
+			<itemmod item="hermes_ikon"/>
+			<attrmod attr="INITIATIVE_DICE_MATRIX_VR_HOT" val="2"/>
+		</modifications>
+	</item>
+	<item avail="6" cost="350000" id="cybershell_obvious">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<armor rating="10" social="0" add="true"/>
+		<requires>
+			<itemreq item="cyber_ccu"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="120" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="ALTERNATE" val="16"/>
+			<attrmod attr="BODY" type="ALTERNATE" val="8" modType="ABSOLUTE"/>
+			<attrmod attr="AGILITY" type="ALTERNATE" val="6" modType="ABSOLUTE"/>
+			<attrmod attr="REACTION" type="ALTERNATE" val="4" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="6" modType="ABSOLUTE"/>
+			<itemmod item="voice_modulator" rating="2"/>
+			<itemmod item="cybereye2" rating="2"/>
+			<itemmod item="cyberears1" rating="2"/>
+		</modifications>
+	</item>
+	<item avail="6" cost="225000" id="cybershell_synthetic">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<armor rating="8" social="0" add="true"/>
+		<requires>
+			<itemreq item="cyber_ccu"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="80" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="ALTERNATE" val="15"/>
+			<attrmod attr="BODY" type="ALTERNATE" val="5" modType="ABSOLUTE"/>
+			<attrmod attr="AGILITY" type="ALTERNATE" val="4" modType="ABSOLUTE"/>
+			<attrmod attr="REACTION" type="ALTERNATE" val="4" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="4" modType="ABSOLUTE"/>
+			<itemmod item="voice_modulator" rating="2"/>
+			<itemmod item="cybereye2" rating="2"/>
+			<itemmod item="cyberears1" rating="2"/>
+		</modifications>
+	</item>
+	<item avail="6" cost="400000" id="trollshell_obvious">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<armor rating="10" social="0" add="true"/>
+		<requires>
+			<itemreq item="cyber_ccu"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="140" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="ALTERNATE" val="20"/>
+			<attrmod attr="BODY" type="ALTERNATE" val="8" modType="ABSOLUTE"/>
+			<attrmod attr="AGILITY" type="ALTERNATE" val="8" modType="ABSOLUTE"/>
+			<attrmod attr="REACTION" type="ALTERNATE" val="4" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="8" modType="ABSOLUTE"/>
+			<itemmod item="voice_modulator" rating="2"/>
+			<itemmod item="cybereye2" rating="2"/>
+			<itemmod item="cyberears1" rating="2"/>
+		</modifications>
+	</item>
+	<item avail="6" cost="275000" id="trollshell_synthetic">
+		<useas type="CYBERWARE" subtype="CYBER_LIMBS" ess="0" />
+		<armor rating="8" social="0" add="true"/>
+		<requires>
+			<itemreq item="cyber_ccu"/>
+		</requires>
+		<modifications>
+			<itemhookmod capacity="100" hook="CYBERLIMB_IMPLANT"/>
+			<attrmod attr="PHYSICAL_MONITOR" type="ALTERNATE" val="19"/>
+			<attrmod attr="BODY" type="ALTERNATE" val="5" modType="ABSOLUTE"/>
+			<attrmod attr="AGILITY" type="ALTERNATE" val="6" modType="ABSOLUTE"/>
+			<attrmod attr="REACTION" type="ALTERNATE" val="4" modType="ABSOLUTE"/>
+			<attrmod attr="STRENGTH" type="ALTERNATE" val="6" modType="ABSOLUTE"/>
+			<itemmod item="voice_modulator" rating="2"/>
+			<itemmod item="cybereye2" rating="2"/>
+			<itemmod item="cyberears1" rating="2"/>
+		</modifications>
+	</item>
+</items>

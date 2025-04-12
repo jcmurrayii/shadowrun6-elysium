@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+
+<!-- Seattle -->
+
+	<quality id="you_get_used_to_it" karma="5" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="TOXIN_RESISTANCE_POOL" type="AUGMENTED" val="1"/>
+		</modifications>
+	</quality>
+	<quality id="i_belong_here" karma="3" type="POSITIVE" selectable="y" >
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="salish_shaman" karma="9" type="POSITIVE" selectable="y" />
+	<quality id="big_brothers_blindspot" karma="14" type="POSITIVE" selectable="y" >
+		<modifications>
+			<edgemod skill="stealth" type="USAGE" />
+		</modifications>
+	</quality>
+	<quality id="northgate_optimist" karma="3" type="POSITIVE" selectable="y" >
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="bilko_contacts1" karma="7" type="POSITIVE" selectable="y" >
+		<requires>
+			<qualreq ref="bilko_contacts2" negated="true"/>
+		</requires>
+	</quality>
+	<quality id="bilko_contacts2" karma="12" type="POSITIVE" selectable="y" >
+		<requires>
+			<qualreq ref="bilko_contacts1" negated="true"/>
+		</requires>
+	</quality>
+	<quality id="water_born" karma="5" type="POSITIVE" max="2" selectable="y" />
+	<quality id="the_briar_patch" karma="5" type="POSITIVE" />
+	<quality id="good_ol_folks" karma="7" type="POSITIVE" selectable="y" >
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="clean_living" karma="10" type="POSITIVE" selectable="y" >
+		<modifications>
+			<attrmod attr="BODY" type="NATURAL" val="1"/>
+			<lifecostmod fixed="500"/>
+		</modifications>
+	</quality>
+	<quality id="import_export1" karma="10" type="POSITIVE" selectable="y" >
+		<requires>
+			<qualreq ref="import_export2" negated="true"/>
+		</requires>
+	</quality>
+	<quality id="import_export2" karma="14" type="POSITIVE" selectable="y" >
+		<requires>
+			<qualreq ref="import_export1" negated="true"/>
+		</requires>
+	</quality>
+	<quality id="mental_mapmaker" karma="5" type="POSITIVE" selectable="y" />
+
+<!-- Berlin -->
+
+	<quality id="agent_of_the_flux_state" karma="10" type="POSITIVE" selectable="y" >
+		<modifications>
+			<skillmod ref="language" modType="ALTERNATE" name="Kiezspeak" val="4"/>
+		</modifications>
+	</quality>
+
+	<quality id="crowd_ghost" karma="5" type="POSITIVE" selectable="y" />
+
+	<quality id="exotic_style" karma="5" type="POSITIVE" selectable="y" select="NAME" />
+
+	<quality id="factory_blood" karma="10" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<attrmod attr="CHARISMA" val="-1" />
+		</modifications>
+	</quality>
+
+	<quality id="off_the_grid" karma="8" type="POSITIVE" selectable="y" />
+
+	<quality id="sorbian_blood" karma="10" type="POSITIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+		<modifications>
+			<skillmod ref="language" modType="ALTERNATE" name="Sorbian" val="4"/>
+		</modifications>
+	</quality>
+
+	<quality id="tunnel_rat" karma="10" type="POSITIVE" selectable="y" />
+
+	<quality id="under_the_radar" karma="15" type="POSITIVE" selectable="y" />
+
+	<quality id="marked_by_kassandra" karma="5" type="NEGATIVE" selectable="y" />
+
+	<quality id="what_dosent_kill_you" karma="3" type="NEGATIVE" selectable="y" >
+		<requires>
+			<metareq ref="pilot" negated="true"/>
+			<metareq ref="agent" negated="true"/>
+			<metareq ref="foundation" negated="true"/>
+			<metareq ref="realm" negated="true"/>
+		</requires>
+	</quality>
+
+<!-- Emerald City -->
+
+	<quality id="hunting_permit" karma="5" type="POSITIVE" selectable="y" />
+	<quality id="union_man" karma="8" type="POSITIVE" selectable="y" select="NAME" >
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="guardians_at_the_gates" karma="3" type="POSITIVE" selectable="y" />
+	<quality id="so_many_rich_friends" karma="3" type="POSITIVE" selectable="y" >
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+			<lifecostmod percent="-10"/>
+		</modifications>
+	</quality>
+	<quality id="council_isl1" karma="5" type="POSITIVE" selectable="y" />
+	<quality id="council_isl2" karma="12" type="POSITIVE" selectable="y" />
+	<quality id="corp_flash" karma="10" type="POSITIVE" selectable="y" >
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+			<skillmod ref="knowledge" name="Fashion" modType="ALTERNATE"/>
+		</modifications>
+	</quality>
+	<quality id="paparazzi_savvy" karma="10" type="POSITIVE" selectable="y" >
+		<modifications>
+			<edgemod skill="perception" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+			<skillmod ref="knowledge" name="Celebrity Gossip and News" modType="ALTERNATE"/>
+		</modifications>
+	</quality>
+	<quality id="border_hopper" karma="3" type="POSITIVE" selectable="y" >
+		<modifications>
+			<edgemod skill="outdoors" type="USAGE" />
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="union_supporter" karma="3" type="POSITIVE" selectable="y" select="NAME" >
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="stolen_valor" karma="10" type="NEGATIVE" selectable="y" />
+	<quality id="advanced_combat_training" karma="10" type="POSITIVE" selectable="y" >
+		<modifications>
+			<attrmod attr="MINOR_ACTION" val="1"/>
+		</modifications>
+	</quality>
+	<quality id="vashonista" karma="10" type="POSITIVE" selectable="y" >
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="carbonado_smuggler" karma="3" type="POSITIVE" selectable="y" />
+	<quality id="big_dreams" karma="10" type="POSITIVE" selectable="y" >
+		<modifications>
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="school_of_hard_knocks" karma="10" type="POSITIVE" selectable="y" >
+		<requires>
+			<qualreq ref="big_dreams"/>
+		</requires>
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="beat_in" karma="10" type="POSITIVE" selectable="y" >
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="beat_out" karma="10" type="POSITIVE" selectable="y" >
+		<requires>
+			<qualreq ref="beat_in"/>
+		</requires>
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="snitch" karma="4" type="NEGATIVE" selectable="y" />
+	<quality id="socialite" karma="5" type="POSITIVE" selectable="y" >
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="suburbanite" karma="5" type="POSITIVE" selectable="y" >
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="heart_of_humanis" karma="5" type="POSITIVE" selectable="y" />
+	<quality id="black_fence_farmer" karma="5" type="POSITIVE" selectable="y" />
+	<quality id="golden_cage" karma="12" type="NEGATIVE" selectable="y" />
+	<quality id="mob_earner" karma="5" type="POSITIVE" selectable="y" />
+	<quality id="mob_connected" karma="10" type="POSITIVE" selectable="y" >
+		<requires>
+			<qualreq ref="mob_earner"/>
+		</requires>
+	</quality>
+	<quality id="mob_made" karma="20" type="POSITIVE" selectable="y" >
+		<requires>
+			<qualreq ref="mob_connected"/>
+		</requires>
+	</quality>
+	<quality id="event_horizon_access" karma="15" type="POSITIVE" selectable="y" />
+
+</qualities>

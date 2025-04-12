@@ -1,0 +1,37 @@
+{{#> 'systems/shadowrun6-elysium/dist/mod_templates/common/TabWrapper.html' tabId='misc'}}
+    <div class="inventory">
+        <div class="split-container">
+            <div>
+                {{> 'systems/shadowrun6-elysium/dist/mod_templates/common/List/ListHeader.html'
+                    name=(localize 'SR6.Description')
+                }}
+                {{editor biographyHTML target="system.description.value" button=true editable=true engine="prosemirror" collaborate=false}}
+            </div>
+            <div>
+                {{> 'systems/shadowrun6-elysium/dist/mod_templates/common/List/ListHeader.html'
+                    name=(localize 'SR6.Modifier')
+                    itemId='modifiers'
+                    rightSide=(ItemHeaderRightSide 'modifiers')
+                }}
+                <div class="mods-scroll">
+                    {{#each system.modifiers as |value id|}} {{#ifne id 'wound'}}
+                        {{#> "systems/shadowrun6-elysium/dist/mod_templates/common/NameLineBlock.html" name=(localizeOb id ../config.actorModifiers) }}
+                        <div class="item-text rtg">
+                            <input
+                                    class="display attribute-input"
+                                    size="4"
+                                    maxlength="3"
+                                    type="text"
+                                    name="system.modifiers.{{id}}"
+                                    value="{{value}}"
+                                    placeholder="None"
+                                    data-dtype="Number"
+                            />
+                        </div>
+                        {{/"systems/shadowrun6-elysium/dist/mod_templates/common/NameLineBlock.html"}}
+                    {{/ifne}} {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+{{/'systems/shadowrun6-elysium/dist/mod_templates/common/TabWrapper.html'}}

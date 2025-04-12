@@ -8,6 +8,12 @@ export class MeleeParser extends WeaponParserBase {
 
         item.system.melee.reach = ImportHelper.IntValue(jsonData, 'reach');
 
+        // Check if the weapon has a specific attribute set
+        const attribute = ImportHelper.StringValue(jsonData, 'attribute');
+        if (attribute === 'agility') {
+            item.system.melee.attribute = 'agility';
+        }
+
         return item;
     }
 }

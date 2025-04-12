@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item id="extreme_environment_water" avail="3" cost="3000" type="MOD_CHASSIS" subtype="MOD_CORE" modonly="true" >
+      <requires>
+        <slotreq capacity="1" slot="VEHICLE_CHASSIS" />
+      </requires>
+   </item>
+</items>

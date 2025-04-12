@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+	<item id="horizon_flynn_pilum" avail="4L" cost="750" >
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="6L" cost="750"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon dmg="4P" attack="10,8,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="kami_standard" avail="3" cost="100" >
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="5" cost="100"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon dmg="3P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="kami_folding" avail="3" cost="100" >
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="5" cost="100"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon dmg="3P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="kukri" avail="5" cost="200"  >
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="7" cost="200"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon  dmg="3P" attack="9,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="nodachi" avail="4" cost="900" >
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="6" cost="900"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon  dmg="5P" attack="10,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="trench_knife" avail="3" cost="100" >
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="5" cost="100"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon  dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="long_tooth_no_blade" avail="4" cost="300">
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="6" cost="300"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+		<weapon  dmg="4S" attack="8,4,,," skill="close_combat" spec="close_combat/clubs"/>
+	</item>
+	<item id="dassault_alpenstock" avail="3L" cost="500">
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="5L" cost="500"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+		<modifications>
+			<itemmod item="dassault_alpenstock_blade"/>
+			<itemmod item="dassault_alpenstock_spear"/>
+		</modifications>
+		<weapon  dmg="4S" attack="8,,,," skill="close_combat" spec="close_combat/clubs"/>
+	</item>
+	<item id="tactical_hammer_short" avail="4" cost="200">
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="6" cost="200"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+		<weapon  dmg="2S" attack="8,,,," skill="close_combat" spec="close_combat/clubs"/>
+	</item>
+	<item id="tactical_hammer_long" avail="4" cost="300">
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="6" cost="300"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+		<weapon  dmg="4S" attack="9,,,," skill="close_combat" spec="close_combat/clubs"/>
+	</item>
+	<item id="tonfa" avail="1" cost="75">
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="3" cost="75"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+		<weapon  dmg="3S" attack="6,,,," skill="close_combat" spec="close_combat/clubs"/>
+	</item>
+	<item id="urban_tribe_tomahawk_mkII" avail="1" cost="75">
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="3" cost="75"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon  dmg="2P" attack="10,9,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="xiphos_tactical_gladius" avail="4" cost="300">
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="6" cost="300"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon  dmg="3P" attack="10,,,," skill="close_combat" spec="close_combat/blades"/>
+	</item>
+	<item id="bearded_axe" avail="3L" cost="600" >
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="5L" cost="600"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon  dmg="3P" attack="11,,,," skill="close_combat" spec="close_combat/blades"/>
+		<modifications>
+		  <moditemmod ref="personalized_grip_melee"/>
+		  <moditemmod ref="metahuman_adaption_close"/>
+		</modifications>
+	</item>
+	<item id="claymore" avail="3L" cost="750">
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="5L" cost="750"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon  dmg="4P" attack="12,,,," skill="close_combat" spec="close_combat/blades"/>
+		<modifications>
+		  <moditemmod ref="personalized_grip_melee"/>
+		  <moditemmod ref="metahuman_adaption_close"/>
+		</modifications>
+	</item>
+	<item id="labrys" avail="3L" cost="1000">
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="5L" cost="1000"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon  dmg="4P" attack="10,,,," skill="close_combat" spec="close_combat/blades"/>
+		<modifications>
+		  <moditemmod ref="personalized_grip_melee"/>
+		  <moditemmod ref="metahuman_adaption_close"/>
+		</modifications>
+	</item>
+	<item id="tomahawk" avail="3L" cost="225">
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="5L" cost="225"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon  dmg="2P" attack="10,9,,," skill="close_combat" spec="close_combat/blades"/>
+		<modifications>
+		  <moditemmod ref="personalized_grip_melee"/>
+		  <moditemmod ref="metahuman_adaption_close"/>
+		</modifications>
+	</item>
+	<item id="gunstock_warclub" avail="3L" cost="300">
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="5L" cost="300"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+		<weapon  dmg="4S" attack="10,6,,," skill="close_combat" spec="close_combat/clubs"/>
+		<modifications>
+		  <moditemmod ref="personalized_grip_melee"/>
+		  <moditemmod ref="metahuman_adaption_close"/>
+		</modifications>
+	</item>
+	<item id="macuahuitl" avail="3L" cost="200">
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="5L" cost="200"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+		<weapon  dmg="3P" attack="9,,,," skill="close_combat" spec="close_combat/blades"/>
+		<modifications>
+		  <moditemmod ref="personalized_grip_melee"/>
+		  <moditemmod ref="metahuman_adaption_close"/>
+		</modifications>
+	</item>
+	<item id="shillelagh" avail="3L" cost="150">
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="5L" cost="150"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+		<weapon  dmg="3S" attack="8,,,," skill="close_combat" spec="close_combat/clubs"/>
+		<modifications>
+		  <moditemmod ref="personalized_grip_melee"/>
+		  <moditemmod ref="metahuman_adaption_close"/>
+		</modifications>
+	</item>
+	<item id="taiaha" avail="3L" cost="200">
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="5L" cost="200"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+		<weapon  dmg="4S" attack="9,,,," skill="close_combat" spec="close_combat/clubs"/>
+		<modifications>
+		  <moditemmod ref="personalized_grip_melee"/>
+		  <moditemmod ref="metahuman_adaption_close"/>
+		</modifications>
+	</item>
+	<item id="tonfa_zoe_heritage" avail="1" cost="125">
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="3" cost="125"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+		<weapon  dmg="2S" attack="7,,,," skill="close_combat" spec="close_combat/clubs"/>
+		<modifications>
+		  <moditemmod ref="personalized_grip_melee"/>
+		  <moditemmod ref="metahuman_adaption_close"/>
+		</modifications>
+	</item>
+	<item id="katar" avail="3L" cost="200">
+		<useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="5L" cost="200"/>
+		<useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+		<weapon  dmg="3P" attack="8,,,," skill="close_combat" spec="close_combat/unarmed"/>
+		<modifications>
+		  <moditemmod ref="personalized_grip_melee"/>
+		  <moditemmod ref="metahuman_adaption_close"/>
+		</modifications>
+	</item>
+
+	<item id="tactical_hammer_blade" avail="4" cost="100"  >
+		<useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="MELEE_EXTERNAL"/>
+		<modifications>
+		  <itemmod item="tachammer_blade_augment"/>
+		</modifications>
+	</item>
+	<item id="tactical_hammer_spike" avail="4" cost="100"  >
+		<useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="MELEE_EXTERNAL"/>
+		<modifications>
+		  <itemmod item="tachammer_spike_augment"/>
+		</modifications>
+	</item>
+</items>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<item avail="3L" cost="300" id="cyber_restraint" subtype="SECURITY" type="ELECTRONICS" count="y">
+		<useas type="ELECTRONICS" subtype="SECURITY" />
+	</item>
+
+	<item avail="5I" cost="150" id="headjammer" maxrat="6" rate="true" ratemul="PRICE" count="y">
+		<useas type="ELECTRONICS" subtype="SECURITY" />
+	</item>
+
+	<item avail="3I" cost="200" id="flametosser_fuel" count="y" >
+		<useas type="AMMUNITION" subtype="AMMUNITION" />
+	</item>
+
+	<item avail="2" cost="100" id="replacement_battery" count="y" >
+		<useas type="AMMUNITION" subtype="AMMUNITION" />
+	</item>
+
+	<item avail="0" cost="1000" id="skillnet_prime" type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	<item avail="0" cost="2000" id="skillnet_elite" type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+	<item avail="0" cost="4000" id="skillnet_vip" type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"/>
+
+	<item avail="4" cost="0" id="active_skillnet" maxrat="6" rate="true" ratemul="PRICE CAPACITY" multi="yes" choice="PHYSICAL_SKILL">
+		<useas type="ACCESSORY" subtype="SKILLSOFT" slot="SKILLJACK" cap="1"/>
+		<modifications>
+			<skillmod val="1" modType="ALTERNATE"/>
+		</modifications>
+	</item>
+	<item avail="2" cost="0" id="know_skillnet" choice="NAME" multi="yes">
+		<useas type="ACCESSORY" subtype="SKILLSOFT" slot="SKILLJACK" cap="1"/>
+		<modifications>
+			<skillmod ref="knowledge" val="1" modType="ALTERNATE"/>
+		</modifications>
+	</item> 
+	<item avail="1" cost="0" id="lingua_skillnet" choice="NAME" multi="yes">
+		<useas type="ACCESSORY" subtype="SKILLSOFT" slot="SKILLJACK" cap="1"/>
+		<modifications>
+			<skillmod ref="language" val="1" modType="ALTERNATE"/>
+		</modifications>
+	</item>
+
+</items>

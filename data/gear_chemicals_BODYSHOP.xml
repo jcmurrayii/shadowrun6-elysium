@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<item id="signal_drug" avail="4I" cost="50" count="y" >
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+
+	<item id="mimic_signal_drug" avail="5I" cost="500" count="y" >
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+
+<!-- TOXINS -->
+
+	<item avail="2" cost="70" id="aisa" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="1" cost="70" id="arsenic" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="4I" cost="250" id="blight" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="2" cost="70" id="cyanide" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="4" cost="45" id="dopadrine" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="5L" cost="500" id="fugu" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="5L" cost="60" id="green_ring_3" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="6L" cost="70" id="green_ring_8" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="4L" cost="270" id="slab" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="6I" cost="150" id="soothsayer" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="5L" cost="800" id="spell_stripper" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="6I" cost="1050" id="void_burst" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+
+<!-- DRUGS -->
+
+	<item avail="1" cost="20" id="anabolic_steroids" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="2I" cost="25" id="betameth" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="2I" cost="5" id="burn" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="7I" cost="900" id="cereprax" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="8I" cost="900" id="eel" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="1L" cost="20" id="ex" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="5I" cost="400" id="forget-me-not" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="2L" cost="50" id="galak" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="6I" cost="750" id="greys_resistor" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="4L" cost="60" id="guts" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="1L" cost="20" id="hurlg" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="2L" cost="35" id="hyper" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="8I" cost="900" id="k-10" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="2L" cost="40" id="monoamine_oxidase" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="1L" cost="25" id="nightwatch" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="4I" cost="260" id="pine" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="2I" cost="20" id="push" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="3I" cost="250" id="q-bars" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="2L" cost="40" id="red_mescaline" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="1L" cost="10" id="snuff" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="2L" cost="15" id="woad" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+	<item avail="2L" cost="300" id="zone" count="y">
+		<useas type="CHEMICALS" subtype="DRUGS"/>
+	</item>
+
+<!-- MAGICAL DRUGS -->
+
+	<item avail="3L" cost="1500" id="animal_tongue" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="7I" cost="750" id="ayaos_will" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="6I" cost="500" id="hecates_blessing" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="7L" cost="2500" id="immortal_flower" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="6I" cost="750" id="laes" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="6I" cost="750" id="laesal_wine" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="5I" cost="500" id="leal" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="6I" cost="1700" id="little_smoke" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="6" cost="280" id="manaproof_ipa" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="3I" cost="1200" id="oneiro" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="5I" cost="800" id="overdrive" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="8I" cost="800" id="pixie_dust" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="5L" cost="1600" id="rock_lizard_blood" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="3I" cost="1000" id="shade" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="5I" cost="1200" id="spirit_strength" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="5I" cost="150" id="tempo" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="4L" cost="700" id="warp_bubble" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="4I" cost="1800" id="witchs_moss" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="6I" cost="2400" id="wuduaku" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+	<item avail="6I" cost="1500" id="zombie_dust" count="y">
+		<useas type="CHEMICALS" subtype="TOXINS"/>
+	</item>
+
+<!-- RESONANT DRUGS -->
+
+	<item avail="3L" cost="900" id="resdrug_baud" count="y"><useas type="CHEMICALS" subtype="DRUGS"/></item>
+	<item avail="4L" cost="1500" id="resdrug_deep_impact" count="y"><useas type="CHEMICALS" subtype="DRUGS"/></item>
+	<item avail="4I" cost="1800" id="resdrug_the_exploding_boy" count="y"><useas type="CHEMICALS" subtype="DRUGS"/></item>
+	<item avail="3L" cost="1100" id="resdrug_i_see_dead_icons" count="y"><useas type="CHEMICALS" subtype="DRUGS"/></item>
+	<item avail="7I" cost="2500" id="resdrug_soul_splice" count="y"><useas type="CHEMICALS" subtype="DRUGS"/></item>
+
+
+<!-- BTLS AND RIPJACKS -->
+
+	<item avail="4I" cost="200" id="btl_berserker" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="3L" cost="200" id="btl_bodyguard" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="4I" cost="150" id="btl_casanova" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="3L" cost="150" id="btl_chill" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="3I" cost="150" id="btl_downer" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="2L" cost="50" id="btl_fear_free" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="5I" cost="250" id="btl_god_chip" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="4L" cost="200" id="btl_good_times" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="4I" cost="200" id="btl_hyper" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="5L" cost="400" id="btl_infiltrator" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="3L" cost="400" id="btl_peddler" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="3I" cost="150" id="btl_upper" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="4L" cost="200" id="btl_urge_stopper" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="4L" cost="300" id="btl_vulcan" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="3I" cost="200" id="ripjack_deprivation" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="4I" cost="400" id="ripjack_pacifier" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="4I" cost="200" id="ripjack_pantophobia" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="4I" cost="200" id="ripjack_rave" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="4I" cost="300" id="ripjack_rigor_mortis" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+	<item avail="3I" cost="300" id="ripjack_vomit_comet" count="y" maxrat="6" rate="true" ratemul="PRICE"><useas type="CHEMICALS" subtype="BTL"/></item>
+
+</items>

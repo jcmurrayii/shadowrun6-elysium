@@ -1,0 +1,12 @@
+{{> 'systems/shadowrun6-elysium/dist/mod_templates/rolls/success-test-message.html'}}
+<div class="sr6 chat-card roll-card">
+    <div class="card-content">
+        <div class="left-side">
+            {{> 'systems/shadowrun6-elysium/dist/mod_templates/rolls/parts/Damage.html'
+            name=(localize "SR6.IncomingDrain")
+            damage=test.data.drainDamage
+            showAP=true
+            }}
+        </div>
+    </div>
+</div>

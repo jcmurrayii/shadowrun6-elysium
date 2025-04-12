@@ -10,3 +10,51 @@
         </div>
     </div>
 </div>
+
+{{#each test.data.defenders as | defender |}}
+<div class="sr6 chat-card roll-card">
+    <div class="card-content">
+        <div class="left-side">
+            <span class="{{#unless defender.isWinner}}value-result{{/unless}}">
+                {{../speaker.actor.name}}'s AR: {{../test.data.attackerAR}}
+            </span>
+        </div>
+        <div class="right-side">
+            <span class="{{#if defender.isWinner}}value-result{{/if}}">
+                {{defender.name}}'s DR: {{defender.dr}}
+            </span>
+        </div>
+    </div>
+</div>
+{{#if defender.hasSignificantAdvantage}}
+    {{#if defender.isWinner}}
+        {{#if defender.edgeAwarded}}
+        <div class="sr6 chat-card roll-card">
+            <div class="card-content">
+                <b>{{defender.name}} gained Edge!</b>
+            </div>
+        </div>
+        {{else}}
+        <div class="sr6 chat-card roll-card">
+            <div class="card-content">
+                <b>{{defender.name}} could not gain Edge: {{defender.edgeReason}}</b>
+            </div>
+        </div>
+        {{/if}}
+    {{else}}
+        {{#if (not defender.edgeAwarded)}}
+        <div class="sr6 chat-card roll-card">
+            <div class="card-content">
+                <b>{{../speaker.actor.name}} could not gain Edge: {{defender.edgeReason}}</b>
+            </div>
+        </div>
+        {{/if}}
+    {{/if}}
+{{else}}
+<div class="sr6 chat-card roll-card">
+    <div class="card-content">
+        <b>{{localize "SR6.NoEdgeAwarded"}}</b>
+    </div>
+</div>
+{{/if}}
+{{/each}}

@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+    <!-- Attribute CodeMods -->
+   <item id="attribute_augmentation_bod" avail="5" cost="12000" maxrat="4" rate="true" ratemul="PRICE ESSENCE MODIFIER">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.2"/>
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+      <modifications>
+        <attrmod attr="BODY" val="1" type="AUGMENTED" />
+      </modifications>
+   </item>
+   <item id="attribute_augmentation_agi" avail="5" cost="12000" maxrat="4" rate="true" ratemul="PRICE ESSENCE MODIFIER">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.2"/>
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+      <modifications>
+        <attrmod attr="AGILITY" val="1" type="AUGMENTED" />
+      </modifications>
+   </item>
+   <item id="attribute_augmentation_rea" avail="5" cost="12000" maxrat="4" rate="true" ratemul="PRICE ESSENCE MODIFIER">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.2"/>
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+      <modifications>
+        <attrmod attr="REACTION" val="1" type="AUGMENTED" />
+      </modifications>
+   </item>
+   <item id="attribute_augmentation_str" avail="5" cost="12000" maxrat="4" rate="true" ratemul="PRICE ESSENCE MODIFIER">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.2"/>
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+      <modifications>
+        <attrmod attr="STRENGTH" val="1" type="AUGMENTED" />
+      </modifications>
+   </item>
+   <item id="attribute_augmentation_wil" avail="5" cost="34000" maxrat="4" rate="true" ratemul="PRICE ESSENCE MODIFIER">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.5"/>
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+      <modifications>
+        <attrmod attr="WILLPOWER" val="1" type="AUGMENTED" />
+      </modifications>
+   </item>
+   <item id="attribute_augmentation_log" avail="5" cost="34000" maxrat="4" rate="true" ratemul="PRICE ESSENCE MODIFIER">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.5"/>
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+      <modifications>
+        <attrmod attr="LOGIC" val="1" type="AUGMENTED" />
+      </modifications>
+   </item>
+   <item id="attribute_augmentation_int" avail="5" cost="34000" maxrat="4" rate="true" ratemul="PRICE ESSENCE MODIFIER">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.5"/>
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+      <modifications>
+        <attrmod attr="INTUITION" val="1" type="AUGMENTED" />
+      </modifications>
+   </item>
+   <item id="attribute_augmentation_cha" avail="5" cost="34000" maxrat="4" rate="true" ratemul="PRICE ESSENCE MODIFIER">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.5"/>
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+      <modifications>
+        <attrmod attr="CHARISMA" val="1" type="AUGMENTED" />
+      </modifications>
+   </item>
+   <item id="attribute_overclocking_wil" avail="4" cost="9000" maxrat="8" rate="true" ratemul="PRICE ESSENCE">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.25"/>
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="attribute_overclocking_log" avail="4" cost="9000" maxrat="8" rate="true" ratemul="PRICE ESSENCE">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.25"/>
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="attribute_overclocking_int" avail="4" cost="9000" maxrat="8" rate="true" ratemul="PRICE ESSENCE">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.25"/>
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="attribute_overclocking_cha" avail="4" cost="9000" maxrat="8" rate="true" ratemul="PRICE ESSENCE">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.25"/>
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="attribute_overclocking_bod" avail="3" cost="5000" maxrat="8" rate="true" ratemul="PRICE ESSENCE">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1"/>
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="attribute_overclocking_agi" avail="3" cost="5000" maxrat="8" rate="true" ratemul="PRICE ESSENCE">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1"/>
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="attribute_overclocking_rea" avail="3" cost="5000" maxrat="8" rate="true" ratemul="PRICE ESSENCE">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1"/>
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="attribute_overclocking_str" avail="3" cost="5000" maxrat="8" rate="true" ratemul="PRICE ESSENCE">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1"/>
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="quantum_processor" avail="5L" cost="40000" maxrat="2" rate="true" ratemul="PRICE ESSENCE MODIFIER">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1"/>
+      <modifications>
+         <attrmod attr="INITIATIVE_MATRIX_VR_HOT" val="1"/>
+         <attrmod attr="INITIATIVE_DICE_MATRIX_VR_HOT" val="1"/>
+         <!-- Additional minor action already included by adding additional initiative dice -->
+      </modifications>
+   </item>
+
+    <!-- Core CodeMods --> 
+   <item id="core_code_redundancy" avail="3L" cost="12000" maxrat="4" rate="true" ratemul="PRICE ESSENCE MODIFIER">
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.2"/>
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+      <modifications>
+        <attrmod attr="STUN_MONITOR" val="1" />
+      </modifications>
+   </item>
+   <item id="core_code_shielding" avail="2" cost="3500" maxrat="6" rate="true" ratemul="PRICE ESSENCE" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.15" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="damage_mitigation_protocols" avail="4" cost="18500" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.2" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="damage_response_overrides" avail="5L" cost="3000" maxrat="12" rate="true" ratemul="PRICE ESSENCE" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="data_archive_upgrade" avail="3" cost="4000" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+      <modifications>
+        <qualitymod ref="photographic_memory"/>
+      </modifications>
+   </item>
+   <item id="optimized_restoration" avail="5" cost="10000" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+
+    <!-- Processor CodeMods --> 
+   <item id="rcc_emulator" avail="1L" cost="7500" maxrat="8" rate="true" ratemul="PRICE ESSENCE" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="sideload_processor" avail="2" cost="2000" maxrat="12" rate="true" ratemul="PRICE CAPACITY ESSENCE" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+      <modifications>
+        <itemhookmod hook="SOFTWARE" capacity="1"/>
+        <itemhookmod hook="SOFTWARE_RIGGER" capacity="1"/>
+        <itemhookmod hook="SOFTWARE_DRONE" capacity="1"/>
+      </modifications>
+   </item>
+   <item id="synthetic_skill_driver_activesoft" avail="5" cost="25000" maxrat="6" rate="true" ratemul="PRICE CAPACITY ESSENCE" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+      <modifications>
+        <itemhookmod hook="SKILLJACK" capacity="20"/>
+      </modifications>
+   </item>
+   <item id="synthetic_skill_driver_knowsoft" avail="2" cost="5000" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+      <modifications>
+        <itemhookmod hook="SKILLJACK" capacity="20" />
+      </modifications>
+   </item>
+   <item id="synthetic_skill_driver_linguasoft" avail="2" cost="4000" maxrat="4" rate="true" ratemul="PRICE CAPACITY ESSENCE" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.2" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+      <modifications>
+        <itemhookmod hook="SKILLJACK" capacity="20" />
+      </modifications>
+   </item>
+
+    <!-- Input/Output CodeMods --> 
+   <item id="active_signal_filter" avail="3" cost="7000" maxrat="6" rate="true" ratemul="PRICE ESSENCE" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="ecm_integration" avail="5L" cost="2500" maxrat="6" rate="true" ratemul="PRICE ESSENCE" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="pan_emulator" avail="3" cost="14000" maxrat="3" rate="true" ratemul="PRICE ESSENCE" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.2" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="control_rig_integration" avail="4L" cost="30000" maxrat="3" rate="true" ratemul="PRICE ESSENCE MODIFIER" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.8" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+      <modifications>
+        <itemmod item="control_rig_mm" rating="1"/>
+      </modifications>
+   </item>
+   <item id="smartlink_adapter" avail="3L" cost="4000" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.2" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+
+    <!-- Weapon CodeMods -->
+   <item id="acid_jet" avail="3I" cost="5000" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="limelight" avail="3I" cost="5000" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="swordbreaker" avail="3I" cost="5000" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.1" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="slashing_strike" avail="4I" cost="8000" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.25" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+   <item id="thunder_strike" avail="6I" cost="12000" >
+      <useas type="CYBERWARE" subtype="CYBER_HEADWARE" ess="0.75" />
+      <requires>
+        <anyreq>
+          <metareq ref="pilot"/>
+          <metareq ref="agent"/>
+          <metareq ref="foundation"/>
+          <metareq ref="realm"/>
+        </anyreq>
+      </requires>
+   </item>
+</items>

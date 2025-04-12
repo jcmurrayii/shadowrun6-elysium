@@ -22,8 +22,10 @@ declare namespace Shadowrun {
         // Test test class used for the active action test
         // Should be defined in game['shadowrun6-elysium'].activeTests
         test: string
-        // The type of combat action to be performed. @taMiF: I don't think this is in use.
-        type: string
+        // The type of combat action to be performed (free, minor, major, etc.)
+        type: ActionType
+        // When this action can be taken in relation to initiative order
+        initiative_timing: InitiativeTiming
         // A grouping of actions for different purposes.
         categories: ActionCategories[]
         // When set to true, the skill specialization modifier must be applied.
