@@ -199,17 +199,19 @@ export const shadowrunSR5CharacterDataPrep = (context: QuenchBatchContext) => {
 
             let character = actor.asCharacter() as CharacterActorData;
 
-            assert.strictEqual(character.system.movement.walk.value, 2); // AGI * 2
-            assert.strictEqual(character.system.movement.run.value, 4);  // AGI * 4
+            assert.strictEqual(character.system.movement.walk.value, 10); // Fixed value for SR6e
+            assert.strictEqual(character.system.movement.run.value, 15);  // Fixed value for SR6e
 
+            // Test that modifiers still work
             await actor.update({
-                'system.attributes.agility.base': 6
+                'system.modifiers.walk': 2,
+                'system.modifiers.run': 3
             });
 
             character = actor.asCharacter() as CharacterActorData;
 
-            assert.strictEqual(character.system.movement.walk.value, 12);
-            assert.strictEqual(character.system.movement.run.value, 24);
+            assert.strictEqual(character.system.movement.walk.value, 12); // 10 + 2
+            assert.strictEqual(character.system.movement.run.value, 18);  // 15 + 3
         });
 
         it('skill calculation', async () => {

@@ -1,0 +1,103 @@
+// This file contains the fixed version of the rerollFailures method
+// It has only one implementation of the method
+
+/**
+ * Reroll a specified number of failures
+ * @param failuresToReroll The number of failures to reroll
+ */
+async rerollFailures(failuresToReroll: number): Promise<this> {
+    console.log(`Shadowrun 6e | Rerolling ${failuresToReroll} failures for ${this.actor?.name || 'unknown actor'}`);
+    console.log('Shadowrun 6e | Test data before reroll:', this.data);
+    console.log('Shadowrun 6e | Original rolls:', this.rolls);
+    
+    // We'll allow rerolling even if there's no actor
+    if (!this.actor) {
+        console.warn('Shadowrun 6e | No actor found, but continuing with reroll');
+    }
+    if (this.data.rerolledFailures) {
+        console.warn('Shadowrun 6e | Cannot reroll failures: Already rerolled');
+        return this;
+    } // Prevent multiple rerolls
+    
+    // Count the total number of failures across all rolls
+    const totalFailures = this.rolls.reduce((failures, roll) => {
+        // Count dice that are not successes (not 5 or 6)
+        const rollFailures = roll.sides.filter(side => !SR.die.success.includes(side)).length;
+        console.log(`Shadowrun 6e | Roll ${roll.formula} has ${rollFailures} failures:`, roll.sides);
+        return failures + rollFailures;
+    }, 0);
+    
+    console.log(`Shadowrun 6e | Total failures found: ${totalFailures}`);
+
+    // Limit the number of failures to reroll to the total number of failures
+    const actualFailuresToReroll = Math.min(failuresToReroll, totalFailures);
+    console.log(`Shadowrun 6e | Actual failures to reroll: ${actualFailuresToReroll}`);
+
+    if (actualFailuresToReroll <= 0) {
+        console.warn('Shadowrun 6e | No failures to reroll');
+        ui.notifications?.warn(game.i18n.localize('SR6.NoFailuresToReroll'));
+        return this;
+    }
+
+    // Create a new roll for the rerolled failures
+    const formula = this.buildFormula(actualFailuresToReroll, false);
+    console.log(`Shadowrun 6e | Creating new roll with formula: ${formula}`);
+    const roll = new SR6Roll(formula);
+
+    // Store the rerolled failures roll
+    this.data.rerolledFailuresRolls = [roll];
+    this.data.rerolledFailuresCount = actualFailuresToReroll;
+    this.data.rerolledFailures = true;
+    console.log('Shadowrun 6e | Stored rerolled failures in test data');
+
+    // Add these properties to the test object itself for template access
+    this.rerolledFailuresRolls = [roll];
+    this.rerolledFailures = true;
+    this.rerolledFailuresCount = actualFailuresToReroll;
+    console.log('Shadowrun 6e | Added rerolled failures properties to test object');
+    
+    // Make sure the test has a messageUuid for saving later
+    if (!this.data.messageUuid && this.data.previousMessageId) {
+        this.data.messageUuid = this.data.previousMessageId;
+        console.log(`Shadowrun 6e | Using previousMessageId as messageUuid: ${this.data.messageUuid}`);
+    }
+
+    // Evaluate the roll
+    console.log('Shadowrun 6e | Evaluating rerolled failures roll...');
+    await roll.evaluate({async: true});
+    console.log('Shadowrun 6e | Rerolled failures roll results:', roll.sides);
+    
+    // Show dice animation if DiceSoNice is enabled
+    try {
+        // @ts-ignore
+        if (game.dice3d) {
+            console.log('Shadowrun 6e | Showing DiceSoNice animation for rerolled failures');
+            // @ts-ignore
+            await game.dice3d.showForRoll(roll, game.user, true, null, false);
+        }
+    } catch (error) {
+        console.error('Shadowrun 6e | Error showing DiceSoNice animation:', error);
+    }
+
+    // Calculate the number of hits from the rerolled failures
+    const rerolledHits = roll.total;
+    this.rerolledFailuresHits = rerolledHits;
+    this.data.rerolledFailuresHits = rerolledHits;
+    console.log(`Shadowrun 6e | Rerolled failures produced ${rerolledHits} hits`);
+
+    // Add the new roll to the rolls array
+    this.rolls.push(roll);
+    console.log('Shadowrun 6e | Added rerolled failures roll to rolls array');
+
+    // Recalculate hits
+    console.log('Shadowrun 6e | Recalculating derived values...');
+    this.calculateDerivedValues();
+    console.log(`Shadowrun 6e | New total hits: ${this.data.values.hits}`);
+
+    // Update the message
+    console.log(`Shadowrun 6e | Updating message: ${this.data.messageUuid}`);
+    await this.saveToMessage();
+    console.log('Shadowrun 6e | Message updated');
+
+    return this;
+}

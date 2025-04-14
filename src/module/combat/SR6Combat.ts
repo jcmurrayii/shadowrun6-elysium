@@ -13,6 +13,9 @@ import SocketMessageData = Shadowrun.SocketMessageData;
  *       @PDF SR5#160 'Changing Initiative'
  */
 export class SR6Combat extends Combat {
+    // Flag to prevent initiative from being rerolled
+    skipRollInitiative: boolean = false;
+
     // Overwrite foundry-vtt-types v9 combatTrackerSettings type definitions.
     override get settings() {
         return super.settings as { resource: string, skipDefeated: boolean };
@@ -44,6 +47,21 @@ export class SR6Combat extends Combat {
      */
     static addCombatTrackerContextOptions(html, options: any[]) {
         options.push(
+            {
+                name: game.i18n.localize('SR6.COMBAT.RollInitiative'),
+                icon: '<i class="fas fa-dice-d6"></i>',
+                callback: async (li) => {
+                    const combatant = await game.combat?.combatants.get(li.data('combatant-id'));
+                    if (combatant) {
+                        const combat: SR6Combat = game.combat as unknown as SR6Combat;
+                        // Temporarily disable skipRollInitiative to allow rolling
+                        const oldSkipValue = combat.skipRollInitiative;
+                        combat.skipRollInitiative = false;
+                        await combat.rollInitiative(combatant.id);
+                        combat.skipRollInitiative = oldSkipValue;
+                    }
+                },
+            },
             {
                 name: game.i18n.localize('SR6.COMBAT.ReduceInitByOne'),
                 icon: '<i class="fas fa-caret-down"></i>',
@@ -150,18 +168,45 @@ export class SR6Combat extends Combat {
     static async handleNextRound(combatId: string) {
         const combat = game.combats?.get(combatId) as unknown as SR6Combat;
         if (!combat) return;
-        await combat.resetAll();
-        await SR6Combat.setInitiativePass(combat, SR.combat.INITIAL_INI_PASS);
 
-        if (game.settings.get(SYSTEM_NAME, FLAGS.OnlyAutoRollNPCInCombat)) {
-            await combat.rollNPC();
-        } else {
-            await combat.rollAll();
+        // Don't call resetAll() as it resets initiative
+        // Instead, just reset what we need
+
+        // Reset actions for all combatants
+        await combat.resetCombatantActions();
+
+        // In Shadowrun 6th Edition, initiative is not rerolled each round
+        // Only roll initiative for combatants who don't have an initiative score yet
+        const unrolledCombatants = combat.combatants.filter(c => c.initiative === null);
+        if (unrolledCombatants.length > 0) {
+            console.log('Shadowrun 6e | Rolling initiative for new combatants only');
+            for (const combatant of unrolledCombatants) {
+                await combat.rollInitiative(combatant.id);
+            }
         }
+
+        // Prevent any automatic initiative rolling that might happen in the base Combat class
+        combat.skipRollInitiative = true;
 
         const turn = 0;
         await combat.update({ turn });
         await combat.handleActionPhase();
+    }
+
+    /**
+     * Reset actions for all combatants
+     */
+    async resetCombatantActions() {
+        console.log('Shadowrun 6e | Resetting actions for all combatants');
+
+        for (const combatant of this.combatants) {
+            if (!combatant.actor) continue;
+
+            // Only reset actions for actors with initiative
+            if (combatant.actor.system.initiative) {
+                await combatant.actor.resetActions();
+            }
+        }
     }
 
     /**
@@ -294,12 +339,8 @@ export class SR6Combat extends Combat {
      * @return true means that an initiative pass must be applied
      */
     doIniPass(nextTurn: number): boolean {
-        // We're currently only stepping from combatant to combatant.
-        if (nextTurn < this.turns.length) return false;
-        // Prepare another possible initiative order.
-        const currentScores = this.combatants.map(combatant => Number(combatant.initiative));
-
-        return CombatRules.iniOrderCanDoAnotherPass(currentScores);
+        // In Shadowrun 6th Edition, there are no initiative passes
+        return false;
     }
 
     /**
@@ -338,16 +379,7 @@ export class SR6Combat extends Combat {
             return;
         }
 
-        // Initiative Pass Handling. Owner permissions are needed to change the initiative pass.
-        if (!game.user?.isGM && this.doIniPass(nextTurn)) {
-            await this._createDoIniPassSocketMessage();
-            return;
-        }
-
-        if (game.user?.isGM && this.doIniPass(nextTurn)) {
-            await SR6Combat.handleIniPass(this.id as string);
-            return;
-        }
+        // In Shadowrun 6th Edition, there are no initiative passes
 
 
         // Initiative Round Handling.
@@ -369,12 +401,10 @@ export class SR6Combat extends Combat {
         // Start at top of the ini order.
         const turn = 0;
         const round = SR.combat.INITIAL_INI_ROUND;
-        const initiativePass = SR.combat.INITIAL_INI_PASS;
 
         const updateData = {
             turn,
-            round,
-            [`flags.${SYSTEM_NAME}.${FLAGS.CombatInitiativePass}`]: initiativePass
+            round
         }
         await this.update(updateData);
 
@@ -395,6 +425,10 @@ export class SR6Combat extends Combat {
     }
 
     override async nextRound(): Promise<any> {
+        // Set skipRollInitiative to true before calling super.nextRound()
+        // This will prevent the base Combat class from rerolling initiative
+        this.skipRollInitiative = true;
+
         // Let Foundry handle time and some other things.
         await super.nextRound();
 
@@ -404,6 +438,41 @@ export class SR6Combat extends Combat {
         } else {
             await SR6Combat.handleNextRound(this.id as string);
         }
+    }
+
+    /**
+     * Override rollInitiative to prevent rerolling initiative for combatants who already have an initiative score
+     * @param ids The IDs of combatants to roll
+     * @param options Options for the initiative roll
+     */
+    override async rollInitiative(ids: string | string[], options: any = {}): Promise<this> {
+        // Convert to an array of IDs
+        ids = typeof ids === 'string' ? [ids] : ids;
+
+        // If skipRollInitiative is true, only roll for combatants with null initiative
+        if (this.skipRollInitiative) {
+            console.log('Shadowrun 6e | skipRollInitiative is true, only rolling for combatants with null initiative');
+
+            // Filter out combatants who already have an initiative score
+            const combatantsToRoll = ids.filter(id => {
+                const combatant = this.combatants.get(id);
+                return combatant && combatant.initiative === null;
+            });
+
+            // If there are no combatants to roll, return
+            if (combatantsToRoll.length === 0) {
+                console.log('Shadowrun 6e | No combatants need initiative rolls');
+                return this;
+            }
+
+            // Roll initiative for combatants who don't have an initiative score
+            console.log('Shadowrun 6e | Rolling initiative for new combatants only:', combatantsToRoll);
+            return await super.rollInitiative(combatantsToRoll, options);
+        }
+
+        // If skipRollInitiative is false, roll for all specified combatants
+        console.log('Shadowrun 6e | Rolling initiative for all specified combatants:', ids);
+        return await super.rollInitiative(ids, options);
     }
 
     /**

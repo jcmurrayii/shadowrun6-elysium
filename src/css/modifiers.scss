@@ -1,6 +1,7 @@
 /**
   * Is used on TokenHUDs to display a additional segment per situational modifer.
   */
+@use 'config' as *;
 .sr-modifier-container {
 
     // The column to hold all modifiers besides the FoundryVTT token HUD.

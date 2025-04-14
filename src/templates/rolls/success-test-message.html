@@ -1,6 +1,9 @@
 <div class="sr6 chat-card roll-card">
     <div class="card-title card-header">
         <span class="test-name">{{localize title}}</span>
+        {{#if actionTypeLabel}}
+        <span class="action-type">[{{actionTypeLabel}}{{#if initiativeTimingLabel}} - {{initiativeTimingLabel}}{{/if}}]</span>
+        {{/if}}
     </div>
     {{#if speaker.actor}}
     <div class="card-title card-header">
@@ -43,10 +46,12 @@
                     {{#if test.opposing}}<div class="test-value"><span class="value">{{localize "SR6.OpposingNetHits"}}:</span> <span class="value-result">{{test.againstNetHits.value}}</span></div>{{/if}}
                 </div>
                 <div class="right-side">
+                    {{#if (or @root.isGM (eq speaker.actor.type 'character'))}} <!-- Show pool only to GMs or if it's a player character -->
                     <div class="test-value"><span class="value">{{localize test.pool.label}}:</span> <span class="value-result">{{test.pool.value}}</span></div>
+                    {{/if}}
                     <div class="test-value">
                         <span class="value">{{localize test.hits.label}}:</span>
-                        <span class="value-result">{{test.displayHits}}{{#if test.usingManualRoll}}*{{/if}}{{#if test.appendedHits}} + {{test.appendedHits}}{{/if}}</span>
+                        <span class="value-result">{{test.rawHits}}{{#if test.usingManualRoll}}*{{/if}}{{#if test.appendedHits}} + {{test.appendedHits}}{{/if}}</span>
                         {{#if test.hitsIcon}}<img class="test-icon" src="{{test.hitsIcon.icon}}" data-tooltip="{{test.hitsIcon.tooltip}}" />{{/if}}
                     </div>
                     {{#if test.extended}}<div class="test-value"><span class="value">{{localize test.extendedHits.label}}:</span> <span class="value-result">{{test.extendedHits.value}}</span></div>{{/if}}
@@ -123,6 +128,7 @@
         <div class="card-content">* {{localize "SR6.ManualHits"}}</div>
     </disv>
     {{/if}}
+    {{#if (or @root.isGM (eq speaker.actor.type 'character'))}} <!-- Show dice rolls only to GMs or if it's a player character -->
     <div class="card-rolls {{#if applyGmOnlyContent}}gm-only-content{{/if}}">
         {{#if (not test.usingManualRoll)}}
         {{#each test.rolls}}
@@ -132,6 +138,42 @@
         {{/each}}
         {{/if}}
     </div>
+    {{/if}}
+
+    {{#if (and (not test.usingManualRoll) (not test.rerolledFailures))}}
+    {{#if (or @root.isGM (eq speaker.actor.type 'character'))}} <!-- Show reroll failures button only to GMs or if it's a player character -->
+    <div class="card-buttons">
+        <div class="button reroll-failures">
+            {{localize "SR6.RerollFailures"}}
+        </div>
+    </div>
+    {{/if}}
+    {{/if}}
+
+    {{#if test.rerolledFailures}}
+    {{#if (or @root.isGM (eq speaker.actor.type 'character'))}} <!-- Show rerolled failures only to GMs or if it's a player character -->
+    <div class="card-rolls {{#if applyGmOnlyContent}}gm-only-content{{/if}}">
+        <div class="rerolled-failures-header">
+            {{localize "SR6.RerolledFailures"}}
+            <span class="rerolled-count">({{localize "SR6.RerolledFailuresCount" count=test.rerolledFailuresCount}})</span>
+        </div>
+        <div class="rerolled-failures-summary">
+            {{localize "SR6.RerolledFailuresHits" count=test.rerolledFailuresHits}}
+        </div>
+        {{#each test.rerolledFailuresRolls}}
+            <div class="dice-rolls">
+                <div class="dice-roll-content">
+                    {{#each this.sides}}
+                    <div class="dice-roll {{diceIcon this}}">
+                        <div class="result-text">{{this}}</div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        {{/each}}
+    </div>
+    {{/if}}
+    {{/if}}
     {{#if test.targets}}
     <div class="test-line">
         <span class="test-name {{#if roll}}test-roll{{/if}}">

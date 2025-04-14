@@ -1,4 +1,5 @@
 /* Styling for legality indicators */
+@use 'config' as *;
 .legality-tag {
     display: inline-block;
     width: 16px;

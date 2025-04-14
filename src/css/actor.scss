@@ -1,4 +1,5 @@
-@import 'config';
+@use 'config' as *;
+@use '../styles/actor/action-tracker';
 
 .sr6.actor {
     min-height: 690px;

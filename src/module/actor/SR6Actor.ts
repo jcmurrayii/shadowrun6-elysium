@@ -5,6 +5,7 @@ import {PartsList} from '../parts/PartsList';
 import {SR6Combat} from "../combat/SR6Combat";
 import {DataDefaults} from '../data/DataDefaults';
 import {SkillFlow} from "./flows/SkillFlow";
+import {SR6CharacterSheet} from "./sheets/SR6CharacterSheet";
 import {SR6} from "../config";
 import {CharacterPrep} from "./prep/CharacterPrep";
 import {SR6ItemDataWrapper} from "../data/SR6ItemDataWrapper";
@@ -48,6 +49,19 @@ import { SR6ActiveEffect } from '../effect/SR6ActiveEffect';
  *
  */
 export class SR6Actor extends Actor {
+    /**
+     * Cache for armor calculations to avoid recalculating unnecessarily
+     * @type {Object}
+     * @private
+     */
+    private _armorCache: {
+        armor?: Shadowrun.ActorArmor,
+        timestamp: number,
+        equipmentHash: string
+    } = {
+        timestamp: 0,
+        equipmentHash: ''
+    };
     // This is the default inventory name and label for when no other inventory has been created.
     defaultInventory: Shadowrun.InventoryData = {
         name: 'Carried',
@@ -79,6 +93,45 @@ export class SR6Actor extends Actor {
 
         this.inventory = new InventoryFlow(this);
         this.modifiers = new ModifierFlow(this);
+    }
+
+    /**
+     * Hook into item creation to invalidate armor cache
+     * @override
+     */
+    override async _onCreateEmbeddedDocuments(embeddedName, documents, result, options, userId) {
+        await super._onCreateEmbeddedDocuments(embeddedName, documents, result, options, userId);
+
+        // Only invalidate cache for items that could affect armor
+        if (embeddedName === 'Item' && documents.some(doc => doc.type === 'armor' || doc.type === 'equipment')) {
+            this.invalidateArmorCache();
+        }
+    }
+
+    /**
+     * Hook into item update to invalidate armor cache
+     * @override
+     */
+    override async _onUpdateEmbeddedDocuments(embeddedName, documents, result, options, userId) {
+        await super._onUpdateEmbeddedDocuments(embeddedName, documents, result, options, userId);
+
+        // Only invalidate cache for items that could affect armor
+        if (embeddedName === 'Item' && documents.some(doc => doc.type === 'armor' || doc.type === 'equipment')) {
+            this.invalidateArmorCache();
+        }
+    }
+
+    /**
+     * Hook into item deletion to invalidate armor cache
+     * @override
+     */
+    override async _onDeleteEmbeddedDocuments(embeddedName, documents, result, options, userId) {
+        await super._onDeleteEmbeddedDocuments(embeddedName, documents, result, options, userId);
+
+        // Only invalidate cache for items that could affect armor
+        if (embeddedName === 'Item' && documents.some(doc => doc.type === 'armor' || doc.type === 'equipment')) {
+            this.invalidateArmorCache();
+        }
     }
 
     getOverwatchScore() {
@@ -264,8 +317,12 @@ export class SR6Actor extends Actor {
 
         // Ensure matrix actions are available for all actors that can use the Matrix
         if (game.user?.isGM && this.isOwner && (this.isCharacter() || this.isSprite() || this.isIC())) {
-            // We need to use a setTimeout to avoid issues with the actor being locked during data preparation
-            setTimeout(() => this.ensureMatrixActions(), 500);
+            // Check if we've already added matrix actions to this actor
+            const hasMatrixActions = this.getFlag('shadowrun6-elysium', 'hasMatrixActions');
+            if (!hasMatrixActions) {
+                // We need to use a setTimeout to avoid issues with the actor being locked during data preparation
+                setTimeout(() => this.ensureMatrixActions(), 500);
+            }
         }
     }
 
@@ -414,12 +471,100 @@ export class SR6Actor extends Actor {
     }
 
     /**
+     * Generate a hash of the actor's equipped armor items
+     * This is used to determine if the armor cache is still valid
+     * @returns {string} A hash of the actor's equipped armor items
+     * @private
+     */
+    private _generateEquipmentHash(): string {
+        // Get all equipped armor items
+        const equippedArmor = this.items
+            .filter(item => item.type === 'armor' || item.type === 'equipment')
+            .filter(item => item.system.technology?.equipped)
+            .map(item => ({
+                id: item.id,
+                name: item.name,
+                type: item.type,
+                equipped: item.system.technology?.equipped,
+                dr: item.system.armor?.defense_rating?.value || 0
+            }));
+
+        // Generate a hash of the equipped armor
+        return JSON.stringify(equippedArmor);
+    }
+
+    /**
+     * Check if the armor cache is still valid
+     * @returns {boolean} True if the cache is valid, false otherwise
+     * @private
+     */
+    private _isArmorCacheValid(): boolean {
+        // If there's no cache, it's not valid
+        if (!this._armorCache.armor) return false;
+
+        // Generate a hash of the current equipped armor
+        const currentHash = this._generateEquipmentHash();
+
+        // Check if the hash matches the cached hash
+        return this._armorCache.equipmentHash === currentHash;
+    }
+
+    /**
+     * Invalidate the armor cache
+     * This should be called when equipment changes
+     */
+    invalidateArmorCache(): void {
+        console.log(`Shadowrun 6e | Invalidating armor cache for ${this.name}`);
+        this._armorCache = {
+            timestamp: 0,
+            equipmentHash: ''
+        };
+    }
+
+    /**
      * Return armor worn by this actor.
      *
      * @param damage If given will be applied to the armor to get modified armor.
      * @returns Armor or modified armor.
      */
     getArmor(damage?:Shadowrun.DamageData) {
+        // If damage is provided, we can't use the cache
+        if (damage) {
+            return this._calculateArmor(damage);
+        }
+
+        // Check if the cache is valid
+        if (this._isArmorCacheValid()) {
+            console.log(`Shadowrun 6e | Using cached armor for ${this.name}`);
+            return foundry.utils.duplicate(this._armorCache.armor);
+        }
+
+        // Calculate the armor and cache it
+        const armor = this._calculateArmor();
+
+        // Cache the armor
+        this._armorCache = {
+            armor: foundry.utils.duplicate(armor),
+            timestamp: Date.now(),
+            equipmentHash: this._generateEquipmentHash()
+        };
+
+        console.log(`Shadowrun 6e | Cached armor for ${this.name}:`, this._armorCache);
+
+        return armor;
+    }
+
+    /**
+     * Calculate the armor worn by this actor.
+     * This is the actual calculation method, while getArmor() handles caching.
+     *
+     * @param damage If given will be applied to the armor to get modified armor.
+     * @returns Armor or modified armor.
+     * @private
+     */
+    private _calculateArmor(damage?:Shadowrun.DamageData) {
+        console.log(`Shadowrun 6e | Calculating armor for ${this.name}`);
+
         // Prepare base armor data.
         const armor = "armor" in this.system ?
             foundry.utils.duplicate(this.system.armor) :
@@ -1755,13 +1900,8 @@ export class SR6Actor extends Actor {
             return this.getArmor();
         }
 
-        const modified = foundry.utils.duplicate(this.getArmor());
-        if (modified) {
-            modified.mod = PartsList.AddUniquePart(modified.mod, 'SR6.DV', damage.ap.value);
-            modified.value = Helpers.calcTotal(modified, {min: 0});
-        }
-
-        return modified;
+        // Use the _calculateArmor method directly with the damage
+        return this._calculateArmor(damage);
     }
 
     /** Reduce the initiative of the actor in the currently open / selected combat.
@@ -2295,6 +2435,304 @@ export class SR6Actor extends Actor {
 
         if (this.isMatrixActor) await this.setMatrixDamage(0);
         if (updateData) await this.update(updateData);
+
+        // Reset actions
+        await this.resetActions();
+    }
+
+    /**
+     * Reset the actor's actions for a new combat round
+     */
+    async resetActions() {
+        // Only proceed if the actor has initiative
+        if (!this.system.initiative) return;
+
+        // Initialize the actions object if it doesn't exist
+        if (!this.system.initiative.actions) {
+            await this.update({
+                'system.initiative.actions': {}
+            });
+        }
+
+        // Calculate available actions based on initiative dice
+        const initiativeDice = this.system.initiative?.current?.dice?.value || 0;
+
+        // In Shadowrun 6th Edition, each character starts with one major and one minor action
+        // They gain an additional minor action for each die in their initiative roll
+        // Free actions are unlimited
+        const majorCount = 1;
+        const minorCount = 1 + initiativeDice;
+        const freeCount = '∞';
+
+        // Log the values for debugging
+        console.log('Shadowrun 6e | Reset action values:', {
+            major: majorCount,
+            minor: minorCount,
+            free: freeCount
+        });
+
+        // Update the actions directly
+        await this.update({
+            'system.initiative.actions.major': majorCount,
+            'system.initiative.actions.minor': minorCount,
+            'system.initiative.actions.free': freeCount
+        });
+
+        console.log(`Shadowrun 6e | Reset actions for ${this.name}: Major: ${majorCount}, Minor: ${minorCount}, Free: ${freeCount}`);
+
+        // Force a refresh of all sheets displaying this actor
+        this.forceRefreshSheets();
+    }
+
+    /**
+     * Convert 4 minor actions into 1 major action
+     * If a player has 4 or more unspent minor actions, they may convert 4 minor actions into a major action (for the round)
+     */
+    async convertMinorToMajorAction() {
+        // Log the actor name for debugging
+        console.log(`Shadowrun 6e | Converting minor actions to major action for ${this.name} (${this.id})`);
+
+        // Only proceed if the actor has initiative
+        if (!this.system.initiative) {
+            console.log(`Shadowrun 6e | Actor ${this.name} has no initiative data`);
+            return;
+        }
+
+        // Initialize the actions object if it doesn't exist
+        if (!this.system.initiative.actions) {
+            console.log(`Shadowrun 6e | Actor ${this.name} has no actions data, initializing`);
+            await this.update({
+                'system.initiative.actions': {}
+            });
+            // Reset actions to ensure they're properly initialized
+            await this.resetActions();
+            return;
+        }
+
+        const actions = this.system.initiative.actions;
+        console.log(`Shadowrun 6e | Current actions for ${this.name}:`, actions);
+
+        // Check if the actor has at least 4 minor actions
+        if (actions.minor < 4) {
+            ui.notifications?.warn(game.i18n.format('SR6.NotEnoughMinorActions', {
+                name: this.name,
+                count: actions.minor
+            }));
+            return;
+        }
+
+        // Get the actor from the game.actors collection to ensure we're working with the latest data
+        const checkActor = game.actors.get(this.id);
+        if (checkActor && checkActor.system.initiative && checkActor.system.initiative.actions) {
+            // Check if the actor has at least 4 minor actions in the database
+            const dbMinorActions = checkActor.system.initiative.actions.minor;
+            if (dbMinorActions < 4) {
+                ui.notifications?.warn(game.i18n.format('SR6.NotEnoughMinorActions', {
+                    name: this.name,
+                    count: dbMinorActions
+                }));
+                return;
+            }
+        }
+
+        // Convert 4 minor actions into 1 major action
+        // Make sure we're working with numbers
+        const majorCount = Number(actions.major) + 1;
+        const minorCount = Number(actions.minor) - 4;
+
+        // Log the values for debugging
+        console.log('Shadowrun 6e | Action conversion values:', {
+            originalMajor: actions.major,
+            originalMinor: actions.minor,
+            newMajor: majorCount,
+            newMinor: minorCount
+        });
+
+        // Create a complete actions object
+        const newActions = {
+            major: majorCount,
+            minor: minorCount,
+            free: this.system.initiative.actions.free
+        };
+
+        console.log(`Shadowrun 6e | Updating actions for ${this.name} (${this.id}):`, newActions);
+
+        try {
+            // Use a direct approach to update the actor
+            console.log(`Shadowrun 6e | Using direct update approach for ${this.name}`);
+
+            // Get the actor from the game.actors collection to ensure we're working with the latest data
+            const actor = game.actors.get(this.id);
+            if (!actor) {
+                console.error(`Shadowrun 6e | Could not find actor ${this.name} (${this.id}) in game.actors collection`);
+                return;
+            }
+
+            // Log the current actions before update
+            console.log(`Shadowrun 6e | Actions before update for ${this.name}:`, {
+                major: actor.system.initiative.actions.major,
+                minor: actor.system.initiative.actions.minor,
+                free: actor.system.initiative.actions.free
+            });
+
+            // Create a complete update data object
+            const updateData = {
+                'system.initiative.actions': {
+                    major: majorCount,
+                    minor: minorCount,
+                    free: actor.system.initiative.actions.free
+                }
+            };
+
+            // Log the update data
+            console.log(`Shadowrun 6e | Update data for ${this.name}:`, updateData);
+
+            // Update the actor in the database
+            await actor.update(updateData);
+
+            // Wait a moment to ensure the update is processed
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            // Directly modify the actor's data as a fallback
+            actor.system.initiative.actions.major = majorCount;
+            actor.system.initiative.actions.minor = minorCount;
+
+            console.log(`Shadowrun 6e | Actions after direct update for ${this.name}:`, {
+                major: actor.system.initiative.actions.major,
+                minor: actor.system.initiative.actions.minor,
+                free: actor.system.initiative.actions.free
+            });
+
+            // Force a refresh of all sheets displaying this actor
+            actor.forceRefreshSheets();
+
+            // Force a delayed re-render of the character sheet
+            setTimeout(() => {
+                // Get the actor again to ensure we have the latest data
+                const refreshActor = game.actors.get(this.id);
+                if (refreshActor) {
+                    // Force a refresh of all sheets displaying this actor
+                    refreshActor.forceRefreshSheets();
+                    console.log(`Shadowrun 6e | Forced delayed refresh of ${Object.values(refreshActor.apps).length} sheets for ${refreshActor.name}`);
+                }
+            }, 500);
+
+            console.log(`Shadowrun 6e | Forced refresh of ${Object.values(actor.apps).length} sheets for ${this.name}`);
+        } catch (error) {
+            console.error(`Shadowrun 6e | Error updating actions for ${this.name}:`, error);
+
+            // Try a more direct approach
+            console.log(`Shadowrun 6e | Trying direct data modification after error for ${this.name}`);
+
+            // Directly modify the data
+            if (this.system.initiative && this.system.initiative.actions) {
+                this.system.initiative.actions.major = majorCount;
+                this.system.initiative.actions.minor = minorCount;
+
+                // Force a refresh of all sheets displaying this actor
+                this.forceRefreshSheets();
+
+                console.log(`Shadowrun 6e | Actions after direct modification for ${this.name}:`, this.system.initiative.actions);
+            }
+        }
+
+        // Verify the update was successful by checking the game.actors collection
+        const verifyActor = game.actors.get(this.id);
+        if (verifyActor) {
+            // Get the current values from the actor
+            const actorMajor = verifyActor.system.initiative.actions.major;
+            const actorMinor = verifyActor.system.initiative.actions.minor;
+
+            console.log(`Shadowrun 6e | Final verification from game.actors collection for ${this.name}:`, {
+                major: actorMajor,
+                minor: actorMinor,
+                expectedMajor: majorCount,
+                expectedMinor: minorCount
+            });
+
+            // Check if the values match the expected values
+            if (actorMajor !== majorCount || actorMinor !== minorCount) {
+                console.error(`Shadowrun 6e | Values don't match expected values! Forcing direct update.`);
+
+                // Force a direct update of the actor's data
+                verifyActor.system.initiative.actions.major = majorCount;
+                verifyActor.system.initiative.actions.minor = minorCount;
+
+                // Force a refresh of all sheets displaying this actor
+                verifyActor.forceRefreshSheets();
+            }
+
+            // Notify the user with the expected values
+            ui.notifications?.info(game.i18n.format('SR6.ConvertedActionsWithValues', {
+                name: this.name,
+                major: majorCount,
+                minor: minorCount
+            }));
+
+            console.log(`Shadowrun 6e | Converted 4 minor actions to 1 major action for ${this.name}: Major: ${majorCount}, Minor: ${minorCount}`);
+        } else {
+            // Fall back to using the local data
+            const currentMajor = this.system.initiative.actions.major;
+            const currentMinor = this.system.initiative.actions.minor;
+
+            // Notify the user with the values from the local data
+            ui.notifications?.info(game.i18n.format('SR6.ConvertedActionsWithValues', {
+                name: this.name,
+                major: majorCount,
+                minor: minorCount
+            }));
+
+            console.log(`Shadowrun 6e | Converted 4 minor actions to 1 major action for ${this.name}: Major: ${majorCount}, Minor: ${minorCount}`);
+        }
+
+        // Force a final refresh of all sheets displaying this actor
+        this.forceRefreshSheets();
+
+        console.log(`Shadowrun 6e | Forced refresh of ${Object.values(this.apps).length} sheets for ${this.name}`);
+    }
+
+
+
+    /**
+     * Reset the matrix actions flag
+     * This will force the system to recalculate whether the actor has matrix actions
+     */
+    async resetMatrixActionsFlag() {
+        await this.unsetFlag('shadowrun6-elysium', 'hasMatrixActions');
+        console.log(`Shadowrun 6e | Reset matrix actions flag for ${this.name}`);
+    }
+
+    /**
+     * Find and refresh all token sheets for this actor
+     * This is needed because token sheets are not automatically refreshed when the actor is updated
+     */
+    refreshTokenSheets() {
+        console.log(`Shadowrun 6e | Refreshing token sheets for ${this.name}`);
+
+        // Get all tokens for this actor
+        const tokens = this.getActiveTokens();
+        console.log(`Shadowrun 6e | Found ${tokens.length} tokens for ${this.name}`);
+
+        // Refresh each token
+        for (const token of tokens) {
+            // Refresh the token
+            if (token.refresh) token.refresh();
+
+            // Refresh the token's sheet if it's open
+            if (token.sheet && token.sheet.rendered) {
+                token.sheet.render(true);
+                console.log(`Shadowrun 6e | Refreshed token sheet for ${token.name}`);
+            }
+        }
+
+        // Find and refresh all token sheets in the ui.windows collection
+        for (const [id, app] of Object.entries(ui.windows)) {
+            // Check if this is a sheet for one of our tokens
+            if (app.token && tokens.some(t => t.id === app.token.id)) {
+                app.render(true);
+                console.log(`Shadowrun 6e | Refreshed token sheet ${id} for ${app.token.name}`);
+            }
+        }
     }
 
     /**
@@ -2305,6 +2743,13 @@ export class SR6Actor extends Actor {
      */
     async ensureMatrixActions() {
         console.log(`Shadowrun 6e | Ensuring matrix actions for actor ${this.name} (${this.id})`);
+
+        // Check if we've already added matrix actions to this actor
+        const hasMatrixActions = this.getFlag('shadowrun6-elysium', 'hasMatrixActions');
+        if (hasMatrixActions) {
+            console.log(`Shadowrun 6e | ${this.name} already has matrix actions flag set`);
+            return;
+        }
 
         // Get the matrix actions compendium
         const matrixPack = game.packs.get("shadowrun6-elysium.matrix-actions");
@@ -2331,6 +2776,8 @@ export class SR6Actor extends Actor {
 
         if (actionsToAdd.length === 0) {
             console.log(`Shadowrun 6e | ${this.name} already has all matrix actions`);
+            // Set the flag to indicate that we've checked for matrix actions
+            await this.setFlag('shadowrun6-elysium', 'hasMatrixActions', true);
             return;
         }
 
@@ -2341,6 +2788,9 @@ export class SR6Actor extends Actor {
         );
 
         console.log(`Shadowrun 6e | Added ${actionsToAdd.length} matrix actions to ${this.name}`);
+
+        // Set the flag to indicate that we've added matrix actions
+        await this.setFlag('shadowrun6-elysium', 'hasMatrixActions', true);
     }
 
     async newSceneSetup() {
@@ -2349,7 +2799,208 @@ export class SR6Actor extends Actor {
         updateData['system.attributes.edge.uses'] = this.getEdge().value;
 
         if(updateData) await this.update(updateData);
+    }
 
+    /**
+     * Spend a major action
+     * This should be called whenever a character performs an action that costs a major action
+     * @returns True if the action was spent successfully, false if there were no major actions left
+     */
+    async spendMajorAction() {
+        console.log(`Shadowrun 6e | Spending major action for ${this.name}`);
+
+        // Only proceed if the actor has initiative
+        if (!this.system.initiative) {
+            console.log(`Shadowrun 6e | Actor ${this.name} has no initiative data`);
+            return false;
+        }
+
+        // Initialize the actions object if it doesn't exist
+        if (!this.system.initiative.actions) {
+            console.log(`Shadowrun 6e | Actor ${this.name} has no actions data, initializing`);
+            await this.update({
+                'system.initiative.actions': {}
+            });
+            // Reset actions to ensure they're properly initialized
+            await this.resetActions();
+            return false;
+        }
+
+        const actions = this.system.initiative.actions;
+        console.log(`Shadowrun 6e | Current actions for ${this.name}:`, actions);
+
+        // Check if the actor has at least 1 major action
+        if (actions.major < 1) {
+            ui.notifications?.warn(game.i18n.format('SR6.NoMajorActionsLeft', {
+                name: this.name
+            }));
+            return false;
+        }
+
+        // Spend 1 major action
+        const majorCount = Number(actions.major) - 1;
+
+        // If the major action count will be 0, we need to make sure it doesn't get reset
+        // by the InitiativePrep.calculateAvailableActions method
+        const willBeZero = majorCount === 0;
+
+        // Log the values for debugging
+        console.log('Shadowrun 6e | Action spending values:', {
+            originalMajor: actions.major,
+            newMajor: majorCount
+        });
+
+        // Update the actions
+        console.log(`Shadowrun 6e | Updating major action count for ${this.name} from ${actions.major} to ${majorCount}`);
+        try {
+            // Update the actor data directly first for immediate feedback
+            this.system.initiative.actions.major = majorCount;
+
+            // Then update the database
+            await this.update({
+                'system.initiative.actions.major': majorCount
+            });
+            console.log(`Shadowrun 6e | Successfully updated major action count for ${this.name}`);
+        } catch (error) {
+            console.error(`Shadowrun 6e | Error updating major action count for ${this.name}:`, error);
+            return false;
+        }
+
+        // Force a refresh of all sheets displaying this actor
+        console.log(`Shadowrun 6e | Refreshing sheets for ${this.name}`);
+        this.forceRefreshSheets();
+        console.log(`Shadowrun 6e | Sheets refreshed for ${this.name}`);
+
+        // No need to verify the update since we've already updated the actor data directly
+
+        console.log(`Shadowrun 6e | Spent 1 major action for ${this.name}: Major: ${majorCount}`);
+
+        // Notify the user that a major action was spent
+        ui.notifications?.info(game.i18n.format('SR6.SpentMajorAction', {
+            name: this.name,
+            count: majorCount
+        }));
+
+        return true;
+    }
+
+    /**
+     * Spend a minor action
+     * This should be called whenever a character performs an action that costs a minor action
+     * @returns True if the action was spent successfully, false if there were no minor actions left
+     */
+    async spendMinorAction() {
+        console.log(`Shadowrun 6e | Spending minor action for ${this.name}`);
+
+        // Only proceed if the actor has initiative
+        if (!this.system.initiative) {
+            console.log(`Shadowrun 6e | Actor ${this.name} has no initiative data`);
+            return false;
+        }
+
+        // Initialize the actions object if it doesn't exist
+        if (!this.system.initiative.actions) {
+            console.log(`Shadowrun 6e | Actor ${this.name} has no actions data, initializing`);
+            await this.update({
+                'system.initiative.actions': {}
+            });
+            // Reset actions to ensure they're properly initialized
+            await this.resetActions();
+            return false;
+        }
+
+        const actions = this.system.initiative.actions;
+        console.log(`Shadowrun 6e | Current actions for ${this.name}:`, actions);
+
+        // Check if the actor has at least 1 minor action
+        if (actions.minor < 1) {
+            ui.notifications?.warn(game.i18n.format('SR6.NoMinorActionsLeft', {
+                name: this.name
+            }));
+            return false;
+        }
+
+        // Spend 1 minor action
+        const minorCount = Number(actions.minor) - 1;
+
+        // If the minor action count will be 0, we need to make sure it doesn't get reset
+        // by the InitiativePrep.calculateAvailableActions method
+        const willBeZero = minorCount === 0;
+
+        // Log the values for debugging
+        console.log('Shadowrun 6e | Action spending values:', {
+            originalMinor: actions.minor,
+            newMinor: minorCount
+        });
+
+        // Update the actions
+        console.log(`Shadowrun 6e | Updating minor action count for ${this.name} from ${actions.minor} to ${minorCount}`);
+        try {
+            // Update the actor data directly first for immediate feedback
+            this.system.initiative.actions.minor = minorCount;
+
+            // Then update the database
+            await this.update({
+                'system.initiative.actions.minor': minorCount
+            });
+            console.log(`Shadowrun 6e | Successfully updated minor action count for ${this.name}`);
+        } catch (error) {
+            console.error(`Shadowrun 6e | Error updating minor action count for ${this.name}:`, error);
+            return false;
+        }
+
+        // Force a refresh of all sheets displaying this actor
+        console.log(`Shadowrun 6e | Refreshing sheets for ${this.name}`);
+        this.forceRefreshSheets();
+        console.log(`Shadowrun 6e | Sheets refreshed for ${this.name}`);
+
+        // No need to verify the update since we've already updated the actor data directly
+
+        console.log(`Shadowrun 6e | Spent 1 minor action for ${this.name}: Minor: ${minorCount}`);
+
+        // Notify the user that a minor action was spent
+        ui.notifications?.info(game.i18n.format('SR6.SpentMinorAction', {
+            name: this.name,
+            count: minorCount
+        }));
+
+        return true;
+    }
+
+    /**
+     * Force a refresh of all sheets displaying this actor
+     * This is a comprehensive method to ensure all sheets and tokens are updated
+     */
+    forceRefreshSheets() {
+        console.log(`Shadowrun 6e | Forcing refresh of all sheets for ${this.name}`);
+
+        // Force a refresh of the actor
+        this.render(false);
+
+        // Force a refresh of all sheets displaying this actor
+        for (const sheet of Object.values(this.apps)) {
+            // Render all sheets to ensure they get the latest data
+            sheet.render(true);
+        }
+
+        // Also refresh any token HUDs
+        for (const token of this.getActiveTokens()) {
+            if (token.refresh) token.refresh();
+        }
+
+        // Refresh the canvas if it exists
+        if (canvas && canvas.tokens && typeof canvas.tokens.placeables !== 'undefined') {
+            canvas.tokens.placeables.forEach(token => {
+                if (token.actor && token.actor.id === this.id && token.refresh) {
+                    token.refresh();
+                }
+            });
+        }
+
+        // Refresh token sheets
+        this.refreshTokenSheets();
+
+        console.log(`Shadowrun 6e | Completed refresh of all sheets for ${this.name}`);
     }
 
     /**

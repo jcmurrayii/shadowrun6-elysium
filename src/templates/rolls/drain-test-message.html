@@ -2,18 +2,30 @@
 <div class="sr6 chat-card roll-card">
     <div class="card-content">
         <div class="left-side">
-            {{> 'systems/shadowrun6-elysium/dist/templates/rolls/parts/Damage.html'
-            name=(localize "SR6.IncomingDrain")
-            damage=test.data.incomingDrain
-            showAP=true
-            }}
+            <div class="test-value">
+                <span class="value">{{localize "SR6.IncomingDrain"}}: </span>
+                <span class="value-result">
+                    <span class="button apply-damage"
+                      data-damage-value="{{test.data.incomingDrain.value}}"
+                      data-damage-type="{{test.data.incomingDrain.type.value}}"
+                      >
+                        {{#if test.data.incomingDrain.value}}{{test.data.incomingDrain.value}}{{else}}4{{/if}}S
+                    </span>
+                </span>
+            </div>
         </div>
         <div class="right-side">
-            {{> 'systems/shadowrun6-elysium/dist/templates/rolls/parts/Damage.html'
-            name=(localize "SR6.ModifiedDrain")
-            damage=test.data.modifiedDrain
-            showAP=true
-            }}
+            <div class="test-value">
+                <span class="value">{{localize "SR6.ModifiedDrain"}}: </span>
+                <span class="value-result">
+                    <span class="button apply-damage"
+                      data-damage-value="{{test.data.modifiedDrain.value}}"
+                      data-damage-type="{{test.data.modifiedDrain.type.value}}"
+                      >
+                        {{#if test.data.modifiedDrain.value}}{{test.data.modifiedDrain.value}}{{else}}1{{/if}}S
+                    </span>
+                </span>
+            </div>
         </div>
     </div>
 </div>

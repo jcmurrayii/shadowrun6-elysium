@@ -1,5 +1,5 @@
-2025/04/08-01:38:54.836 faf8 Recovering log #45
-2025/04/08-01:38:54.836 faf8 Level-0 table #48: started
-2025/04/08-01:38:54.847 faf8 Level-0 table #48: 1810 bytes OK
-2025/04/08-01:38:54.853 faf8 Delete type=0 #45
-2025/04/08-01:38:54.853 faf8 Delete type=3 #43
+2025/04/12-02:33:46.031 5040 Recovering log #52
+2025/04/12-02:33:46.031 5040 Level-0 table #54: started
+2025/04/12-02:33:46.041 5040 Level-0 table #54: 1810 bytes OK
+2025/04/12-02:33:46.045 5040 Delete type=0 #52
+2025/04/12-02:33:46.045 5040 Delete type=3 #50

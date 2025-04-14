@@ -105,15 +105,52 @@ export class TestDialog extends FormDialog {
      * Overwrite this method to provide dialog buttons.
      */
     override get buttons() {
+        // Check if this is a skill test and if the skill can be rolled
+        const canRoll = this._canRollSkill();
+
         return {
             roll: {
                 label: game.i18n.localize('SR6.Roll'),
-                icon: '<i class="fas fa-dice-six"></i>'
+                icon: '<i class="fas fa-dice-six"></i>',
+                disabled: !canRoll,
+                title: !canRoll ? game.i18n.localize('SR6.Warnings.SkillCantBeRolled') : ''
             },
             cancel: {
                 label: game.i18n.localize('SR6.Dialogs.Common.Cancel')
             }
         };
+    }
+
+    /**
+     * Check if the skill in this test can be rolled
+     * @returns true if the skill can be rolled, false otherwise
+     */
+    _canRollSkill(): boolean {
+        const test = this.data.test;
+
+        // If this isn't a skill test, we can always roll
+        if (!test.data.action || !test.data.action.skill) return true;
+
+        // If we don't have an actor, we can't check the skill
+        if (!test.actor) return true;
+
+        // Get the skill from the actor
+        const skill = test.actor.getSkill(test.data.action.skill) ||
+                      test.actor.getSkill(test.data.action.skill, {byLabel: true});
+
+        // If we don't have a skill, we can't roll it
+        if (!skill) return false;
+
+        // Check if the skill can be rolled
+        // Make sure the rules object exists before accessing it
+        // @ts-ignore
+        if (game.shadowrun6e && game.shadowrun6e.rules && game.shadowrun6e.rules.SkillRules) {
+            // @ts-ignore
+            return game.shadowrun6e.rules.SkillRules.allowRoll(skill);
+        }
+
+        // If we can't access the rules, assume the skill can be rolled
+        return true;
     }
 
     /**

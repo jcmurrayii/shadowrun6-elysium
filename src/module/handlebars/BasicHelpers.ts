@@ -81,6 +81,11 @@ export const registerBasicHelpers = () => {
         if (v1 > v2) return options.fn(this);
         else return options.inverse(this);
     });
+
+    // if greater than or equal
+    Handlebars.registerHelper('gte', function (v1, v2) {
+        return Number(v1) >= Number(v2);
+    });
     // if less than
     Handlebars.registerHelper('iflt', function (v1, v2, options) {
         if (v1 < v2) return options.fn(this);

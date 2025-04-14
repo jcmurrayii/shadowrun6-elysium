@@ -2,11 +2,31 @@
 <div class="sr6 chat-card roll-card">
     <div class="card-content">
         <div class="left-side">
-            {{> 'systems/shadowrun6-elysium/dist/templates/rolls/parts/Damage.html'
-            name=(localize "SR6.IncomingDrain")
-            damage=test.data.drainDamage
-            showAP=true
-            }}
+            <div class="test-value">
+                <span class="value">{{localize "SR6.IncomingDrain"}}: </span>
+                <span class="value-result">
+                    <span class="button apply-damage"
+                      data-damage-value="{{test.data.drain}}"
+                      data-damage-type="stun"
+                      >
+                        {{#if test.data.drain}}{{test.data.drain}}{{else}}4{{/if}}S
+                    </span>
+                </span>
+            </div>
+        </div>
+        <div class="right-side">
+            {{#if test.data.ampUp}}
+            <div class="test-value">
+                <span class="value">Amp Up:</span>
+                <span class="value-result">{{test.data.ampUp}} (+{{test.data.ampUp}} damage)</span>
+            </div>
+            {{/if}}
+            {{#if test.data.increasedArea}}
+            <div class="test-value">
+                <span class="value">Increased Area:</span>
+                <span class="value-result">{{test.data.increasedArea}}</span>
+            </div>
+            {{/if}}
         </div>
     </div>
 </div>

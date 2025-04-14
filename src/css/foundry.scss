@@ -2,6 +2,7 @@
  * Rules related to FoundryVTT styling meant to not be limited to the system id.
  * Everything here will overwrite default Foundry Styling.
  */
+@use 'config' as *;
 
 /**
   * GENERAL ELEMENT STYLING

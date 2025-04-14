@@ -50,12 +50,13 @@ export class DataDefaults {
      * Damage data to hold everything around damaging actors.
      *
      * @param partialDamageData give partial DamageData fields to overwrite default values
+     * @param isDrain whether this damage is for drain (defaults to stun instead of physical)
      */
-    static damageData(partialDamageData: RecursivePartial<DamageData> = {}): DamageData {
+    static damageData(partialDamageData: RecursivePartial<DamageData> = {}, isDrain: boolean = false): DamageData {
         const data: DamageData = {
             type: {
-                base: 'physical',
-                value: 'physical',
+                base: isDrain ? 'stun' : 'physical',
+                value: isDrain ? 'stun' : 'physical',
             },
             element: {
                 base: '',
@@ -80,7 +81,36 @@ export class DataDefaults {
                 itemName: ''
             }
         }
-        return foundry.utils.mergeObject(data, partialDamageData) as DamageData;
+
+        // Create the merged damage data
+        const mergedData = foundry.utils.mergeObject(data, partialDamageData) as DamageData;
+
+        // Ensure the value property is set
+        if (mergedData.value === undefined) {
+            mergedData.value = mergedData.base;
+        }
+
+        // Ensure type values are set
+        if (!mergedData.type) {
+            mergedData.type = {
+                base: isDrain ? 'stun' : 'physical',
+                value: isDrain ? 'stun' : 'physical'
+            };
+        } else {
+            // Ensure type.base is set
+            if (!mergedData.type.base || mergedData.type.base === '') {
+                mergedData.type.base = isDrain ? 'stun' : 'physical';
+            }
+
+            // Ensure type.value is set
+            if (!mergedData.type.value || mergedData.type.value === '') {
+                mergedData.type.value = mergedData.type.base || (isDrain ? 'stun' : 'physical');
+            }
+        }
+
+        console.log('Shadowrun 6e | Created damage data:', mergedData);
+
+        return mergedData;
     }
 
     /**

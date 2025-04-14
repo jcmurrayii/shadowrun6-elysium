@@ -17,7 +17,7 @@ export class InitiativePrep {
         else {
             initiative.current = initiative.meatspace;
             initiative.perception = 'meatspace';
-        }        
+        }
 
         // Recalculate selected initiative to be sure.
         initiative.current.base.value = Helpers.calcTotal(initiative.current.base);
@@ -26,7 +26,43 @@ export class InitiativePrep {
         initiative.current.dice.value = Helpers.calcTotal(initiative.current.dice, {min: 0, max: 5});
         if (initiative.edge) initiative.current.dice.value = 5;
         initiative.current.dice.value = Math.min(5, initiative.current.dice.value); // maximum of 5d6 for initiative
-        initiative.current.dice.text = `${initiative.current.dice.value}d6`;        
+        initiative.current.dice.text = `${initiative.current.dice.value}d6`;
+
+        // Calculate available actions based on initiative dice
+        InitiativePrep.calculateAvailableActions(initiative);
+    }
+
+    /**
+     * Calculate available actions based on initiative dice
+     * Every character starts with one major and one minor action
+     * They gain an additional minor action for each die in their initiative roll
+     */
+    static calculateAvailableActions(initiative: Shadowrun.Initiative) {
+        // Initialize actions if not already present
+        if (!initiative.actions) {
+            initiative.actions = {
+                major: 1,
+                minor: 1,
+                free: 1
+            };
+        }
+
+        // Only calculate actions if they haven't been initialized yet
+        // This allows the resetActions method to take precedence
+        // We check if the actions object exists but is empty (undefined values)
+        if (initiative.actions.major === undefined || initiative.actions.minor === undefined || initiative.actions.free === undefined) {
+            // Every character starts with one major and one minor action
+            initiative.actions.major = 1;
+
+            // They gain an additional minor action for each die in their initiative roll
+            // Start with 1 minor action and add one for each initiative die
+            initiative.actions.minor = 1 + initiative.current.dice.value;
+
+            // Free actions are unlimited
+            initiative.actions.free = '∞';
+
+            console.log(`Shadowrun 6e | Initialized actions for character: Major: ${initiative.actions.major}, Minor: ${initiative.actions.minor}, Free: ${initiative.actions.free}`);
+        }
     }
 
     /**

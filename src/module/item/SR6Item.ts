@@ -295,6 +295,16 @@ export class SR6Item extends Item {
 
         if (!this.actor) return;
 
+        // Log the action type but don't spend it yet - actions will be spent when the test is submitted
+        const action = this.getAction();
+        console.log(`Shadowrun 6e | castAction for ${this.name} - Action:`, action);
+
+        if (action) {
+            console.log(`Shadowrun 6e | ${this.name} is a ${action.type} action`);
+        } else {
+            console.log(`Shadowrun 6e | ${this.name} has no action data`);
+        }
+
         const showDialog = !TestCreator.shouldHideDialog(event);
         const test = await TestCreator.fromItem(this, this.actor, { showDialog });
         if (!test) return;

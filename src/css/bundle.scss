@@ -1,19 +1,24 @@
-@import "node_modules/@yaireo/tagify/dist/tagify";
+// Use the modern @use rule instead of @import
+@use "node_modules/@yaireo/tagify/dist/tagify" as tagify;
 
-@import 'config';
-@import 'item';
-@import 'actor';
-@import 'chat';
-@import 'test';
-@import 'tagify';
-@import 'modifiers';
-@import 'modifiers-container';
-@import 'foundry';
-@import 'module';
-@import 'effect';
-@import 'folders';
-@import 'matrix-actions';
-@import 'legality';
+// Forward config to make its variables and mixins available to this file
+@use 'config' as *;
+
+// Use other SCSS files
+@use 'item';
+@use 'actor';
+@use 'chat';
+@use 'test';
+@use 'tagify' as local_tagify;
+@use 'modifiers';
+@use 'modifiers-container';
+@use 'foundry';
+@use 'module';
+@use 'effect';
+@use 'folders';
+@use 'matrix-actions';
+@use 'legality';
+@use 'number-spinner';
 
 @font-face {
     font-family: 'klavika-medium';

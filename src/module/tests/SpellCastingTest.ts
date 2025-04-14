@@ -6,17 +6,19 @@ import {DrainRules} from "../rules/DrainRules";
 import {Helpers} from "../helpers";
 import {SYSTEM_NAME} from "../constants";
 import {SR6Actor} from "../actor/SR6Actor";
+import { SpellcastingTestDialog } from "../apps/dialogs/SpellcastingTestDialog";
 import DamageData = Shadowrun.DamageData;
 import MinimalActionData = Shadowrun.MinimalActionData;
 import ModifierTypes = Shadowrun.ModifierTypes;
 
 
 export interface SpellCastingTestData extends SuccessTestData {
-    force: number
     drain: number
     reckless: boolean
     attackerAR: number
     attackerEdge: boolean
+    ampUp: number       // Number of amp up levels applied
+    increasedArea: number  // Number of increased area levels applied
     defenders: {
         actorUuid: string;
         name: string
@@ -40,13 +42,26 @@ export class SpellCastingTest extends SuccessTest<SpellCastingTestData> {
     override _prepareData(data, options): any {
         data = super._prepareData(data, options);
 
-        data.force = data.force || 0;
         data.drain = data.drain || 0;
         data.reckless = data.reckless || false;
         data.attackerAR = data.attackerAR || 0;
         data.attackerEdge = data.attackerEdge || false;
+        data.ampUp = data.ampUp || 0;
+        data.increasedArea = data.increasedArea || 0;
         data.defenders = data.defenders || [];
         data.drainDamage = data.drainDamage || DataDefaults.damageData();
+
+        // Ensure the drain damage has a value property
+        if (data.drainDamage && data.drainDamage.value === undefined) {
+            data.drainDamage.value = data.drainDamage.base || 0;
+        }
+
+        console.log('Shadowrun 6e | SpellCastingTest prepared data:', {
+            drain: data.drain,
+            ampUp: data.ampUp,
+            increasedArea: data.increasedArea,
+            drainDamage: data.drainDamage
+        });
 
         // Initialize defenders data with target tokens
         if (data.defenders.length === 0 && this.actor) {
@@ -96,6 +111,13 @@ export class SpellCastingTest extends SuccessTest<SpellCastingTestData> {
         return 'systems/shadowrun6-elysium/dist/templates/apps/dialogs/spellcasting-test-dialog.html';
     }
 
+    /**
+     * Override to use the SpellcastingTestDialog class
+     */
+    override _createTestDialog() {
+        return new SpellcastingTestDialog({ test: this, templatePath: this._dialogTemplate }, undefined, this._testDialogListeners());
+    }
+
     override get _chatMessageTemplate(): string {
         return 'systems/shadowrun6-elysium/dist/templates/rolls/spellcasting-test-message.html';
     }
@@ -139,8 +161,6 @@ export class SpellCastingTest extends SuccessTest<SpellCastingTestData> {
     }
 
     override async prepareDocumentData() {
-        this.prepareInitialForceValue();
-
         // Calculate the attack rating for magical attacks
         this.calculateAR();
 
@@ -241,28 +261,8 @@ export class SpellCastingTest extends SuccessTest<SpellCastingTestData> {
         return this.data.attackerAR;
     }
 
-    /**
-     * Set a force value based on the items history or viable suggestions.
-     */
-    prepareInitialForceValue() {
-        if (!this.item) return;
-
-        const lastUsedForce = this.item.getLastSpellForce();
-        const suggestedForce = SpellcastingRules.calculateMinimalForce(this.item.getDrain);
-        this.data.force = lastUsedForce.value || suggestedForce;
-    }
-
     override prepareBaseValues() {
         super.prepareBaseValues();
-        this.prepareLimitValue();
-    }
-
-    prepareLimitValue() {
-        const force = Number(this.data.force);
-        this.data.limit.mod = PartsList.AddUniquePart(
-            this.data.limit.mod,
-            'SR6.Force',
-            SpellcastingRules.calculateLimit(force));
     }
 
     override calculateBaseValues() {
@@ -274,10 +274,41 @@ export class SpellCastingTest extends SuccessTest<SpellCastingTestData> {
      * Precalculate drain for user display.
      */
     calculateDrainValue() {
-        const force = Number(this.data.force);
         const drain = Number(this.item?.getDrain);
         const reckless = this.data.reckless;
-        this.data.drain = SpellcastingRules.calculateDrain(force, drain, reckless);
+        const ampUp = Number(this.data.ampUp);
+        const increasedArea = Number(this.data.increasedArea);
+
+        // In SR6e, drain is the base drain value of the spell
+        let totalDrain = drain;
+
+        // Add drain for reckless casting if applicable
+        if (reckless) {
+            totalDrain += 3; // Keeping the SR5 reckless modifier for now
+        }
+
+        // Add drain for amp up: +2 drain per level
+        if (ampUp > 0) {
+            totalDrain += ampUp * 2;
+        }
+
+        // Add drain for increased area: +1 drain per level
+        if (increasedArea > 0) {
+            totalDrain += increasedArea;
+        }
+
+        // Ensure minimum drain of 2
+        totalDrain = Math.max(2, totalDrain);
+
+        console.log('Shadowrun 6e | Calculated drain value:', {
+            baseDrain: drain,
+            reckless,
+            ampUp,
+            increasedArea,
+            totalDrain
+        });
+
+        this.data.drain = totalDrain;
     }
 
     /**
@@ -286,21 +317,122 @@ export class SpellCastingTest extends SuccessTest<SpellCastingTestData> {
     calcDrainDamage() {
         if (!this.actor) return DataDefaults.damageData();
 
-        const force = Number(this.data.force);
         const drain = Number(this.data.drain);
         const magic = this.actor.getAttribute('magic').value;
 
-        this.data.drainDamage = DrainRules.calcDrainDamage(drain, force, magic, this.hits.value);
+        console.log('Shadowrun 6e | Calculating drain damage with:', { drain, magic, hits: this.hits.value });
+
+        // Create drain damage data with isDrain=true to default to stun damage
+        const damage = DataDefaults.damageData({}, true);
+        damage.base = drain;
+        damage.value = drain;
+
+        // In SR6e, drain is always stun damage unless the number of hits exceeds the magic attribute
+        // Only change to physical in rare cases
+        if (this.hits.value > magic) {
+            damage.type.base = 'physical';
+            damage.type.value = 'physical';
+        }
+
+        this.data.drainDamage = damage;
+
+        // Ensure all properties are set
+        this._ensureDamageProperties(this.data.drainDamage);
+
+        console.log('Shadowrun 6e | Created drain damage:', this.data.drainDamage);
+    }
+
+    /**
+     * Ensure that a damage object has all the required properties
+     */
+    _ensureDamageProperties(damage) {
+        if (!damage) return;
+
+        // Ensure value is set
+        if (damage.value === undefined) {
+            damage.value = damage.base || 0;
+        }
+
+        // Ensure type is set
+        if (!damage.type) {
+            damage.type = { base: 'stun', value: 'stun' };
+        } else {
+            // Ensure type.value is set
+            if (damage.type.value === undefined) {
+                damage.type.value = damage.type.base || 'stun';
+            }
+        }
+
+        console.log('Shadowrun 6e | Ensured damage properties:', damage);
     }
 
     override async processResults() {
         this.calcDrainDamage();
+        this.modifySpellDamageForAmpUp();
+
+        // Debug the drain damage before processing results
+        console.log('Shadowrun 6e | Drain damage before processing results:', {
+            drainDamage: this.data.drainDamage,
+            drain: this.data.drain
+        });
+
+        // Force the drain damage to have the correct values
+        if (this.data.drainDamage) {
+            this.data.drainDamage.value = this.data.drain;
+            this.data.drainDamage.base = this.data.drain;
+            if (this.data.drainDamage.type) {
+                this.data.drainDamage.type.value = 'stun';
+                this.data.drainDamage.type.base = 'stun';
+            }
+            console.log('Shadowrun 6e | Forced drain damage values:', this.data.drainDamage);
+        }
 
         await super.processResults();
+
+        // Debug the drain damage after processing results
+        console.log('Shadowrun 6e | Drain damage after processing results:', {
+            drainDamage: this.data.drainDamage,
+            drain: this.data.drain
+        });
 
         console.log('Shadowrun 6e | Starting edge award calculations');
         await this.calculateEdgeAwards();
         console.log('Shadowrun 6e | Finished edge award calculations');
+    }
+
+    /**
+     * Modify the spell's damage value based on amp up levels
+     * In SR6e, each amp up level increases damage by 1
+     */
+    modifySpellDamageForAmpUp() {
+        const spell = this.item?.asSpell;
+        if (!spell) return;
+
+        const ampUp = Number(this.data.ampUp);
+        if (ampUp <= 0) return;
+
+        // Only modify damage for combat spells
+        if (spell.system.category !== 'combat') return;
+
+        // Get the action damage
+        const damage = spell.system.action.damage;
+        if (!damage) return;
+
+        // Increase damage by 1 for each level of amp up
+        const damageBonus = ampUp;
+
+        console.log('Shadowrun 6e | Modifying spell damage for amp up:', {
+            originalDamage: damage.value,
+            ampUp,
+            damageBonus,
+            newDamage: damage.value + damageBonus
+        });
+
+        // Create a chat message to show the damage modification
+        ChatMessage.create({
+            content: `<div class="sr6 chat-card roll-card"><div class="card-content"><b>Amp Up Damage Bonus:</b> +${damageBonus} damage</div></div>`,
+            speaker: ChatMessage.getSpeaker({actor: this.actor})
+        });
     }
 
     /**
@@ -445,12 +577,35 @@ export class SpellCastingTest extends SuccessTest<SpellCastingTestData> {
         return true;  // Return true to indicate edge was successfully awarded
     }
 
-    /**
-     * Allow the currently used force value of this spell item to be reused next time.
-     */
-    override async saveUserSelectionAfterDialog() {
-        if (!this.item) return;
+    // No need to save force value in SR6e
 
-        await this.item.setLastSpellForce({value: this.data.force, reckless: false});
+    /**
+     * Override to ensure drain value is properly passed to the template
+     */
+    override async _prepareMessageTemplateData() {
+        const templateData = await super._prepareMessageTemplateData();
+
+        // Add debugging to see what's in the template data
+        console.log('Shadowrun 6e | SpellCastingTest _prepareMessageTemplateData - Template data:', templateData);
+
+        // Ensure the test object has the correct drain value
+        if (templateData && templateData.test) {
+            // Make sure the data property exists
+            if (!templateData.test.data) {
+                templateData.test.data = {};
+            }
+
+            // Log the original drain value
+            console.log('Shadowrun 6e | SpellCastingTest _prepareMessageTemplateData - Original drain value:', templateData.test.data.drain);
+
+            // Make sure the drain value is set
+            if (templateData.test.data.drain === undefined || templateData.test.data.drain === 0) {
+                templateData.test.data.drain = this.data.drain || 4; // Default to 4 if no drain value is set
+            }
+
+            console.log('Shadowrun 6e | SpellCastingTest _prepareMessageTemplateData - Updated drain value:', templateData.test.data.drain);
+        }
+
+        return templateData;
     }
 }

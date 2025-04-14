@@ -1,6 +1,7 @@
 /**
  * Rules around the value modifier pop up that's shown for Value style data structures like Attributes, Skills, etc.
  */
+@use 'config' as *;
 .sr6 .value {
     >.value-modifiers-container {
         display: none;

@@ -30,15 +30,65 @@ export class DrainTest extends SuccessTest<DrainTestData> {
 
         // Is this test part of a followup test chain? spell => drain
         if (data.against) {
-            data.incomingDrain = foundry.utils.duplicate(data.against.drainDamage);
+            console.log('Shadowrun 6e | DrainTest preparing data with against:', data.against);
+
+            // Create a new drain damage object with the correct values
+            const drainValue = data.against.drain || 0;
+            console.log('Shadowrun 6e | Drain value from against data:', drainValue);
+
+            data.incomingDrain = DataDefaults.damageData({
+                base: drainValue,
+                value: drainValue,
+                type: {
+                    base: 'stun',
+                    value: 'stun'
+                }
+            }, true);
+
+            console.log('Shadowrun 6e | Created new incoming drain:', data.incomingDrain);
+
             data.modifiedDrain = foundry.utils.duplicate(data.incomingDrain);
         // This test is part of either a standalone test or created with its own data (i.e. edge reroll).
         } else {
-            data.incomingDrain = data.incomingDrain ?? DataDefaults.damageData();
+            console.log('Shadowrun 6e | DrainTest preparing data without against');
+            data.incomingDrain = data.incomingDrain ?? DataDefaults.damageData({}, true);
             data.modifiedDrain = foundry.utils.duplicate(data.incomingDrain);
         }
 
+        // Ensure the damage objects have value properties
+        this._ensureDamageProperties(data.incomingDrain);
+        this._ensureDamageProperties(data.modifiedDrain);
+
+        console.log('Shadowrun 6e | DrainTest prepared data:', {
+            incomingDrain: data.incomingDrain,
+            modifiedDrain: data.modifiedDrain
+        });
+
         return data;
+    }
+
+    /**
+     * Ensure that a damage object has all the required properties
+     */
+    _ensureDamageProperties(damage) {
+        if (!damage) return;
+
+        // Ensure value is set
+        if (damage.value === undefined) {
+            damage.value = damage.base || 0;
+        }
+
+        // Ensure type is set
+        if (!damage.type) {
+            damage.type = { base: 'stun', value: 'stun' };
+        } else {
+            // Ensure type.value is set
+            if (damage.type.value === undefined) {
+                damage.type.value = damage.type.base || 'stun';
+            }
+        }
+
+        console.log('Shadowrun 6e | Ensured damage properties:', damage);
     }
 
     override get _dialogTemplate(): string {
@@ -47,6 +97,22 @@ export class DrainTest extends SuccessTest<DrainTestData> {
 
     override get _chatMessageTemplate(): string {
         return 'systems/shadowrun6-elysium/dist/templates/rolls/drain-test-message.html';
+    }
+
+    /**
+     * Override to add debugging for drain test message template data
+     */
+    override async _prepareMessageTemplateData() {
+        const templateData = await super._prepareMessageTemplateData();
+
+        console.log('Shadowrun 6e | DrainTest _prepareMessageTemplateData:', {
+            templateData,
+            incomingDrain: this.data.incomingDrain,
+            modifiedDrain: this.data.modifiedDrain,
+            testObject: templateData.test
+        });
+
+        return templateData;
     }
 
     static override _getDefaultTestAction(): Partial<MinimalActionData> {
@@ -119,6 +185,24 @@ export class DrainTest extends SuccessTest<DrainTestData> {
         // Don't use incomingDrain as it might have a user value override applied.
         this.data.modifiedDrain = DrainRules.modifyDrainDamage(this.data.modifiedDrain, this.hits.value);
 
+        console.log('Shadowrun 6e | Drain test modified drain:', this.data.modifiedDrain);
+
+        // Ensure both drain damage objects have all required properties
+        this._ensureDamageProperties(this.data.incomingDrain);
+        this._ensureDamageProperties(this.data.modifiedDrain);
+
+        // Debug the drain test data before processing results
+        console.log('Shadowrun 6e | Drain test data before processing results:', {
+            incomingDrain: this.data.incomingDrain,
+            modifiedDrain: this.data.modifiedDrain
+        });
+
         await super.processResults();
+
+        // Debug the drain test data after processing results
+        console.log('Shadowrun 6e | Drain test data after processing results:', {
+            incomingDrain: this.data.incomingDrain,
+            modifiedDrain: this.data.modifiedDrain
+        });
     }
 }

@@ -73,8 +73,11 @@ export class SR6Roll extends Roll {
 
     // TODO: Rework this to work with the complex formula of SuccessTest.formula (total counts all cs and cf)
     get hits(): number {
-        return this.sides.reduce((hits, result) => SR.die.success.includes(result) ? hits + 1 : hits,
-                                 0);
+        const calculatedHits = this.sides.reduce((hits, result) => SR.die.success.includes(result) ? hits + 1 : hits, 0);
+        console.log('Shadowrun 6e | SR6Roll calculating hits from sides:', this.sides);
+        console.log('Shadowrun 6e | SR6Roll success values are:', SR.die.success);
+        console.log('Shadowrun 6e | SR6Roll calculated hits:', calculatedHits);
+        return calculatedHits;
     }
 
     get glitches(): number {

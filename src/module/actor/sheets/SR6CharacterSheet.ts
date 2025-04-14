@@ -81,6 +81,43 @@ export class SR6CharacterSheet extends SR6BaseActorSheet {
     }
 
     /**
+     * Cache for matrix actions to avoid recalculating them every time
+     * @type {Object}
+     * @private
+     */
+    _matrixActionsCache = null;
+
+    /**
+     * Clear the matrix actions cache
+     * This should be called when items are added or removed
+     */
+    clearMatrixActionsCache() {
+        this._matrixActionsCache = null;
+        console.log('Shadowrun 6e | Matrix actions cache cleared');
+    }
+
+    /**
+     * Force a refresh of the character sheet
+     * This should be called when the actor's data changes
+     */
+    forceRefresh() {
+        console.log('Shadowrun 6e | Forcing refresh of character sheet');
+
+        // Get the latest data from the actor
+        const actor = game.actors.get(this.actor.id);
+        if (actor) {
+            console.log('Shadowrun 6e | Character sheet data before refresh:', {
+                sheetActions: this.actor.system.initiative.actions,
+                actorActions: actor.system.initiative.actions
+            });
+        }
+
+        // We can't directly set this.actor as it only has a getter
+        // Instead, we'll just re-render the sheet which will get the latest actor data
+        this.render(true);
+    }
+
+    /**
      * Separate matrix actions from regular actions
      * @param sheetData The data for the actor sheet
      * @private
@@ -93,7 +130,16 @@ export class SR6CharacterSheet extends SR6BaseActorSheet {
 
         // Get all actions
         const actions = sheetData.itemType.action || [];
-        console.log('SR6: Total actions before filtering:', actions.length);
+
+        // Check if we have a valid cache and the actor has the matrix actions flag set
+        const hasMatrixActions = this.actor.getFlag('shadowrun6-elysium', 'hasMatrixActions');
+        if (this._matrixActionsCache && hasMatrixActions) {
+            // Use the cached matrix actions
+            sheetData.matrixActions = this._matrixActionsCache.matrixActions;
+            sheetData.nonMatrixActions = this._matrixActionsCache.nonMatrixActions;
+            sheetData.itemType.action = this._matrixActionsCache.nonMatrixActions;
+            return;
+        }
 
         // Separate matrix actions from regular actions
         const matrixActions = [];
@@ -111,9 +157,6 @@ export class SR6CharacterSheet extends SR6BaseActorSheet {
             }
         }
 
-        console.log('SR6: Matrix actions:', matrixActions.length);
-        console.log('SR6: Non-matrix actions:', nonMatrixActions.length);
-
         // Add actions to sheet data
         sheetData.matrixActions = matrixActions;
         sheetData.nonMatrixActions = nonMatrixActions;
@@ -122,8 +165,13 @@ export class SR6CharacterSheet extends SR6BaseActorSheet {
         // This ensures matrix actions don't show up in the Actions tab
         sheetData.itemType.action = nonMatrixActions;
 
-        console.log('SR6: Actions after filtering:', sheetData.itemType.action.length);
-        console.log('SR6: Matrix actions array:', sheetData.matrixActions.length);
+        // Cache the matrix actions if the actor has the matrix actions flag set
+        if (hasMatrixActions) {
+            this._matrixActionsCache = {
+                matrixActions: [...matrixActions],
+                nonMatrixActions: [...nonMatrixActions]
+            };
+        }
     }
 
     /**
@@ -137,6 +185,28 @@ export class SR6CharacterSheet extends SR6BaseActorSheet {
         const key = `folders.${folderId}`;
         const state = this.actor.getFlag('shadowrun6-elysium', key);
         return state !== undefined ? state : defaultState;
+    }
+
+
+
+    /**
+     * Override the _onItemEdit method to clear the matrix actions cache
+     * @param event The click event
+     * @private
+     */
+    override async _onItemEdit(event) {
+        await super._onItemEdit(event);
+        this.clearMatrixActionsCache();
+    }
+
+    /**
+     * Override the _onItemDelete method to clear the matrix actions cache
+     * @param event The click event
+     * @private
+     */
+    override async _onItemDelete(event) {
+        await super._onItemDelete(event);
+        this.clearMatrixActionsCache();
     }
 
     /**
@@ -160,13 +230,20 @@ export class SR6CharacterSheet extends SR6BaseActorSheet {
 
     /**
      * Inject special case handling for call in action items, only usable by character actors.
+     * Also clears the matrix actions cache when items are created.
      */
     override async _onItemCreate(event) {
         event.preventDefault();
         const type = event.currentTarget.closest('.list-header').dataset.itemId;
 
-        if (type !== 'summoning' && type !== 'compilation') return await super._onItemCreate(event);
+        if (type !== 'summoning' && type !== 'compilation') {
+            await super._onItemCreate(event);
+            this.clearMatrixActionsCache();
+            return;
+        }
+
         await this._onCallInActionCreate(type);
+        this.clearMatrixActionsCache();
     }
 
     /**

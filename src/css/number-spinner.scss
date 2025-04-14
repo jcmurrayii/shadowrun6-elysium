@@ -1,0 +1,41 @@
+/* Number spinner styles */
+.number-spinner {
+  display: flex;
+  align-items: center;
+  
+  input[type="number"] {
+    text-align: center;
+    width: 50px;
+    margin: 0 5px;
+    
+    /* Remove the default number input arrows */
+    -moz-appearance: textfield;
+    
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+  
+  .number-spinner-button {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+    
+    &:active {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+  }
+}

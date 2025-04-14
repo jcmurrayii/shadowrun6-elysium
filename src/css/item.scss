@@ -1,4 +1,4 @@
-@import 'config';
+@use 'config' as *;
 .sr6.item {
     min-height: 484px;
     min-width: 600px;

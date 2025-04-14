@@ -9451,12 +9451,13 @@ var DataDefaults = class {
    * Damage data to hold everything around damaging actors.
    *
    * @param partialDamageData give partial DamageData fields to overwrite default values
+   * @param isDrain whether this damage is for drain (defaults to stun instead of physical)
    */
-  static damageData(partialDamageData = {}) {
+  static damageData(partialDamageData = {}, isDrain = false) {
     const data = {
       type: {
-        base: "physical",
-        value: "physical"
+        base: isDrain ? "stun" : "physical",
+        value: isDrain ? "stun" : "physical"
       },
       element: {
         base: "",
@@ -9481,7 +9482,25 @@ var DataDefaults = class {
         itemName: ""
       }
     };
-    return foundry.utils.mergeObject(data, partialDamageData);
+    const mergedData = foundry.utils.mergeObject(data, partialDamageData);
+    if (mergedData.value === void 0) {
+      mergedData.value = mergedData.base;
+    }
+    if (!mergedData.type) {
+      mergedData.type = {
+        base: isDrain ? "stun" : "physical",
+        value: isDrain ? "stun" : "physical"
+      };
+    } else {
+      if (!mergedData.type.base || mergedData.type.base === "") {
+        mergedData.type.base = isDrain ? "stun" : "physical";
+      }
+      if (!mergedData.type.value || mergedData.type.value === "") {
+        mergedData.type.value = mergedData.type.base || (isDrain ? "stun" : "physical");
+      }
+    }
+    console.log("Shadowrun 6e | Created damage data:", mergedData);
+    return mergedData;
   }
   /**
    * Armor data used within actor documents.
@@ -10360,10 +10379,11 @@ var SR6Roll = class extends Roll {
   }
   // TODO: Rework this to work with the complex formula of SuccessTest.formula (total counts all cs and cf)
   get hits() {
-    return this.sides.reduce(
-      (hits, result) => SR.die.success.includes(result) ? hits + 1 : hits,
-      0
-    );
+    const calculatedHits = this.sides.reduce((hits, result) => SR.die.success.includes(result) ? hits + 1 : hits, 0);
+    console.log("Shadowrun 6e | SR6Roll calculating hits from sides:", this.sides);
+    console.log("Shadowrun 6e | SR6Roll success values are:", SR.die.success);
+    console.log("Shadowrun 6e | SR6Roll calculated hits:", calculatedHits);
+    return calculatedHits;
   }
   get glitches() {
     return this.sides.reduce(
@@ -13926,15 +13946,33 @@ var TestDialog = class extends FormDialog {
    * Overwrite this method to provide dialog buttons.
    */
   get buttons() {
+    const canRoll = this._canRollSkill();
     return {
       roll: {
         label: game.i18n.localize("SR6.Roll"),
-        icon: '<i class="fas fa-dice-six"></i>'
+        icon: '<i class="fas fa-dice-six"></i>',
+        disabled: !canRoll,
+        title: !canRoll ? game.i18n.localize("SR6.Warnings.SkillCantBeRolled") : ""
       },
       cancel: {
         label: game.i18n.localize("SR6.Dialogs.Common.Cancel")
       }
     };
+  }
+  /**
+   * Check if the skill in this test can be rolled
+   * @returns true if the skill can be rolled, false otherwise
+   */
+  _canRollSkill() {
+    const test = this.data.test;
+    if (!test.data.action || !test.data.action.skill) return true;
+    if (!test.actor) return true;
+    const skill = test.actor.getSkill(test.data.action.skill) || test.actor.getSkill(test.data.action.skill, { byLabel: true });
+    if (!skill) return false;
+    if (game.shadowrun6e && game.shadowrun6e.rules && game.shadowrun6e.rules.SkillRules) {
+      return game.shadowrun6e.rules.SkillRules.allowRoll(skill);
+    }
+    return true;
   }
   /**
    * Callback for after the dialog has closed.
@@ -16939,9 +16977,13 @@ var SuccessTest = class _SuccessTest {
    */
   calculateHits() {
     const rollHits = this.usingManualRoll ? this.manualHits.value : this.rolls.reduce((hits, roll) => hits + roll.hits, 0);
+    console.log("Shadowrun 6e | Calculating hits from rolls:", this.rolls);
+    console.log("Shadowrun 6e | Roll hits calculated:", rollHits);
     this.hits.base = rollHits;
     this.hits.value = Helpers.calcTotal(this.hits, { min: 0 });
+    console.log("Shadowrun 6e | Hits after modifiers:", this.hits.value);
     this.hits.value = this.hasLimit ? Math.min(this.limit.value, this.hits.value) : this.hits.value;
+    console.log("Shadowrun 6e | Final hits value after limit:", this.hits.value);
     return this.hits;
   }
   get hits() {
@@ -16964,7 +17006,13 @@ var SuccessTest = class _SuccessTest {
   }
   // In the case we've added appended hits, we want to separately display the hits value and the appended hits (ie. "7 + 5" instead of "12")
   get displayHits() {
-    return this.hits.value - (this.appendedHits || 0);
+    console.log("Shadowrun 6e | Getting displayHits");
+    console.log("Shadowrun 6e | hits.value:", this.hits.value);
+    console.log("Shadowrun 6e | hits.base:", this.hits.base);
+    console.log("Shadowrun 6e | appendedHits:", this.appendedHits);
+    const result = this.hits.base;
+    console.log("Shadowrun 6e | displayHits result:", result);
+    return result;
   }
   // Hide dice pool and roll results as they are not relevant to the success of the test
   get autoSuccess() {
@@ -17241,6 +17289,29 @@ var SuccessTest = class _SuccessTest {
         return false;
       }
     }
+    if (this.data.action && this.data.action.type) {
+      if (!this.actor.system.initiative) {
+        console.log(`Shadowrun 6e | Actor ${this.actor.name} has no initiative data`);
+        return true;
+      }
+      const actions = this.actor.system.initiative.actions;
+      if (!actions) return true;
+      if (this.data.action.type === "major") {
+        if (actions.major < 1) {
+          ui.notifications?.warn(game.i18n.format("SR6.NoMajorActionsLeft", {
+            name: this.actor.name
+          }));
+          return false;
+        }
+      } else if (this.data.action.type === "minor") {
+        if (actions.minor < 1) {
+          ui.notifications?.warn(game.i18n.format("SR6.NoMinorActionsLeft", {
+            name: this.actor.name
+          }));
+          return false;
+        }
+      }
+    }
     return true;
   }
   /**
@@ -17252,6 +17323,25 @@ var SuccessTest = class _SuccessTest {
     if (!this.actor) return true;
     if (this.hasPushTheLimit || this.hasSecondChance) {
       await this.actor.useEdge();
+    }
+    if (this.data.action && this.data.action.type) {
+      if (this.data.action.type === "major") {
+        console.log(`Shadowrun 6e | Test is a major action, attempting to spend a major action for ${this.actor.name}`);
+        const success = await this.actor.spendMajorAction();
+        if (!success) {
+          console.log(`Shadowrun 6e | ${this.actor.name} has no major actions left, canceling test`);
+          return false;
+        }
+        console.log(`Shadowrun 6e | Successfully spent a major action for ${this.actor.name}`);
+      } else if (this.data.action.type === "minor") {
+        console.log(`Shadowrun 6e | Test is a minor action, attempting to spend a minor action for ${this.actor.name}`);
+        const success = await this.actor.spendMinorAction();
+        if (!success) {
+          console.log(`Shadowrun 6e | ${this.actor.name} has no minor actions left, canceling test`);
+          return false;
+        }
+        console.log(`Shadowrun 6e | Successfully spent a minor action for ${this.actor.name}`);
+      }
     }
     return true;
   }
@@ -17451,6 +17541,83 @@ var SuccessTest = class _SuccessTest {
   async afterFailure() {
   }
   /**
+   * Reroll a specified number of failures
+   * @param failuresToReroll The number of failures to reroll
+   */
+  async rerollFailures(failuresToReroll) {
+    console.log(`Shadowrun 6e | Rerolling ${failuresToReroll} failures for ${this.actor?.name || "unknown actor"}`);
+    console.log("Shadowrun 6e | Test data before reroll:", this.data);
+    console.log("Shadowrun 6e | Original rolls:", this.rolls);
+    if (!this.actor) {
+      console.warn("Shadowrun 6e | No actor found, but continuing with reroll");
+    }
+    if (this.data.rerolledFailures) {
+      console.warn("Shadowrun 6e | Cannot reroll failures: Already rerolled");
+      return this;
+    }
+    const totalFailures = this.rolls.reduce((failures, roll2) => {
+      const rollFailures = roll2.sides.filter((side) => !SR.die.success.includes(side)).length;
+      console.log(`Shadowrun 6e | Roll ${roll2.formula} has ${rollFailures} failures:`, roll2.sides);
+      return failures + rollFailures;
+    }, 0);
+    console.log(`Shadowrun 6e | Total failures found: ${totalFailures}`);
+    const actualFailuresToReroll = Math.min(failuresToReroll, totalFailures);
+    console.log(`Shadowrun 6e | Actual failures to reroll: ${actualFailuresToReroll}`);
+    if (actualFailuresToReroll <= 0) {
+      console.warn("Shadowrun 6e | No failures to reroll");
+      ui.notifications?.warn(game.i18n.localize("SR6.NoFailuresToReroll"));
+      return this;
+    }
+    const formula = this.buildFormula(actualFailuresToReroll, false);
+    console.log(`Shadowrun 6e | Creating new roll with formula: ${formula}`);
+    const roll = new SR6Roll(formula);
+    this.data.rerolledFailuresRolls = [roll];
+    this.data.rerolledFailuresCount = actualFailuresToReroll;
+    this.data.rerolledFailures = true;
+    console.log("Shadowrun 6e | Stored rerolled failures in test data");
+    this.rerolledFailuresRolls = [roll];
+    this.rerolledFailures = true;
+    this.rerolledFailuresCount = actualFailuresToReroll;
+    console.log("Shadowrun 6e | Added rerolled failures properties to test object");
+    if (!this.data.messageUuid && this.data.previousMessageId) {
+      this.data.messageUuid = this.data.previousMessageId;
+      console.log(`Shadowrun 6e | Using previousMessageId as messageUuid: ${this.data.messageUuid}`);
+    }
+    console.log("Shadowrun 6e | Evaluating rerolled failures roll...");
+    await roll.evaluate({ async: true });
+    console.log("Shadowrun 6e | Rerolled failures roll results:", roll.sides);
+    console.log("Shadowrun 6e | Rerolled failures roll hits:", roll.hits);
+    console.log("Shadowrun 6e | Rerolled failures roll total:", roll.total);
+    try {
+      if (game.dice3d) {
+        console.log("Shadowrun 6e | Showing DiceSoNice animation for rerolled failures");
+        await game.dice3d.showForRoll(roll, game.user, true, null, false);
+      }
+    } catch (error) {
+      console.error("Shadowrun 6e | Error showing DiceSoNice animation:", error);
+    }
+    const rerolledHits = roll.total;
+    this.rerolledFailuresHits = rerolledHits;
+    this.data.rerolledFailuresHits = rerolledHits;
+    console.log(`Shadowrun 6e | Rerolled failures produced ${rerolledHits} hits`);
+    this.rolls.push(roll);
+    console.log("Shadowrun 6e | Added rerolled failures roll to rolls array:", this.rolls);
+    this.calculateDerivedValues();
+    console.log("Shadowrun 6e | Recalculated derived values:", this.data.values);
+    this.data.rerolledFailuresRolls = [roll];
+    console.log("Shadowrun 6e | Ensured rerolledFailuresRolls is set in data:", this.data.rerolledFailuresRolls);
+    console.log("Shadowrun 6e | Saving rerolled failures to message:", this.data.messageUuid);
+    await this.saveToMessage();
+    if (this.data.messageUuid) {
+      const message = await fromUuid(this.data.messageUuid);
+      if (message) {
+        console.log("Shadowrun 6e | Re-rendering message:", message.id);
+        await message.render(true);
+      }
+    }
+    return this;
+  }
+  /**
    * Allow a test to determine if it's follow up tests should auto cast after test completion.
    *
    * This could be set to false to allow for tests to NOT have an immediate auto cast, due to
@@ -17554,15 +17721,97 @@ var SuccessTest = class _SuccessTest {
   async _prepareMessageTemplateData() {
     const linkedTokens = this.actor?.getActiveTokens(true) || [];
     const token = linkedTokens.length >= 1 ? linkedTokens[0] : void 0;
+    let actionType = "";
+    let initiativeTiming = "";
+    if (this.data.action && this.data.action.type) {
+      actionType = this.data.action.type;
+      initiativeTiming = this.data.action.initiative_timing || "none";
+    }
+    if (this.data.rerolledFailures) {
+      console.log("Shadowrun 6e | Preparing message template data with rerolled failures");
+      console.log("Shadowrun 6e | rerolledFailures:", this.data.rerolledFailures);
+      console.log("Shadowrun 6e | rerolledFailuresRolls:", this.data.rerolledFailuresRolls);
+      console.log("Shadowrun 6e | rerolledFailuresCount:", this.data.rerolledFailuresCount);
+      console.log("Shadowrun 6e | rerolledFailuresHits:", this.data.rerolledFailuresHits);
+    }
+    const message = this.data.messageUuid ? await fromUuid(this.data.messageUuid) : null;
+    if (this.data.rerolledFailures) {
+      console.log("Shadowrun 6e | Preparing message template data with rerolled failures");
+      console.log("Shadowrun 6e | rerolledFailures:", this.data.rerolledFailures);
+      console.log("Shadowrun 6e | rerolledFailuresRolls:", this.data.rerolledFailuresRolls);
+      console.log("Shadowrun 6e | rerolledFailuresCount:", this.data.rerolledFailuresCount);
+      console.log("Shadowrun 6e | rerolledFailuresHits:", this.data.rerolledFailuresHits);
+      console.log("Shadowrun 6e | this.rerolledFailures:", this.rerolledFailures);
+      console.log("Shadowrun 6e | this.rerolledFailuresRolls:", this.rerolledFailuresRolls);
+    }
+    console.log("Shadowrun 6e | Rolls in _prepareMessageTemplateData:", this.rolls);
+    if (this.data.rerolledFailuresRolls) {
+      console.log("Shadowrun 6e | Rerolled failures rolls:", this.data.rerolledFailuresRolls);
+    }
+    console.log("Shadowrun 6e | Test data in _prepareMessageTemplateData:", this.data);
+    const testObject = {
+      ...this.data,
+      // Add properties from the test instance
+      rolls: this.rolls,
+      rerolledFailures: this.data.rerolledFailures,
+      rerolledFailuresRolls: this.data.rerolledFailuresRolls ? this.data.rerolledFailuresRolls.map((roll) => ({
+        sides: roll.sides,
+        formula: roll.formula,
+        total: roll.total,
+        hits: roll.hits
+      })) : [],
+      rerolledFailuresCount: this.data.rerolledFailuresCount,
+      rerolledFailuresHits: this.data.rerolledFailuresHits,
+      // Add computed properties
+      displayHits: this.displayHits,
+      // Add raw hits from the roll for debugging
+      rawHits: this.hits.base,
+      // Debug the test data
+      debug_data: JSON.stringify(this.data),
+      pool: this.pool,
+      hits: this.hits,
+      threshold: this.threshold,
+      limit: this.limit,
+      netHits: this.netHits,
+      extendedHits: this.extendedHits,
+      glitches: this.glitches,
+      hasThreshold: this.hasThreshold,
+      hasLimit: this.hasLimit,
+      canSucceed: this.canSucceed,
+      canFail: this.canFail,
+      success: this.success,
+      failure: this.failure,
+      glitched: this.glitched,
+      criticalGlitched: this.criticalGlitched,
+      showSuccessLabel: this.showSuccessLabel,
+      successLabel: this.successLabel,
+      failureLabel: this.failureLabel,
+      usingManualRoll: this.usingManualRoll,
+      hasAction: this.hasAction,
+      code: this.code,
+      extended: this.extended,
+      opposing: this.opposing,
+      opposed: this.opposed,
+      autoSuccess: this.autoSuccess
+    };
     return {
       title: this.data.title,
-      test: this,
+      test: testObject,
+      // Add isGM flag to control visibility of dice pools and rolls
+      isGM: game.user.isGM,
       // Note: While ChatData uses ids, this uses full documents.
       speaker: {
         actor: this.actor,
         token
       },
       item: this.item,
+      // Add the message for the reroll button
+      message,
+      // Add action type and initiative timing information
+      actionType,
+      actionTypeLabel: actionType ? game.i18n.localize(SR6.actionTypes[actionType]) : "",
+      initiativeTiming,
+      initiativeTimingLabel: initiativeTiming ? game.i18n.localize(SR6.initiativeTiming[initiativeTiming]) : "",
       opposedActions: this._prepareOpposedActionsTemplateData(),
       followupActions: this._prepareFollowupActionsTemplateData(),
       resultActions: this._prepareResultActionsTemplateData(),
@@ -17689,9 +17938,37 @@ var SuccessTest = class _SuccessTest {
    * @param uuid
    */
   async saveToMessage(uuid = this.data.messageUuid) {
-    if (!uuid) return;
+    if (!uuid) {
+      console.warn("Shadowrun 6e | Cannot save to message: No message UUID");
+      const chatMessage = $(".chat-message.selected");
+      if (chatMessage.length > 0) {
+        const messageId = chatMessage.data("messageId");
+        if (messageId) {
+          uuid = `ChatMessage.${messageId}`;
+          console.log(`Shadowrun 6e | Found message ID from selected chat message: ${messageId}`);
+          this.data.messageUuid = uuid;
+        }
+      }
+      if (!uuid) return;
+    }
+    console.log(`Shadowrun 6e | Saving test to message: ${uuid}`);
     const message = await fromUuid(uuid);
-    await message?.setFlag(SYSTEM_NAME, FLAGS.Test, this.toJSON());
+    if (!message) {
+      console.warn(`Shadowrun 6e | Cannot save to message: Message not found for UUID ${uuid}`);
+      return;
+    }
+    if (this.data.rerolledFailures) {
+      console.log("Shadowrun 6e | Test data before saving to message:");
+      console.log("Shadowrun 6e | rerolledFailures:", this.data.rerolledFailures);
+      console.log("Shadowrun 6e | rerolledFailuresRolls:", this.data.rerolledFailuresRolls);
+      console.log("Shadowrun 6e | rerolledFailuresCount:", this.data.rerolledFailuresCount);
+      console.log("Shadowrun 6e | rerolledFailuresHits:", this.data.rerolledFailuresHits);
+    }
+    const testData = this.toJSON();
+    console.log("Shadowrun 6e | Test data to save:", testData);
+    await message.setFlag(SYSTEM_NAME, FLAGS.Test, testData);
+    console.log("Shadowrun 6e | Test saved to message");
+    message.render(true);
   }
   /**
    * Register listeners for ChatMessage html created by a SuccessTest.
@@ -17710,6 +17987,7 @@ var SuccessTest = class _SuccessTest {
     html.find(".result-action").on("click", this._castResultAction);
     html.find(".chat-select-link").on("click", this._selectSceneToken);
     html.find(".test-action").on("click", this._castTestAction);
+    html.find(".reroll-failures").on("click", this._rerollFailures);
     DamageApplicationFlow.handleRenderChatMessage(message, html, data);
     await GmOnlyMessageContentFlow.chatMessageListeners(message, html, data);
   }
@@ -17742,6 +18020,81 @@ var SuccessTest = class _SuccessTest {
     const item = await fromUuid(uuid);
     if (!item) return console.error("Shadowrun 6e | Item doesn't exist for uuid", uuid);
     item.castAction(event);
+  }
+  /**
+   * Handle the reroll failures button click
+   * @param event The click event
+   */
+  static async _rerollFailures(event) {
+    event.preventDefault();
+    console.log("Shadowrun 6e | Reroll failures button clicked");
+    const button = $(event.currentTarget);
+    const chatMessage = button.closest(".chat-message");
+    console.log("Shadowrun 6e | Chat message element:", chatMessage);
+    const messageId = chatMessage.data("messageId");
+    console.log(`Shadowrun 6e | Message ID: ${messageId}`);
+    if (!messageId) {
+      console.error("Shadowrun 6e | No message ID found");
+      ui.notifications?.error(game.i18n.localize("SR6.Errors.NoMessageId"));
+      return;
+    }
+    console.log(`Shadowrun 6e | Getting test from message: ${messageId}`);
+    const test = await TestCreator.fromMessage(messageId);
+    console.log("Shadowrun 6e | Test from message:", test);
+    if (!test) {
+      console.error("Shadowrun 6e | No test found in message");
+      ui.notifications?.error(game.i18n.localize("SR6.Errors.NoTestFound"));
+      return;
+    }
+    console.log("Shadowrun 6e | Counting failures in rolls:", test.rolls);
+    const totalFailures = test.rolls.reduce((failures, roll) => {
+      const rollFailures = roll.sides.filter((side) => !SR.die.success.includes(side)).length;
+      console.log(`Shadowrun 6e | Roll ${roll.formula} has ${rollFailures} failures:`, roll.sides);
+      return failures + rollFailures;
+    }, 0);
+    console.log(`Shadowrun 6e | Total failures found: ${totalFailures}`);
+    if (totalFailures <= 0) {
+      console.warn("Shadowrun 6e | No failures to reroll");
+      ui.notifications?.warn(game.i18n.localize("SR6.NoFailuresToReroll"));
+      return;
+    }
+    const content = `
+            <p>${game.i18n.localize("SR6.EnterNumberOfFailuresToReroll")}</p>
+            <div class="form-group">
+                <label>${game.i18n.localize("SR6.NumberOfFailuresToReroll")}</label>
+                <input type="number" name="failures" value="${totalFailures}" min="1" max="${totalFailures}" />
+            </div>
+            <p class="note">${game.i18n.format("SR6.TotalFailuresFound", { count: totalFailures })}</p>
+        `;
+    const dialog = new Dialog({
+      title: game.i18n.localize("SR6.RerollFailures"),
+      content,
+      buttons: {
+        reroll: {
+          label: game.i18n.localize("SR6.Reroll"),
+          callback: /* @__PURE__ */ __name(async (html) => {
+            const input = html.find('input[name="failures"]');
+            const inputValue = input.val();
+            console.log(`Shadowrun 6e | Input value: ${inputValue}`);
+            const failures = parseInt(inputValue) || 0;
+            console.log(`Shadowrun 6e | Parsed failures: ${failures}`);
+            if (failures <= 0) {
+              console.warn("Shadowrun 6e | No failures to reroll from input");
+              ui.notifications?.warn(game.i18n.localize("SR6.NoFailuresToReroll"));
+              return;
+            }
+            console.log(`Shadowrun 6e | Calling rerollFailures with ${failures} failures`);
+            await test.rerollFailures(failures);
+            console.log("Shadowrun 6e | Reroll complete");
+          }, "callback")
+        },
+        cancel: {
+          label: game.i18n.localize("SR6.Cancel")
+        }
+      },
+      default: "reroll"
+    });
+    dialog.render(true);
   }
   static async chatLogListeners(chatLog, html, data) {
     html.find(".chat-message").each(async (index, element) => {
@@ -19686,6 +20039,13 @@ var SR6Item = class _SR6Item extends Item {
     const dontRollTest = TestCreator.shouldPostItemDescription(event) || !this.hasRoll;
     if (dontRollTest) return await this.postItemCard();
     if (!this.actor) return;
+    const action = this.getAction();
+    console.log(`Shadowrun 6e | castAction for ${this.name} - Action:`, action);
+    if (action) {
+      console.log(`Shadowrun 6e | ${this.name} is a ${action.type} action`);
+    } else {
+      console.log(`Shadowrun 6e | ${this.name} has no action data`);
+    }
     const showDialog = !TestCreator.shouldHideDialog(event);
     const test = await TestCreator.fromItem(this, this.actor, { showDialog });
     if (!test) return;
@@ -20752,7 +21112,7 @@ var SR6Item = class _SR6Item extends Item {
 };
 
 // src/module/actor/prep/functions/InitiativePrep.ts
-var InitiativePrep = class {
+var InitiativePrep = class _InitiativePrep {
   static {
     __name(this, "InitiativePrep");
   }
@@ -20773,6 +21133,27 @@ var InitiativePrep = class {
     if (initiative.edge) initiative.current.dice.value = 5;
     initiative.current.dice.value = Math.min(5, initiative.current.dice.value);
     initiative.current.dice.text = `${initiative.current.dice.value}d6`;
+    _InitiativePrep.calculateAvailableActions(initiative);
+  }
+  /**
+   * Calculate available actions based on initiative dice
+   * Every character starts with one major and one minor action
+   * They gain an additional minor action for each die in their initiative roll
+   */
+  static calculateAvailableActions(initiative) {
+    if (!initiative.actions) {
+      initiative.actions = {
+        major: 1,
+        minor: 1,
+        free: 1
+      };
+    }
+    if (initiative.actions.major === void 0 || initiative.actions.minor === void 0 || initiative.actions.free === void 0) {
+      initiative.actions.major = 1;
+      initiative.actions.minor = 1 + initiative.current.dice.value;
+      initiative.actions.free = "\u221E";
+      console.log(`Shadowrun 6e | Initialized actions for character: Major: ${initiative.actions.major}, Minor: ${initiative.actions.minor}, Free: ${initiative.actions.free}`);
+    }
   }
   /**
    * Physical initiative
@@ -21260,10 +21641,10 @@ var MovementPrep = class {
     __name(this, "MovementPrep");
   }
   static prepareMovement(system) {
-    const { attributes, modifiers } = system;
+    const { modifiers } = system;
     const movement = system.movement;
-    movement.walk.value = attributes.agility.value * (2 + Number(modifiers["walk"])) + new PartsList(movement.walk.mod).total;
-    movement.run.value = attributes.agility.value * (4 + Number(modifiers["run"])) + new PartsList(movement.run.mod).total;
+    movement.walk.value = 10 + Number(modifiers["walk"]) + new PartsList(movement.walk.mod).total;
+    movement.run.value = 15 + Number(modifiers["run"]) + new PartsList(movement.run.mod).total;
   }
 };
 
@@ -22910,6 +23291,15 @@ var SR6Actor = class _SR6Actor extends Actor {
   // TODO: foundry-vtt-types v10. Allows for {system: ...} to be given without type error
   constructor(data, context) {
     super(data, context);
+    /**
+     * Cache for armor calculations to avoid recalculating unnecessarily
+     * @type {Object}
+     * @private
+     */
+    this._armorCache = {
+      timestamp: 0,
+      equipmentHash: ""
+    };
     // This is the default inventory name and label for when no other inventory has been created.
     this.defaultInventory = {
       name: "Carried",
@@ -22930,6 +23320,36 @@ var SR6Actor = class _SR6Actor extends Actor {
   }
   static {
     __name(this, "SR6Actor");
+  }
+  /**
+   * Hook into item creation to invalidate armor cache
+   * @override
+   */
+  async _onCreateEmbeddedDocuments(embeddedName, documents, result, options, userId) {
+    await super._onCreateEmbeddedDocuments(embeddedName, documents, result, options, userId);
+    if (embeddedName === "Item" && documents.some((doc) => doc.type === "armor" || doc.type === "equipment")) {
+      this.invalidateArmorCache();
+    }
+  }
+  /**
+   * Hook into item update to invalidate armor cache
+   * @override
+   */
+  async _onUpdateEmbeddedDocuments(embeddedName, documents, result, options, userId) {
+    await super._onUpdateEmbeddedDocuments(embeddedName, documents, result, options, userId);
+    if (embeddedName === "Item" && documents.some((doc) => doc.type === "armor" || doc.type === "equipment")) {
+      this.invalidateArmorCache();
+    }
+  }
+  /**
+   * Hook into item deletion to invalidate armor cache
+   * @override
+   */
+  async _onDeleteEmbeddedDocuments(embeddedName, documents, result, options, userId) {
+    await super._onDeleteEmbeddedDocuments(embeddedName, documents, result, options, userId);
+    if (embeddedName === "Item" && documents.some((doc) => doc.type === "armor" || doc.type === "equipment")) {
+      this.invalidateArmorCache();
+    }
   }
   getOverwatchScore() {
     const os = this.getFlag(SYSTEM_NAME, "overwatchScore");
@@ -23069,7 +23489,10 @@ var SR6Actor = class _SR6Actor extends Actor {
         break;
     }
     if (game.user?.isGM && this.isOwner && (this.isCharacter() || this.isSprite() || this.isIC())) {
-      setTimeout(() => this.ensureMatrixActions(), 500);
+      const hasMatrixActions = this.getFlag("shadowrun6-elysium", "hasMatrixActions");
+      if (!hasMatrixActions) {
+        setTimeout(() => this.ensureMatrixActions(), 500);
+      }
     }
   }
   /**
@@ -23171,12 +23594,75 @@ var SR6Actor = class _SR6Actor extends Actor {
     return "armor" in this.system;
   }
   /**
+   * Generate a hash of the actor's equipped armor items
+   * This is used to determine if the armor cache is still valid
+   * @returns {string} A hash of the actor's equipped armor items
+   * @private
+   */
+  _generateEquipmentHash() {
+    const equippedArmor = this.items.filter((item) => item.type === "armor" || item.type === "equipment").filter((item) => item.system.technology?.equipped).map((item) => ({
+      id: item.id,
+      name: item.name,
+      type: item.type,
+      equipped: item.system.technology?.equipped,
+      dr: item.system.armor?.defense_rating?.value || 0
+    }));
+    return JSON.stringify(equippedArmor);
+  }
+  /**
+   * Check if the armor cache is still valid
+   * @returns {boolean} True if the cache is valid, false otherwise
+   * @private
+   */
+  _isArmorCacheValid() {
+    if (!this._armorCache.armor) return false;
+    const currentHash = this._generateEquipmentHash();
+    return this._armorCache.equipmentHash === currentHash;
+  }
+  /**
+   * Invalidate the armor cache
+   * This should be called when equipment changes
+   */
+  invalidateArmorCache() {
+    console.log(`Shadowrun 6e | Invalidating armor cache for ${this.name}`);
+    this._armorCache = {
+      timestamp: 0,
+      equipmentHash: ""
+    };
+  }
+  /**
    * Return armor worn by this actor.
    *
    * @param damage If given will be applied to the armor to get modified armor.
    * @returns Armor or modified armor.
    */
   getArmor(damage) {
+    if (damage) {
+      return this._calculateArmor(damage);
+    }
+    if (this._isArmorCacheValid()) {
+      console.log(`Shadowrun 6e | Using cached armor for ${this.name}`);
+      return foundry.utils.duplicate(this._armorCache.armor);
+    }
+    const armor3 = this._calculateArmor();
+    this._armorCache = {
+      armor: foundry.utils.duplicate(armor3),
+      timestamp: Date.now(),
+      equipmentHash: this._generateEquipmentHash()
+    };
+    console.log(`Shadowrun 6e | Cached armor for ${this.name}:`, this._armorCache);
+    return armor3;
+  }
+  /**
+   * Calculate the armor worn by this actor.
+   * This is the actual calculation method, while getArmor() handles caching.
+   *
+   * @param damage If given will be applied to the armor to get modified armor.
+   * @returns Armor or modified armor.
+   * @private
+   */
+  _calculateArmor(damage) {
+    console.log(`Shadowrun 6e | Calculating armor for ${this.name}`);
     const armor3 = "armor" in this.system ? foundry.utils.duplicate(this.system.armor) : DataDefaults.actorArmor();
     damage = damage || DataDefaults.damageData();
     Helpers.calcTotal(damage);
@@ -24201,12 +24687,7 @@ var SR6Actor = class _SR6Actor extends Actor {
     if (!damage.ap?.value) {
       return this.getArmor();
     }
-    const modified = foundry.utils.duplicate(this.getArmor());
-    if (modified) {
-      modified.mod = PartsList.AddUniquePart(modified.mod, "SR6.DV", damage.ap.value);
-      modified.value = Helpers.calcTotal(modified, { min: 0 });
-    }
-    return modified;
+    return this._calculateArmor(damage);
   }
   /** Reduce the initiative of the actor in the currently open / selected combat.
    * Should a tokens actor be in multiple combats it will also only affect the currently open combat,
@@ -24631,6 +25112,199 @@ var SR6Actor = class _SR6Actor extends Actor {
     }
     if (this.isMatrixActor) await this.setMatrixDamage(0);
     if (updateData) await this.update(updateData);
+    await this.resetActions();
+  }
+  /**
+   * Reset the actor's actions for a new combat round
+   */
+  async resetActions() {
+    if (!this.system.initiative) return;
+    if (!this.system.initiative.actions) {
+      await this.update({
+        "system.initiative.actions": {}
+      });
+    }
+    const initiativeDice = this.system.initiative?.current?.dice?.value || 0;
+    const majorCount = 1;
+    const minorCount = 1 + initiativeDice;
+    const freeCount = "\u221E";
+    console.log("Shadowrun 6e | Reset action values:", {
+      major: majorCount,
+      minor: minorCount,
+      free: freeCount
+    });
+    await this.update({
+      "system.initiative.actions.major": majorCount,
+      "system.initiative.actions.minor": minorCount,
+      "system.initiative.actions.free": freeCount
+    });
+    console.log(`Shadowrun 6e | Reset actions for ${this.name}: Major: ${majorCount}, Minor: ${minorCount}, Free: ${freeCount}`);
+    this.forceRefreshSheets();
+  }
+  /**
+   * Convert 4 minor actions into 1 major action
+   * If a player has 4 or more unspent minor actions, they may convert 4 minor actions into a major action (for the round)
+   */
+  async convertMinorToMajorAction() {
+    console.log(`Shadowrun 6e | Converting minor actions to major action for ${this.name} (${this.id})`);
+    if (!this.system.initiative) {
+      console.log(`Shadowrun 6e | Actor ${this.name} has no initiative data`);
+      return;
+    }
+    if (!this.system.initiative.actions) {
+      console.log(`Shadowrun 6e | Actor ${this.name} has no actions data, initializing`);
+      await this.update({
+        "system.initiative.actions": {}
+      });
+      await this.resetActions();
+      return;
+    }
+    const actions = this.system.initiative.actions;
+    console.log(`Shadowrun 6e | Current actions for ${this.name}:`, actions);
+    if (actions.minor < 4) {
+      ui.notifications?.warn(game.i18n.format("SR6.NotEnoughMinorActions", {
+        name: this.name,
+        count: actions.minor
+      }));
+      return;
+    }
+    const checkActor = game.actors.get(this.id);
+    if (checkActor && checkActor.system.initiative && checkActor.system.initiative.actions) {
+      const dbMinorActions = checkActor.system.initiative.actions.minor;
+      if (dbMinorActions < 4) {
+        ui.notifications?.warn(game.i18n.format("SR6.NotEnoughMinorActions", {
+          name: this.name,
+          count: dbMinorActions
+        }));
+        return;
+      }
+    }
+    const majorCount = Number(actions.major) + 1;
+    const minorCount = Number(actions.minor) - 4;
+    console.log("Shadowrun 6e | Action conversion values:", {
+      originalMajor: actions.major,
+      originalMinor: actions.minor,
+      newMajor: majorCount,
+      newMinor: minorCount
+    });
+    const newActions = {
+      major: majorCount,
+      minor: minorCount,
+      free: this.system.initiative.actions.free
+    };
+    console.log(`Shadowrun 6e | Updating actions for ${this.name} (${this.id}):`, newActions);
+    try {
+      console.log(`Shadowrun 6e | Using direct update approach for ${this.name}`);
+      const actor = game.actors.get(this.id);
+      if (!actor) {
+        console.error(`Shadowrun 6e | Could not find actor ${this.name} (${this.id}) in game.actors collection`);
+        return;
+      }
+      console.log(`Shadowrun 6e | Actions before update for ${this.name}:`, {
+        major: actor.system.initiative.actions.major,
+        minor: actor.system.initiative.actions.minor,
+        free: actor.system.initiative.actions.free
+      });
+      const updateData = {
+        "system.initiative.actions": {
+          major: majorCount,
+          minor: minorCount,
+          free: actor.system.initiative.actions.free
+        }
+      };
+      console.log(`Shadowrun 6e | Update data for ${this.name}:`, updateData);
+      await actor.update(updateData);
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      actor.system.initiative.actions.major = majorCount;
+      actor.system.initiative.actions.minor = minorCount;
+      console.log(`Shadowrun 6e | Actions after direct update for ${this.name}:`, {
+        major: actor.system.initiative.actions.major,
+        minor: actor.system.initiative.actions.minor,
+        free: actor.system.initiative.actions.free
+      });
+      actor.forceRefreshSheets();
+      setTimeout(() => {
+        const refreshActor = game.actors.get(this.id);
+        if (refreshActor) {
+          refreshActor.forceRefreshSheets();
+          console.log(`Shadowrun 6e | Forced delayed refresh of ${Object.values(refreshActor.apps).length} sheets for ${refreshActor.name}`);
+        }
+      }, 500);
+      console.log(`Shadowrun 6e | Forced refresh of ${Object.values(actor.apps).length} sheets for ${this.name}`);
+    } catch (error) {
+      console.error(`Shadowrun 6e | Error updating actions for ${this.name}:`, error);
+      console.log(`Shadowrun 6e | Trying direct data modification after error for ${this.name}`);
+      if (this.system.initiative && this.system.initiative.actions) {
+        this.system.initiative.actions.major = majorCount;
+        this.system.initiative.actions.minor = minorCount;
+        this.forceRefreshSheets();
+        console.log(`Shadowrun 6e | Actions after direct modification for ${this.name}:`, this.system.initiative.actions);
+      }
+    }
+    const verifyActor = game.actors.get(this.id);
+    if (verifyActor) {
+      const actorMajor = verifyActor.system.initiative.actions.major;
+      const actorMinor = verifyActor.system.initiative.actions.minor;
+      console.log(`Shadowrun 6e | Final verification from game.actors collection for ${this.name}:`, {
+        major: actorMajor,
+        minor: actorMinor,
+        expectedMajor: majorCount,
+        expectedMinor: minorCount
+      });
+      if (actorMajor !== majorCount || actorMinor !== minorCount) {
+        console.error(`Shadowrun 6e | Values don't match expected values! Forcing direct update.`);
+        verifyActor.system.initiative.actions.major = majorCount;
+        verifyActor.system.initiative.actions.minor = minorCount;
+        verifyActor.forceRefreshSheets();
+      }
+      ui.notifications?.info(game.i18n.format("SR6.ConvertedActionsWithValues", {
+        name: this.name,
+        major: majorCount,
+        minor: minorCount
+      }));
+      console.log(`Shadowrun 6e | Converted 4 minor actions to 1 major action for ${this.name}: Major: ${majorCount}, Minor: ${minorCount}`);
+    } else {
+      const currentMajor = this.system.initiative.actions.major;
+      const currentMinor = this.system.initiative.actions.minor;
+      ui.notifications?.info(game.i18n.format("SR6.ConvertedActionsWithValues", {
+        name: this.name,
+        major: majorCount,
+        minor: minorCount
+      }));
+      console.log(`Shadowrun 6e | Converted 4 minor actions to 1 major action for ${this.name}: Major: ${majorCount}, Minor: ${minorCount}`);
+    }
+    this.forceRefreshSheets();
+    console.log(`Shadowrun 6e | Forced refresh of ${Object.values(this.apps).length} sheets for ${this.name}`);
+  }
+  /**
+   * Reset the matrix actions flag
+   * This will force the system to recalculate whether the actor has matrix actions
+   */
+  async resetMatrixActionsFlag() {
+    await this.unsetFlag("shadowrun6-elysium", "hasMatrixActions");
+    console.log(`Shadowrun 6e | Reset matrix actions flag for ${this.name}`);
+  }
+  /**
+   * Find and refresh all token sheets for this actor
+   * This is needed because token sheets are not automatically refreshed when the actor is updated
+   */
+  refreshTokenSheets() {
+    console.log(`Shadowrun 6e | Refreshing token sheets for ${this.name}`);
+    const tokens = this.getActiveTokens();
+    console.log(`Shadowrun 6e | Found ${tokens.length} tokens for ${this.name}`);
+    for (const token of tokens) {
+      if (token.refresh) token.refresh();
+      if (token.sheet && token.sheet.rendered) {
+        token.sheet.render(true);
+        console.log(`Shadowrun 6e | Refreshed token sheet for ${token.name}`);
+      }
+    }
+    for (const [id, app] of Object.entries(ui.windows)) {
+      if (app.token && tokens.some((t2) => t2.id === app.token.id)) {
+        app.render(true);
+        console.log(`Shadowrun 6e | Refreshed token sheet ${id} for ${app.token.name}`);
+      }
+    }
   }
   /**
    * Ensures that the actor has access to all matrix actions from the matrix-actions compendium.
@@ -24640,6 +25314,11 @@ var SR6Actor = class _SR6Actor extends Actor {
    */
   async ensureMatrixActions() {
     console.log(`Shadowrun 6e | Ensuring matrix actions for actor ${this.name} (${this.id})`);
+    const hasMatrixActions = this.getFlag("shadowrun6-elysium", "hasMatrixActions");
+    if (hasMatrixActions) {
+      console.log(`Shadowrun 6e | ${this.name} already has matrix actions flag set`);
+      return;
+    }
     const matrixPack = game.packs.get("shadowrun6-elysium.matrix-actions");
     if (!matrixPack) {
       console.error("Shadowrun 6e | Matrix Actions compendium not found");
@@ -24655,6 +25334,7 @@ var SR6Actor = class _SR6Actor extends Actor {
     );
     if (actionsToAdd.length === 0) {
       console.log(`Shadowrun 6e | ${this.name} already has all matrix actions`);
+      await this.setFlag("shadowrun6-elysium", "hasMatrixActions", true);
       return;
     }
     await this.createEmbeddedDocuments(
@@ -24662,11 +25342,143 @@ var SR6Actor = class _SR6Actor extends Actor {
       actionsToAdd.map((a2) => a2.toObject())
     );
     console.log(`Shadowrun 6e | Added ${actionsToAdd.length} matrix actions to ${this.name}`);
+    await this.setFlag("shadowrun6-elysium", "hasMatrixActions", true);
   }
   async newSceneSetup() {
     const updateData = {};
     updateData["system.attributes.edge.uses"] = this.getEdge().value;
     if (updateData) await this.update(updateData);
+  }
+  /**
+   * Spend a major action
+   * This should be called whenever a character performs an action that costs a major action
+   * @returns True if the action was spent successfully, false if there were no major actions left
+   */
+  async spendMajorAction() {
+    console.log(`Shadowrun 6e | Spending major action for ${this.name}`);
+    if (!this.system.initiative) {
+      console.log(`Shadowrun 6e | Actor ${this.name} has no initiative data`);
+      return false;
+    }
+    if (!this.system.initiative.actions) {
+      console.log(`Shadowrun 6e | Actor ${this.name} has no actions data, initializing`);
+      await this.update({
+        "system.initiative.actions": {}
+      });
+      await this.resetActions();
+      return false;
+    }
+    const actions = this.system.initiative.actions;
+    console.log(`Shadowrun 6e | Current actions for ${this.name}:`, actions);
+    if (actions.major < 1) {
+      ui.notifications?.warn(game.i18n.format("SR6.NoMajorActionsLeft", {
+        name: this.name
+      }));
+      return false;
+    }
+    const majorCount = Number(actions.major) - 1;
+    const willBeZero = majorCount === 0;
+    console.log("Shadowrun 6e | Action spending values:", {
+      originalMajor: actions.major,
+      newMajor: majorCount
+    });
+    console.log(`Shadowrun 6e | Updating major action count for ${this.name} from ${actions.major} to ${majorCount}`);
+    try {
+      this.system.initiative.actions.major = majorCount;
+      await this.update({
+        "system.initiative.actions.major": majorCount
+      });
+      console.log(`Shadowrun 6e | Successfully updated major action count for ${this.name}`);
+    } catch (error) {
+      console.error(`Shadowrun 6e | Error updating major action count for ${this.name}:`, error);
+      return false;
+    }
+    console.log(`Shadowrun 6e | Refreshing sheets for ${this.name}`);
+    this.forceRefreshSheets();
+    console.log(`Shadowrun 6e | Sheets refreshed for ${this.name}`);
+    console.log(`Shadowrun 6e | Spent 1 major action for ${this.name}: Major: ${majorCount}`);
+    ui.notifications?.info(game.i18n.format("SR6.SpentMajorAction", {
+      name: this.name,
+      count: majorCount
+    }));
+    return true;
+  }
+  /**
+   * Spend a minor action
+   * This should be called whenever a character performs an action that costs a minor action
+   * @returns True if the action was spent successfully, false if there were no minor actions left
+   */
+  async spendMinorAction() {
+    console.log(`Shadowrun 6e | Spending minor action for ${this.name}`);
+    if (!this.system.initiative) {
+      console.log(`Shadowrun 6e | Actor ${this.name} has no initiative data`);
+      return false;
+    }
+    if (!this.system.initiative.actions) {
+      console.log(`Shadowrun 6e | Actor ${this.name} has no actions data, initializing`);
+      await this.update({
+        "system.initiative.actions": {}
+      });
+      await this.resetActions();
+      return false;
+    }
+    const actions = this.system.initiative.actions;
+    console.log(`Shadowrun 6e | Current actions for ${this.name}:`, actions);
+    if (actions.minor < 1) {
+      ui.notifications?.warn(game.i18n.format("SR6.NoMinorActionsLeft", {
+        name: this.name
+      }));
+      return false;
+    }
+    const minorCount = Number(actions.minor) - 1;
+    const willBeZero = minorCount === 0;
+    console.log("Shadowrun 6e | Action spending values:", {
+      originalMinor: actions.minor,
+      newMinor: minorCount
+    });
+    console.log(`Shadowrun 6e | Updating minor action count for ${this.name} from ${actions.minor} to ${minorCount}`);
+    try {
+      this.system.initiative.actions.minor = minorCount;
+      await this.update({
+        "system.initiative.actions.minor": minorCount
+      });
+      console.log(`Shadowrun 6e | Successfully updated minor action count for ${this.name}`);
+    } catch (error) {
+      console.error(`Shadowrun 6e | Error updating minor action count for ${this.name}:`, error);
+      return false;
+    }
+    console.log(`Shadowrun 6e | Refreshing sheets for ${this.name}`);
+    this.forceRefreshSheets();
+    console.log(`Shadowrun 6e | Sheets refreshed for ${this.name}`);
+    console.log(`Shadowrun 6e | Spent 1 minor action for ${this.name}: Minor: ${minorCount}`);
+    ui.notifications?.info(game.i18n.format("SR6.SpentMinorAction", {
+      name: this.name,
+      count: minorCount
+    }));
+    return true;
+  }
+  /**
+   * Force a refresh of all sheets displaying this actor
+   * This is a comprehensive method to ensure all sheets and tokens are updated
+   */
+  forceRefreshSheets() {
+    console.log(`Shadowrun 6e | Forcing refresh of all sheets for ${this.name}`);
+    this.render(false);
+    for (const sheet of Object.values(this.apps)) {
+      sheet.render(true);
+    }
+    for (const token of this.getActiveTokens()) {
+      if (token.refresh) token.refresh();
+    }
+    if (canvas && canvas.tokens && typeof canvas.tokens.placeables !== "undefined") {
+      canvas.tokens.placeables.forEach((token) => {
+        if (token.actor && token.actor.id === this.id && token.refresh) {
+          token.refresh();
+        }
+      });
+    }
+    this.refreshTokenSheets();
+    console.log(`Shadowrun 6e | Completed refresh of all sheets for ${this.name}`);
   }
   /**
    * Will unequip all other items of the same type as the given item.
@@ -25615,8 +26427,30 @@ var registerRollAndLabelHelpers = /* @__PURE__ */ __name(() => {
     return "";
   });
   Handlebars.registerHelper("damageCode", function(damage) {
-    const typeCode = Handlebars.helpers.damageAbbreviation(damage.type.value);
-    let code = `${damage.value}${typeCode}`;
+    if (!damage) {
+      console.log("Shadowrun 6e | Damage object is undefined in damageCode helper");
+      return new Handlebars.SafeString("0S");
+    }
+    console.log("Shadowrun 6e | Damage object in damageCode helper:", damage);
+    let damageValue = 0;
+    if (damage.value !== void 0) {
+      damageValue = damage.value;
+    } else if (damage.base !== void 0) {
+      damageValue = damage.base;
+    }
+    let damageType = "stun";
+    if (damage.type) {
+      if (damage.type.value && damage.type.value !== "") {
+        damageType = damage.type.value;
+      } else if (damage.type.base && damage.type.base !== "") {
+        damageType = damage.type.base;
+      }
+    } else {
+      damage.type = { base: "stun", value: "stun" };
+    }
+    const typeCode = Handlebars.helpers.damageAbbreviation(damageType);
+    let code = `${damageValue}${typeCode}`;
+    console.log("Shadowrun 6e | Damage code generated:", code);
     return new Handlebars.SafeString(code);
   });
   Handlebars.registerHelper("diceIcon", function(side) {
@@ -26780,6 +27614,9 @@ var registerBasicHelpers = /* @__PURE__ */ __name(() => {
     if (v1 > v2) return options.fn(this);
     else return options.inverse(this);
   });
+  Handlebars.registerHelper("gte", function(v1, v2) {
+    return Number(v1) >= Number(v2);
+  });
   Handlebars.registerHelper("iflt", function(v1, v2, options) {
     if (v1 < v2) return options.fn(this);
     else return options.inverse(this);
@@ -27109,26 +27946,45 @@ var DrainRules = class _DrainRules {
     __name(this, "DrainRules");
   }
   /**
-   * Calculate spell casting drain damage according to SR5#281-282
+   * Calculate spell casting drain damage according to SR6e rules
    *
    * @param drain The drain value
-   * @param force The force value used to cast
+   * @param force The force value used to cast (not used in SR6e)
    * @param magic The magic attribute level of the caster
    * @param hits Spellcasting test hits
    */
   static calcDrainDamage(drain, force, magic, hits) {
-    if (force < 0) force = 1;
     if (magic < 0) magic = 1;
     if (hits < 0) hits = 0;
-    const damage = DataDefaults.damageData();
+    console.log("Shadowrun 6e | DrainRules.calcDrainDamage inputs:", { drain, magic, hits });
+    const damage = DataDefaults.damageData({}, true);
     damage.base = drain;
-    Helpers.calcTotal(damage, { min: 0 });
+    damage.value = drain;
     damage.type.base = damage.type.value = _DrainRules.calcDrainDamageType(hits, magic);
+    _DrainRules.ensureDamageProperties(damage);
+    console.log("Shadowrun 6e | DrainRules.calcDrainDamage result:", damage);
     return damage;
   }
   /**
-   * Get the drain damage type according to SR5#281 'Step 3'
-   * @param hits The spell casting test hits AFTER limit
+   * Ensure that a damage object has all the required properties
+   */
+  static ensureDamageProperties(damage) {
+    if (!damage) return;
+    if (damage.value === void 0) {
+      damage.value = damage.base || 0;
+    }
+    if (!damage.type) {
+      damage.type = { base: "stun", value: "stun" };
+    } else {
+      if (damage.type.value === void 0) {
+        damage.type.value = damage.type.base || "stun";
+      }
+    }
+    console.log("Shadowrun 6e | Ensured damage properties:", damage);
+  }
+  /**
+   * Get the drain damage type according to SR6e rules
+   * @param hits The spell casting test hits
    * @param magic The magic attribute level of the caster
    */
   static calcDrainDamageType(hits, magic) {
@@ -27144,9 +28000,12 @@ var DrainRules = class _DrainRules {
    */
   static modifyDrainDamage(drainDamage, hits) {
     if (hits < 0) hits = 0;
+    console.log("Shadowrun 6e | DrainRules.modifyDrainDamage inputs:", { drainDamage, hits });
     drainDamage = foundry.utils.duplicate(drainDamage);
     PartsList.AddUniquePart(drainDamage.mod, "SR6.Hits", -hits);
     Helpers.calcTotal(drainDamage, { min: 0 });
+    _DrainRules.ensureDamageProperties(drainDamage);
+    console.log("Shadowrun 6e | DrainRules.modifyDrainDamage result:", drainDamage);
     return drainDamage;
   }
 };
@@ -29427,6 +30286,11 @@ var SR6Token = class extends Token {
 
 // src/module/combat/SR6Combat.ts
 var SR6Combat = class _SR6Combat extends Combat {
+  constructor() {
+    super(...arguments);
+    // Flag to prevent initiative from being rerolled
+    this.skipRollInitiative = false;
+  }
   static {
     __name(this, "SR6Combat");
   }
@@ -29457,6 +30321,20 @@ var SR6Combat = class _SR6Combat extends Combat {
    */
   static addCombatTrackerContextOptions(html, options) {
     options.push(
+      {
+        name: game.i18n.localize("SR6.COMBAT.RollInitiative"),
+        icon: '<i class="fas fa-dice-d6"></i>',
+        callback: /* @__PURE__ */ __name(async (li) => {
+          const combatant = await game.combat?.combatants.get(li.data("combatant-id"));
+          if (combatant) {
+            const combat = game.combat;
+            const oldSkipValue = combat.skipRollInitiative;
+            combat.skipRollInitiative = false;
+            await combat.rollInitiative(combatant.id);
+            combat.skipRollInitiative = oldSkipValue;
+          }
+        }, "callback")
+      },
       {
         name: game.i18n.localize("SR6.COMBAT.ReduceInitByOne"),
         icon: '<i class="fas fa-caret-down"></i>',
@@ -29551,16 +30429,30 @@ var SR6Combat = class _SR6Combat extends Combat {
   static async handleNextRound(combatId) {
     const combat = game.combats?.get(combatId);
     if (!combat) return;
-    await combat.resetAll();
-    await _SR6Combat.setInitiativePass(combat, SR.combat.INITIAL_INI_PASS);
-    if (game.settings.get(SYSTEM_NAME, FLAGS.OnlyAutoRollNPCInCombat)) {
-      await combat.rollNPC();
-    } else {
-      await combat.rollAll();
+    await combat.resetCombatantActions();
+    const unrolledCombatants = combat.combatants.filter((c2) => c2.initiative === null);
+    if (unrolledCombatants.length > 0) {
+      console.log("Shadowrun 6e | Rolling initiative for new combatants only");
+      for (const combatant of unrolledCombatants) {
+        await combat.rollInitiative(combatant.id);
+      }
     }
+    combat.skipRollInitiative = true;
     const turn = 0;
     await combat.update({ turn });
     await combat.handleActionPhase();
+  }
+  /**
+   * Reset actions for all combatants
+   */
+  async resetCombatantActions() {
+    console.log("Shadowrun 6e | Resetting actions for all combatants");
+    for (const combatant of this.combatants) {
+      if (!combatant.actor) continue;
+      if (combatant.actor.system.initiative) {
+        await combatant.actor.resetActions();
+      }
+    }
   }
   /**
    * New action phase might need changes on the actor that only the GM can reliable make.
@@ -29664,9 +30556,7 @@ var SR6Combat = class _SR6Combat extends Combat {
    * @return true means that an initiative pass must be applied
    */
   doIniPass(nextTurn) {
-    if (nextTurn < this.turns.length) return false;
-    const currentScores = this.combatants.map((combatant) => Number(combatant.initiative));
-    return CombatRules.iniOrderCanDoAnotherPass(currentScores);
+    return false;
   }
   /**
    * After all combatants have had their action phase (click on next 'turn') handle shadowrun rules for
@@ -29695,14 +30585,6 @@ var SR6Combat = class _SR6Combat extends Combat {
       await this.handleActionPhase();
       return;
     }
-    if (!game.user?.isGM && this.doIniPass(nextTurn)) {
-      await this._createDoIniPassSocketMessage();
-      return;
-    }
-    if (game.user?.isGM && this.doIniPass(nextTurn)) {
-      await _SR6Combat.handleIniPass(this.id);
-      return;
-    }
     return this.nextRound();
   }
   async startCombat() {
@@ -29713,11 +30595,9 @@ var SR6Combat = class _SR6Combat extends Combat {
     }
     const turn = 0;
     const round = SR.combat.INITIAL_INI_ROUND;
-    const initiativePass = SR.combat.INITIAL_INI_PASS;
     const updateData = {
       turn,
-      round,
-      [`flags.${SYSTEM_NAME}.${FLAGS.CombatInitiativePass}`]: initiativePass
+      round
     };
     await this.update(updateData);
     this._playCombatSound("startEncounter");
@@ -29730,12 +30610,36 @@ var SR6Combat = class _SR6Combat extends Combat {
     super._playCombatSound(name3);
   }
   async nextRound() {
+    this.skipRollInitiative = true;
     await super.nextRound();
     if (!game.user?.isGM) {
       await this._createDoNextRoundSocketMessage();
     } else {
       await _SR6Combat.handleNextRound(this.id);
     }
+  }
+  /**
+   * Override rollInitiative to prevent rerolling initiative for combatants who already have an initiative score
+   * @param ids The IDs of combatants to roll
+   * @param options Options for the initiative roll
+   */
+  async rollInitiative(ids, options = {}) {
+    ids = typeof ids === "string" ? [ids] : ids;
+    if (this.skipRollInitiative) {
+      console.log("Shadowrun 6e | skipRollInitiative is true, only rolling for combatants with null initiative");
+      const combatantsToRoll = ids.filter((id) => {
+        const combatant = this.combatants.get(id);
+        return combatant && combatant.initiative === null;
+      });
+      if (combatantsToRoll.length === 0) {
+        console.log("Shadowrun 6e | No combatants need initiative rolls");
+        return this;
+      }
+      console.log("Shadowrun 6e | Rolling initiative for new combatants only:", combatantsToRoll);
+      return await super.rollInitiative(combatantsToRoll, options);
+    }
+    console.log("Shadowrun 6e | Rolling initiative for all specified combatants:", ids);
+    return await super.rollInitiative(ids, options);
   }
   /**
    * This handler handles FoundryVTT hook preUpdateCombatant
@@ -36429,6 +37333,8 @@ var SR6BaseActorSheet = class extends ActorSheet {
     html.find(".show-situation-modifiers-application").on("click", this._onShowSituationModifiersApplication.bind(this));
     html.find(".toggle-fresh-import-all-off").on("click", async (event) => this._toggleAllFreshImportFlags(event, false));
     html.find(".toggle-fresh-import-all-on").on("click", async (event) => this._toggleAllFreshImportFlags(event, true));
+    html.find(".reset-actions").on("click", this._onResetActions.bind(this));
+    html.find(".convert-actions").on("click", this._onConvertActions.bind(this));
     html.find(".ensure-matrix-actions").on("click", this._onEnsureMatrixActions.bind(this));
     html.find(".reset-actor-run-data").on("click", this._onResetActorRunData.bind(this));
   }
@@ -37634,6 +38540,32 @@ var SR6BaseActorSheet = class extends ActorSheet {
     }
   }
   /**
+   * Handle clicking the reset actions button
+   * @param event The click event
+   */
+  async _onResetActions(event) {
+    event.preventDefault();
+    await this.actor.resetActions();
+  }
+  /**
+   * Handle clicking the convert actions button
+   * @param event The click event
+   */
+  async _onConvertActions(event) {
+    event.preventDefault();
+    console.log(`Shadowrun 6e | Converting actions for actor:`, {
+      name: this.actor.name,
+      id: this.actor.id,
+      actions: this.actor.system.initiative.actions
+    });
+    const actor = this.actor;
+    if (!actor) {
+      console.error(`Shadowrun 6e | No actor found for sheet`);
+      return;
+    }
+    await actor.convertMinorToMajorAction();
+  }
+  /**
    * Trigger a full reset of all run related actor data.
    *
    * @param event
@@ -37696,6 +38628,10 @@ var SR6BaseActorSheet = class extends ActorSheet {
     event.preventDefault();
     await this.actor.ensureMatrixActions();
     ui.notifications?.info(`Matrix actions have been ensured for ${this.actor.name}.`);
+    if (this instanceof SR6CharacterSheet) {
+      this.clearMatrixActionsCache();
+    }
+    this.render(true);
   }
 };
 
@@ -38003,7 +38939,16 @@ var SR6VehicleActorSheet = class extends SR6BaseActorSheet {
 };
 
 // src/module/actor/sheets/SR6CharacterSheet.ts
-var SR6CharacterSheet = class extends SR6BaseActorSheet {
+var SR6CharacterSheet2 = class extends SR6BaseActorSheet {
+  constructor() {
+    super(...arguments);
+    /**
+     * Cache for matrix actions to avoid recalculating them every time
+     * @type {Object}
+     * @private
+     */
+    this._matrixActionsCache = null;
+  }
   static {
     __name(this, "SR6CharacterSheet");
   }
@@ -38063,6 +39008,29 @@ var SR6CharacterSheet = class extends SR6BaseActorSheet {
     return data;
   }
   /**
+   * Clear the matrix actions cache
+   * This should be called when items are added or removed
+   */
+  clearMatrixActionsCache() {
+    this._matrixActionsCache = null;
+    console.log("Shadowrun 6e | Matrix actions cache cleared");
+  }
+  /**
+   * Force a refresh of the character sheet
+   * This should be called when the actor's data changes
+   */
+  forceRefresh() {
+    console.log("Shadowrun 6e | Forcing refresh of character sheet");
+    const actor = game.actors.get(this.actor.id);
+    if (actor) {
+      console.log("Shadowrun 6e | Character sheet data before refresh:", {
+        sheetActions: this.actor.system.initiative.actions,
+        actorActions: actor.system.initiative.actions
+      });
+    }
+    this.render(true);
+  }
+  /**
    * Separate matrix actions from regular actions
    * @param sheetData The data for the actor sheet
    * @private
@@ -38072,7 +39040,13 @@ var SR6CharacterSheet = class extends SR6BaseActorSheet {
       sheetData.itemType = {};
     }
     const actions = sheetData.itemType.action || [];
-    console.log("SR6: Total actions before filtering:", actions.length);
+    const hasMatrixActions = this.actor.getFlag("shadowrun6-elysium", "hasMatrixActions");
+    if (this._matrixActionsCache && hasMatrixActions) {
+      sheetData.matrixActions = this._matrixActionsCache.matrixActions;
+      sheetData.nonMatrixActions = this._matrixActionsCache.nonMatrixActions;
+      sheetData.itemType.action = this._matrixActionsCache.nonMatrixActions;
+      return;
+    }
     const matrixActions = [];
     const nonMatrixActions = [];
     for (const action of actions) {
@@ -38083,13 +39057,15 @@ var SR6CharacterSheet = class extends SR6BaseActorSheet {
         nonMatrixActions.push(action);
       }
     }
-    console.log("SR6: Matrix actions:", matrixActions.length);
-    console.log("SR6: Non-matrix actions:", nonMatrixActions.length);
     sheetData.matrixActions = matrixActions;
     sheetData.nonMatrixActions = nonMatrixActions;
     sheetData.itemType.action = nonMatrixActions;
-    console.log("SR6: Actions after filtering:", sheetData.itemType.action.length);
-    console.log("SR6: Matrix actions array:", sheetData.matrixActions.length);
+    if (hasMatrixActions) {
+      this._matrixActionsCache = {
+        matrixActions: [...matrixActions],
+        nonMatrixActions: [...nonMatrixActions]
+      };
+    }
   }
   /**
    * Get the saved state of a folder
@@ -38102,6 +39078,24 @@ var SR6CharacterSheet = class extends SR6BaseActorSheet {
     const key = `folders.${folderId}`;
     const state = this.actor.getFlag("shadowrun6-elysium", key);
     return state !== void 0 ? state : defaultState;
+  }
+  /**
+   * Override the _onItemEdit method to clear the matrix actions cache
+   * @param event The click event
+   * @private
+   */
+  async _onItemEdit(event) {
+    await super._onItemEdit(event);
+    this.clearMatrixActionsCache();
+  }
+  /**
+   * Override the _onItemDelete method to clear the matrix actions cache
+   * @param event The click event
+   * @private
+   */
+  async _onItemDelete(event) {
+    await super._onItemDelete(event);
+    this.clearMatrixActionsCache();
   }
   /**
    * Determine if an action is a matrix action
@@ -38120,12 +39114,18 @@ var SR6CharacterSheet = class extends SR6BaseActorSheet {
   }
   /**
    * Inject special case handling for call in action items, only usable by character actors.
+   * Also clears the matrix actions cache when items are created.
    */
   async _onItemCreate(event) {
     event.preventDefault();
     const type = event.currentTarget.closest(".list-header").dataset.itemId;
-    if (type !== "summoning" && type !== "compilation") return await super._onItemCreate(event);
+    if (type !== "summoning" && type !== "compilation") {
+      await super._onItemCreate(event);
+      this.clearMatrixActionsCache();
+      return;
+    }
     await this._onCallInActionCreate(type);
+    this.clearMatrixActionsCache();
   }
   /**
    * Create a call in action item with pre configured actor type.
@@ -39167,6 +40167,10 @@ ${statName} (${arStat}) + Weapon AR (${weaponAR}) = ${this.data.attackerAR}`;
               defender.edgeReason = `${defenderActor.name} has already gained the maximum Edge (${edgeGainedThisRound}) this round`;
             } else if (edge.uses >= 7) {
               defender.edgeReason = `${defenderActor.name} is already at maximum Edge (${edge.uses})`;
+            } else if (!defender.hasSignificantAdvantage) {
+              defender.edgeReason = `No significant advantage (DR vs AR difference must be 4+)`;
+            } else if (!defender.isWinner) {
+              defender.edgeReason = `${defenderActor.name} did not have a higher DR than the attacker's AR`;
             }
             const canGainEdge = edge && edgeGainedThisRound < 2 && edge.uses < 7;
             console.log("Shadowrun 6e | Edge check for defender:", {
@@ -39249,66 +40253,34 @@ ${statName} (${arStat}) + Weapon AR (${weaponAR}) = ${this.data.attackerAR}`;
   }
 };
 
-// src/module/rules/SpellcastingRules.ts
-var SpellcastingRules = class _SpellcastingRules {
+// src/module/apps/dialogs/SpellcastingTestDialog.ts
+var SpellcastingTestDialog = class extends TestDialog {
   static {
-    __name(this, "SpellcastingRules");
+    __name(this, "SpellcastingTestDialog");
+  }
+  activateListeners(html) {
+    super.activateListeners(html);
+    html.find(".number-spinner-button").on("click", this._onNumberSpinnerButtonClick.bind(this));
   }
   /**
-   * Calculate spellcasting drain value without its damage type
-   *
-   * As defined in SR5#282 - Step 6 Resist Drain.
-   *
-   * @param force The force the spell is cast with.
-   * @param drainModifier The drain modifier defined within the spells action configuration.
-   * @param reckless Set this to true should the spell be cast recklessly as defined in SR5#281 Cast Spell.
+   * Handle clicks on the number spinner buttons
    */
-  static calculateDrain(force, drainModifier, reckless = false) {
-    const recklessModifier = reckless ? this.recklessDrainModifier : 0;
-    const drain = force + drainModifier + recklessModifier;
-    return Math.max(this.minimalDrain, drain);
-  }
-  /**
-   * As defined in SR5#282 - Step 6 Resist Drain
-   */
-  static get minimalDrain() {
-    return 2;
-  }
-  /**
-   * As defined in SR5#281 - Step 4 Cast Spell.
-   *
-   * Reckless spellcasting will alter drain damage.
-   */
-  static get recklessDrainModifier() {
-    return 3;
-  }
-  /**
-   * Based on the minimal drain value use this as the minimal usable force value.
-   * @param drainModifier The drain modifier defined within the spells action configuration.
-   */
-  static calculateMinimalForce(drainModifier) {
-    return Math.max(1, this.minimalDrain - drainModifier);
-  }
-  /**
-   * Calculate spell casting limit based on the force chosen.
-   *
-   * As defined in SR5#281 - Step 3 Choose Spell Force
-   * As defined in SR5#316-317 'Reagents'
-   *
-   * @param force The spell force chosen by test configuration.
-   * @param reagents The amount of reagents / drams used for the spell.
-   * @returns The limit value to be applied.
-   */
-  static calculateLimit(force, reagents = 0) {
-    return _SpellcastingRules.limitIsReagentInsteadOfForce(reagents) ? reagents : force;
-  }
-  /**
-   * As defined in SR5#316-317 'Reagents'
-   * @param reagents The amount of drams used from reagents
-   * @returns True if reagents should be used 
-   */
-  static limitIsReagentInsteadOfForce(reagents = 0) {
-    return reagents > 0;
+  _onNumberSpinnerButtonClick(event) {
+    event.preventDefault();
+    const button = event.currentTarget;
+    const action = button.dataset.action;
+    const field = button.dataset.field;
+    if (!field) return;
+    const input = this.element.find(`input[name="${field}"]`);
+    if (!input.length) return;
+    let value = parseInt(input.val()) || 0;
+    if (action === "increment") {
+      value += 1;
+    } else if (action === "decrement") {
+      value = Math.max(0, value - 1);
+    }
+    input.val(value);
+    input.trigger("change");
   }
 };
 
@@ -39319,13 +40291,23 @@ var SpellCastingTest = class extends SuccessTest {
   }
   _prepareData(data, options) {
     data = super._prepareData(data, options);
-    data.force = data.force || 0;
     data.drain = data.drain || 0;
     data.reckless = data.reckless || false;
     data.attackerAR = data.attackerAR || 0;
     data.attackerEdge = data.attackerEdge || false;
+    data.ampUp = data.ampUp || 0;
+    data.increasedArea = data.increasedArea || 0;
     data.defenders = data.defenders || [];
     data.drainDamage = data.drainDamage || DataDefaults.damageData();
+    if (data.drainDamage && data.drainDamage.value === void 0) {
+      data.drainDamage.value = data.drainDamage.base || 0;
+    }
+    console.log("Shadowrun 6e | SpellCastingTest prepared data:", {
+      drain: data.drain,
+      ampUp: data.ampUp,
+      increasedArea: data.increasedArea,
+      drainDamage: data.drainDamage
+    });
     if (data.defenders.length === 0 && this.actor) {
       console.log("Shadowrun 6e | Getting user targets for spell casting");
       const targets = Helpers.getUserTargets(game.user);
@@ -39361,6 +40343,12 @@ var SpellCastingTest = class extends SuccessTest {
   }
   get _dialogTemplate() {
     return "systems/shadowrun6-elysium/dist/templates/apps/dialogs/spellcasting-test-dialog.html";
+  }
+  /**
+   * Override to use the SpellcastingTestDialog class
+   */
+  _createTestDialog() {
+    return new SpellcastingTestDialog({ test: this, templatePath: this._dialogTemplate }, void 0, this._testDialogListeners());
   }
   get _chatMessageTemplate() {
     return "systems/shadowrun6-elysium/dist/templates/rolls/spellcasting-test-message.html";
@@ -39403,7 +40391,6 @@ var SpellCastingTest = class extends SuccessTest {
     return ["global", "wounds", "background_count"];
   }
   async prepareDocumentData() {
-    this.prepareInitialForceValue();
     this.calculateAR();
     this.prepareTargets();
     await super.prepareDocumentData();
@@ -39465,26 +40452,8 @@ Magic (${magicAttr.value}) + ${drainAttr.charAt(0).toUpperCase() + drainAttr.sli
     }
     return this.data.attackerAR;
   }
-  /**
-   * Set a force value based on the items history or viable suggestions.
-   */
-  prepareInitialForceValue() {
-    if (!this.item) return;
-    const lastUsedForce = this.item.getLastSpellForce();
-    const suggestedForce = SpellcastingRules.calculateMinimalForce(this.item.getDrain);
-    this.data.force = lastUsedForce.value || suggestedForce;
-  }
   prepareBaseValues() {
     super.prepareBaseValues();
-    this.prepareLimitValue();
-  }
-  prepareLimitValue() {
-    const force = Number(this.data.force);
-    this.data.limit.mod = PartsList.AddUniquePart(
-      this.data.limit.mod,
-      "SR6.Force",
-      SpellcastingRules.calculateLimit(force)
-    );
   }
   calculateBaseValues() {
     super.calculateBaseValues();
@@ -39494,27 +40463,114 @@ Magic (${magicAttr.value}) + ${drainAttr.charAt(0).toUpperCase() + drainAttr.sli
    * Precalculate drain for user display.
    */
   calculateDrainValue() {
-    const force = Number(this.data.force);
     const drain = Number(this.item?.getDrain);
     const reckless = this.data.reckless;
-    this.data.drain = SpellcastingRules.calculateDrain(force, drain, reckless);
+    const ampUp = Number(this.data.ampUp);
+    const increasedArea = Number(this.data.increasedArea);
+    let totalDrain = drain;
+    if (reckless) {
+      totalDrain += 3;
+    }
+    if (ampUp > 0) {
+      totalDrain += ampUp * 2;
+    }
+    if (increasedArea > 0) {
+      totalDrain += increasedArea;
+    }
+    totalDrain = Math.max(2, totalDrain);
+    console.log("Shadowrun 6e | Calculated drain value:", {
+      baseDrain: drain,
+      reckless,
+      ampUp,
+      increasedArea,
+      totalDrain
+    });
+    this.data.drain = totalDrain;
   }
   /**
    * Derive the actual drain damage from spellcasting values.
    */
   calcDrainDamage() {
     if (!this.actor) return DataDefaults.damageData();
-    const force = Number(this.data.force);
     const drain = Number(this.data.drain);
     const magic = this.actor.getAttribute("magic").value;
-    this.data.drainDamage = DrainRules.calcDrainDamage(drain, force, magic, this.hits.value);
+    console.log("Shadowrun 6e | Calculating drain damage with:", { drain, magic, hits: this.hits.value });
+    const damage = DataDefaults.damageData({}, true);
+    damage.base = drain;
+    damage.value = drain;
+    if (this.hits.value > magic) {
+      damage.type.base = "physical";
+      damage.type.value = "physical";
+    }
+    this.data.drainDamage = damage;
+    this._ensureDamageProperties(this.data.drainDamage);
+    console.log("Shadowrun 6e | Created drain damage:", this.data.drainDamage);
+  }
+  /**
+   * Ensure that a damage object has all the required properties
+   */
+  _ensureDamageProperties(damage) {
+    if (!damage) return;
+    if (damage.value === void 0) {
+      damage.value = damage.base || 0;
+    }
+    if (!damage.type) {
+      damage.type = { base: "stun", value: "stun" };
+    } else {
+      if (damage.type.value === void 0) {
+        damage.type.value = damage.type.base || "stun";
+      }
+    }
+    console.log("Shadowrun 6e | Ensured damage properties:", damage);
   }
   async processResults() {
     this.calcDrainDamage();
+    this.modifySpellDamageForAmpUp();
+    console.log("Shadowrun 6e | Drain damage before processing results:", {
+      drainDamage: this.data.drainDamage,
+      drain: this.data.drain
+    });
+    if (this.data.drainDamage) {
+      this.data.drainDamage.value = this.data.drain;
+      this.data.drainDamage.base = this.data.drain;
+      if (this.data.drainDamage.type) {
+        this.data.drainDamage.type.value = "stun";
+        this.data.drainDamage.type.base = "stun";
+      }
+      console.log("Shadowrun 6e | Forced drain damage values:", this.data.drainDamage);
+    }
     await super.processResults();
+    console.log("Shadowrun 6e | Drain damage after processing results:", {
+      drainDamage: this.data.drainDamage,
+      drain: this.data.drain
+    });
     console.log("Shadowrun 6e | Starting edge award calculations");
     await this.calculateEdgeAwards();
     console.log("Shadowrun 6e | Finished edge award calculations");
+  }
+  /**
+   * Modify the spell's damage value based on amp up levels
+   * In SR6e, each amp up level increases damage by 1
+   */
+  modifySpellDamageForAmpUp() {
+    const spell = this.item?.asSpell;
+    if (!spell) return;
+    const ampUp = Number(this.data.ampUp);
+    if (ampUp <= 0) return;
+    if (spell.system.category !== "combat") return;
+    const damage = spell.system.action.damage;
+    if (!damage) return;
+    const damageBonus = ampUp;
+    console.log("Shadowrun 6e | Modifying spell damage for amp up:", {
+      originalDamage: damage.value,
+      ampUp,
+      damageBonus,
+      newDamage: damage.value + damageBonus
+    });
+    ChatMessage.create({
+      content: `<div class="sr6 chat-card roll-card"><div class="card-content"><b>Amp Up Damage Bonus:</b> +${damageBonus} damage</div></div>`,
+      speaker: ChatMessage.getSpeaker({ actor: this.actor })
+    });
   }
   /**
    * Calculate edge awards based on Attack Rating vs Defense Rating
@@ -39550,6 +40606,10 @@ Magic (${magicAttr.value}) + ${drainAttr.charAt(0).toUpperCase() + drainAttr.sli
               defender.edgeReason = `${defenderActor.name} has already gained the maximum Edge (${edgeGainedThisRound}) this round`;
             } else if (edge.uses >= 7) {
               defender.edgeReason = `${defenderActor.name} is already at maximum Edge (${edge.uses})`;
+            } else if (!defender.hasSignificantAdvantage) {
+              defender.edgeReason = `No significant advantage (DR vs AR difference must be 4+)`;
+            } else if (!defender.isWinner) {
+              defender.edgeReason = `${defenderActor.name} did not have a higher DR than the caster's AR`;
             }
             const canGainEdge = edge && edgeGainedThisRound < 2 && edge.uses < 7;
             console.log("Shadowrun 6e | Edge check for defender:", {
@@ -39630,12 +40690,24 @@ Magic (${magicAttr.value}) + ${drainAttr.charAt(0).toUpperCase() + drainAttr.sli
     console.log(`Shadowrun 6e | Edge awarded to ${actor.name}: ${edge.uses} \u2192 ${newEdgeUses}`);
     return true;
   }
+  // No need to save force value in SR6e
   /**
-   * Allow the currently used force value of this spell item to be reused next time.
+   * Override to ensure drain value is properly passed to the template
    */
-  async saveUserSelectionAfterDialog() {
-    if (!this.item) return;
-    await this.item.setLastSpellForce({ value: this.data.force, reckless: false });
+  async _prepareMessageTemplateData() {
+    const templateData = await super._prepareMessageTemplateData();
+    console.log("Shadowrun 6e | SpellCastingTest _prepareMessageTemplateData - Template data:", templateData);
+    if (templateData && templateData.test) {
+      if (!templateData.test.data) {
+        templateData.test.data = {};
+      }
+      console.log("Shadowrun 6e | SpellCastingTest _prepareMessageTemplateData - Original drain value:", templateData.test.data.drain);
+      if (templateData.test.data.drain === void 0 || templateData.test.data.drain === 0) {
+        templateData.test.data.drain = this.data.drain || 4;
+      }
+      console.log("Shadowrun 6e | SpellCastingTest _prepareMessageTemplateData - Updated drain value:", templateData.test.data.drain);
+    }
+    return templateData;
   }
 };
 
@@ -39647,19 +40719,67 @@ var DrainTest = class extends SuccessTest {
   _prepareData(data, options) {
     data = super._prepareData(data, options);
     if (data.against) {
-      data.incomingDrain = foundry.utils.duplicate(data.against.drainDamage);
+      console.log("Shadowrun 6e | DrainTest preparing data with against:", data.against);
+      const drainValue = data.against.drain || 0;
+      console.log("Shadowrun 6e | Drain value from against data:", drainValue);
+      data.incomingDrain = DataDefaults.damageData({
+        base: drainValue,
+        value: drainValue,
+        type: {
+          base: "stun",
+          value: "stun"
+        }
+      }, true);
+      console.log("Shadowrun 6e | Created new incoming drain:", data.incomingDrain);
       data.modifiedDrain = foundry.utils.duplicate(data.incomingDrain);
     } else {
-      data.incomingDrain = data.incomingDrain ?? DataDefaults.damageData();
+      console.log("Shadowrun 6e | DrainTest preparing data without against");
+      data.incomingDrain = data.incomingDrain ?? DataDefaults.damageData({}, true);
       data.modifiedDrain = foundry.utils.duplicate(data.incomingDrain);
     }
+    this._ensureDamageProperties(data.incomingDrain);
+    this._ensureDamageProperties(data.modifiedDrain);
+    console.log("Shadowrun 6e | DrainTest prepared data:", {
+      incomingDrain: data.incomingDrain,
+      modifiedDrain: data.modifiedDrain
+    });
     return data;
+  }
+  /**
+   * Ensure that a damage object has all the required properties
+   */
+  _ensureDamageProperties(damage) {
+    if (!damage) return;
+    if (damage.value === void 0) {
+      damage.value = damage.base || 0;
+    }
+    if (!damage.type) {
+      damage.type = { base: "stun", value: "stun" };
+    } else {
+      if (damage.type.value === void 0) {
+        damage.type.value = damage.type.base || "stun";
+      }
+    }
+    console.log("Shadowrun 6e | Ensured damage properties:", damage);
   }
   get _dialogTemplate() {
     return "systems/shadowrun6-elysium/dist/templates/apps/dialogs/drain-test-dialog.html";
   }
   get _chatMessageTemplate() {
     return "systems/shadowrun6-elysium/dist/templates/rolls/drain-test-message.html";
+  }
+  /**
+   * Override to add debugging for drain test message template data
+   */
+  async _prepareMessageTemplateData() {
+    const templateData = await super._prepareMessageTemplateData();
+    console.log("Shadowrun 6e | DrainTest _prepareMessageTemplateData:", {
+      templateData,
+      incomingDrain: this.data.incomingDrain,
+      modifiedDrain: this.data.modifiedDrain,
+      testObject: templateData.test
+    });
+    return templateData;
   }
   static _getDefaultTestAction() {
     return {
@@ -39712,7 +40832,18 @@ var DrainTest = class extends SuccessTest {
   }
   async processResults() {
     this.data.modifiedDrain = DrainRules.modifyDrainDamage(this.data.modifiedDrain, this.hits.value);
+    console.log("Shadowrun 6e | Drain test modified drain:", this.data.modifiedDrain);
+    this._ensureDamageProperties(this.data.incomingDrain);
+    this._ensureDamageProperties(this.data.modifiedDrain);
+    console.log("Shadowrun 6e | Drain test data before processing results:", {
+      incomingDrain: this.data.incomingDrain,
+      modifiedDrain: this.data.modifiedDrain
+    });
     await super.processResults();
+    console.log("Shadowrun 6e | Drain test data after processing results:", {
+      incomingDrain: this.data.incomingDrain,
+      modifiedDrain: this.data.modifiedDrain
+    });
   }
 };
 
@@ -40455,6 +41586,69 @@ var SuppressionDefenseTest = class extends PhysicalDefenseTest {
   }
   async processFailure() {
     this.data.modifiedDamage = CombatRules.modifyDamageAfterSuppressionHit(this.data.incomingDamage);
+  }
+};
+
+// src/module/rules/SpellcastingRules.ts
+var SpellcastingRules = class _SpellcastingRules {
+  static {
+    __name(this, "SpellcastingRules");
+  }
+  /**
+   * Calculate spellcasting drain value without its damage type
+   *
+   * As defined in SR5#282 - Step 6 Resist Drain.
+   *
+   * @param force The force the spell is cast with.
+   * @param drainModifier The drain modifier defined within the spells action configuration.
+   * @param reckless Set this to true should the spell be cast recklessly as defined in SR5#281 Cast Spell.
+   */
+  static calculateDrain(force, drainModifier, reckless = false) {
+    const recklessModifier = reckless ? this.recklessDrainModifier : 0;
+    const drain = force + drainModifier + recklessModifier;
+    return Math.max(this.minimalDrain, drain);
+  }
+  /**
+   * As defined in SR5#282 - Step 6 Resist Drain
+   */
+  static get minimalDrain() {
+    return 2;
+  }
+  /**
+   * As defined in SR5#281 - Step 4 Cast Spell.
+   *
+   * Reckless spellcasting will alter drain damage.
+   */
+  static get recklessDrainModifier() {
+    return 3;
+  }
+  /**
+   * Based on the minimal drain value use this as the minimal usable force value.
+   * @param drainModifier The drain modifier defined within the spells action configuration.
+   */
+  static calculateMinimalForce(drainModifier) {
+    return Math.max(1, this.minimalDrain - drainModifier);
+  }
+  /**
+   * Calculate spell casting limit based on the force chosen.
+   *
+   * As defined in SR5#281 - Step 3 Choose Spell Force
+   * As defined in SR5#316-317 'Reagents'
+   *
+   * @param force The spell force chosen by test configuration.
+   * @param reagents The amount of reagents / drams used for the spell.
+   * @returns The limit value to be applied.
+   */
+  static calculateLimit(force, reagents = 0) {
+    return _SpellcastingRules.limitIsReagentInsteadOfForce(reagents) ? reagents : force;
+  }
+  /**
+   * As defined in SR5#316-317 'Reagents'
+   * @param reagents The amount of drams used from reagents
+   * @returns True if reagents should be used 
+   */
+  static limitIsReagentInsteadOfForce(reagents = 0) {
+    return reagents > 0;
   }
 };
 
@@ -41547,14 +42741,15 @@ var shadowrunSR5CharacterDataPrep = /* @__PURE__ */ __name((context) => {
     it("movement calculation", async () => {
       const actor = await testActor.create({ type: "character" });
       let character = actor.asCharacter();
-      assert.strictEqual(character.system.movement.walk.value, 2);
-      assert.strictEqual(character.system.movement.run.value, 4);
+      assert.strictEqual(character.system.movement.walk.value, 10);
+      assert.strictEqual(character.system.movement.run.value, 15);
       await actor.update({
-        "system.attributes.agility.base": 6
+        "system.modifiers.walk": 2,
+        "system.modifiers.run": 3
       });
       character = actor.asCharacter();
       assert.strictEqual(character.system.movement.walk.value, 12);
-      assert.strictEqual(character.system.movement.run.value, 24);
+      assert.strictEqual(character.system.movement.run.value, 18);
     });
     it("skill calculation", async () => {
       const actor = await testActor.create({
@@ -46852,7 +48047,7 @@ ___________________
     registerSystemSettings();
     registerSystemKeybindings();
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet(SYSTEM_NAME, SR6CharacterSheet, {
+    Actors.registerSheet(SYSTEM_NAME, SR6CharacterSheet2, {
       label: "SR6.SheetActor",
       makeDefault: true,
       types: ["critter", "character"]

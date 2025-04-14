@@ -874,6 +874,66 @@
   margin-left: 4px;
 }
 
+.action-tracker {
+  margin-top: 5px;
+  border: 1px solid var(--color-border-light-primary);
+  border-radius: 3px;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.action-tracker .action-tracker-content {
+  display: flex;
+  justify-content: space-between;
+}
+.action-tracker .action-tracker-content .action-type {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 5px;
+}
+.action-tracker .action-tracker-content .action-type .action-label {
+  font-size: 0.8em;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+.action-tracker .action-tracker-content .action-type .action-count {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+}
+.action-tracker .action-tracker-footer {
+  margin-top: 5px;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+.action-tracker .action-tracker-footer button {
+  background-color: rgba(60, 60, 60, 0.7);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  padding: 2px 8px;
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+  margin: 0 2px;
+}
+.action-tracker .action-tracker-footer button:hover {
+  background-color: rgba(80, 80, 80, 0.8);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.action-tracker .action-tracker-footer button.reset-actions {
+  background-color: rgba(60, 60, 60, 0.7);
+}
+.action-tracker .action-tracker-footer button.convert-actions {
+  background-color: rgba(60, 80, 60, 0.7);
+}
+.action-tracker .action-tracker-footer button.convert-actions:hover {
+  background-color: rgba(70, 100, 70, 0.8);
+}
+
 .sr6.actor {
   min-height: 690px;
   min-width: 870px;
@@ -1135,6 +1195,13 @@
   color: #ebb531;
   border-color: #ebb531;
 }
+.sr6.chat-card .card-header:first-of-type .action-type {
+  float: right;
+  font-size: var(--font-size-11);
+  font-style: italic;
+  color: #ddd;
+  margin-top: 3px;
+}
 .sr6.chat-card .button {
   color: white;
   border-color: black;
@@ -1360,7 +1427,7 @@
   white-space: nowrap;
 }
 .sr6.roll-card .dice-rolls {
-  display: none;
+  display: block; /* Changed from none to block to make dice visible by default */
   border-bottom: 1px solid #4d4d4d;
 }
 .sr6.roll-card .dice-roll-content {
@@ -1474,6 +1541,42 @@
   padding: 0;
   border: 1px solid #4d4d4d;
 }
+.sr6 .card-rolls {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  border: 1px solid grey;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.sr6 .card-rolls .rerolled-failures-header {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  color: #ebb531;
+  border-bottom: 1px solid #ebb531;
+  padding-bottom: 0.25em;
+}
+.sr6 .card-rolls .rerolled-failures-header .rerolled-count {
+  font-size: 0.9em;
+  font-style: italic;
+  margin-left: 0.5em;
+}
+.sr6 .card-rolls .rerolled-failures-summary {
+  font-weight: bold;
+  color: green;
+  margin-bottom: 0.5em;
+  font-size: 0.9em;
+  text-align: center;
+  padding: 0.25em;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+.sr6 .note {
+  font-style: italic;
+  color: #ebb531;
+  font-size: 0.9em;
+  margin-top: 0.5em;
+}
 
 /**
  * CSS for Success Test Dialog styling.
@@ -1489,6 +1592,14 @@
 }
 .sr6.form-dialog .form-group .form-group-element-2 {
   flex: 2;
+}
+.sr6.form-dialog .form-group .drain-value {
+  font-weight: bold;
+  font-size: 1.2em;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  display: inline-block;
 }
 .sr6.form-dialog .form-group .form-group-element-1-right {
   flex: 1;
@@ -2204,6 +2315,41 @@ h4.message-sender {
 .illegal-action .item-name {
   color: red;
   font-weight: bold;
+}
+
+/* Number spinner styles */
+.number-spinner {
+  display: flex;
+  align-items: center;
+}
+.number-spinner input[type=number] {
+  text-align: center;
+  width: 50px;
+  margin: 0 5px;
+  /* Remove the default number input arrows */
+  -moz-appearance: textfield;
+}
+.number-spinner input[type=number]::-webkit-outer-spin-button, .number-spinner input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.number-spinner .number-spinner-button {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.number-spinner .number-spinner-button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.number-spinner .number-spinner-button:active {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 @font-face {

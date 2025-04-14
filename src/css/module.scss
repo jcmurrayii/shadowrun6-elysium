@@ -1,6 +1,8 @@
 /** This is intended to replace foriens Quest Log to Match its CSS to Shadowrun Styles
  */
- #forien-quest-log.window-app .window-content {
+@use 'config' as *;
+
+#forien-quest-log.window-app .window-content {
     overflow: visible;
 }
 
@@ -22,7 +24,7 @@ body #forien-quest-log .window-content, .window-app.forien-quest-preview .window
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    
+
     padding: 8px;
     //color: var(--color-text-dark-primary);
     overflow-y: auto;
@@ -106,7 +108,7 @@ body #forien-quest-log h1, .window-app.forien-quest-preview h1 {
     line-height: 1;
     margin: 0 0 8px;
     padding: 0 0 30px;
-    color: #ffffff; 
+    color: #ffffff;
     //border-bottom: 2px solid var(--color-underline-header);
 }
 // h1 quest log header

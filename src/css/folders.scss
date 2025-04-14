@@ -1,14 +1,15 @@
 /* Folder styling for item lists */
+@use 'config' as *;
 .list-folder {
     margin-bottom: 0.5em;
     border: 1px solid $dark;
     border-radius: 3px;
     background-color: rgba($black, 0.1);
-    
+
     &.collapsed {
         margin-bottom: 0.2em;
     }
-    
+
     .list-folder-header {
         display: flex;
         flex-flow: row nowrap;
@@ -16,16 +17,16 @@
         padding: 0.3em 0.5em;
         cursor: pointer;
         background-color: rgba($black, 0.2);
-        
+
         &:hover {
             background-color: rgba($black, 0.3);
         }
-        
+
         .folder-toggle {
             margin-right: 0.5em;
             color: $yellow;
         }
-        
+
         .folder-name {
             @include systemFonts;
             font-size: var(--font-size-14);
@@ -33,17 +34,17 @@
             color: $yellow;
         }
     }
-    
+
     .list-folder-content {
         padding: 0.2em;
-        
+
         &.hidden {
             display: none;
         }
-        
+
         .list-item {
             margin-bottom: 0.1em;
-            
+
             &:last-child {
                 margin-bottom: 0;
                 border-bottom: none;

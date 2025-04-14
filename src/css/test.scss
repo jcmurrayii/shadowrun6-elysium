@@ -1,7 +1,7 @@
 /**
  * CSS for Success Test Dialog styling.
  */
-@import 'config';
+@use 'config' as *;
 
 .sr6.form-dialog {
   .dialog-title {
@@ -15,6 +15,15 @@
      */
     .form-group-element-2 {
       flex: 2
+    }
+
+    .drain-value {
+      font-weight: bold;
+      font-size: 1.2em;
+      padding: 5px;
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 3px;
+      display: inline-block;
     }
 
     .form-group-element-1-right {

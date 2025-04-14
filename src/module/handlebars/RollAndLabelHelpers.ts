@@ -16,8 +16,39 @@ export const registerRollAndLabelHelpers = () => {
     });
 
     Handlebars.registerHelper('damageCode', function(damage: DamageData): SafeString {
-        const typeCode = Handlebars.helpers.damageAbbreviation(damage.type.value);
-        let code = `${damage.value}${typeCode}`;
+        // Add null checks to prevent errors when damage or damage.type is undefined
+        if (!damage) {
+            console.log('Shadowrun 6e | Damage object is undefined in damageCode helper');
+            return new Handlebars.SafeString('0S');
+        }
+
+        // Add debugging to see what's in the damage object
+        console.log('Shadowrun 6e | Damage object in damageCode helper:', damage);
+
+        // Make sure damage.value is defined
+        let damageValue = 0;
+        if (damage.value !== undefined) {
+            damageValue = damage.value;
+        } else if (damage.base !== undefined) {
+            damageValue = damage.base;
+        }
+
+        // Handle empty or missing type
+        let damageType = 'stun';
+        if (damage.type) {
+            if (damage.type.value && damage.type.value !== '') {
+                damageType = damage.type.value;
+            } else if (damage.type.base && damage.type.base !== '') {
+                damageType = damage.type.base;
+            }
+        } else {
+            // Create type object if it doesn't exist
+            damage.type = { base: 'stun', value: 'stun' };
+        }
+
+        const typeCode = Handlebars.helpers.damageAbbreviation(damageType);
+        let code = `${damageValue}${typeCode}`;
+        console.log('Shadowrun 6e | Damage code generated:', code);
         return new Handlebars.SafeString(code);
     });
 

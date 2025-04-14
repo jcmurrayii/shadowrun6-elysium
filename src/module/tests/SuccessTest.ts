@@ -117,6 +117,12 @@ export interface SuccessTestData extends TestData {
     values: SuccessTestValues
     // Scene Token Ids marked as targets of this test.
     targetActorsUuid: string[]
+    // Track if failures have been rerolled
+    rerolledFailures?: boolean
+    // Store the rerolled failures rolls
+    rerolledFailuresRolls?: SR6Roll[]
+    // Store the number of failures rerolled
+    rerolledFailuresCount?: number
 }
 
 export interface TestOptions {
@@ -901,13 +907,19 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
             this.manualHits.value :
             this.rolls.reduce((hits, roll) => hits + roll.hits, 0);
 
+        console.log('Shadowrun 6e | Calculating hits from rolls:', this.rolls);
+        console.log('Shadowrun 6e | Roll hits calculated:', rollHits);
+
         // Sum of all rolls!
         this.hits.base = rollHits;
 
         // First, calculate hits based on roll and modifiers.
         this.hits.value = Helpers.calcTotal(this.hits, { min: 0 });
+        console.log('Shadowrun 6e | Hits after modifiers:', this.hits.value);
+
         // Second, reduce hits by limit.
         this.hits.value = this.hasLimit ? Math.min(this.limit.value, this.hits.value) : this.hits.value;
+        console.log('Shadowrun 6e | Final hits value after limit:', this.hits.value);
 
         return this.hits;
     }
@@ -939,7 +951,16 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
 
     // In the case we've added appended hits, we want to separately display the hits value and the appended hits (ie. "7 + 5" instead of "12")
     get displayHits(): number | undefined {
-        return this.hits.value - (this.appendedHits || 0);
+        console.log('Shadowrun 6e | Getting displayHits');
+        console.log('Shadowrun 6e | hits.value:', this.hits.value);
+        console.log('Shadowrun 6e | hits.base:', this.hits.base);
+        console.log('Shadowrun 6e | appendedHits:', this.appendedHits);
+
+        // Make sure we're returning the actual number of hits from the roll
+        // For spellcasting tests, we want to show the actual number of hits
+        const result = this.hits.base;
+        console.log('Shadowrun 6e | displayHits result:', result);
+        return result;
     }
 
     // Hide dice pool and roll results as they are not relevant to the success of the test
@@ -1293,6 +1314,36 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
             }
         }
 
+        // Check if this is a major or minor action and if the actor has enough actions
+        if (this.data.action && this.data.action.type) {
+            // Only proceed if the actor has initiative
+            if (!this.actor.system.initiative) {
+                console.log(`Shadowrun 6e | Actor ${this.actor.name} has no initiative data`);
+                return true; // Allow the test to proceed, but it won't spend an action
+            }
+
+            const actions = this.actor.system.initiative.actions;
+            if (!actions) return true; // Allow the test to proceed, but it won't spend an action
+
+            if (this.data.action.type === 'major') {
+                // Check if the actor has at least 1 major action
+                if (actions.major < 1) {
+                    ui.notifications?.warn(game.i18n.format('SR6.NoMajorActionsLeft', {
+                        name: this.actor.name
+                    }));
+                    return false;
+                }
+            } else if (this.data.action.type === 'minor') {
+                // Check if the actor has at least 1 minor action
+                if (actions.minor < 1) {
+                    ui.notifications?.warn(game.i18n.format('SR6.NoMinorActionsLeft', {
+                        name: this.actor.name
+                    }));
+                    return false;
+                }
+            }
+        }
+
         return true;
     }
 
@@ -1307,6 +1358,33 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
         // Edge consumption.
         if (this.hasPushTheLimit || this.hasSecondChance) {
             await this.actor.useEdge();
+        }
+
+        // Check if this is a major or minor action and spend it if needed
+        if (this.data.action && this.data.action.type) {
+            if (this.data.action.type === 'major') {
+                console.log(`Shadowrun 6e | Test is a major action, attempting to spend a major action for ${this.actor.name}`);
+                // Attempt to spend a major action
+                const success = await this.actor.spendMajorAction();
+
+                // If the actor has no major actions left, don't proceed with the test
+                if (!success) {
+                    console.log(`Shadowrun 6e | ${this.actor.name} has no major actions left, canceling test`);
+                    return false;
+                }
+                console.log(`Shadowrun 6e | Successfully spent a major action for ${this.actor.name}`);
+            } else if (this.data.action.type === 'minor') {
+                console.log(`Shadowrun 6e | Test is a minor action, attempting to spend a minor action for ${this.actor.name}`);
+                // Attempt to spend a minor action
+                const success = await this.actor.spendMinorAction();
+
+                // If the actor has no minor actions left, don't proceed with the test
+                if (!success) {
+                    console.log(`Shadowrun 6e | ${this.actor.name} has no minor actions left, canceling test`);
+                    return false;
+                }
+                console.log(`Shadowrun 6e | Successfully spent a minor action for ${this.actor.name}`);
+            }
         }
 
         return true;
@@ -1586,6 +1664,123 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
     async afterFailure() { }
 
     /**
+     * Reroll a specified number of failures
+     * @param failuresToReroll The number of failures to reroll
+     */
+    async rerollFailures(failuresToReroll: number): Promise<this> {
+        console.log(`Shadowrun 6e | Rerolling ${failuresToReroll} failures for ${this.actor?.name || 'unknown actor'}`);
+        console.log('Shadowrun 6e | Test data before reroll:', this.data);
+        console.log('Shadowrun 6e | Original rolls:', this.rolls);
+
+        // We'll allow rerolling even if there's no actor
+        if (!this.actor) {
+            console.warn('Shadowrun 6e | No actor found, but continuing with reroll');
+        }
+        if (this.data.rerolledFailures) {
+            console.warn('Shadowrun 6e | Cannot reroll failures: Already rerolled');
+            return this;
+        } // Prevent multiple rerolls
+
+        // Count the total number of failures across all rolls
+        const totalFailures = this.rolls.reduce((failures, roll) => {
+            // Count dice that are not successes (not 5 or 6)
+            const rollFailures = roll.sides.filter(side => !SR.die.success.includes(side)).length;
+            console.log(`Shadowrun 6e | Roll ${roll.formula} has ${rollFailures} failures:`, roll.sides);
+            return failures + rollFailures;
+        }, 0);
+
+        console.log(`Shadowrun 6e | Total failures found: ${totalFailures}`);
+
+        // Limit the number of failures to reroll to the total number of failures
+        const actualFailuresToReroll = Math.min(failuresToReroll, totalFailures);
+        console.log(`Shadowrun 6e | Actual failures to reroll: ${actualFailuresToReroll}`);
+
+        if (actualFailuresToReroll <= 0) {
+            console.warn('Shadowrun 6e | No failures to reroll');
+            ui.notifications?.warn(game.i18n.localize('SR6.NoFailuresToReroll'));
+            return this;
+        }
+
+        // Create a new roll for the rerolled failures
+        const formula = this.buildFormula(actualFailuresToReroll, false);
+        console.log(`Shadowrun 6e | Creating new roll with formula: ${formula}`);
+        const roll = new SR6Roll(formula);
+
+        // Store the rerolled failures roll
+        this.data.rerolledFailuresRolls = [roll];
+        this.data.rerolledFailuresCount = actualFailuresToReroll;
+        this.data.rerolledFailures = true;
+        console.log('Shadowrun 6e | Stored rerolled failures in test data');
+
+        // Add these properties to the test object itself for template access
+        this.rerolledFailuresRolls = [roll];
+        this.rerolledFailures = true;
+        this.rerolledFailuresCount = actualFailuresToReroll;
+        console.log('Shadowrun 6e | Added rerolled failures properties to test object');
+
+        // Make sure the test has a messageUuid for saving later
+        if (!this.data.messageUuid && this.data.previousMessageId) {
+            this.data.messageUuid = this.data.previousMessageId;
+            console.log(`Shadowrun 6e | Using previousMessageId as messageUuid: ${this.data.messageUuid}`);
+        }
+
+        // Evaluate the roll
+        console.log('Shadowrun 6e | Evaluating rerolled failures roll...');
+        await roll.evaluate({async: true});
+        console.log('Shadowrun 6e | Rerolled failures roll results:', roll.sides);
+        console.log('Shadowrun 6e | Rerolled failures roll hits:', roll.hits);
+        console.log('Shadowrun 6e | Rerolled failures roll total:', roll.total);
+
+        // Show dice animation if DiceSoNice is enabled
+        try {
+            // @ts-ignore
+            if (game.dice3d) {
+                console.log('Shadowrun 6e | Showing DiceSoNice animation for rerolled failures');
+                // @ts-ignore
+                await game.dice3d.showForRoll(roll, game.user, true, null, false);
+            }
+        } catch (error) {
+            console.error('Shadowrun 6e | Error showing DiceSoNice animation:', error);
+        }
+
+        // Calculate the number of hits from the rerolled failures
+        const rerolledHits = roll.total;
+        this.rerolledFailuresHits = rerolledHits;
+        this.data.rerolledFailuresHits = rerolledHits;
+        console.log(`Shadowrun 6e | Rerolled failures produced ${rerolledHits} hits`);
+
+        // Add the new roll to the rolls array
+        this.rolls.push(roll);
+        console.log('Shadowrun 6e | Added rerolled failures roll to rolls array:', this.rolls);
+
+        // Recalculate hits
+        this.calculateDerivedValues();
+        console.log('Shadowrun 6e | Recalculated derived values:', this.data.values);
+
+        // Make sure the rerolled failures rolls are properly set in the data
+        // This is important for the template to access them
+        this.data.rerolledFailuresRolls = [roll];
+        console.log('Shadowrun 6e | Ensured rerolledFailuresRolls is set in data:', this.data.rerolledFailuresRolls);
+
+        // Update the message
+        console.log('Shadowrun 6e | Saving rerolled failures to message:', this.data.messageUuid);
+        await this.saveToMessage();
+
+        // Force a re-render of the message
+        if (this.data.messageUuid) {
+            const message = await fromUuid(this.data.messageUuid);
+            if (message) {
+                console.log('Shadowrun 6e | Re-rendering message:', message.id);
+                await message.render(true);
+            }
+        }
+
+        return this;
+    }
+
+
+
+    /**
      * Allow a test to determine if it's follow up tests should auto cast after test completion.
      *
      * This could be set to false to allow for tests to NOT have an immediate auto cast, due to
@@ -1746,15 +1941,113 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
         const linkedTokens = this.actor?.getActiveTokens(true) || [];
         const token = linkedTokens.length >= 1 ? linkedTokens[0] : undefined;
 
+        // Get action type and initiative timing information if available
+        let actionType = '';
+        let initiativeTiming = '';
+
+        if (this.data.action && this.data.action.type) {
+            actionType = this.data.action.type;
+            initiativeTiming = this.data.action.initiative_timing || 'none';
+        }
+
+        // Debug rerolled failures data
+        if (this.data.rerolledFailures) {
+            console.log('Shadowrun 6e | Preparing message template data with rerolled failures');
+            console.log('Shadowrun 6e | rerolledFailures:', this.data.rerolledFailures);
+            console.log('Shadowrun 6e | rerolledFailuresRolls:', this.data.rerolledFailuresRolls);
+            console.log('Shadowrun 6e | rerolledFailuresCount:', this.data.rerolledFailuresCount);
+            console.log('Shadowrun 6e | rerolledFailuresHits:', this.data.rerolledFailuresHits);
+        }
+
+        // Get the message ID if available
+        const message = this.data.messageUuid ? await fromUuid(this.data.messageUuid) : null;
+
+        // Debug rerolled failures data
+        if (this.data.rerolledFailures) {
+            console.log('Shadowrun 6e | Preparing message template data with rerolled failures');
+            console.log('Shadowrun 6e | rerolledFailures:', this.data.rerolledFailures);
+            console.log('Shadowrun 6e | rerolledFailuresRolls:', this.data.rerolledFailuresRolls);
+            console.log('Shadowrun 6e | rerolledFailuresCount:', this.data.rerolledFailuresCount);
+            console.log('Shadowrun 6e | rerolledFailuresHits:', this.data.rerolledFailuresHits);
+            console.log('Shadowrun 6e | this.rerolledFailures:', this.rerolledFailures);
+            console.log('Shadowrun 6e | this.rerolledFailuresRolls:', this.rerolledFailuresRolls);
+        }
+
+        // Debug the rolls to see what's in them
+        console.log('Shadowrun 6e | Rolls in _prepareMessageTemplateData:', this.rolls);
+        if (this.data.rerolledFailuresRolls) {
+            console.log('Shadowrun 6e | Rerolled failures rolls:', this.data.rerolledFailuresRolls);
+        }
+
+        // Debug the test data before creating the test object
+        console.log('Shadowrun 6e | Test data in _prepareMessageTemplateData:', this.data);
+
+        // Create a test object with all the necessary properties for the template
+        const testObject = {
+            ...this.data,
+            // Add properties from the test instance
+            rolls: this.rolls,
+            rerolledFailures: this.data.rerolledFailures,
+            rerolledFailuresRolls: this.data.rerolledFailuresRolls ? this.data.rerolledFailuresRolls.map(roll => ({
+                sides: roll.sides,
+                formula: roll.formula,
+                total: roll.total,
+                hits: roll.hits
+            })) : [],
+            rerolledFailuresCount: this.data.rerolledFailuresCount,
+            rerolledFailuresHits: this.data.rerolledFailuresHits,
+            // Add computed properties
+            displayHits: this.displayHits,
+            // Add raw hits from the roll for debugging
+            rawHits: this.hits.base,
+
+            // Debug the test data
+            debug_data: JSON.stringify(this.data),
+            pool: this.pool,
+            hits: this.hits,
+            threshold: this.threshold,
+            limit: this.limit,
+            netHits: this.netHits,
+            extendedHits: this.extendedHits,
+            glitches: this.glitches,
+            hasThreshold: this.hasThreshold,
+            hasLimit: this.hasLimit,
+            canSucceed: this.canSucceed,
+            canFail: this.canFail,
+            success: this.success,
+            failure: this.failure,
+            glitched: this.glitched,
+            criticalGlitched: this.criticalGlitched,
+            showSuccessLabel: this.showSuccessLabel,
+            successLabel: this.successLabel,
+            failureLabel: this.failureLabel,
+            usingManualRoll: this.usingManualRoll,
+            hasAction: this.hasAction,
+            code: this.code,
+            extended: this.extended,
+            opposing: this.opposing,
+            opposed: this.opposed,
+            autoSuccess: this.autoSuccess
+        };
+
         return {
             title: this.data.title,
-            test: this,
+            test: testObject,
+            // Add isGM flag to control visibility of dice pools and rolls
+            isGM: game.user.isGM,
             // Note: While ChatData uses ids, this uses full documents.
             speaker: {
                 actor: this.actor,
                 token: token
             },
             item: this.item,
+            // Add the message for the reroll button
+            message: message,
+            // Add action type and initiative timing information
+            actionType: actionType,
+            actionTypeLabel: actionType ? game.i18n.localize(SR6.actionTypes[actionType]) : '',
+            initiativeTiming: initiativeTiming,
+            initiativeTimingLabel: initiativeTiming ? game.i18n.localize(SR6.initiativeTiming[initiativeTiming]) : '',
             opposedActions: this._prepareOpposedActionsTemplateData(),
             followupActions: this._prepareFollowupActionsTemplateData(),
             resultActions: this._prepareResultActionsTemplateData(),
@@ -1908,11 +2201,48 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
      * @param uuid
      */
     async saveToMessage(uuid: string | undefined = this.data.messageUuid) {
-        if (!uuid) return;
+        if (!uuid) {
+            console.warn('Shadowrun 6e | Cannot save to message: No message UUID');
 
+            // Try to get the message ID from the chat message element
+            const chatMessage = $('.chat-message.selected');
+            if (chatMessage.length > 0) {
+                const messageId = chatMessage.data('messageId');
+                if (messageId) {
+                    uuid = `ChatMessage.${messageId}`;
+                    console.log(`Shadowrun 6e | Found message ID from selected chat message: ${messageId}`);
+                    this.data.messageUuid = uuid;
+                }
+            }
+
+            if (!uuid) return;
+        }
+
+        console.log(`Shadowrun 6e | Saving test to message: ${uuid}`);
         const message = await fromUuid(uuid);
 
-        await message?.setFlag(SYSTEM_NAME, FLAGS.Test, this.toJSON());
+        if (!message) {
+            console.warn(`Shadowrun 6e | Cannot save to message: Message not found for UUID ${uuid}`);
+            return;
+        }
+
+        // Log the test data before saving
+        if (this.data.rerolledFailures) {
+            console.log('Shadowrun 6e | Test data before saving to message:');
+            console.log('Shadowrun 6e | rerolledFailures:', this.data.rerolledFailures);
+            console.log('Shadowrun 6e | rerolledFailuresRolls:', this.data.rerolledFailuresRolls);
+            console.log('Shadowrun 6e | rerolledFailuresCount:', this.data.rerolledFailuresCount);
+            console.log('Shadowrun 6e | rerolledFailuresHits:', this.data.rerolledFailuresHits);
+        }
+
+        const testData = this.toJSON();
+        console.log('Shadowrun 6e | Test data to save:', testData);
+
+        await message.setFlag(SYSTEM_NAME, FLAGS.Test, testData);
+        console.log('Shadowrun 6e | Test saved to message');
+
+        // Force a re-render of the message
+        message.render(true);
     }
 
     /**
@@ -1932,6 +2262,7 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
         html.find('.result-action').on('click', this._castResultAction);
         html.find('.chat-select-link').on('click', this._selectSceneToken);
         html.find('.test-action').on('click', this._castTestAction);
+        html.find('.reroll-failures').on('click', this._rerollFailures);
 
         DamageApplicationFlow.handleRenderChatMessage(message, html, data);
 
@@ -1976,6 +2307,98 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
         if (!item) return console.error("Shadowrun 6e | Item doesn't exist for uuid", uuid);
 
         item.castAction(event);
+    }
+
+    /**
+     * Handle the reroll failures button click
+     * @param event The click event
+     */
+    static async _rerollFailures(event) {
+        event.preventDefault();
+        console.log('Shadowrun 6e | Reroll failures button clicked');
+
+        const button = $(event.currentTarget);
+        const chatMessage = button.closest('.chat-message');
+        console.log('Shadowrun 6e | Chat message element:', chatMessage);
+        const messageId = chatMessage.data('messageId');
+        console.log(`Shadowrun 6e | Message ID: ${messageId}`);
+
+        if (!messageId) {
+            console.error('Shadowrun 6e | No message ID found');
+            ui.notifications?.error(game.i18n.localize('SR6.Errors.NoMessageId'));
+            return;
+        }
+
+        // Get the test from the message
+        console.log(`Shadowrun 6e | Getting test from message: ${messageId}`);
+        const test = await TestCreator.fromMessage(messageId);
+        console.log('Shadowrun 6e | Test from message:', test);
+
+        if (!test) {
+            console.error('Shadowrun 6e | No test found in message');
+            ui.notifications?.error(game.i18n.localize('SR6.Errors.NoTestFound'));
+            return;
+        }
+
+        // Count the total number of failures across all rolls
+        console.log('Shadowrun 6e | Counting failures in rolls:', test.rolls);
+        const totalFailures = test.rolls.reduce((failures, roll) => {
+            // Count dice that are not successes (not 5 or 6)
+            const rollFailures = roll.sides.filter(side => !SR.die.success.includes(side)).length;
+            console.log(`Shadowrun 6e | Roll ${roll.formula} has ${rollFailures} failures:`, roll.sides);
+            return failures + rollFailures;
+        }, 0);
+        console.log(`Shadowrun 6e | Total failures found: ${totalFailures}`);
+
+        if (totalFailures <= 0) {
+            console.warn('Shadowrun 6e | No failures to reroll');
+            ui.notifications?.warn(game.i18n.localize('SR6.NoFailuresToReroll'));
+            return;
+        }
+
+        // Prompt the user for the number of failures to reroll
+        const content = `
+            <p>${game.i18n.localize('SR6.EnterNumberOfFailuresToReroll')}</p>
+            <div class="form-group">
+                <label>${game.i18n.localize('SR6.NumberOfFailuresToReroll')}</label>
+                <input type="number" name="failures" value="${totalFailures}" min="1" max="${totalFailures}" />
+            </div>
+            <p class="note">${game.i18n.format('SR6.TotalFailuresFound', {count: totalFailures})}</p>
+        `;
+
+        const dialog = new Dialog({
+            title: game.i18n.localize('SR6.RerollFailures'),
+            content,
+            buttons: {
+                reroll: {
+                    label: game.i18n.localize('SR6.Reroll'),
+                    callback: async (html) => {
+                        const input = html.find('input[name="failures"]');
+                        const inputValue = input.val() as string;
+                        console.log(`Shadowrun 6e | Input value: ${inputValue}`);
+                        const failures = parseInt(inputValue) || 0;
+                        console.log(`Shadowrun 6e | Parsed failures: ${failures}`);
+
+                        if (failures <= 0) {
+                            console.warn('Shadowrun 6e | No failures to reroll from input');
+                            ui.notifications?.warn(game.i18n.localize('SR6.NoFailuresToReroll'));
+                            return;
+                        }
+
+                        // Reroll the failures
+                        console.log(`Shadowrun 6e | Calling rerollFailures with ${failures} failures`);
+                        await test.rerollFailures(failures);
+                        console.log('Shadowrun 6e | Reroll complete');
+                    }
+                },
+                cancel: {
+                    label: game.i18n.localize('SR6.Cancel')
+                }
+            },
+            default: 'reroll'
+        });
+
+        dialog.render(true);
     }
 
     static async chatLogListeners(chatLog: ChatLog, html, data) {

@@ -4,6 +4,7 @@
  * In general the effect config isn't changed much from default Foundry styling.
  * Design here is only for added elements to adhere to Foundry styling.
 */
+@use 'config' as *;
 .active-effect-sheet {
 
     // Match tagify input selection to Foundry's default input selection

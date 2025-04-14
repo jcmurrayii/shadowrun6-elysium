@@ -8,6 +8,8 @@ import { SkillEditSheet } from "../../apps/skills/SkillEditSheet";
 import { SR6Actor } from "../SR6Actor";
 import { KnowledgeSkillEditSheet } from "../../apps/skills/KnowledgeSkillEditSheet";
 import { LanguageSkillEditSheet } from "../../apps/skills/LanguageSkillEditSheet";
+// Forward reference for type checking
+type SR6CharacterSheet = import('./SR6CharacterSheet').SR6CharacterSheet;
 import { MoveInventoryDialog } from "../../apps/dialogs/MoveInventoryDialog";
 import { ChummerImportForm } from '../../apps/chummer-import-form';
 import { GenesisImportForm } from '../../apps/genesis-import-form';
@@ -370,6 +372,10 @@ export class SR6BaseActorSheet extends ActorSheet {
         // Freshly imported item toggle
         html.find('.toggle-fresh-import-all-off').on('click', async (event) => this._toggleAllFreshImportFlags(event, false));
         html.find('.toggle-fresh-import-all-on').on('click', async (event) => this._toggleAllFreshImportFlags(event, true));
+
+        // Action tracker
+        html.find('.reset-actions').on('click', this._onResetActions.bind(this));
+        html.find('.convert-actions').on('click', this._onConvertActions.bind(this));
 
         // Matrix actions
         html.find('.ensure-matrix-actions').on('click', this._onEnsureMatrixActions.bind(this));
@@ -1910,6 +1916,39 @@ export class SR6BaseActorSheet extends ActorSheet {
     }
 
     /**
+     * Handle clicking the reset actions button
+     * @param event The click event
+     */
+    async _onResetActions(event) {
+        event.preventDefault();
+        await this.actor.resetActions();
+    }
+
+    /**
+     * Handle clicking the convert actions button
+     * @param event The click event
+     */
+    async _onConvertActions(event) {
+        event.preventDefault();
+
+        // Log the actor information for debugging
+        console.log(`Shadowrun 6e | Converting actions for actor:`, {
+            name: this.actor.name,
+            id: this.actor.id,
+            actions: this.actor.system.initiative.actions
+        });
+
+        // Make sure we're using the correct actor
+        const actor = this.actor;
+        if (!actor) {
+            console.error(`Shadowrun 6e | No actor found for sheet`);
+            return;
+        }
+
+        await actor.convertMinorToMajorAction();
+    }
+
+    /**
      * Trigger a full reset of all run related actor data.
      *
      * @param event
@@ -1985,5 +2024,13 @@ export class SR6BaseActorSheet extends ActorSheet {
         event.preventDefault();
         await this.actor.ensureMatrixActions();
         ui.notifications?.info(`Matrix actions have been ensured for ${this.actor.name}.`);
+
+        // Clear the matrix actions cache if this is a character sheet
+        if (this instanceof SR6CharacterSheet) {
+            (this as SR6CharacterSheet).clearMatrixActionsCache();
+        }
+
+        // Force a refresh of the sheet to update the UI
+        this.render(true);
     }
 }

@@ -109,6 +109,11 @@ declare namespace Shadowrun {
         astral: InitiativeType;
         current: InitiativeType;
         edge?: boolean;
+        actions?: {
+            major: number;
+            minor: number;
+            free: number;
+        };
     };
 
     export type SkillEditFormData = {

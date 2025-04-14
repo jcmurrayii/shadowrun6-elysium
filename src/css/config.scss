@@ -1,2 +1,7 @@
-@import 'config/mixins';
-@import 'config/variables';
+// Forward mixins and variables to make them available to files that use this file
+@forward 'config/mixins';
+@forward 'config/variables';
+
+// Use mixins and variables within this file if needed
+@use 'config/mixins' as mixins;
+@use 'config/variables' as vars;
