@@ -182,7 +182,10 @@
         }
     },
     "SR6.Agent": "Agent",
-    "SR6.Ammo": "Ammo",
+    "SR6.Ammo": {
+        "_": "Ammo",
+        "Used": "Ammo Used"
+    },
     "SR6.AmmoFull": "Ammo Full",
     "SR6.AmmoGelRounds": "Gel Rounds",
     "SR6.Aoe": "AoE",
@@ -492,7 +495,10 @@
     "SR6.FadeAttribute": "Fade Attribute",
     "SR6.FadeValue": "Fade Value",
     "SR6.Filter": "Filter",
-    "SR6.FireMode": "Fire Mode",
+    "SR6.FireMode": {
+        "_": "Fire Mode",
+        "Effects": "Fire Mode Effects"
+    },
     "SR6.Force": "Force",
     "SR6.FullDefense": "Full Defense",
     "SR6.FullDefenseAttribute": "Full Defense Attribute",
@@ -552,9 +558,7 @@
         }
     },
     "SR6.ImportCharacter": "Import Character",
-    "SR6.ImportCharacterChoose": "Choose an import format",
     "SR6.ChummerImport": "Chummer Import",
-    "SR6.GenesisImport": "Genesis Import",
     "SR6.Incoming": "Incoming",
     "SR6.IncomingDamage": "Incoming Damage",
     "SR6.IncomingDrain": "Incoming Drain",
@@ -764,7 +768,8 @@
         "Edge": "No Edge left to consume",
         "Initiative": "Not enough initiative score",
         "SomeAmmo": "Not enough ammunition to fire in selected mode, mode modifiers will be reduced.",
-        "SomeAmmoMelee": "Not enough ammunition left to make a melee attack"
+        "SomeAmmoMelee": "Not enough ammunition left to make a melee attack",
+        "NotEnoughAmmoForFullEffect": "Not enough ammunition for full firing mode effect. Reduced effects will be applied."
     },
     "SR6.ModPoints": "Mod Points",
     "SR6.Modification": "Modification",
@@ -1446,12 +1451,17 @@
             "FullAuto": "FA",
             "FullAutoLong": "FA-L",
             "FullAutoShort": "FA",
+            "FullAutoFull": "Full Auto",
             "Modes": "Modes",
+            "Current": "Current Mode",
             "SemiAuto": "SA",
             "SemiAutoBurst": "SA-BF",
             "SemiAutoShort": "SA",
+            "SemiAutoFull": "Semi-Automatic",
             "SingleShot": "SS",
-            "SingleShotShort": "SS"
+            "SingleShotShort": "SS",
+            "SingleShotFull": "Single Shot",
+            "BurstFireFull": "Burst Fire"
         },
         "Mods": "Mods",
         "Range": {
@@ -1543,6 +1553,7 @@
     "SR6.MatrixAction.HackingProgramReason": "active hacking program",
     "SR6.MatrixAction.IllegalActionReason": "illegal matrix action",
     "SR6.MatrixAction.OverwatchAccrued": "{name} accrued {amount} Overwatch Score ({reasons}).",
-    "SR6.MatrixAction.IllegalActionOpposedOverwatch": "{name} accrued {amount} Overwatch Score from hits scored against them during an illegal matrix action."
+    "SR6.MatrixAction.IllegalActionOpposedOverwatch": "{name} accrued {amount} Overwatch Score from hits scored against them during an illegal matrix action.",
+    "SR6.Yes": "Yes"
 }
 

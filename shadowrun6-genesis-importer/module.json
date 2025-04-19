@@ -1,0 +1,29 @@
+{
+  "name": "shadowrun6-genesis-importer",
+  "title": "Shadowrun 6e Genesis Character Importer",
+  "description": "A module for importing characters from Genesis character creator into Shadowrun 6e Elysium system.",
+  "version": "1.0.0",
+  "author": "Shadowrun 6e Elysium Team",
+  "minimumCoreVersion": "10",
+  "compatibleCoreVersion": "10",
+  "dependencies": [
+    {
+      "name": "shadowrun6-elysium",
+      "type": "system"
+    }
+  ],
+  "esmodules": [
+    "module/main.js"
+  ],
+  "styles": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "url": "https://github.com/yourusername/shadowrun6-genesis-importer",
+  "manifest": "https://github.com/yourusername/shadowrun6-genesis-importer/releases/latest/download/module.json",
+  "download": "https://github.com/yourusername/shadowrun6-genesis-importer/releases/latest/download/shadowrun6-genesis-importer.zip"
+}

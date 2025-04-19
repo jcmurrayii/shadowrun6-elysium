@@ -1,0 +1,10 @@
+{
+  "shadowrun6-genesis-importer": {
+    "title": "Shadowrun 6e Genesis Character Importer",
+    "import": {
+      "title": "Genesis Import",
+      "button": "Import from Genesis",
+      "complete": "Genesis import complete! Please check everything to ensure it was imported correctly."
+    }
+  }
+}

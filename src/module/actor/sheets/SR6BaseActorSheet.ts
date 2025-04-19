@@ -12,7 +12,6 @@ import { LanguageSkillEditSheet } from "../../apps/skills/LanguageSkillEditSheet
 type SR6CharacterSheet = import('./SR6CharacterSheet').SR6CharacterSheet;
 import { MoveInventoryDialog } from "../../apps/dialogs/MoveInventoryDialog";
 import { ChummerImportForm } from '../../apps/chummer-import-form';
-import { GenesisImportForm } from '../../apps/genesis-import-form';
 import SR6SheetFilters = Shadowrun.SR6SheetFilters;
 import SR6ActorSheetData = Shadowrun.SR6ActorSheetData;
 import SkillField = Shadowrun.SkillField;
@@ -382,6 +381,9 @@ export class SR6BaseActorSheet extends ActorSheet {
 
         // Reset Actor Run Data
         html.find('.reset-actor-run-data').on('click', this._onResetActorRunData.bind(this));
+
+        // Start New Scene
+        html.find('.start-new-scene').on('click', this._onStartNewSchene.bind(this));
     }
 
     /**
@@ -1791,43 +1793,12 @@ export class SR6BaseActorSheet extends ActorSheet {
     _onShowImportCharacter(event) {
         event.preventDefault();
 
-        // Create a dialog to choose between Chummer and Genesis import
-        const content = `
-            <div style="text-align: center; margin-bottom: 10px;">
-                <p>${game.i18n.localize('SR6.ImportCharacterChoose')}</p>
-            </div>
-            <div style="display: flex; justify-content: space-around;">
-                <button class="chummer-import">${game.i18n.localize('SR6.ChummerImport')}</button>
-                <button class="genesis-import">${game.i18n.localize('SR6.GenesisImport')}</button>
-            </div>
-        `;
-
-        const dialog = new Dialog({
-            title: game.i18n.localize('SR6.ImportCharacter'),
-            content: content,
-            buttons: {},
-            render: html => {
-                html.find('.chummer-import').click(() => {
-                    dialog.close();
-                    const options = {
-                        name: 'chummer-import',
-                        title: game.i18n.localize('SR6.ChummerImport'),
-                    };
-                    new ChummerImportForm(this.actor, options).render(true);
-                });
-
-                html.find('.genesis-import').click(() => {
-                    dialog.close();
-                    const options = {
-                        name: 'genesis-import',
-                        title: game.i18n.localize('SR6.GenesisImport'),
-                    };
-                    new GenesisImportForm(this.actor, options).render(true);
-                });
-            }
-        });
-
-        dialog.render(true);
+        // Open Chummer import directly
+        const options = {
+            name: 'chummer-import',
+            title: game.i18n.localize('SR6.ChummerImport'),
+        };
+        new ChummerImportForm(this.actor, options).render(true);
     }
 
     _setupCustomCheckbox(html) {
@@ -1957,8 +1928,14 @@ export class SR6BaseActorSheet extends ActorSheet {
         this.actor.resetRunData()
     }
 
-    _onStartNewSchene(event) {
-        this.actor.newSceneSetup()
+    async _onStartNewSchene(event) {
+        try {
+            event.preventDefault();
+            await this.actor.newSceneSetup();
+        } catch (error) {
+            console.error(`Shadowrun 6e | Error in _onStartNewSchene for actor ${this.actor.name}:`, error);
+            ui.notifications?.error(`Error starting new scene for ${this.actor.name}. See console for details.`);
+        }
     }
 
     /**

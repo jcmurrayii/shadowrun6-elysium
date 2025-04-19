@@ -1,0 +1,39 @@
+{
+  "name": "Attribute Mastery: Strength",
+  "type": "quality",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "description": "<p>You have mastered your Strength attribute. You gain Edge when making Strength-based tests.</p>",
+    "type": "positive",
+    "subtype": "physical",
+    "karma": 8,
+    "source": "Custom",
+    "page": ""
+  },
+  "effects": [
+    {
+      "label": "Strength Test: Edge gain",
+      "icon": "icons/svg/aura.svg",
+      "origin": "",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "changes": [],
+      "flags": {
+        "core": {
+          "statusId": ""
+        },
+        "shadowrun6-elysium": {
+          "description": "Gain edge when making Strength tests"
+        }
+      }
+    }
+  ]
+}

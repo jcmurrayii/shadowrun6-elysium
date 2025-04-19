@@ -1,0 +1,39 @@
+{
+  "name": "Attribute Mastery: Willpower",
+  "type": "quality",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "description": "<p>You have mastered your Willpower attribute. You gain Edge when making Willpower-based tests.</p>",
+    "type": "positive",
+    "subtype": "mental",
+    "karma": 8,
+    "source": "Custom",
+    "page": ""
+  },
+  "effects": [
+    {
+      "label": "Willpower Test: Edge gain",
+      "icon": "icons/svg/aura.svg",
+      "origin": "",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "changes": [],
+      "flags": {
+        "core": {
+          "statusId": ""
+        },
+        "shadowrun6-elysium": {
+          "description": "Gain edge when making Willpower tests"
+        }
+      }
+    }
+  ]
+}

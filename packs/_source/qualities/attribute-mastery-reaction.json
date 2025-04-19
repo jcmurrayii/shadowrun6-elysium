@@ -1,0 +1,39 @@
+{
+  "name": "Attribute Mastery: Reaction",
+  "type": "quality",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "description": "<p>You have mastered your Reaction attribute. You gain Edge when making Reaction-based tests.</p>",
+    "type": "positive",
+    "subtype": "physical",
+    "karma": 8,
+    "source": "Custom",
+    "page": ""
+  },
+  "effects": [
+    {
+      "label": "Reaction Test: Edge gain",
+      "icon": "icons/svg/aura.svg",
+      "origin": "",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "changes": [],
+      "flags": {
+        "core": {
+          "statusId": ""
+        },
+        "shadowrun6-elysium": {
+          "description": "Gain edge when making Reaction tests"
+        }
+      }
+    }
+  ]
+}
