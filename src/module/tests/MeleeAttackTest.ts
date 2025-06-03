@@ -249,11 +249,11 @@ export class MeleeAttackTest extends SuccessTest<MeleeAttackData> {
         if (this.item === undefined) return true;
         if (!this.item.usesAmmo) return true;
 
-        // Consume one ammo per attack.
-        if (!this.item.hasAmmo(1)) {
-            ui.notifications?.error('SR6.MissingRessource.SomeAmmoMelee', {localize: true});
-            return false;
-        }
+        // // Consume one ammo per attack.
+        // if (!this.item.hasAmmo(1)) {
+        //     ui.notifications?.error('SR6.MissingRessource.SomeAmmoMelee', {localize: true});
+        //     return false;
+        // }
 
         return super.canConsumeDocumentResources();
     }
@@ -272,15 +272,15 @@ export class MeleeAttackTest extends SuccessTest<MeleeAttackData> {
      * Reduce the melee weapon ammunition for this attack.
      */
     async consumeWeaponAmmo(): Promise<boolean> {
-        if (this.item === undefined) return true;
-        if (!this.item.usesAmmo) return true;
-
-        // Notify user about some but not no ammo. Still let them punch though.
-        if (!this.item.hasAmmo(1)) {
-            ui.notifications?.warn('SR6.MissingRessource.SomeAmmoMelee', {localize: true});
-        }
-
-        await this.item.useAmmo(1);
+        // if (this.item === undefined) return true;
+        // if (!this.item.usesAmmo) return true;
+        //
+        // // Notify user about some but not no ammo. Still let them punch though.
+        // if (!this.item.hasAmmo(1)) {
+        //     ui.notifications?.warn('SR6.MissingRessource.SomeAmmoMelee', {localize: true});
+        // }
+        //
+        // await this.item.useAmmo(1);
 
         return true;
     }
