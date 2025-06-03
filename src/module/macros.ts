@@ -22,7 +22,7 @@ export async function createItemMacro(dropData, slot) {
     const item = await SR6Item.fromDropData(dropData);
     if (!(item instanceof SR6Item)) return console.error(`Shadowrun 6e | Macro Drop expected an item document but got a different document type`, item);
 
-    const command = `game['shadowrun6-elysium'].rollItemMacro("${item.name}");`;
+    const command = `game['sr6elysium'].rollItemMacro("${item.name}");`;
     let macro = game.macros.contents.find((m) => m.name === item.name);
     if (!macro) {
         macro = await Macro.create(
@@ -32,7 +32,7 @@ export async function createItemMacro(dropData, slot) {
                 type: 'script',
                 img: item.img,
                 command: command,
-                flags: { 'shadowrun6-elysium.itemMacro': true },
+                flags: { 'sr6elysium.itemMacro': true },
             },
             { renderSheet: false },
         );
@@ -80,7 +80,7 @@ export async function createSkillMacro(data: {skillId: string, skill: SkillField
     if (existingMacro) return;
 
     // Setup macro data.
-    const command = `game['shadowrun6-elysium'].rollSkillMacro("${name}");`;
+    const command = `game['sr6elysium'].rollSkillMacro("${name}");`;
     const macro = await Macro.create({
         name,
         type: 'script',

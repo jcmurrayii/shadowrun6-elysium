@@ -168,10 +168,10 @@ export interface SuccessTestMessageData {
  * be an action configuration that is used to retrieve and create the test.
  *
  * The test registry is a simple key value store mapping names to classes underneath
- * game['shadowrun6-elysium'].tests
+ * game['sr6elysium'].tests
  *
  * For the default SuccessTest class the registry entry would look like this:
- * > game['shadowrun6-elysium'].tests['SuccessTest'] = SuccessTest;
+ * > game['sr6elysium'].tests['SuccessTest'] = SuccessTest;
  * and it would be retrieved by the TestCreator like this:
  * > const SuccessTest = TestCreate._getTestClass('SuccessTest');
  */
@@ -404,7 +404,7 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
      * Create the default formula for this test based on it's pool
      *
      * FoundryVTT documentation:
-     * shadowrun6-elysium: SR6#44
+     * sr6elysium: SR6#44
      *
      */
     get formula(): string {
@@ -486,14 +486,14 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
      * Allow other implementations to override what TestDialog template to use.
      */
     get _dialogTemplate(): string {
-        return 'systems/shadowrun6-elysium/dist/templates/apps/dialogs/success-test-dialog.html';
+        return 'systems/sr6elysium/dist/templates/apps/dialogs/success-test-dialog.html';
     }
 
     /**
      * Allow other implementations to override what ChatMessage template to use.
      */
     get _chatMessageTemplate(): string {
-        return 'systems/shadowrun6-elysium/dist/templates/rolls/success-test-message.html';
+        return 'systems/sr6elysium/dist/templates/rolls/success-test-message.html';
     }
 
     /**

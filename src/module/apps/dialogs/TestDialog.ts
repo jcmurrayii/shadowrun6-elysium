@@ -75,7 +75,7 @@ export class TestDialog extends FormDialog {
      * data.templatePath work's the same and can be used as well.
      */
     override get templateContent(): string {
-        return 'systems/shadowrun6-elysium/dist/templates/apps/dialogs/success-test-dialog.html';
+        return 'systems/sr6elysium/dist/templates/apps/dialogs/success-test-dialog.html';
     }
 
     //@ts-expect-error

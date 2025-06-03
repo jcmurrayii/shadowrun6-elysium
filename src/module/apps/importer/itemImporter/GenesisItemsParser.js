@@ -12,57 +12,57 @@ export class GenesisItemsParser extends ItemsParser {
      */
     parse(genesisCharacter, importOptions) {
         console.log('Parsing items from Genesis character');
-        
+
         const items = [];
-        
+
         // Parse weapons
         if (importOptions.weapons && genesisCharacter.weapons) {
             this.parseWeapons(items, genesisCharacter.weapons, importOptions);
         }
-        
+
         // Parse armor
         if (importOptions.armor && genesisCharacter.armor) {
             this.parseArmor(items, genesisCharacter.armor, importOptions);
         }
-        
+
         // Parse cyberware
         if (importOptions.cyberware && genesisCharacter.cyberware) {
             this.parseCyberware(items, genesisCharacter.cyberware, importOptions);
         }
-        
+
         // Parse equipment
         if (importOptions.equipment && genesisCharacter.equipment) {
             this.parseEquipment(items, genesisCharacter.equipment, importOptions);
         }
-        
+
         // Parse qualities
         if (importOptions.qualities && genesisCharacter.qualities) {
             this.parseQualities(items, genesisCharacter.qualities, importOptions);
         }
-        
+
         // Parse powers
         if (importOptions.powers && genesisCharacter.powers) {
             this.parsePowers(items, genesisCharacter.powers, importOptions);
         }
-        
+
         // Parse spells
         if (importOptions.spells && genesisCharacter.spells) {
             this.parseSpells(items, genesisCharacter.spells, importOptions);
         }
-        
+
         // Parse contacts
         if (importOptions.contacts && genesisCharacter.contacts) {
             this.parseContacts(items, genesisCharacter.contacts, importOptions);
         }
-        
+
         // Parse lifestyles
         if (importOptions.lifestyles && genesisCharacter.lifestyles) {
             this.parseLifestyles(items, genesisCharacter.lifestyles, importOptions);
         }
-        
+
         return items;
     }
-    
+
     /**
      * Parses weapons from a Genesis character file.
      * @param {*} items The array to add items to.
@@ -114,11 +114,11 @@ export class GenesisItemsParser extends ItemsParser {
                     }
                 }
             };
-            
+
             items.push(weaponItem);
         }
     }
-    
+
     /**
      * Gets the weapon skill based on the weapon type.
      * @param {*} weapon The weapon data.
@@ -132,10 +132,10 @@ export class GenesisItemsParser extends ItemsParser {
             'Throwing': 'athletics',
             'Unarmed': 'unarmed_combat'
         };
-        
+
         return skillMap[weapon.type] || 'firearms';
     }
-    
+
     /**
      * Gets the weapon range based on the weapon type.
      * @param {*} weapon The weapon data.
@@ -164,7 +164,7 @@ export class GenesisItemsParser extends ItemsParser {
             };
         }
     }
-    
+
     /**
      * Gets an icon for a weapon.
      * @param {*} weapon The weapon data.
@@ -175,18 +175,18 @@ export class GenesisItemsParser extends ItemsParser {
         if (!importOptions.assignIcons) {
             return 'icons/svg/item-bag.svg';
         }
-        
+
         // Map weapon types to icons
         const iconMap = {
-            'Melee': 'systems/shadowrun6-elysium/dist/icons/redist/melee.svg',
-            'Ranged': 'systems/shadowrun6-elysium/dist/icons/redist/gun.svg',
-            'Throwing': 'systems/shadowrun6-elysium/dist/icons/redist/thrown.svg',
-            'Unarmed': 'systems/shadowrun6-elysium/dist/icons/redist/unarmed.svg'
+            'Melee': 'systems/sr6elysium/dist/icons/redist/melee.svg',
+            'Ranged': 'systems/sr6elysium/dist/icons/redist/gun.svg',
+            'Throwing': 'systems/sr6elysium/dist/icons/redist/thrown.svg',
+            'Unarmed': 'systems/sr6elysium/dist/icons/redist/unarmed.svg'
         };
-        
+
         return iconMap[weapon.type] || 'icons/svg/item-bag.svg';
     }
-    
+
     /**
      * Parses armor from a Genesis character file.
      * @param {*} items The array to add items to.
@@ -198,7 +198,7 @@ export class GenesisItemsParser extends ItemsParser {
             const armorItem = {
                 name: armor.name,
                 type: 'armor',
-                img: importOptions.assignIcons ? 'systems/shadowrun6-elysium/dist/icons/redist/armor.svg' : 'icons/svg/item-bag.svg',
+                img: importOptions.assignIcons ? 'systems/sr6elysium/dist/icons/redist/armor.svg' : 'icons/svg/item-bag.svg',
                 system: {
                     description: {
                         value: armor.description || ''
@@ -221,11 +221,11 @@ export class GenesisItemsParser extends ItemsParser {
                     }
                 }
             };
-            
+
             items.push(armorItem);
         }
     }
-    
+
     /**
      * Parses cyberware from a Genesis character file.
      * @param {*} items The array to add items to.
@@ -237,7 +237,7 @@ export class GenesisItemsParser extends ItemsParser {
             const cyberwareItem = {
                 name: ware.name,
                 type: 'cyberware',
-                img: importOptions.assignIcons ? 'systems/shadowrun6-elysium/dist/icons/redist/cyberware.svg' : 'icons/svg/item-bag.svg',
+                img: importOptions.assignIcons ? 'systems/sr6elysium/dist/icons/redist/cyberware.svg' : 'icons/svg/item-bag.svg',
                 system: {
                     description: {
                         value: ware.description || ''
@@ -257,11 +257,11 @@ export class GenesisItemsParser extends ItemsParser {
                     }
                 }
             };
-            
+
             items.push(cyberwareItem);
         }
     }
-    
+
     /**
      * Parses equipment from a Genesis character file.
      * @param {*} items The array to add items to.
@@ -273,7 +273,7 @@ export class GenesisItemsParser extends ItemsParser {
             const gearItem = {
                 name: gear.name,
                 type: 'equipment',
-                img: importOptions.assignIcons ? 'systems/shadowrun6-elysium/dist/icons/redist/gear.svg' : 'icons/svg/item-bag.svg',
+                img: importOptions.assignIcons ? 'systems/sr6elysium/dist/icons/redist/gear.svg' : 'icons/svg/item-bag.svg',
                 system: {
                     description: {
                         value: gear.description || ''
@@ -292,11 +292,11 @@ export class GenesisItemsParser extends ItemsParser {
                     }
                 }
             };
-            
+
             items.push(gearItem);
         }
     }
-    
+
     /**
      * Parses qualities from a Genesis character file.
      * @param {*} items The array to add items to.
@@ -320,11 +320,11 @@ export class GenesisItemsParser extends ItemsParser {
                     }
                 }
             };
-            
+
             items.push(qualityItem);
         }
     }
-    
+
     /**
      * Gets an icon for a quality.
      * @param {*} quality The quality data.
@@ -335,16 +335,16 @@ export class GenesisItemsParser extends ItemsParser {
         if (!importOptions.assignIcons) {
             return 'icons/svg/item-bag.svg';
         }
-        
+
         // Map quality types to icons
         const iconMap = {
-            'positive': 'systems/shadowrun6-elysium/dist/icons/redist/quality-positive.svg',
-            'negative': 'systems/shadowrun6-elysium/dist/icons/redist/quality-negative.svg'
+            'positive': 'systems/sr6elysium/dist/icons/redist/quality-positive.svg',
+            'negative': 'systems/sr6elysium/dist/icons/redist/quality-negative.svg'
         };
-        
+
         return iconMap[quality.type] || 'icons/svg/item-bag.svg';
     }
-    
+
     /**
      * Parses powers from a Genesis character file.
      * @param {*} items The array to add items to.
@@ -356,7 +356,7 @@ export class GenesisItemsParser extends ItemsParser {
             const powerItem = {
                 name: power.name,
                 type: 'adept_power',
-                img: importOptions.assignIcons ? 'systems/shadowrun6-elysium/dist/icons/redist/adept.svg' : 'icons/svg/item-bag.svg',
+                img: importOptions.assignIcons ? 'systems/sr6elysium/dist/icons/redist/adept.svg' : 'icons/svg/item-bag.svg',
                 system: {
                     description: {
                         value: power.description || ''
@@ -373,11 +373,11 @@ export class GenesisItemsParser extends ItemsParser {
                     }
                 }
             };
-            
+
             items.push(powerItem);
         }
     }
-    
+
     /**
      * Parses spells from a Genesis character file.
      * @param {*} items The array to add items to.
@@ -389,7 +389,7 @@ export class GenesisItemsParser extends ItemsParser {
             const spellItem = {
                 name: spell.name,
                 type: 'spell',
-                img: importOptions.assignIcons ? 'systems/shadowrun6-elysium/dist/icons/redist/spell.svg' : 'icons/svg/item-bag.svg',
+                img: importOptions.assignIcons ? 'systems/sr6elysium/dist/icons/redist/spell.svg' : 'icons/svg/item-bag.svg',
                 system: {
                     description: {
                         value: spell.description || ''
@@ -409,11 +409,11 @@ export class GenesisItemsParser extends ItemsParser {
                     }
                 }
             };
-            
+
             items.push(spellItem);
         }
     }
-    
+
     /**
      * Parses contacts from a Genesis character file.
      * @param {*} items The array to add items to.
@@ -425,7 +425,7 @@ export class GenesisItemsParser extends ItemsParser {
             const contactItem = {
                 name: contact.name,
                 type: 'contact',
-                img: importOptions.assignIcons ? 'systems/shadowrun6-elysium/dist/icons/redist/contact.svg' : 'icons/svg/item-bag.svg',
+                img: importOptions.assignIcons ? 'systems/sr6elysium/dist/icons/redist/contact.svg' : 'icons/svg/item-bag.svg',
                 system: {
                     description: {
                         value: contact.description || ''
@@ -438,11 +438,11 @@ export class GenesisItemsParser extends ItemsParser {
                     }
                 }
             };
-            
+
             items.push(contactItem);
         }
     }
-    
+
     /**
      * Parses lifestyles from a Genesis character file.
      * @param {*} items The array to add items to.
@@ -454,7 +454,7 @@ export class GenesisItemsParser extends ItemsParser {
             const lifestyleItem = {
                 name: lifestyle.name,
                 type: 'lifestyle',
-                img: importOptions.assignIcons ? 'systems/shadowrun6-elysium/dist/icons/redist/lifestyle.svg' : 'icons/svg/item-bag.svg',
+                img: importOptions.assignIcons ? 'systems/sr6elysium/dist/icons/redist/lifestyle.svg' : 'icons/svg/item-bag.svg',
                 system: {
                     description: {
                         value: lifestyle.description || ''
@@ -467,7 +467,7 @@ export class GenesisItemsParser extends ItemsParser {
                     }
                 }
             };
-            
+
             items.push(lifestyleItem);
         }
     }

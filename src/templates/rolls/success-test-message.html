@@ -132,7 +132,7 @@
     <div class="card-rolls {{#if applyGmOnlyContent}}gm-only-content{{/if}}">
         {{#if (not test.usingManualRoll)}}
         {{#each test.rolls}}
-            {{> 'systems/shadowrun6-elysium/dist/templates/rolls/parts/rolled-dice.html'
+            {{> 'systems/sr6elysium/dist/templates/rolls/parts/rolled-dice.html'
                 roll=this
             }}
         {{/each}}
@@ -234,7 +234,7 @@
 <div class="sr6 chat-card roll-card">
     <div class="card-content">
         <div class="left-side">
-            {{> 'systems/shadowrun6-elysium/dist/templates/rolls/parts/Damage.html'
+            {{> 'systems/sr6elysium/dist/templates/rolls/parts/Damage.html'
                 name=(localize "SR6.Incoming")
                 damage=test.data.damage
                 showAP=true

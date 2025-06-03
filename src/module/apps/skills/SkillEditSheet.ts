@@ -26,7 +26,7 @@ export class SkillEditSheet extends DocumentSheet {
         return foundry.utils.mergeObject(options, {
             id: 'skill-editor',
             classes: ['sr6', 'sheet', 'skill-edit-window'],
-            template: 'systems/shadowrun6-elysium/dist/templates/apps/skill-edit.html',
+            template: 'systems/sr6elysium/dist/templates/apps/skill-edit.html',
             width: 300,
             height: 'auto',
             submitOnClose: true,

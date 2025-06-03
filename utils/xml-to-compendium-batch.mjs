@@ -140,7 +140,7 @@ function convertToCompendiumItem(xmlItem, properties) {
       default: 0
     },
     _stats: {
-      systemId: 'shadowrun6-elysium',
+      systemId: 'sr6elysium',
       systemVersion: '0.23.2',
       coreVersion: '11',
       createdTime: Date.now(),
@@ -195,13 +195,13 @@ function determineItemIcon(xmlItem) {
 
   // Default icons based on item type
   const iconMap = {
-    'armor': 'systems/shadowrun6-elysium/dist/icons/redist/armor.svg',
-    'weapon': 'systems/shadowrun6-elysium/dist/icons/redist/weapon.svg',
-    'equipment': 'systems/shadowrun6-elysium/dist/icons/redist/gear.svg',
-    'ammo': 'systems/shadowrun6-elysium/dist/icons/redist/ammo.svg',
-    'program': 'systems/shadowrun6-elysium/dist/icons/redist/program.svg',
-    'cyberware': 'systems/shadowrun6-elysium/dist/icons/redist/cyberware.svg',
-    'bioware': 'systems/shadowrun6-elysium/dist/icons/redist/bioware.svg'
+    'armor': 'systems/sr6elysium/dist/icons/redist/armor.svg',
+    'weapon': 'systems/sr6elysium/dist/icons/redist/weapon.svg',
+    'equipment': 'systems/sr6elysium/dist/icons/redist/gear.svg',
+    'ammo': 'systems/sr6elysium/dist/icons/redist/ammo.svg',
+    'program': 'systems/sr6elysium/dist/icons/redist/program.svg',
+    'cyberware': 'systems/sr6elysium/dist/icons/redist/cyberware.svg',
+    'bioware': 'systems/sr6elysium/dist/icons/redist/bioware.svg'
   };
 
   return iconMap[type] || iconMap.equipment;
@@ -376,7 +376,7 @@ function updateSystemJson(packNames) {
             ASSISTANT: "OWNER"
           },
           type: "Item",
-          system: "shadowrun6-elysium"
+          system: "sr6elysium"
         });
 
         packsAdded++;

@@ -3,7 +3,7 @@
 ## General development
 The main development workflow uses a build system using npm and gulp with Github pull requests required for changes made. Should you have issues while setting it up, please web search first.
 
-shadowrun6-elysium uses Typescript (with esbuild), npm with gulp and git.
+sr6elysium uses Typescript (with esbuild), npm with gulp and git.
 
 You'll have to install node.js (npm) (Use node v18! v20 seems to cause issues) and git: 
 * Node v18: [https://nodejs.org/download/release/v18.18.2/node-v18.18.2-x64.msi](https://nodejs.org/download/release/v18.18.2/node-v18.18.2-x64.msi)
@@ -26,19 +26,19 @@ There are multiple gulp tasks available to help development:
 The resulting application used for FoundryVTT will only use contents in `/dist`.
 
 ## Linking the dev and system folder
-It's helpful, but not strictly necessary, to place your development folder separate from the FoundryVTT system folder as a system update will overwrite your development folder otherwise. This can be done with linking the two. For both options to work, the shadowrun6-elysium system can't be installed in your local Foundry.
+It's helpful, but not strictly necessary, to place your development folder separate from the FoundryVTT system folder as a system update will overwrite your development folder otherwise. This can be done with linking the two. For both options to work, the sr6elysium system can't be installed in your local Foundry.
 
 ### Option A: gulp link 
-For the `gulp link` command to work, you need to include the following file as _foundryconfig.json_ directly underneath your development shadowrun6-elysium system directory.
+For the `gulp link` command to work, you need to include the following file as _foundryconfig.json_ directly underneath your development sr6elysium system directory.
 `{
   "dataPath": "C:\\Users\\<addYourUserHere>\\AppData\\Local\\FoundryVTT\\",
-  "linkTargetDirName": "shadowrun6-elysium"
+  "linkTargetDirName": "sr6elysium"
 }
 `
 
 ### Option B: (Windows) mklink
 Instead of using the built in `gulp link` command, you can also execute this from within your `cmd` or `Windows Terminal`:
-`mklink /D "C:\Users\<yourUser>\AppData\Local\FoundryVTT\Data\systems\shadowrun6-elysium" "<yourClonedRepoPath>"`
+`mklink /D "C:\Users\<yourUser>\AppData\Local\FoundryVTT\Data\systems\sr6elysium" "<yourClonedRepoPath>"`
 
 <yourClonedRepoPath> must be the cloned repository that includes the `dist` folder within it.
 
@@ -56,7 +56,7 @@ The relevant commands are:
  * `npm run prettier`: Run prettier, auto-formatting your changeset
 
 # System Architecture
-A broad overview of the different areas of the shadowrun6-elysium system. For more explanations around system specific concepts see `System Concepts`.
+A broad overview of the different areas of the sr6elysium system. For more explanations around system specific concepts see `System Concepts`.
 ## Folder structure
 Everything needed to execute the system within foundry must live under 
 * `/dist`
@@ -98,9 +98,9 @@ There is unit testing support using the FVTT Quench module. It's encouraged to d
 
 Afterwards open a terminal (cmd.exe on Windows) with administrative permissions ([see here for help](https://www.howtogeek.com/194041/how-to-open-the-command-prompt-as-administrator-in-windows-8.1/)):
 * `cd <the_cloned_fork_directory>`
-* `gulp link` (should this fail, remove the existing shadowrun6-elysium system or check for administrative permissions)
+* `gulp link` (should this fail, remove the existing sr6elysium system or check for administrative permissions)
 
-You should see a success message and a little arrow symbol on the shadowrun6-elysium folder within the FoundryVTT _Data/systems_ directory. Now you can use the Gulp watch-Task as described above. This needs to be repeated after each shadowrun6-elysiumVTT system update.
+You should see a success message and a little arrow symbol on the sr6elysium folder within the FoundryVTT _Data/systems_ directory. Now you can use the Gulp watch-Task as described above. This needs to be repeated after each sr6elysiumVTT system update.
 
 
 ## Linux and docker workflow changes
@@ -141,9 +141,9 @@ docker-compose up
 ```
 
 # System Concepts
-General concepts as used in the shadowrun6-elysium system.
+General concepts as used in the sr6elysium system.
 ## Test implementation (Success Test)
-The shadowrun6-elysium system implements Shadowrun 5e Success Tests as implementations of the `SuccessTest` class. These implementations are connected to items containing `action` segments. An `action` segment defines values and implementations to use for all tests related to that action.
+The sr6elysium system implements Shadowrun 5e Success Tests as implementations of the `SuccessTest` class. These implementations are connected to items containing `action` segments. An `action` segment defines values and implementations to use for all tests related to that action.
 
 While a `SuccessTest` implementation doesn't need an `action` to function, it's advised to trigger tests via casting actions.
 
@@ -157,10 +157,10 @@ For further details see the `SuccessTest` class docs and `TestCreation` docs.
   * A resist test for the opposed test
 * Each of these defines at least what test to use and allows for skill/attributes to be configured, should the user want to
 * If there is no user configured test action default action values will be used that are connected to the test implementation
-* All test implementations are registered within `game['shadowrun6-elysium'].tests` and only taken and created from there
+* All test implementations are registered within `game['sr6elysium'].tests` and only taken and created from there
 * Modules can, in theory, overwrite a registered test implementation by replacing the implementation for a test within that registry
 ### Test creation
-If you don't know how to create a `SuccessTest` implementation the helper function within `TestCreator` available at `game['shadowrun6-elysium'].test`
+If you don't know how to create a `SuccessTest` implementation the helper function within `TestCreator` available at `game['sr6elysium'].test`
 provide a few different options. These are meant as system internal helpers to simplify the different ways to create tests
 into one helper and not pollute the general `SuccessTest` class.
 #### Value application
@@ -211,7 +211,7 @@ Typical use cases would be:
 Categories can be mixed and matched at will and don't have to adhere to sr5 rules.
 
 ## Modifier implementation
-The shadowrun6-elysium system has multiple ways of handling modifiers on actors, items and 'situations':
+The sr6elysium system has multiple ways of handling modifiers on actors, items and 'situations':
 - actor local modifiers
 - situational modifiers
   

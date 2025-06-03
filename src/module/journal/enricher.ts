@@ -118,7 +118,7 @@ export class JournalEnrichers {
     }
 
     static async createChatMessage (templateData) {
-        const html = await renderTemplate('systems/shadowrun6-elysium/dist/templates/chat/rollRequest.html', templateData);
+        const html = await renderTemplate('systems/sr6elysium/dist/templates/chat/rollRequest.html', templateData);
 
         const chatData = {
             user: game.user?.id,

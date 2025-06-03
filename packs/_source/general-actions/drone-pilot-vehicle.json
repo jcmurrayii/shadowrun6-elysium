@@ -2,7 +2,7 @@
   "_id": "OKZ0Th9uo0tAYD1E",
   "name": "Drone Pilot Vehicle",
   "type": "action",
-  "img": "systems/shadowrun6-elysium/dist/icons/redist/redline.svg",
+  "img": "systems/sr6elysium/dist/icons/redist/redline.svg",
   "data": {
     "description": {
       "value": "",

@@ -4,7 +4,7 @@ export class GenesisImportForm extends FormApplication {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.id = 'genesis-import';
-        options.classes = ['shadowrun6-elysium'];
+        options.classes = ['sr6elysium'];
         options.title = 'Genesis Import';
         options.template = 'modules/shadowrun6-genesis-importer/module/templates/apps/genesis-import.html';
         options.width = 600;

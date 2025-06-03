@@ -16,7 +16,7 @@ export interface UpdateData {
  *  other methods are implementable purely for convenience and atomicity.
  */
 export abstract class VersionMigration {
-    static readonly MODULE_NAME = 'shadowrun6-elysium';
+    static readonly MODULE_NAME = 'sr6elysium';
     static readonly KEY_DATA_VERSION = 'systemMigrationVersion';
     static readonly NO_VERSION = '0';
 

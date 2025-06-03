@@ -42,7 +42,7 @@ export class ThrownAttackTest extends SuccessTest<ThrownAttackTestData> {
     }
 
     override get _dialogTemplate(): string {
-        return 'systems/shadowrun6-elysium/dist/templates/apps/dialogs/thrown-attack-test-dialog.html';
+        return 'systems/sr6elysium/dist/templates/apps/dialogs/thrown-attack-test-dialog.html';
     }
 
     /**

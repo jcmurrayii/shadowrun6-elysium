@@ -8,7 +8,7 @@
   "compatibleCoreVersion": "10",
   "dependencies": [
     {
-      "name": "shadowrun6-elysium",
+      "name": "sr6elysium",
       "type": "system"
     }
   ],

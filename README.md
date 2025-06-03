@@ -1,7 +1,7 @@
-# shadowrun6-elysium for Foundry Virtual Tabletop
+# sr6elysium for Foundry Virtual Tabletop
 Manifest: https://raw.githubusercontent.com/SR5-FoundryVTT/SR5-FoundryVTT/master/system.json
 
-Come on the FoundryVTT discord shadowrun6-elysium channel and have a chat. :)
+Come on the FoundryVTT discord sr6elysium channel and have a chat. :)
 
 We will always be happy to look at a Pull Request if there are features or bugs you'd like to work on.
 

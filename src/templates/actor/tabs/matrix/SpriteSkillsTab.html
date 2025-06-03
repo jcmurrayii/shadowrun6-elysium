@@ -1,11 +1,11 @@
-{{#> 'systems/shadowrun6-elysium/dist/templates/common/TabWrapper.html' tabId='skills'}}
+{{#> 'systems/sr6elysium/dist/templates/common/TabWrapper.html' tabId='skills'}}
     <div class="inventory">
         <div class="split-container">
 
-            {{> 'systems/shadowrun6-elysium/dist/templates/actor/parts/skills/ActiveSkillList.html' }}
+            {{> 'systems/sr6elysium/dist/templates/actor/parts/skills/ActiveSkillList.html' }}
             <!--Here needs to go the Sprite Config-->
                 <div class= "list-item item-section center sprite"> <!--Here starts the selector sprite-->
-                    {{> 'systems/shadowrun6-elysium/dist/templates/common/HeaderBlock.html' name=(localize "SR6.Labels.ActorSheet.SpriteConfiguration") }}
+                    {{> 'systems/sr6elysium/dist/templates/common/HeaderBlock.html' name=(localize "SR6.Labels.ActorSheet.SpriteConfiguration") }}
                     <div class="item-center">
                     <!--Needs Section for the Compiler of the Sprite-->
                         <div class="list-item matrix">
@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="item-right">
                                     <div class="item-text">
-                                        {{> 'systems/shadowrun6-elysium/dist/templates/common/ValueInput.html'
+                                        {{> 'systems/sr6elysium/dist/templates/common/ValueInput.html'
                                                 cssClass="attribute-input"
                                                 size="2"
                                                 maxLength="2"
@@ -81,9 +81,9 @@
                         </div>
                     </div>
                 <div>
-            {{> 'systems/shadowrun6-elysium/dist/templates/actor/parts/matrix/Marks.html' }}
+            {{> 'systems/sr6elysium/dist/templates/actor/parts/matrix/Marks.html' }}
                 </div>
             </div>
         </div>
     </div>
-{{/ 'systems/shadowrun6-elysium/dist/templates/common/TabWrapper.html'}}
+{{/ 'systems/sr6elysium/dist/templates/common/TabWrapper.html'}}

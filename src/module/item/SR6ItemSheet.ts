@@ -69,13 +69,13 @@ interface SR6ItemSheetData extends SR6BaseItemSheetData {
 
     // Action Items. (not only type = action)
     //@ts-expect-error
-    tests: typeof game['shadowrun6-elysium'].tests
+    tests: typeof game['sr6elysium'].tests
     // @ts-expect-error
-    opposedTests: typeof game['shadowrun6-elysium'].opposedTests
+    opposedTests: typeof game['sr6elysium'].opposedTests
     // @ts-expect-error
-    activeTests: typeof game['shadowrun6-elysium'].activeTests
+    activeTests: typeof game['sr6elysium'].activeTests
     // @ts-expect-error
-    resistTests: typeof game['shadowrun6-elysium'].resistTests
+    resistTests: typeof game['sr6elysium'].resistTests
 
     // Rendered description field
     descriptionHTML: string
@@ -109,7 +109,7 @@ export class SR6ItemSheet extends ItemSheet {
     }
 
     override get template() {
-        return `systems/shadowrun6-elysium/dist/templates/item/${this.item.type}.html`;
+        return `systems/sr6elysium/dist/templates/item/${this.item.type}.html`;
     }
 
     /* -------------------------------------------- */
@@ -221,10 +221,10 @@ export class SR6ItemSheet extends ItemSheet {
         }
 
         // Provide action parts with all test variants.
-        data.tests = game['shadowrun6-elysium'].tests;
-        data.opposedTests = game['shadowrun6-elysium'].opposedTests;
-        data.activeTests = game['shadowrun6-elysium'].activeTests;
-        data.resistTests = game['shadowrun6-elysium'].resistTests;
+        data.tests = game['sr6elysium'].tests;
+        data.opposedTests = game['sr6elysium'].opposedTests;
+        data.activeTests = game['sr6elysium'].activeTests;
+        data.resistTests = game['sr6elysium'].resistTests;
 
         // @ts-expect-error TODO: foundry-vtt-types v10
         data.descriptionHTML = await this.enrichEditorFieldToHTML(this.item.system.description.value);

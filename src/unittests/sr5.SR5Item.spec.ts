@@ -84,24 +84,24 @@ export const shadowrunSR5Item = (context: QuenchBatchContext) => {
 
         describe('Testing related data injection', () => {
             it('Correctly add default test to spells', async () => {
-                // const item = await testItem.create({type: 'spell'});
+                const item = await testItem.create({type: 'spell'});
 
-                // assert.equal(item.system.action.test, 'SpellCastingTest');
-                // assert.equal(item.system.action.followed.test, 'DrainTest');
-                // assert.equal(item.system.action.opposed.test, '');
+                assert.equal(item.system.action.test, 'SpellCastingTest');
+                assert.equal(item.system.action.followed.test, 'DrainTest');
+                assert.equal(item.system.action.opposed.test, '');
             });
 
             it('Correctly add defense tests to spells', async () => {
                 const item = await testItem.create({type: 'spell'});
 
                 await item.update({'system.category': 'combat'});
-                assert.equal(item.system.action.test, 'SpellCastingTest');
+                assert.equal(item.system.action.test, 'SpellCastingTest', "Combat spells should have a default test type of SpellCastingTest.");
                 assert.equal(item.system.action.followed.test, 'DrainTest');
                 assert.equal(item.system.action.opposed.test, 'CombatSpellDefenseTest');
                 assert.equal(item.system.action.opposed.resist.test, 'PhysicalResistTest');
 
                 await item.update({'system.category': 'detection'});
-                assert.equal(item.system.action.test, 'SpellCastingTest');
+                assert.equal(item.system.action.test, 'SpellCastingTest', "Detection spell should have a default test type of SpellCastingTest.");
                 assert.equal(item.system.action.followed.test, 'DrainTest');
                 assert.equal(item.system.action.opposed.test, 'OpposedTest');
                 assert.equal(item.system.action.opposed.resist.test, '');

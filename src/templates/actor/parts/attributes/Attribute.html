@@ -1,4 +1,4 @@
-{{#> "systems/shadowrun6-elysium/dist/templates/common/Attribute.html" dataName="attribute" dataId=attributeId}}
+{{#> "systems/sr6elysium/dist/templates/common/Attribute.html" dataName="attribute" dataId=attributeId}}
     <div class="attribute-name roll {{#if rollId}}Roll{{/if}}">
         {{#if label}}
             {{localize label}}
@@ -8,11 +8,11 @@
     </div>
     <div class="attribute-value value">
         <span class="attribute-value-total">{{attribute.value}}</span>
-        {{> "systems/shadowrun6-elysium/dist/templates/common/ValueModifiers.html" value=attribute}}
+        {{> "systems/sr6elysium/dist/templates/common/ValueModifiers.html" value=attribute}}
     </div>
     <div class="track center {{#if disableBase}}{{#if disableManual}}invisible{{/if}}{{/if}}">
         <div class="attribute-input-container">
-            {{> 'systems/shadowrun6-elysium/dist/templates/common/ValueInput.html'
+            {{> 'systems/sr6elysium/dist/templates/common/ValueInput.html'
                     cssClass="attribute-input short"
                     title="SR6.BaseValue"
                     size="2"
@@ -24,7 +24,7 @@
         </div>
         <div class="track-plus"></div>
         <div class="attribute-input-container">
-            {{> 'systems/shadowrun6-elysium/dist/templates/common/ValueInput.html'
+            {{> 'systems/sr6elysium/dist/templates/common/ValueInput.html'
                     cssClass="attribute-input short"
                     title="SR6.TemporaryModifiers"
                     size="2"
@@ -37,7 +37,7 @@
         {{!--
         {{#if (partsTotal attribute.mod)}}
         <div class="attribute-input-container">
-            {{> 'systems/shadowrun6-elysium/dist/templates/common/ValueInput.html'
+            {{> 'systems/sr6elysium/dist/templates/common/ValueInput.html'
                     cssClass="attribute-input short"
                     title="SR6.AutoModifiers"
                     size="2"
@@ -49,4 +49,4 @@
         {{/if}}
         --}}
     </div>
-{{/"systems/shadowrun6-elysium/dist/templates/common/Attribute.html"}}
+{{/"systems/sr6elysium/dist/templates/common/Attribute.html"}}

@@ -109,11 +109,11 @@ export class CharacterPrep {
         const { attributes } = system;
         const { defense_rating } = system.armor;
 
-        console.log('Shadowrun 6e | Defense Rating Pre-Calculation:', {
-            attributes,
-            initialDefenseRating: foundry.utils.duplicate(defense_rating),
-            bodyValue: attributes.body.value
-        });
+        // console.log('Shadowrun 6e | Defense Rating Pre-Calculation:', {
+        //     attributes,
+        //     initialDefenseRating: foundry.utils.duplicate(defense_rating),
+        //     bodyValue: attributes.body.value
+        // });
 
         // Add body attribute as a modifier to defense rating
         PartsList.AddUniquePart(defense_rating.mod, 'SR6.AttrBody', attributes.body.value);
@@ -121,12 +121,12 @@ export class CharacterPrep {
         // Recalculate total DR with all modifiers
         defense_rating.value = Helpers.calcTotal(defense_rating, {min: 0});
 
-        console.log('Shadowrun 6e | Defense Rating Post-Calculation:', {
-            baseArmor: defense_rating.base,
-            bodyMod: attributes.body.value,
-            otherMods: defense_rating.mod,
-            totalDR: defense_rating.value,
-            calculation: `${defense_rating.base} (base armor) + ${attributes.body.value} (body) + ${defense_rating.mod.total || 0} (mods) = ${defense_rating.value}`
-        });
+        // console.log('Shadowrun 6e | Defense Rating Post-Calculation:', {
+        //     baseArmor: defense_rating.base,
+        //     bodyMod: attributes.body.value,
+        //     otherMods: defense_rating.mod,
+        //     totalDR: defense_rating.value,
+        //     calculation: `${defense_rating.base} (base armor) + ${attributes.body.value} (body) + ${defense_rating.mod.total || 0} (mods) = ${defense_rating.value}`
+        // });
     }
 }

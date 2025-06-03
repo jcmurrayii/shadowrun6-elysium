@@ -32,7 +32,7 @@
         "value": 0,
         "base": 0
       },
-      "extended": true,
+      "extended": false,
       "damage": {
         "type": {
           "value": "",
@@ -112,7 +112,7 @@
     "compendiumSource": null,
     "duplicateSource": null,
     "coreVersion": "12.331",
-    "systemId": "shadowrun6-elysium",
+    "systemId": "sr6elysium",
     "systemVersion": "0.23.2",
     "createdTime": 1744067278480,
     "modifiedTime": 1744077316206,

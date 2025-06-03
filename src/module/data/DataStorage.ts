@@ -10,9 +10,9 @@ import { SocketMessage } from "../sockets";
  * NOTE: Foundry doesn´t do it's typical differential merge on updates, nor does it handle unset / delete.
  *
  * Usage:
- * > const mydata = game['shadowrun6-elysium'].storage.get('key1.key2');
+ * > const mydata = game['sr6elysium'].storage.get('key1.key2');
  * > mydata.subValue = 'new value';
- * > await game['shadowrun6-elysium'].storage.set('key1.key2', mydata);
+ * > await game['sr6elysium'].storage.set('key1.key2', mydata);
  */
 export const DataStorage = {
     /**

@@ -92,11 +92,11 @@ export class DrainTest extends SuccessTest<DrainTestData> {
     }
 
     override get _dialogTemplate(): string {
-        return 'systems/shadowrun6-elysium/dist/templates/apps/dialogs/drain-test-dialog.html';
+        return 'systems/sr6elysium/dist/templates/apps/dialogs/drain-test-dialog.html';
     }
 
     override get _chatMessageTemplate(): string {
-        return 'systems/shadowrun6-elysium/dist/templates/rolls/drain-test-message.html';
+        return 'systems/sr6elysium/dist/templates/rolls/drain-test-message.html';
     }
 
     /**

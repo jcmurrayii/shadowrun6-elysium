@@ -50,7 +50,7 @@ export const shadowrunSR5SpiritDataPrep = (context: QuenchBatchContext) => {
 
             assert.strictEqual(spirit.system.initiative.meatspace.base.base, 4); // force * 2 + override;
 
-            assert.strictEqual(spirit.system.skills.active.assensing.base, 0);
+            assert.strictEqual(spirit.system.skills.active.astral.base, 0);
 
             await actor.update({
                 'system.force': 6
@@ -66,8 +66,8 @@ export const shadowrunSR5SpiritDataPrep = (context: QuenchBatchContext) => {
 
             assert.strictEqual(spirit.system.initiative.meatspace.base.base, 16);
 
-            assert.strictEqual(spirit.system.skills.active.assensing.base, 6);
-            assert.strictEqual(spirit.system.skills.active.arcana.base, 0); // not for this spirit type.
+            assert.strictEqual(spirit.system.skills.active.astral.base, 6);
+            assert.strictEqual(spirit.system.skills.active.sorcery.base, 0); // not for this spirit type.
         });
 
         it('Spirit recoil compensation', () => {

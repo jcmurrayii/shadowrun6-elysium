@@ -1,7 +1,7 @@
 <div class="flexcol">
     <div class="attributes">
         {{#each system.attributes as |attribute a|}} {{#unless attribute.hidden}}
-            {{> "systems/shadowrun6-elysium/dist/templates/actor/parts/attributes/Attribute.html"
+            {{> "systems/sr6elysium/dist/templates/actor/parts/attributes/Attribute.html"
                     rollId=(concatStrings "attribute." a)
                     attributeId=a
                     attribute=attribute

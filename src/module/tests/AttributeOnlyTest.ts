@@ -18,7 +18,7 @@ export class AttributeOnlyTest extends SuccessTest {
     override data: AttributeOnlyTestData
 
     override get _dialogTemplate() {
-        return 'systems/shadowrun6-elysium/dist/templates/apps/dialogs/attribute-only-test-dialog.html';
+        return 'systems/sr6elysium/dist/templates/apps/dialogs/attribute-only-test-dialog.html';
     }
     override _prepareData(data, options): any {
         data = super._prepareData(data, options);

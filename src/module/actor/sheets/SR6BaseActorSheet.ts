@@ -203,7 +203,7 @@ export class SR6BaseActorSheet extends ActorSheet {
      * @override
      */
     override get template() {
-        const path = 'systems/shadowrun6-elysium/dist/templates';
+        const path = 'systems/sr6elysium/dist/templates';
 
         // v10 actor.limited doesn't take GM into account, so we have to do it ourselves.
         if (!game.user?.isGM && this.actor.limited) {
@@ -512,7 +512,7 @@ export class SR6BaseActorSheet extends ActorSheet {
         if (data !== undefined) {
             if (data.type === 'ActiveEffect' && data.actorId !== this.actor.id) {
                 const effect = data.data;
-                const applyTo = effect.flags['shadowrun6-elysium'].applyTo as EffectApplyTo;
+                const applyTo = effect.flags['sr6elysium'].applyTo as EffectApplyTo;
                 // if the effect is just supposed to apply to the item's test, it won't work on an actor
                 if (applyTo === 'test_item') {
                     ui.notifications?.warn(game.i18n.localize('SR6.ActiveEffect.CannotAddTestViaItemToActor'));
@@ -1283,7 +1283,7 @@ export class SR6BaseActorSheet extends ActorSheet {
      * Parameterize skill filtering within getData and implement a general delay around it.
      *
      * NOTE: Be aware of UTF-8/16 multi character input languages, using mulitple separate input symbol to form a single alphabet character.
-     * NOTE: This is ONLY necessary as shadowrun6-elysium filters through the render -> getData -> template chain instead of
+     * NOTE: This is ONLY necessary as sr6elysium filters through the render -> getData -> template chain instead of
      *       hiding HTML elements based on their text.
      */
     async _onFilterSkills(event) {
@@ -1944,8 +1944,8 @@ export class SR6BaseActorSheet extends ActorSheet {
      */
     _prepareKeybindings() {
         return {
-            skip: game.keybindings.get('shadowrun6-elysium', 'hide-test-dialog').map(binding => binding.key.replace('Key', '').toUpperCase()).join(', '),
-            card: game.keybindings.get('shadowrun6-elysium', 'show-item-card').map(binding => binding.key.replace('Key', '').toUpperCase()).join(', '),
+            skip: game.keybindings.get('sr6elysium', 'hide-test-dialog').map(binding => binding.key.replace('Key', '').toUpperCase()).join(', '),
+            card: game.keybindings.get('sr6elysium', 'show-item-card').map(binding => binding.key.replace('Key', '').toUpperCase()).join(', '),
         }
     }
 
@@ -1989,7 +1989,7 @@ export class SR6BaseActorSheet extends ActorSheet {
         if (folderId) {
             const key = `folders.${folderId}`;
             const isCollapsed = folder.classList.contains('collapsed');
-            this.actor.setFlag('shadowrun6-elysium', key, isCollapsed);
+            this.actor.setFlag('sr6elysium', key, isCollapsed);
         }
     }
 

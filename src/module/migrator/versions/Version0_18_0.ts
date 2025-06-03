@@ -125,7 +125,7 @@ export class Version0_18_0 extends VersionMigration {
 class ConfigurationDialog extends FormDialog {
     constructor(data = {} as any) {
         data.templateData = {onlyDisableEffects: data.onlyDisableEffects};
-        data.templatePath = `systems/shadowrun6-elysium/dist/templates/apps/migrator/Version0.18.0.hbs`;
+        data.templatePath = `systems/sr6elysium/dist/templates/apps/migrator/Version0.18.0.hbs`;
         data.title = Version0_18_0.TargetVersion;
         //@ts-expect-error
         super(data, {applyFormChangesOnSubmit: true});

@@ -134,7 +134,7 @@ function convertToCompendiumItem(xmlItem, properties) {
       default: 0
     },
     _stats: {
-      systemId: 'shadowrun6-elysium',
+      systemId: 'sr6elysium',
       systemVersion: '0.23.2',
       coreVersion: '11',
       createdTime: Date.now(),
@@ -181,9 +181,9 @@ function determineItemIcon(xmlItem) {
 
   // Default icons based on item type
   const iconMap = {
-    'armor': 'systems/shadowrun6-elysium/dist/icons/redist/armor.svg',
-    'weapon': 'systems/shadowrun6-elysium/dist/icons/redist/weapon.svg',
-    'equipment': 'systems/shadowrun6-elysium/dist/icons/redist/gear.svg'
+    'armor': 'systems/sr6elysium/dist/icons/redist/armor.svg',
+    'weapon': 'systems/sr6elysium/dist/icons/redist/weapon.svg',
+    'equipment': 'systems/sr6elysium/dist/icons/redist/gear.svg'
   };
 
   return iconMap[type] || iconMap.equipment;

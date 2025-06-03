@@ -39,7 +39,7 @@ export class RitualSpellcastingTest extends SuccessTest<RitualSpellcastingTestDa
     }
 
     override get _dialogTemplate() {
-        return 'systems/shadowrun6-elysium/dist/templates/apps/dialogs/ritualspellcasting-test-dialog.html';
+        return 'systems/sr6elysium/dist/templates/apps/dialogs/ritualspellcasting-test-dialog.html';
     }
 
     override get testCategories(): Shadowrun.ActionCategories[] {

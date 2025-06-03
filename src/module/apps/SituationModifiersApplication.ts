@@ -271,7 +271,7 @@ export class SituationModifiersApplication extends FormApplication {
     }
 
     override get template() {
-        return 'systems/shadowrun6-elysium/dist/templates/apps/situational-modifiers.hbs';
+        return 'systems/sr6elysium/dist/templates/apps/situational-modifiers.hbs';
     }
 
     static override get defaultOptions() {

@@ -42,85 +42,85 @@ export const quenchRegister = (quench: Quench) => {
         'Shadowrun 5e | Be aware that FoundryVTT will tank in update performance when a lot of documents are in collections. This is the case if you have all Chummer items imported and might cause tests to cross the 2000ms quench timeout threshold. Clear those collections in a test world. :)',
     );
 
-    quench.registerBatch('shadowrun6-elysium.rules.matrix', shadowrunMatrix, {
-        displayName: 'shadowrun6-elysium: Matrix Rules Test',
+    quench.registerBatch('sr6elysium.rules.matrix', shadowrunMatrix, {
+        displayName: 'sr6elysium: Matrix Rules Test',
     });
-    quench.registerBatch('shadowrun6-elysium.rules.modifiers', shadowrunRulesModifiers, {
-        displayName: 'shadowrun6-elysium: Modifiers Rules Test',
+    quench.registerBatch('sr6elysium.rules.modifiers', shadowrunRulesModifiers, {
+        displayName: 'sr6elysium: Modifiers Rules Test',
     });
-    quench.registerBatch('shadowrun6-elysium.rules.ranged_weapon', shadowrunSR5RangedWeaponRules, {
-        displayName: 'shadowrun6-elysium: Ranged Weapon Rules Test',
-    });
-
-    quench.registerBatch('shadowrun6-elysium.characterImporter', characterImporterTesting, {
-        displayName: 'shadowrun6-elysium: Chummer Character Importer',
-    });
-    quench.registerBatch('shadowrun6-elysium.characterInfoUpdater', characterInfoUpdaterTesting, {
-        displayName: 'shadowrun6-elysium: Chummer Character Info Updater',
-    });
-    quench.registerBatch('shadowrun6-elysium.spiritImporter', spiritImporterTesting, {
-        displayName: 'shadowrun6-elysium: Chummer Spirit Importer',
-    });
-    quench.registerBatch('shadowrun6-elysium.spiritInfoUpdater', spiritInfoUpdaterTesting, {
-        displayName: 'shadowrun6-elysium: Chummer Spirit Info Updater',
-    });
-    quench.registerBatch('shadowrun6-elysium.importerWeapons', weaponParserTesting, {
-        displayName: 'shadowrun6-elysium: Chummer Actor Weapon Importer',
-    });
-    quench.registerBatch('shadowrun6-elysium.importerVehicles', vehicleImporterTesting, {
-        displayName: 'shadowrun6-elysium: Chummer Vehicle Importer',
-    });
-    quench.registerBatch('shadowrun6-elysium.importerVehicleMountedWeapons', mountedWeaponParserTesting, {
-        displayName: 'shadowrun6-elysium: Chummer Vehicle Mounted Weapon Importer',
-    });
-    quench.registerBatch('shadowrun6-elysium.importerVehicleMods', vehicleModParserTesting, {
-        displayName: 'shadowrun6-elysium: Chummer Vehicle Modification Importer',
+    quench.registerBatch('sr6elysium.rules.ranged_weapon', shadowrunSR5RangedWeaponRules, {
+        displayName: 'sr6elysium: Ranged Weapon Rules Test',
     });
 
-    quench.registerBatch('shadowrun6-elysium.entities.items', shadowrunSR5Item, { displayName: 'shadowrun6-elysium: SR6Item Test' });
-    quench.registerBatch('shadowrun6-elysium.entities.actors', shadowrunSR5Actor, {
-        displayName: 'shadowrun6-elysium: SR6Actor Test',
+    quench.registerBatch('sr6elysium.characterImporter', characterImporterTesting, {
+        displayName: 'sr6elysium: Chummer Character Importer',
     });
-    quench.registerBatch('shadowrun6-elysium.entities.effects', shadowrunSR5ActiveEffect, {
-        displayName: 'shadowrun6-elysium: SR6ActiveEffect Test',
+    quench.registerBatch('sr6elysium.characterInfoUpdater', characterInfoUpdaterTesting, {
+        displayName: 'sr6elysium: Chummer Character Info Updater',
     });
-
-    quench.registerBatch('shadowrun6-elysium.data_prep.character', shadowrunSR5CharacterDataPrep, {
-        displayName: 'shadowrun6-elysium: SR5CharacterDataPreparation Test',
+    quench.registerBatch('sr6elysium.spiritImporter', spiritImporterTesting, {
+        displayName: 'sr6elysium: Chummer Spirit Importer',
     });
-    quench.registerBatch('shadowrun6-elysium.data_prep.critter', shadowrunSR5CritterDataPrep, {
-        displayName: 'shadowrun6-elysium: SR5CritterDataPreparation Test',
+    quench.registerBatch('sr6elysium.spiritInfoUpdater', spiritInfoUpdaterTesting, {
+        displayName: 'sr6elysium: Chummer Spirit Info Updater',
     });
-    quench.registerBatch('shadowrun6-elysium.data_prep.sprite', shadowrunSR5SpriteDataPrep, {
-        displayName: 'shadowrun6-elysium: SR5CSpriteDataPreparation Test',
+    quench.registerBatch('sr6elysium.importerWeapons', weaponParserTesting, {
+        displayName: 'sr6elysium: Chummer Actor Weapon Importer',
     });
-    quench.registerBatch('shadowrun6-elysium.data_prep.spirit', shadowrunSR5SpiritDataPrep, {
-        displayName: 'shadowrun6-elysium: SR5SpiritDataPreparation Test',
+    quench.registerBatch('sr6elysium.importerVehicles', vehicleImporterTesting, {
+        displayName: 'sr6elysium: Chummer Vehicle Importer',
     });
-    quench.registerBatch('shadowrun6-elysium.data_prep.ic', shadowrunSR5ICDataPrep, {
-        displayName: 'shadowrun6-elysium: SR5ICDataPreparation Test',
+    quench.registerBatch('sr6elysium.importerVehicleMountedWeapons', mountedWeaponParserTesting, {
+        displayName: 'sr6elysium: Chummer Vehicle Mounted Weapon Importer',
     });
-    quench.registerBatch('shadowrun6-elysium.data_prep.vehicle', shadowrunSR5VehicleDataPrep, {
-        displayName: 'shadowrun6-elysium: SR5VehicleDataPreparation Test',
+    quench.registerBatch('sr6elysium.importerVehicleMods', vehicleModParserTesting, {
+        displayName: 'sr6elysium: Chummer Vehicle Modification Importer',
     });
 
-    quench.registerBatch('shadowrun6-elysium.data_prep.item', shadowrunSR5ItemDataPrep, {
-        displayName: 'shadowrun6-elysium: SR5ItemDataPreparation Test',
+    quench.registerBatch('sr6elysium.entities.items', shadowrunSR5Item, { displayName: 'sr6elysium: SR6Item Test' });
+    quench.registerBatch('sr6elysium.entities.actors', shadowrunSR5Actor, {
+        displayName: 'sr6elysium: SR6Actor Test',
+    });
+    quench.registerBatch('sr6elysium.entities.effects', shadowrunSR5ActiveEffect, {
+        displayName: 'sr6elysium: SR6ActiveEffect Test',
     });
 
-    quench.registerBatch('shadowrun6-elysium.flow.networkDevices', shadowrunNetworkDevices, {
-        displayName: 'shadowrun6-elysium: Matrix Network Devices Test',
+    quench.registerBatch('sr6elysium.data_prep.character', shadowrunSR5CharacterDataPrep, {
+        displayName: 'sr6elysium: SR5CharacterDataPreparation Test',
     });
-    quench.registerBatch('shadowrun6-elysium.flow.inventory', shadowrunInventoryFlow, {
-        displayName: 'shadowrun6-elysium: InventoryFlow Test',
+    quench.registerBatch('sr6elysium.data_prep.critter', shadowrunSR5CritterDataPrep, {
+        displayName: 'sr6elysium: SR5CritterDataPreparation Test',
     });
-    quench.registerBatch('shadowrun6-elysium.flow.tests', shadowrunTesting, { displayName: 'shadowrun6-elysium: SuccessTest Test' });
-    quench.registerBatch('shadowrun6-elysium.flow.tests_attack', shadowrunAttackTesting, {
-        displayName: 'shadowrun6-elysium: Attack Test',
+    quench.registerBatch('sr6elysium.data_prep.sprite', shadowrunSR5SpriteDataPrep, {
+        displayName: 'sr6elysium: SR5CSpriteDataPreparation Test',
     });
-    quench.registerBatch('shadowrun6-elysium.flow.sr5roll', shadowrunRolling, { displayName: 'shadowrun6-elysium: SR6Roll' });
+    quench.registerBatch('sr6elysium.data_prep.spirit', shadowrunSR5SpiritDataPrep, {
+        displayName: 'sr6elysium: SR5SpiritDataPreparation Test',
+    });
+    quench.registerBatch('sr6elysium.data_prep.ic', shadowrunSR5ICDataPrep, {
+        displayName: 'sr6elysium: SR5ICDataPreparation Test',
+    });
+    quench.registerBatch('sr6elysium.data_prep.vehicle', shadowrunSR5VehicleDataPrep, {
+        displayName: 'sr6elysium: SR5VehicleDataPreparation Test',
+    });
 
-    quench.registerBatch('shadowrun6-elysium.parser.weapon', weaponParserBaseTesting, {
-        displayName: 'shadowrun6-elysium: Data Importer Weapon Parsing',
+    quench.registerBatch('sr6elysium.data_prep.item', shadowrunSR5ItemDataPrep, {
+        displayName: 'sr6elysium: SR5ItemDataPreparation Test',
+    });
+
+    quench.registerBatch('sr6elysium.flow.networkDevices', shadowrunNetworkDevices, {
+        displayName: 'sr6elysium: Matrix Network Devices Test',
+    });
+    quench.registerBatch('sr6elysium.flow.inventory', shadowrunInventoryFlow, {
+        displayName: 'sr6elysium: InventoryFlow Test',
+    });
+    quench.registerBatch('sr6elysium.flow.tests', shadowrunTesting, { displayName: 'sr6elysium: SuccessTest Test' });
+    quench.registerBatch('sr6elysium.flow.tests_attack', shadowrunAttackTesting, {
+        displayName: 'sr6elysium: Attack Test',
+    });
+    quench.registerBatch('sr6elysium.flow.sr5roll', shadowrunRolling, { displayName: 'sr6elysium: SR6Roll' });
+
+    quench.registerBatch('sr6elysium.parser.weapon', weaponParserBaseTesting, {
+        displayName: 'sr6elysium: Data Importer Weapon Parsing',
     });
 };

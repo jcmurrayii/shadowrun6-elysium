@@ -10,11 +10,11 @@
         {{#if (itemMarking "ICON")}}
         {{#if (itemMarking "COLOR")}}
         <div class="item-img">
-            <img src="systems/shadowrun6-elysium/dist/icons/checklist.svg" data-tooltip="SR6.IsFreshImport" height="24px" width="24px"/>
+            <img src="systems/sr6elysium/dist/icons/checklist.svg" data-tooltip="SR6.IsFreshImport" height="24px" width="24px"/>
         </div>
         {{else}}
         <div class="item-img">
-            <img src="systems/shadowrun6-elysium/dist/icons/checklist-white.svg" data-tooltip="SR6.IsFreshImport" height="24px" width="24px"/>
+            <img src="systems/sr6elysium/dist/icons/checklist-white.svg" data-tooltip="SR6.IsFreshImport" height="24px" width="24px"/>
         </div>
         {{/if}}
         {{/if}}
@@ -52,7 +52,7 @@
     {{#if option.input}}
     {{#ife option.input.type 'number'}}
     <div class="item-text {{option.cssClass}}">
-        {{> "systems/shadowrun6-elysium/dist/templates/common/ValueInput.html"
+        {{> "systems/sr6elysium/dist/templates/common/ValueInput.html"
         cssClass=(concatStrings "short " option.input.cssClass)
         title="SR6.Quantity"
         size="5"

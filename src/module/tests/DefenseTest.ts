@@ -35,7 +35,7 @@ export class DefenseTest<T extends DefenseTestData = DefenseTestData> extends Op
     }
 
     override get _chatMessageTemplate() {
-        return 'systems/shadowrun6-elysium/dist/templates/rolls/defense-test-message.html'
+        return 'systems/sr6elysium/dist/templates/rolls/defense-test-message.html'
     }
 
     override get successLabel(): Translation {

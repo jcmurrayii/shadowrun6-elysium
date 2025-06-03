@@ -1,11 +1,11 @@
-{{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListHeader.html'
+{{> 'systems/sr6elysium/dist/templates/common/List/ListHeader.html'
         name=(localize 'SR6.CallInAction.Summoning')
         itemId='summoning'
         icons=(ItemHeaderIcons 'summoning')
         rightSide=(ItemHeaderRightSide 'summoning')
 }}
 {{#each itemType.summoning as |item i|}}
-    {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListItem.html'
+    {{> 'systems/sr6elysium/dist/templates/common/List/ListItem.html'
             img=item.img
             name=item.name
             itemId=item._id

@@ -5,18 +5,18 @@ export default async function registerSR5Tours() {
 
      // @ts-expect-error
     game.tours.register(
-      'shadowrun6-elysium',
+      'sr6elysium',
       'ConditionMonitor',
        // @ts-expect-error
-      await Sr5Tour.fromJSON('/systems/shadowrun6-elysium/dist/tours/ConditionMonitor.json'),
+      await Sr5Tour.fromJSON('/systems/sr6elysium/dist/tours/ConditionMonitor.json'),
     );
 
 
 //      game.tours.register(
-//       'shadowrun6-elysium',
+//       'sr6elysium',
 //       'CharacterImport',
 //        // @ts-expect-error
-//       await Sr5Tour.fromJSON('/systems/shadowrun6-elysium/dist/tours/character-import.json'),
+//       await Sr5Tour.fromJSON('/systems/sr6elysium/dist/tours/character-import.json'),
 //     );
 //
 

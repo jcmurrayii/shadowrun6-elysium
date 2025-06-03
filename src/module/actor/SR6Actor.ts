@@ -248,7 +248,7 @@ export class SR6Actor extends Actor {
     /**
      * All temporary ActiveEffects that should display on the Token
      *
-     * The shadowrun6-elysium system uses a custom application method with different effect application targets. Some of
+     * The sr6elysium system uses a custom application method with different effect application targets. Some of
      * these effects exist on the actor or one of it's items, however still shouldn't show in their token.
      *
      * While default Foundry relies on allApplicableEffects, as it only knows apply-to actor effects, we have to
@@ -316,12 +316,23 @@ export class SR6Actor extends Actor {
         }
 
         // Ensure matrix actions are available for all actors that can use the Matrix
-        if (game.user?.isGM && this.isOwner && (this.isCharacter() || this.isSprite() || this.isIC())) {
+        // Only run this if the game is fully ready and not during migration
+        if (game.ready && game.user?.isGM && this.isOwner && (this.isCharacter() || this.isSprite() || this.isIC())) {
             // Check if we've already added matrix actions to this actor
-            const hasMatrixActions = this.getFlag('shadowrun6-elysium', 'hasMatrixActions');
+            const hasMatrixActions = this.getFlag('sr6elysium', 'hasMatrixActions');
             if (!hasMatrixActions) {
                 // We need to use a setTimeout to avoid issues with the actor being locked during data preparation
-                setTimeout(() => this.ensureMatrixActions(), 500);
+                // Also add error handling to prevent crashes during initialization
+                setTimeout(() => {
+                    try {
+                        // Double-check that the game is still ready and the actor is valid
+                        if (game.ready && this.id && this.name) {
+                            this.ensureMatrixActions();
+                        }
+                    } catch (error) {
+                        console.warn(`Shadowrun 6e | Failed to ensure matrix actions for actor ${this.name}:`, error);
+                    }
+                }, 500);
             }
         }
     }
@@ -514,7 +525,7 @@ export class SR6Actor extends Actor {
      * This should be called when equipment changes
      */
     invalidateArmorCache(): void {
-        console.log(`Shadowrun 6e | Invalidating armor cache for ${this.name}`);
+        //console.log(`Shadowrun 6e | Invalidating armor cache for ${this.name}`);
         this._armorCache = {
             timestamp: 0,
             equipmentHash: ''
@@ -535,7 +546,7 @@ export class SR6Actor extends Actor {
 
         // Check if the cache is valid
         if (this._isArmorCacheValid()) {
-            console.log(`Shadowrun 6e | Using cached armor for ${this.name}`);
+            //console.log(`Shadowrun 6e | Using cached armor for ${this.name}`);
             return foundry.utils.duplicate(this._armorCache.armor);
         }
 
@@ -1296,7 +1307,7 @@ export class SR6Actor extends Actor {
             },
             participants: []
         };
-        const content = await renderTemplate('systems/shadowrun6-elysium/dist/templates/rolls/teamwork-test-message.html', templateData);
+        const content = await renderTemplate('systems/sr6elysium/dist/templates/rolls/teamwork-test-message.html', templateData);
         // Prepare the actual message.
         const messageData =  {
             user: game.user?.id,
@@ -2698,7 +2709,7 @@ export class SR6Actor extends Actor {
      * This will force the system to recalculate whether the actor has matrix actions
      */
     async resetMatrixActionsFlag() {
-        await this.unsetFlag('shadowrun6-elysium', 'hasMatrixActions');
+        await this.unsetFlag('sr6elysium', 'hasMatrixActions');
         console.log(`Shadowrun 6e | Reset matrix actions flag for ${this.name}`);
     }
 
@@ -2742,55 +2753,79 @@ export class SR6Actor extends Actor {
      * @returns {Promise<void>}
      */
     async ensureMatrixActions() {
-        console.log(`Shadowrun 6e | Ensuring matrix actions for actor ${this.name} (${this.id})`);
+        try {
+            console.log(`Shadowrun 6e | Ensuring matrix actions for actor ${this.name} (${this.id})`);
 
-        // Check if we've already added matrix actions to this actor
-        const hasMatrixActions = this.getFlag('shadowrun6-elysium', 'hasMatrixActions');
-        if (hasMatrixActions) {
-            console.log(`Shadowrun 6e | ${this.name} already has matrix actions flag set`);
-            return;
+            // Validate that the actor still exists and is valid
+            if (!this.id || !this.name) {
+                console.warn(`Shadowrun 6e | Actor is invalid, skipping matrix actions initialization`);
+                return;
+            }
+
+            // Check if we've already added matrix actions to this actor
+            const hasMatrixActions = this.getFlag('sr6elysium', 'hasMatrixActions');
+            if (hasMatrixActions) {
+                console.log(`Shadowrun 6e | ${this.name} already has matrix actions flag set`);
+                return;
+            }
+
+            // Get the matrix actions compendium
+            const matrixPack = game.packs.get("sr6elysium.matrix-actions");
+            if (!matrixPack) {
+                console.error("Shadowrun 6e | Matrix Actions compendium not found");
+                return;
+            }
+
+            // Get all matrix actions
+            await matrixPack.getIndex();
+            const matrixActions = await Promise.all(
+                Array.from(matrixPack.index).map(i => matrixPack.getDocument(i._id))
+            );
+
+            // Filter out null/undefined actions
+            const validMatrixActions = matrixActions.filter(action => action && action.name);
+            if (validMatrixActions.length === 0) {
+                console.warn(`Shadowrun 6e | No valid matrix actions found in compendium`);
+                await this.setFlag('sr6elysium', 'hasMatrixActions', true);
+                return;
+            }
+
+            // Get existing action names to avoid duplicates
+            const existingNames = this.items
+                .filter(i => i && i.type === "action" && i.name)
+                .map(i => i.name.toLowerCase());
+
+            // Filter out actions the actor already has
+            const actionsToAdd = validMatrixActions.filter(
+                a => a && a.name && !existingNames.includes(a.name.toLowerCase())
+            );
+
+            if (actionsToAdd.length === 0) {
+                console.log(`Shadowrun 6e | ${this.name} already has all matrix actions`);
+                // Set the flag to indicate that we've checked for matrix actions
+                await this.setFlag('sr6elysium', 'hasMatrixActions', true);
+                return;
+            }
+
+            // Add the actions
+            await this.createEmbeddedDocuments(
+                "Item",
+                actionsToAdd.map(a => a.toObject())
+            );
+
+            console.log(`Shadowrun 6e | Added ${actionsToAdd.length} matrix actions to ${this.name}`);
+
+            // Set the flag to indicate that we've added matrix actions
+            await this.setFlag('sr6elysium', 'hasMatrixActions', true);
+        } catch (error) {
+            console.error(`Shadowrun 6e | Error ensuring matrix actions for actor ${this.name}:`, error);
+            // Set the flag anyway to prevent repeated attempts
+            try {
+                await this.setFlag('sr6elysium', 'hasMatrixActions', true);
+            } catch (flagError) {
+                console.error(`Shadowrun 6e | Failed to set matrix actions flag for ${this.name}:`, flagError);
+            }
         }
-
-        // Get the matrix actions compendium
-        const matrixPack = game.packs.get("shadowrun6-elysium.matrix-actions");
-        if (!matrixPack) {
-            console.error("Shadowrun 6e | Matrix Actions compendium not found");
-            return;
-        }
-
-        // Get all matrix actions
-        await matrixPack.getIndex();
-        const matrixActions = await Promise.all(
-            Array.from(matrixPack.index).map(i => matrixPack.getDocument(i._id))
-        );
-
-        // Get existing action names to avoid duplicates
-        const existingNames = this.items
-            .filter(i => i.type === "action")
-            .map(i => i.name.toLowerCase());
-
-        // Filter out actions the actor already has
-        const actionsToAdd = matrixActions.filter(
-            a => !existingNames.includes(a.name.toLowerCase())
-        );
-
-        if (actionsToAdd.length === 0) {
-            console.log(`Shadowrun 6e | ${this.name} already has all matrix actions`);
-            // Set the flag to indicate that we've checked for matrix actions
-            await this.setFlag('shadowrun6-elysium', 'hasMatrixActions', true);
-            return;
-        }
-
-        // Add the actions
-        await this.createEmbeddedDocuments(
-            "Item",
-            actionsToAdd.map(a => a.toObject())
-        );
-
-        console.log(`Shadowrun 6e | Added ${actionsToAdd.length} matrix actions to ${this.name}`);
-
-        // Set the flag to indicate that we've added matrix actions
-        await this.setFlag('shadowrun6-elysium', 'hasMatrixActions', true);
     }
 
     async newSceneSetup() {

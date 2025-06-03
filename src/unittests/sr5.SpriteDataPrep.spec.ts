@@ -46,7 +46,7 @@ export const shadowrunSR5SpriteDataPrep = (context: QuenchBatchContext) => {
 
             assert.strictEqual(sprite.system.initiative.matrix.base.base, 1);
 
-            assert.strictEqual(sprite.system.skills.active.hacking.base, 0);
+            assert.strictEqual(sprite.system.skills.active.cracking.base, 0, "Cracking should be set by sprite type.");
 
             await actor.update({
                 'system.level': 6
@@ -64,9 +64,8 @@ export const shadowrunSR5SpriteDataPrep = (context: QuenchBatchContext) => {
             assert.strictEqual(sprite.system.initiative.matrix.base.base, 13);
             assert.strictEqual(sprite.system.initiative.matrix.dice.base, 4);
 
-            assert.strictEqual(sprite.system.skills.active.hacking.base, 6);
-            assert.strictEqual(sprite.system.skills.active.computer.base, 6); // all sprites
-            assert.strictEqual(sprite.system.skills.active.electronic_warfare.base, 0); // not set by sprite type.
+            assert.strictEqual(sprite.system.skills.active.cracking.base, 6);
+            assert.strictEqual(sprite.system.skills.active.electronics.base, 6); // all sprites
         })
 
         it('Matrix condition monitor track calculation with modifiers', async () => {

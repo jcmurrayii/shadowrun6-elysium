@@ -2,12 +2,12 @@ import {FLAGS, SYSTEM_NAME} from "../constants";
 
 export class ChangelogApplication extends Application {
     override get template(): string {
-        return 'systems/shadowrun6-elysium/dist/templates/apps/changelog.html';
+        return 'systems/sr6elysium/dist/templates/apps/changelog.html';
     }
 
     static override get defaultOptions() {
         const options = super.defaultOptions;
-        options.classes = ['shadowrun6-elysium'];
+        options.classes = ['sr6elysium'];
         options.title = game.i18n.localize('SR6.ChangelogApplication.Title');
         options.width = 500;
         options.height = 'auto';

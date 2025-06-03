@@ -10,7 +10,7 @@ export class TestActorLoader {
     static async loadTestActor(actorName: string): Promise<Actor | undefined> {
         try {
             // Get the test actors compendium
-            const pack = game.packs.get("shadowrun6-elysium.test-actors");
+            const pack = game.packs.get("sr6elysium.test-actors");
             if (!pack) {
                 console.error("Shadowrun 6e | Test Actors compendium not found");
                 return undefined;

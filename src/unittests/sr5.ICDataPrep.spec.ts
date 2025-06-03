@@ -24,11 +24,11 @@ export const shadowrunSR5ICDataPrep = (context: QuenchBatchContext) => {
             const actor = await testActor.create({ type: 'ic' }) as SR6Actor;
 
             let ic = actor.asIC() as Shadowrun.ICActorData;
-            assert.equal(ic.system.matrix.condition_monitor.max, 8);
+            assert.equal(ic.system.matrix.condition_monitor.max, 8, "Default Matrix condition monitor should be 8");
 
             await actor.update({ 'system.modifiers.matrix_track': 1 });
             ic = actor.asIC() as Shadowrun.ICActorData;
-            assert.equal(ic.system.matrix.condition_monitor.max, 9);
+            assert.equal(ic.system.matrix.condition_monitor.max, 9, "Adjusted matrix condition monitor should be 9");
         });
 
 

@@ -21,7 +21,7 @@ export class DamageApplicationDialog extends FormDialog {
 
     static getDialogData(actors : SR6Actor[], damage: DamageData): FormDialogData {
         const title = game.i18n.localize('SR6.DamageApplication.Title');
-        const templatePath = 'systems/shadowrun6-elysium/dist/templates/apps/dialogs/damage-application.html';
+        const templatePath = 'systems/sr6elysium/dist/templates/apps/dialogs/damage-application.html';
 
         // Simplify / refactor this
         const actorDamage : any = actors.map(a => { return {actor:a} }) ;

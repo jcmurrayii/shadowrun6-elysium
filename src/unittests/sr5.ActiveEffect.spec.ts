@@ -184,23 +184,23 @@ export const shadowrunSR5ActiveEffect = (context: QuenchBatchContext) => {
             const actor = await testActor.create({ type: 'character' });
             const effects = await actor.createEmbeddedDocuments('ActiveEffect', [{
                 label: 'Actor Effect',
-                flags: { "shadowrun6-elysium": { applyTo: 'actor' } },
+                flags: { "sr6elysium": { applyTo: 'actor' } },
                 changes: [{ key: 'system.attributes.body', value: 3, mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM }]
             }, {
                 label: 'Targeted Actor Effect',
-                flags: { "shadowrun6-elysium": { applyTo: 'targeted_actor' } },
+                flags: { "sr6elysium": { applyTo: 'targeted_actor' } },
                 changes: [{ key: 'system.attributes.body', value: 3, mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM }]
             }, {
                 label: 'Test_All Effect',
-                flags: { "shadowrun6-elysium": { applyTo: 'test_all' } },
+                flags: { "sr6elysium": { applyTo: 'test_all' } },
                 changes: [{ key: 'system.attributes.body', value: 3, mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM }]
             }, {
                 label: 'Test_Item Effect',
-                flags: { "shadowrun6-elysium": { applyTo: 'test_item' } },
+                flags: { "sr6elysium": { applyTo: 'test_item' } },
                 changes: [{ key: 'system.attributes.body', value: 3, mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM }]
             }, {
                 label: 'Modifiers Effect',
-                flags: { "shadowrun6-elysium": { applyTo: 'modifiers' } },
+                flags: { "sr6elysium": { applyTo: 'modifiers' } },
                 changes: [{ key: 'system.attributes.body', value: 3, mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM }]
             }]);
 
@@ -211,7 +211,7 @@ export const shadowrunSR5ActiveEffect = (context: QuenchBatchContext) => {
 
         it('TEST_ALL apply-to: Actor effect applies to test', async () => {
             const expectedFlags = {
-                "shadowrun6-elysium": { applyTo: 'test_all' }
+                "sr6elysium": { applyTo: 'test_all' }
             }
             const limitValue = 3;
             const poolValue = 3;
@@ -250,7 +250,7 @@ export const shadowrunSR5ActiveEffect = (context: QuenchBatchContext) => {
 
         it('TEST_ALL apply-to: Item effect applies to test', async () => {
             const expectedFlags = {
-                "shadowrun6-elysium": { applyTo: 'test_all' }
+                "sr6elysium": { applyTo: 'test_all' }
             }
             const limitValue = 3;
             const poolValue = 3;
@@ -290,7 +290,7 @@ export const shadowrunSR5ActiveEffect = (context: QuenchBatchContext) => {
 
         it('TEST_ITEM apply-to: Item effect applies only when on test item', async () => {
             const expectedFlags = {
-                "shadowrun6-elysium": { applyTo: 'test_item' }
+                "sr6elysium": { applyTo: 'test_item' }
             }
             const limitValue = 3;
             const poolValue = 3;
@@ -386,14 +386,14 @@ export const shadowrunSR5ActiveEffect = (context: QuenchBatchContext) => {
             const item = items.pop();
             await item.createEmbeddedDocuments('ActiveEffect', [{
                 label: 'Test Effect',
-                flags: { "shadowrun6-elysium": { onlyForWireless: true } },
+                flags: { "sr6elysium": { onlyForWireless: true } },
                 changes: [{ key: 'system.attributes.body', value: 3, mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM }]
             }]);
 
             const item2 = items.pop();
             await item2.createEmbeddedDocuments('ActiveEffect', [{
                 label: 'Test Effect',
-                flags: { "shadowrun6-elysium": { onlyForWireless: true } },
+                flags: { "sr6elysium": { onlyForWireless: true } },
                 changes: [{ key: 'system.attributes.body', value: 3, mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM }]
             }]);
 
@@ -411,14 +411,14 @@ export const shadowrunSR5ActiveEffect = (context: QuenchBatchContext) => {
             const item = items.pop();
             await item.createEmbeddedDocuments('ActiveEffect', [{
                 label: 'Test Effect',
-                flags: { "shadowrun6-elysium": { onlyForEquipped: true } },
+                flags: { "sr6elysium": { onlyForEquipped: true } },
                 changes: [{ key: 'system.attributes.body', value: 3, mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM }]
             }]);
 
             const item2 = items.pop();
             await item2.createEmbeddedDocuments('ActiveEffect', [{
                 label: 'Test Effect',
-                flags: { "shadowrun6-elysium": { onlyForEquipped: true } },
+                flags: { "sr6elysium": { onlyForEquipped: true } },
                 changes: [{ key: 'system.attributes.body', value: 3, mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM }]
             }]);
 
@@ -436,14 +436,14 @@ export const shadowrunSR5ActiveEffect = (context: QuenchBatchContext) => {
             const item = items.pop();
             await item.createEmbeddedDocuments('ActiveEffect', [{
                 label: 'Test Effect',
-                flags: { "shadowrun6-elysium": { onlyForEquipped: true, onlyForWireless: true } },
+                flags: { "sr6elysium": { onlyForEquipped: true, onlyForWireless: true } },
                 changes: [{ key: 'system.attributes.body', value: 3, mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM }]
             }]);
 
             const item2 = items.pop();
             await item2.createEmbeddedDocuments('ActiveEffect', [{
                 label: 'Test Effect',
-                flags: { "shadowrun6-elysium": { onlyForEquipped: true, onlyForeWireless: false } },
+                flags: { "sr6elysium": { onlyForEquipped: true, onlyForeWireless: false } },
                 changes: [{ key: 'system.attributes.body', value: 3, mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM }]
             }]);
 
@@ -461,7 +461,7 @@ export const shadowrunSR5ActiveEffect = (context: QuenchBatchContext) => {
             await item.createEmbeddedDocuments('ActiveEffect', [{
                 label: 'Test Effect',
                 disabled: true,
-                flags: { "shadowrun6-elysium": { onlyForEquipped: true, onlyForWireless: true } },
+                flags: { "sr6elysium": { onlyForEquipped: true, onlyForWireless: true } },
                 changes: [{ key: 'system.attributes.body', value: 3, mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM }]
             }]);
 
@@ -482,7 +482,7 @@ export const shadowrunSR5ActiveEffect = (context: QuenchBatchContext) => {
             let actions = await actor.createEmbeddedDocuments('Item', [{ name: 'Test Action', type: 'action' }]);
             await actor.createEmbeddedDocuments('ActiveEffect', [{
                 label: 'Test Effect',
-                flags: { "shadowrun6-elysium": { applyTo: 'test_all', selection_tests: "[{\"value\":\"Success Test\",\"id\":\"SuccessTest\"}]" } },
+                flags: { "sr6elysium": { applyTo: 'test_all', selection_tests: "[{\"value\":\"Success Test\",\"id\":\"SuccessTest\"}]" } },
                 changes: [{ key: 'data.pool', value: 2, mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM }]
             }]);
 
@@ -533,7 +533,7 @@ export const shadowrunSR5ActiveEffect = (context: QuenchBatchContext) => {
             const weapon = await testItem.create({ type: 'weapon', system: { category: 'ranged' } });
             const effects = await actor.createEmbeddedDocuments('ActiveEffect', [{
                 name: 'Test Effect',
-                flags: { "shadowrun6-elysium": { applyTo: 'test_all' } },
+                flags: { "sr6elysium": { applyTo: 'test_all' } },
                 changes: [{ key: 'data.damage', value: 3, mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM }]
             }]);
 
@@ -548,7 +548,7 @@ export const shadowrunSR5ActiveEffect = (context: QuenchBatchContext) => {
             const actor = await testActor.create({ type: 'character' });
             const effects = await actor.createEmbeddedDocuments('ActiveEffect', [{
                 name: 'Test Effect',
-                flags: { "shadowrun6-elysium": { applyTo: 'test_all' } },
+                flags: { "sr6elysium": { applyTo: 'test_all' } },
                 changes: [
                     { key: 'data.limit', value: 3, mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM },
                     { key: 'data.pool', value: 3, mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM }
@@ -588,7 +588,7 @@ export const shadowrunSR5ActiveEffect = (context: QuenchBatchContext) => {
             const actor = await testActor.create({ type: 'character' });
             const effects = await actor.createEmbeddedDocuments('ActiveEffect', [{
                 name: 'Test Effect',
-                flags: { "shadowrun6-elysium": { applyTo: 'test_all', selection_categories: '[{"value":"Social Actions","id":"social"}]' } },
+                flags: { "sr6elysium": { applyTo: 'test_all', selection_categories: '[{"value":"Social Actions","id":"social"}]' } },
                 changes: [{ key: 'data.pool', value: 3, mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM }]
             }]);
 

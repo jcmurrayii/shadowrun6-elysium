@@ -47,7 +47,7 @@ export class SummonSpiritTest extends SuccessTest<SummonSpiritTestData> {
     }
 
     override get _dialogTemplate() {
-        return 'systems/shadowrun6-elysium/dist/templates/apps/dialogs/summonspirit-test-dialog.html';
+        return 'systems/sr6elysium/dist/templates/apps/dialogs/summonspirit-test-dialog.html';
     }
 
     override get testCategories(): Shadowrun.ActionCategories[] {

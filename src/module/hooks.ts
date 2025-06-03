@@ -108,16 +108,16 @@ export class HooksManager {
     static init() {
         console.log(`Loading Shadowrun 5e System
 ___________________
- ___________ _____ 
+ ___________ _____
 /  ___| ___ \\  ___|
-\\ \`--.| |_/ /___ \\ 
+\\ \`--.| |_/ /___ \\
  \`--. \\    /    \\ \\
 /\\__/ / |\\ \\/\\__/ /
-\\____/\\_| \\_\\____/ 
+\\____/\\_| \\_\\____/
 ===================
 `);
-        // Create a shadowrun6-elysium namespace within the game global
-        game['shadowrun6-elysium'] = {
+        // Create a sr6elysium namespace within the game global
+        game['sr6elysium'] = {
             /**
              * System level Document implementations.
              */
@@ -451,7 +451,7 @@ ___________________
                 ...game.actors.filter((actor: SR6Actor) => actor.isIC() && actor.hasHost()) as SR6Actor[],
                 // All token actors that aren't linked.
                 // @ts-expect-error // TODO: foundry-vtt-types v10
-                ...canvas.scene.tokens.filter(token => !token.actorLink && token.actor?.isIC() && token.actor?.hasHost()).map(t => t.actor)
+                ...canvas.scene.tokens.filter(token => !token.actorLink && token.actor?.isIC() && token.actor?.hasHost()).map(t => t.actor).filter(actor => actor !== null && actor !== undefined)
             ];
 
             // Update host data on the ic actor.
@@ -475,7 +475,7 @@ ___________________
      */
     static registerSocketListeners() {
         if (!game.socket || !game.user) return;
-        console.log('Registering shadowrun6-elysium system socket messages...');
+        console.log('Registering sr6elysium system socket messages...');
         const hooks: Shadowrun.SocketMessageHooks = {
             [FLAGS.addNetworkController]: [NetworkDeviceFlow._handleAddNetworkControllerSocketMessage],
             [FLAGS.DoNextRound]: [SR6Combat._handleDoNextRoundSocketMessage],

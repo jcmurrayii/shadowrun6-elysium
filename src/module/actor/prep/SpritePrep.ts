@@ -121,7 +121,7 @@ export class SpritePrep {
             resonance: 0,
             init: 0,
             // all sprites have computer
-            skills: ['computer'],
+            skills: ['electronics'],
         };
         switch (spriteType) {
             case 'courier':
@@ -129,41 +129,41 @@ export class SpritePrep {
                 overrides.data_processing = 1;
                 overrides.firewall = 2;
                 overrides.init = 1;
-                overrides.skills.push('hacking');
+                overrides.skills.push('cracking');
                 break;
             case 'crack':
                 overrides.sleaze = 3;
                 overrides.data_processing = 2;
                 overrides.firewall = 1;
                 overrides.init = 2;
-                overrides.skills.push('hacking', 'electronic_warfare');
+                overrides.skills.push('cracking');
                 break;
             case 'data':
                 overrides.attack = -1;
                 overrides.data_processing = 4;
                 overrides.firewall = 1;
                 overrides.init = 4;
-                overrides.skills.push('electronic_warfare');
+                overrides.skills.push('cracking');
                 break;
             case 'fault':
                 overrides.attack = 3;
                 overrides.data_processing = 1;
                 overrides.firewall = 2;
                 overrides.init = 1;
-                overrides.skills.push('cybercombat', 'hacking');
+                overrides.skills.push('cracking');
                 break;
             case 'machine':
                 overrides.attack = 1;
                 overrides.data_processing = 3;
                 overrides.firewall = 2;
                 overrides.init = 3;
-                overrides.skills.push('electronic_warfare', 'hardware');
+                overrides.skills.push('cracking','electronics');
                 break;
             case 'companion':
                 overrides.attack = -1;
                 overrides.sleaze = 1;
                 overrides.firewall = 4;
-                overrides.skills.push('electronic_warfare');
+                overrides.skills.push('cracking');
                 break;
             case 'generalist':
                 overrides.attack = 1;
@@ -171,7 +171,7 @@ export class SpritePrep {
                 overrides.data_processing = 1;
                 overrides.firewall = 1;
                 overrides.init = 1;
-                overrides.skills.push('hacking','electronic_warfare');
+                overrides.skills.push('cracking');
                 break;
         }
         return overrides;

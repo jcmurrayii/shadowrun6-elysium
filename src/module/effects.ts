@@ -2,7 +2,7 @@
 /**
  * All functions have been taken from : https://gitlab.com/foundrynet/dnd5e/-/blob/master/module/effects.js
  *
- * There have been some alterations made to fit the shadowrun6-elysium system.
+ * There have been some alterations made to fit the sr6elysium system.
  */
 
 import {SR6Actor} from "./actor/SR6Actor";

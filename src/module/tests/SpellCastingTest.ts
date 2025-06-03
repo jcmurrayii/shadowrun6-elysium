@@ -108,7 +108,7 @@ export class SpellCastingTest extends SuccessTest<SpellCastingTestData> {
     }
 
     override get _dialogTemplate()  {
-        return 'systems/shadowrun6-elysium/dist/templates/apps/dialogs/spellcasting-test-dialog.html';
+        return 'systems/sr6elysium/dist/templates/apps/dialogs/spellcasting-test-dialog.html';
     }
 
     /**
@@ -119,7 +119,7 @@ export class SpellCastingTest extends SuccessTest<SpellCastingTestData> {
     }
 
     override get _chatMessageTemplate(): string {
-        return 'systems/shadowrun6-elysium/dist/templates/rolls/spellcasting-test-message.html';
+        return 'systems/sr6elysium/dist/templates/rolls/spellcasting-test-message.html';
     }
 
     /**

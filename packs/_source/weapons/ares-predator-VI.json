@@ -1,7 +1,7 @@
 {
     "name": "Ares Predator VI",
     "type": "weapon",
-    "img": "systems/shadowrun6-elysium/dist/icons/importer/weapon/heavy-pistols.svg",
+    "img": "systems/sr6elysium/dist/icons/importer/weapon/heavy-pistols.svg",
     "system": {
         "description": {
             "value": "",

@@ -16,7 +16,7 @@ import { SR6ActiveEffect } from "./SR6ActiveEffect";
  * multi step configuration process. If a change is partially configured it might break the underlying data structure
  * and sheet rendering. To prevent this, the config sheet is rendered with a manually triggered 'submit' button.
  *
- * The shadowrun6-elysium system uses ActiveEffects for more than only altering actor data.
+ * The sr6elysium system uses ActiveEffects for more than only altering actor data.
  * Besides the default 'actor' apply-to type others are also supported, with all changes of an effect applying to that target only.
  *
  * Some apply-to types follow the default key-value change structure of altering data, while others (modifiers) allow defining
@@ -32,7 +32,7 @@ export class SR6ActiveEffectConfig extends ActiveEffectConfig {
     override object: SR6ActiveEffect;
 
     override get template(): string {
-        return 'systems/shadowrun6-elysium/dist/templates/effect/active-effect-config.html';
+        return 'systems/sr6elysium/dist/templates/effect/active-effect-config.html';
     }
 
     override async getData(options?: Application.RenderOptions): Promise<ActiveEffectConfig.Data> {
@@ -55,7 +55,7 @@ export class SR6ActiveEffectConfig extends ActiveEffectConfig {
     override activateListeners(html: JQuery<HTMLElement>): void {
         super.activateListeners(html);
 
-        html.find('select[name="flags.shadowrun6-elysium.applyTo"]').on('change', this._onApplyToChange.bind(this));
+        html.find('select[name="flags.sr6elysium.applyTo"]').on('change', this._onApplyToChange.bind(this));
 
         this._activateTagifyListeners(html);
     }
@@ -95,7 +95,7 @@ export class SR6ActiveEffectConfig extends ActiveEffectConfig {
             ui.notifications?.error('You must delete changes before changing the apply-to type.');
         } else {
             // Make sure applyTo is saved but also save all other form data on sheet.
-            const updateData = { 'flags.shadowrun6-elysium.applyTo': select.value };
+            const updateData = { 'flags.sr6elysium.applyTo': select.value };
             await this._onSubmit(event, {updateData, preventClose: true})
         }
     }
@@ -154,7 +154,7 @@ export class SR6ActiveEffectConfig extends ActiveEffectConfig {
         const inputElement = html.find('input#test-selection').get(0) as HTMLInputElement;
 
         // Tagify expects this format for localized tags.
-        const values = Object.values(game['shadowrun6-elysium'].tests).map(((test: any) => ({
+        const values = Object.values(game['sr6elysium'].tests).map(((test: any) => ({
             label: test.label, id: test.name
         })));
 

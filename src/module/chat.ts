@@ -42,7 +42,7 @@ const createChatData = async (template: string, templateData) => {
 
 export async function createItemChatMessage(options) {
     const templateData = createChatTemplateData(options);
-    return await createChatMessage('systems/shadowrun6-elysium/dist/templates/rolls/item-card.html', templateData);
+    return await createChatMessage('systems/sr6elysium/dist/templates/rolls/item-card.html', templateData);
 }
 
 function createChatTemplateData(options) {

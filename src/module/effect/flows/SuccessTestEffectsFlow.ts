@@ -140,7 +140,7 @@ export class SuccessTestEffectsFlow<T extends SuccessTest> {
         // Inject a flag to mark the effect as applied by a test.
         // This is necessary so we can differentiate between effects created and applied.
         for (const effectData of effectsData) {
-            effectData['flags.shadowrun6-elysium.appliedByTest'] = true;
+            effectData['flags.sr6elysium.appliedByTest'] = true;
         }
 
         if (!game.user?.isGM) {
@@ -206,7 +206,7 @@ export class SuccessTestEffectsFlow<T extends SuccessTest> {
                 token
             }
         };
-        const content = await renderTemplate('systems/shadowrun6-elysium/dist/templates/chat/test-effects-message.hbs', templateData);
+        const content = await renderTemplate('systems/sr6elysium/dist/templates/chat/test-effects-message.hbs', templateData);
         const messageData = {
             content
         };

@@ -2,7 +2,7 @@
   "_id": "a7wU1s3FXu21tNGE",
   "name": "Memory",
   "type": "action",
-  "img": "systems/shadowrun6-elysium/dist/icons/redist/brain.svg",
+  "img": "systems/sr6elysium/dist/icons/redist/brain.svg",
   "data": {
     "description": {
       "value": "",

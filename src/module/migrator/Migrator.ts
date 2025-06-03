@@ -32,7 +32,7 @@ export class Migrator {
 
     public static get onlySystemPacks(): boolean {
         //@ts-expect-error // TODO: foundry-vtt-types v10
-        return game.packs.contents.filter(pack => pack.metadata.packageType !== 'system' && pack.metadata.packageName !== 'shadowrun6-elysium').length === 0;
+        return game.packs.contents.filter(pack => pack.metadata.packageType !== 'system' && pack.metadata.packageName !== 'sr6elysium').length === 0;
     }
 
     public static async InitWorldForMigration() {

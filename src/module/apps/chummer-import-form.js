@@ -6,9 +6,9 @@ export class ChummerImportForm extends FormApplication {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.id = 'chummer-import';
-        options.classes = ['shadowrun6-elysium'];
+        options.classes = ['sr6elysium'];
         options.title = 'Chummer/Hero Lab Import';
-        options.template = 'systems/shadowrun6-elysium/dist/templates/apps/import.html';
+        options.template = 'systems/sr6elysium/dist/templates/apps/import.html';
         options.width = 600;
         options.height = 'auto';
         return options;

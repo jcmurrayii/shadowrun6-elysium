@@ -20,7 +20,7 @@ declare namespace Shadowrun {
      */
     export interface ActionRollData extends MinimalActionData {
         // Test test class used for the active action test
-        // Should be defined in game['shadowrun6-elysium'].activeTests
+        // Should be defined in game['sr6elysium'].activeTests
         test: string
         // The type of combat action to be performed (free, minor, major, etc.)
         type: ActionType

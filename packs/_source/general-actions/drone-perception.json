@@ -1,7 +1,7 @@
 {
   "name": "Drone Perception",
   "type": "action",
-  "img": "systems/shadowrun6-elysium/dist/icons/redist/radar.svg",
+  "img": "systems/sr6elysium/dist/icons/redist/radar.svg",
   "data": {
     "description": {
       "value": "",

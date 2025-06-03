@@ -15,7 +15,7 @@ declare global {
         socket: never; // disable socket ready checks
     }
 
-    // Configuration of shadowrun6-elysium system
+    // Configuration of sr6elysium system
     interface SourceConfig {
         Item: ShadowrunItemData;
         Actor: ShadowrunActorData;

@@ -1,12 +1,12 @@
 <div class="scroll-area-sprite-power">
-    {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListHeader.html'
+    {{> 'systems/sr6elysium/dist/templates/common/List/ListHeader.html'
             name=(localize 'SR6.Labels.ActorSheet.SpritePowers')
             itemId='sprite_power'
             icons=(ItemHeaderIcons 'sprite_power')
             rightSide=(ItemHeaderRightSide 'sprite_power')
     }}
     {{#each itemType.sprite_power as |item iid|}}
-        {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListItem.html'
+        {{> 'systems/sr6elysium/dist/templates/common/List/ListItem.html'
                 img=item.img
                 name=item.name
                 itemId=item._id

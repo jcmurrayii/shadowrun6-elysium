@@ -59,7 +59,7 @@ export class CompileSpriteTest extends SuccessTest<CompileSpriteTestData> {
     }
 
     override get _dialogTemplate() {
-        return 'systems/shadowrun6-elysium/dist/templates/apps/dialogs/compilation-test-dialog.html';
+        return 'systems/sr6elysium/dist/templates/apps/dialogs/compilation-test-dialog.html';
     }
 
     override get canBeExtended() {

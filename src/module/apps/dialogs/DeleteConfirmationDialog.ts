@@ -20,7 +20,7 @@ export class DeleteConfirmationDialog extends FormDialog {
             },
             default: 'cancel',
             templateData: {},
-            templatePath: 'systems/shadowrun6-elysium/dist/templates/apps/dialogs/delete-confirmation-dialog.html'
+            templatePath: 'systems/sr6elysium/dist/templates/apps/dialogs/delete-confirmation-dialog.html'
         }
     }
 

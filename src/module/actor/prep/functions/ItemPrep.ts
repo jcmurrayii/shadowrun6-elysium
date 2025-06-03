@@ -22,14 +22,14 @@ export class ItemPrep {
         const defenseRatingParts = new PartsList(armor.defense_rating.mod);
         const equippedArmor = items.filter((item) => item.couldHaveArmor() && item.isEquipped());
 
-        console.log('Shadowrun 6e | Armor Preparation:', {
-            equippedArmorItems: equippedArmor.map(item => ({
-                name: item.getName(),
-                baseDR: item.getBaseDefenseRating(),
-                totalDR: item.getDefenseRating()
-            })),
-            initialArmor: foundry.utils.duplicate(armor)
-        });
+        // console.log('Shadowrun 6e | Armor Preparation:', {
+        //     equippedArmorItems: equippedArmor.map(item => ({
+        //         name: item.getName(),
+        //         baseDR: item.getBaseDefenseRating(),
+        //         totalDR: item.getDefenseRating()
+        //     })),
+        //     initialArmor: foundry.utils.duplicate(armor)
+        // });
 
         // Calculate base DR from equipped armor
         equippedArmor?.forEach((item) => {
@@ -51,10 +51,10 @@ export class ItemPrep {
         // Calculate total DR including modifiers
         armor.defense_rating.value = Helpers.calcTotal(armor.defense_rating);
 
-        console.log('Shadowrun 6e | After Armor Preparation:', {
-            finalArmor: foundry.utils.duplicate(armor),
-            defenseRatingParts: defenseRatingParts
-        });
+        // console.log('Shadowrun 6e | After Armor Preparation:', {
+        //     finalArmor: foundry.utils.duplicate(armor),
+        //     defenseRatingParts: defenseRatingParts
+        // });
     }
     /**
      * Apply all changes to an actor by their 'ware items.

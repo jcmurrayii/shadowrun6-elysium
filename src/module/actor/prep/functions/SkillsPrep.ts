@@ -16,6 +16,8 @@ export class SkillsPrep {
     static prepareSkillData(system: ActorTypesData) {
         const { language, active, knowledge } = system.skills;
 
+        console.log(active);
+
         // Active skills aren't grouped and can be prepared skill by skill.
         Object.values(active).forEach((skill) => { _mergeWithMissingSkillFields(skill)} );
 

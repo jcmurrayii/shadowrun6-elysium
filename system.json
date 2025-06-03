@@ -1,6 +1,6 @@
 {
-    "id": "shadowrun6-elysium",
-    "name": "shadowrun6-elysium",
+    "id": "sr6elysium",
+    "name": "sr6elysium",
     "title": "Unofficial Shadowrun 6e: Elysium",
     "description": "Shadowrun 6e system",
     "authors": [
@@ -41,7 +41,7 @@
                 "ASSISTANT": "OWNER"
             },
             "type": "Macro",
-            "system": "shadowrun6-elysium"
+            "system": "sr6elysium"
         },
         {
             "name": "major-actions",
@@ -53,7 +53,7 @@
                 "ASSISTANT": "OWNER"
             },
             "type": "Item",
-            "system": "shadowrun6-elysium"
+            "system": "sr6elysium"
         },
         {
             "name": "matrix-actions",
@@ -65,7 +65,7 @@
                 "ASSISTANT": "OWNER"
             },
             "type": "Item",
-            "system": "shadowrun6-elysium"
+            "system": "sr6elysium"
         },
         {
             "name": "general-actions",
@@ -77,7 +77,7 @@
                 "ASSISTANT": "OWNER"
             },
             "type": "Item",
-            "system": "shadowrun6-elysium"
+            "system": "sr6elysium"
         },
         {
             "name": "system-macros",
@@ -89,7 +89,7 @@
                 "ASSISTANT": "OWNER"
             },
             "type": "Macro",
-            "system": "shadowrun6-elysium"
+            "system": "sr6elysium"
         },
         {
             "name": "weapons",
@@ -101,7 +101,7 @@
                 "ASSISTANT": "OWNER"
             },
             "type": "Item",
-            "system": "shadowrun6-elysium"
+            "system": "sr6elysium"
         },
         {
             "name": "spells",
@@ -113,7 +113,7 @@
                 "ASSISTANT": "OWNER"
             },
             "type": "Item",
-            "system": "shadowrun6-elysium"
+            "system": "sr6elysium"
         }
     ],
     "relationships": [

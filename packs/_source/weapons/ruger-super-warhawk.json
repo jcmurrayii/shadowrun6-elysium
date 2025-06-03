@@ -2,7 +2,7 @@
     "_id": "d9dc67b4-cafa-488c-a26f-3b08ef8751ec",
     "name": "Ruger Super WarHawk",
     "type": "weapon",
-    "img": "systems/shadowrun6-elysium/dist/icons/importer/weapons/heavy-pistols.svg",
+    "img": "systems/sr6elysium/dist/icons/importer/weapons/heavy-pistols.svg",
     "data": {
         "description": {
             "value": "Boom and glitz! That’s the standard street tag\nfor the Super Warhawk. This revolver is shiny and\nchrome and makes holes the size of a troll’s fist\nstraight out of the box. Upgrade the ammo or the\nfeatures and those holes get real precise",

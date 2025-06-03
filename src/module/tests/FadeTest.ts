@@ -37,11 +37,11 @@ export class FadeTest extends SuccessTest<FadeTestData> {
     }
 
     override get _dialogTemplate() {
-        return 'systems/shadowrun6-elysium/dist/templates/apps/dialogs/fade-test-dialog.html';
+        return 'systems/sr6elysium/dist/templates/apps/dialogs/fade-test-dialog.html';
     }
 
     override get _chatMessageTemplate(): string {
-        return 'systems/shadowrun6-elysium/dist/templates/rolls/fade-test-message.html';
+        return 'systems/sr6elysium/dist/templates/rolls/fade-test-message.html';
     }
 
     static override _getDefaultTestAction(): Partial<MinimalActionData> {

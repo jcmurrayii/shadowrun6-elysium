@@ -93,7 +93,7 @@ export class SR6CharacterSheet extends SR6BaseActorSheet {
      */
     clearMatrixActionsCache() {
         this._matrixActionsCache = null;
-        console.log('Shadowrun 6e | Matrix actions cache cleared');
+        //console.log('Shadowrun 6e | Matrix actions cache cleared');
     }
 
     /**
@@ -101,15 +101,15 @@ export class SR6CharacterSheet extends SR6BaseActorSheet {
      * This should be called when the actor's data changes
      */
     forceRefresh() {
-        console.log('Shadowrun 6e | Forcing refresh of character sheet');
+        //console.log('Shadowrun 6e | Forcing refresh of character sheet');
 
         // Get the latest data from the actor
         const actor = game.actors.get(this.actor.id);
         if (actor) {
-            console.log('Shadowrun 6e | Character sheet data before refresh:', {
-                sheetActions: this.actor.system.initiative.actions,
-                actorActions: actor.system.initiative.actions
-            });
+            // console.log('Shadowrun 6e | Character sheet data before refresh:', {
+            //     sheetActions: this.actor.system.initiative.actions,
+            //     actorActions: actor.system.initiative.actions
+            // });
         }
 
         // We can't directly set this.actor as it only has a getter
@@ -132,7 +132,7 @@ export class SR6CharacterSheet extends SR6BaseActorSheet {
         const actions = sheetData.itemType.action || [];
 
         // Check if we have a valid cache and the actor has the matrix actions flag set
-        const hasMatrixActions = this.actor.getFlag('shadowrun6-elysium', 'hasMatrixActions');
+        const hasMatrixActions = this.actor.getFlag('sr6elysium', 'hasMatrixActions');
         if (this._matrixActionsCache && hasMatrixActions) {
             // Use the cached matrix actions
             sheetData.matrixActions = this._matrixActionsCache.matrixActions;
@@ -183,7 +183,7 @@ export class SR6CharacterSheet extends SR6BaseActorSheet {
      */
     _getFolderState(folderId, defaultState = false) {
         const key = `folders.${folderId}`;
-        const state = this.actor.getFlag('shadowrun6-elysium', key);
+        const state = this.actor.getFlag('sr6elysium', key);
         return state !== undefined ? state : defaultState;
     }
 

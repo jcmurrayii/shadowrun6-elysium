@@ -1,4 +1,4 @@
-{{#> 'systems/shadowrun6-elysium/dist/templates/common/TabWrapper.html' tabId='inventory'}}
+{{#> 'systems/sr6elysium/dist/templates/common/TabWrapper.html' tabId='inventory'}}
     <div class="inventory">
         <div class="list-item item-section flexrow">
             <div class="list-item-content">
@@ -46,7 +46,7 @@
         <div class="scroll-area scroll-area-inventory">
             {{#each inventory.types as |section type|}}
                 <div class="custom-section-heading">
-                    {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListHeader.html'
+                    {{> 'systems/sr6elysium/dist/templates/common/List/ListHeader.html'
                             itemCssClass=(ift (not section.isOpen) 'faded')
                             name=(localize section.label)
                             itemId=section.type
@@ -57,7 +57,7 @@
                 {{#if section.isOpen }}
                     {{#each section.items}}
                         <div class="custom-item-element">
-                            {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListItem.html'
+                            {{> 'systems/sr6elysium/dist/templates/common/List/ListItem.html'
                                     img=this.img
                                     name=this.name
                                     itemId=this._id
@@ -73,5 +73,5 @@
             {{/each}}
         </div>
         </div>
-        {{/'systems/shadowrun6-elysium/dist/templates/common/TabWrapper.html'}}
+        {{/'systems/sr6elysium/dist/templates/common/TabWrapper.html'}}
 

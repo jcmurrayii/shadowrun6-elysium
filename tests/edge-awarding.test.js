@@ -79,14 +79,14 @@ export default function() {
 
       // Set initial edge to 0
       await testActor.update({"system.edge.uses": 0});
-      
+
       // Process the test
       await logicTest.execute();
-      
+
       // Check if edge was awarded
       const newEdge = testActor.system.edge.uses;
       assert.equal(newEdge, 1, "Edge should be awarded for Logic-based test with Analytical Mind");
-      
+
       // Check if edgeGain data was set correctly
       assert.isTrue(logicTest.data.edgeGain.gained, "edgeGain.gained should be true");
       assert.include(logicTest.data.edgeGain.effect, "Logic Test: Edge gain", "edgeGain.effect should mention Logic Test");
@@ -105,14 +105,14 @@ export default function() {
 
       // Set initial edge to 0
       await testActor.update({"system.edge.uses": 0});
-      
+
       // Process the test
       await agilityTest.execute();
-      
+
       // Check if edge was not awarded
       const newEdge = testActor.system.edge.uses;
       assert.equal(newEdge, 0, "Edge should not be awarded for non-Logic test with Analytical Mind");
-      
+
       // Check if edgeGain data was not set
       assert.isUndefined(agilityTest.data.edgeGain, "edgeGain should be undefined for non-matching test");
     });
@@ -120,7 +120,7 @@ export default function() {
     it("should not award edge when already at maximum edge", async function() {
       // Set initial edge to maximum
       await testActor.update({"system.edge.uses": 7});
-      
+
       // Create a test using Logic
       const logicTest = new game.shadowrun6e.tests.SuccessTest({
         actor: testActor,
@@ -130,14 +130,14 @@ export default function() {
           skill: "hacking"
         }
       });
-      
+
       // Process the test
       await logicTest.execute();
-      
+
       // Check if edge was not awarded (still at max)
       const newEdge = testActor.system.edge.uses;
       assert.equal(newEdge, 7, "Edge should not be awarded when already at maximum");
-      
+
       // Check if edgeGain data was set correctly
       assert.isFalse(logicTest.data.edgeGain.gained, "edgeGain.gained should be false");
       assert.include(logicTest.data.edgeGain.reason, "maximum Edge", "edgeGain.reason should mention maximum Edge");
@@ -146,8 +146,8 @@ export default function() {
     it("should not award edge when already gained maximum edge this round", async function() {
       // Set initial edge to 0 and edgeGainedThisRound to 2
       await testActor.update({"system.edge.uses": 0});
-      await testActor.setFlag("shadowrun6-elysium", "edgeGainedThisRound", 2);
-      
+      await testActor.setFlag("sr6elysium", "edgeGainedThisRound", 2);
+
       // Create a test using Logic
       const logicTest = new game.shadowrun6e.tests.SuccessTest({
         actor: testActor,
@@ -157,20 +157,20 @@ export default function() {
           skill: "hacking"
         }
       });
-      
+
       // Process the test
       await logicTest.execute();
-      
+
       // Check if edge was not awarded
       const newEdge = testActor.system.edge.uses;
       assert.equal(newEdge, 0, "Edge should not be awarded when already gained maximum edge this round");
-      
+
       // Check if edgeGain data was set correctly
       assert.isFalse(logicTest.data.edgeGain.gained, "edgeGain.gained should be false");
       assert.include(logicTest.data.edgeGain.reason, "maximum Edge", "edgeGain.reason should mention maximum Edge");
-      
+
       // Reset the flag for other tests
-      await testActor.setFlag("shadowrun6-elysium", "edgeGainedThisRound", 0);
+      await testActor.setFlag("sr6elysium", "edgeGainedThisRound", 0);
     });
 
     it("should correctly identify the default attribute for skill-only tests", async function() {
@@ -181,17 +181,17 @@ export default function() {
           skill: "hacking"
         }
       });
-      
+
       // Set initial edge to 0
       await testActor.update({"system.edge.uses": 0});
-      
+
       // Process the test
       await hackingTest.execute();
-      
+
       // Check if edge was awarded
       const newEdge = testActor.system.edge.uses;
       assert.equal(newEdge, 1, "Edge should be awarded for Hacking test with Analytical Mind");
-      
+
       // Check if edgeGain data was set correctly
       assert.isTrue(hackingTest.data.edgeGain.gained, "edgeGain.gained should be true");
     });

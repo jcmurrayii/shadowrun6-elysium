@@ -10,7 +10,7 @@
  * Other than this file config.ts exists and only contains mappings between fixed names/ids and translation labels.
  *
  */
-export const SYSTEM_NAME = 'shadowrun6-elysium';
+export const SYSTEM_NAME = 'sr6elysium';
 export const SYSTEM_SOCKET = `system.${SYSTEM_NAME}`;
 export const FLAGS = {
     DiagonalMovement: 'diagonalMovement',
@@ -124,19 +124,19 @@ export const SR = {
             edge: {min: 0},
             resonance: {min: 0},
             essence: {min: 0},
-            body: {min: 0},
-            agility: {min: 0},
-            reaction: {min: 0},
-            strength: {min: 0},
-            willpower: {min: 0},
-            logic: {min: 0},
-            intuition: {min: 0},
-            charisma: {min: 0},
-            attack: {min: 0},
-            sleaze: {min: 0},
-            data_processing: {min: 0},
-            firewall: {min: 0},
-            host_rating: {min: 0, max: 12},
+            body: {min: 1},
+            agility: {min: 1},
+            reaction: {min: 1},
+            strength: {min: 1},
+            willpower: {min: 1},
+            logic: {min: 1},
+            intuition: {min: 1},
+            charisma: {min: 1},
+            attack: {min: 1},
+            sleaze: {min: 1},
+            data_processing: {min: 1},
+            firewall: {min: 1},
+            host_rating: {min: 1, max: 12},
             pilot: {min: 0},
             force: {min: 0}
         },

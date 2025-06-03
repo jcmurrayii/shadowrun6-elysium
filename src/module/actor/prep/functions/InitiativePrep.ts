@@ -61,7 +61,7 @@ export class InitiativePrep {
             // Free actions are unlimited
             initiative.actions.free = '∞';
 
-            console.log(`Shadowrun 6e | Initialized actions for character: Major: ${initiative.actions.major}, Minor: ${initiative.actions.minor}, Free: ${initiative.actions.free}`);
+            //console.log(`Shadowrun 6e | Initialized actions for character: Major: ${initiative.actions.major}, Minor: ${initiative.actions.minor}, Free: ${initiative.actions.free}`);
         }
     }
 

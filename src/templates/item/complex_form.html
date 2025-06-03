@@ -1,5 +1,5 @@
 <form class="{{cssClass}} wholesheet" autocomplete="off">
-    {{> "systems/shadowrun6-elysium/dist/templates/item/parts/header.html" }}
+    {{> "systems/sr6elysium/dist/templates/item/parts/header.html" }}
     <nav class="tabs" data-group="primary">
         <a class="item" data-tab="description">{{localize "SR6.Description"}}</a>
         <a class="item" data-tab="form">{{localize "SR6.ComplexForm"}}</a>
@@ -8,17 +8,17 @@
     <section class="sheetbody">
         <div class="tab" data-group="primary" data-tab="description">
             <div class="flexrow align-start nowrap full-height">
-                {{> "systems/shadowrun6-elysium/dist/templates/item/parts/description.html"}}
+                {{> "systems/sr6elysium/dist/templates/item/parts/description.html"}}
             </div>
         </div>
         <div class="tab" data-group="primary" data-tab="form">
             <div class="tabbody">
                 <div class="inventory">
                     <div class="scroll-area">
-                        {{> "systems/shadowrun6-elysium/dist/templates/item/parts/complex_form.html" header=(localize "SR6.ItemTypes.ComplexForm")}}
-                        {{> "systems/shadowrun6-elysium/dist/templates/item/parts/action.html" header=(localize "SR6.Action") hideActionCategory=true}}
-                        {{> "systems/shadowrun6-elysium/dist/templates/item/parts/damage.html" header=(localize "SR6.Damage")}}
-                        {{> "systems/shadowrun6-elysium/dist/templates/item/parts/opposed.html"
+                        {{> "systems/sr6elysium/dist/templates/item/parts/complex_form.html" header=(localize "SR6.ItemTypes.ComplexForm")}}
+                        {{> "systems/sr6elysium/dist/templates/item/parts/action.html" header=(localize "SR6.Action") hideActionCategory=true}}
+                        {{> "systems/sr6elysium/dist/templates/item/parts/damage.html" header=(localize "SR6.Damage")}}
+                        {{> "systems/sr6elysium/dist/templates/item/parts/opposed.html"
                             header=(localize "SR6.Labels.Action.OpposedTest")
                             disableTestSelection=false
                         }}
@@ -26,6 +26,6 @@
                 </div>
             </div>
         </div>
-        {{> "systems/shadowrun6-elysium/dist/templates/actor/tabs/EffectsTab.html"}}
+        {{> "systems/sr6elysium/dist/templates/actor/tabs/EffectsTab.html"}}
     </section>
 </form>

@@ -32,7 +32,7 @@ export const AutocompleteInlineHooksFlow =  {
         const DATA_MODE = api.CONST.DATA_MODE;
 
         const config = {
-            packageName: "shadowrun6-elysium",
+            packageName: "sr6elysium",
             sheetClasses: [{
                 name: "ActiveEffectConfig",
                 fieldConfigs: [

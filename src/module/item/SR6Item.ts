@@ -79,7 +79,7 @@ import WeaponItemData = Shadowrun.WeaponItemData;
 ActionResultFlow; // DON'T TOUCH!
 
 /**
- * Implementation of shadowrun6-elysium items (owned, unowned and nested).
+ * Implementation of sr6elysium items (owned, unowned and nested).
  *
  *       tamIf here: The current legacy nested items approach has been cleaned up a bit but is still causing some issues
  *       with typing and ease of use.
@@ -505,12 +505,17 @@ export class SR6Item extends Item {
         const ammoItems = this.items.filter(item => item.isAmmo).length;
 
         const remainingBullets = Number(weapon.system.ammo.current.value);
+        console.log('Shadowrun 6e | Remaining bullets:', remainingBullets);
         // Don't adhere to clip sizes, only reload from the point of capacity left.
         const missingBullets = Math.max(0, weapon.system.ammo.current.max - remainingBullets);
+        console.log('Shadowrun 6e | Shooter Agi:', this.actor.getAttribute("agility").value);
+        console.log('Shadowrun 6e | Possible Reload Amount:', RangedWeaponRules.partialReload(weapon.system.ammo.clip_type, this.actor.getAttribute('agility').value));
         // This checks how many rounds are required for a partial reload.
         const partialReloadBulletsNeeded = Math.min(weapon.system.ammo.current.max - remainingBullets, RangedWeaponRules.partialReload(weapon.system.ammo.clip_type, this.actor.getAttribute('agility').value));
+        console.log('Shadowrun 6e | Partial reload bullets needed:', partialReloadBulletsNeeded);
         // If there aren't ANY ammo items, just use weapon max as to not enforce ammo onto users without.
-        const availableBullets = ammoItems > 0 ? Number(ammo.system.technology?.quantity) : weapon.system.ammo.current.max;
+        const availableBullets = ammoItems > 0 ? Number(ammo?.system.technology?.quantity) : weapon.system.ammo.current.max;
+        console.log('Shadowrun 6e | Available bullets:', availableBullets);
 
         // Validate ammunition and clip availability.
         if (weapon.system.ammo.spare_clips.value === 0 && weapon.system.ammo.spare_clips.max > 0) {
@@ -530,6 +535,7 @@ export class SR6Item extends Item {
 
         // Prepare what can be reloaded.
         const reloadedBullets = Math.min(missingBullets, availableBullets, partialReload ? partialReloadBulletsNeeded : Infinity);
+        console.log('Shadowrun 6e | Reloaded bullets:', reloadedBullets);
 
 
         if (weapon.system.ammo.spare_clips.max > 0) {
@@ -1671,12 +1677,17 @@ export class SR6Item extends Item {
 
     override async _onCreate(changed, options, user) {
         const applyData = {};
+        console.log("SR6: Elysium | Item created with action tests ", applyData);
         UpdateActionFlow.injectActionTestsIntoChangeData(this.type, changed, applyData, this);
+        console.log("SR6: Elysium | Item before preCreate ", applyData);
         await super._preCreate(changed, options, user);
-
+        console.log("SR6: Elysium | Item after test injection ", applyData);
         // Don't kill DocumentData by applying empty objects. Also performance.
         //@ts-expect-error // TODO: foundry-vtt-types v10
-        if (!foundry.utils.isEmpty(applyData)) await this.update(applyData);
+        if (!foundry.utils.isEmpty(applyData)) {
+            console.log("SR6: Elysium | Updating item with tests:", applyData);
+            await this.update(applyData);
+        }
     }
 
     /**

@@ -52,7 +52,7 @@ node ./utils/packs.mjs package pack armor-accessories
             "ASSISTANT": "OWNER"
         },
         "type": "Item",
-        "system": "shadowrun6-elysium"
+        "system": "sr6elysium"
     },
     // ... other packs
 ]

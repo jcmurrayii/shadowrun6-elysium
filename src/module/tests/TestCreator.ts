@@ -77,7 +77,7 @@ export const TestCreator = {
             console.warn(`Shadowrun 6e | An action without a defined test handler defaulted to ${'SuccessTest'}`);
         }
 
-        if (!game['shadowrun6-elysium'].tests.hasOwnProperty(action.test)) {
+        if (!game['sr6elysium'].tests.hasOwnProperty(action.test)) {
             console.error(`Shadowrun 6e | Test registration for test ${action.test} is missing`);
             return;
         }
@@ -102,7 +102,7 @@ export const TestCreator = {
             console.warn(`Shadowrun 6e | An action without a defined test handler defaulted to ${'SuccessTest'}`);
         }
 
-        if (!game['shadowrun6-elysium'].tests.hasOwnProperty(action.test)) {
+        if (!game['sr6elysium'].tests.hasOwnProperty(action.test)) {
             console.error(`Shadowrun 6e | Test registration for test ${action.test} is missing`);
             return;
         }
@@ -355,11 +355,11 @@ export const TestCreator = {
      */
     _getTestClass: function(testName: string): any | undefined {
         if (!testName) return;
-        if (!game['shadowrun6-elysium'].tests.hasOwnProperty(testName)) {
-            console.error(`Shadowrun 6e | Tried getting a Test Class ${testName}, which isn't registered in: `, game['shadowrun6-elysium'].tests);
+        if (!game['sr6elysium'].tests.hasOwnProperty(testName)) {
+            console.error(`Shadowrun 6e | Tried getting a Test Class ${testName}, which isn't registered in: `, game['sr6elysium'].tests);
             return;
         }
-        return game['shadowrun6-elysium'].tests[testName];
+        return game['sr6elysium'].tests[testName];
     },
 
     /**
@@ -664,7 +664,7 @@ export const TestCreator = {
      */
     shouldHideDialog(event: Shadowrun.RollEvent|undefined): boolean {
         if (!event) return false;
-        const bindings = game.keybindings.get("shadowrun6-elysium", "hide-test-dialog");
+        const bindings = game.keybindings.get("sr6elysium", "hide-test-dialog");
         for (const binding of bindings) {
             return event[binding.key] === true;
         }
@@ -687,7 +687,7 @@ export const TestCreator = {
      */
     shouldPostItemDescription(event: Shadowrun.RollEvent|undefined): boolean {
         if (!event) return false;
-        const bindings = game.keybindings.get("shadowrun6-elysium", "show-item-card");
+        const bindings = game.keybindings.get("sr6elysium", "show-item-card");
         for (const binding of bindings) {
             return event[binding.key] === true;
         }

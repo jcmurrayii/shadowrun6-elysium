@@ -253,7 +253,7 @@ export class SR6Combat extends Combat {
     }
 
     /**
-     * Sort combatants by shadowrun6-elysium attribute order of
+     * Sort combatants by sr6elysium attribute order of
      *  - initiative score
      *  - edge
      *  - reaction

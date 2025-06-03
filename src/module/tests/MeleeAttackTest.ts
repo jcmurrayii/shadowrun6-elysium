@@ -90,11 +90,11 @@ export class MeleeAttackTest extends SuccessTest<MeleeAttackData> {
     }
 
     override get _dialogTemplate(): string {
-        return 'systems/shadowrun6-elysium/dist/templates/apps/dialogs/melee-attack-test-dialog.html';
+        return 'systems/sr6elysium/dist/templates/apps/dialogs/melee-attack-test-dialog.html';
     }
 
     override get _chatMessageTemplate(): string {
-        return 'systems/shadowrun6-elysium/dist/templates/rolls/success-test-message.html';
+        return 'systems/sr6elysium/dist/templates/rolls/success-test-message.html';
     }
 
     override get showSuccessLabel(): boolean {

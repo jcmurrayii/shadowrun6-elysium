@@ -10,7 +10,7 @@ export class OverwatchScoreTracker extends Application {
         options.id = 'overwatch-score-tracker';
         options.classes = ['sr6'];
         options.title = game.i18n.localize('SR6.OverwatchScoreTrackerTitle');
-        options.template = 'systems/shadowrun6-elysium/dist/templates/apps/gmtools/overwatch-score-tracker.html';
+        options.template = 'systems/sr6elysium/dist/templates/apps/gmtools/overwatch-score-tracker.html';
         options.width = 450;
         options.height = 'auto';
         options.resizable = true;

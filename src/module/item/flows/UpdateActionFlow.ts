@@ -121,6 +121,7 @@ export const UpdateActionFlow = {
      * See injectActionTestsIntoChangeData for documentation.
      */
     injectSpellTestIntoChangeData(type: string, changeData: Partial<Shadowrun.SpellItemData>, applyData) {
+
         // Abort when category isn't part of this change.
         if (changeData?.system?.category === undefined) return;
 
@@ -129,6 +130,8 @@ export const UpdateActionFlow = {
             foundry.utils.setProperty(applyData, 'system.action.test', '');
             return;
         }
+        console.log(changeData);
+
 
         // Based on category switch out active, opposed and resist test.
         const test = SR6.activeTests[type];
@@ -140,6 +143,7 @@ export const UpdateActionFlow = {
         foundry.utils.setProperty(applyData, 'system.action.opposed.test', opposedTest);
         foundry.utils.setProperty(applyData, 'system.action.opposed.resist.test', resistTest);
         foundry.utils.setProperty(applyData, 'system.action.followed.test', drainTest);
+        console.log(applyData);
     },
 
     /**

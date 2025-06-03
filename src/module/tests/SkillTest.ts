@@ -28,7 +28,7 @@ export class SkillTest extends SuccessTest<SkillTestData> {
      * Allow users to alter detailed skill values.
      */
     override get _dialogTemplate() {
-        return 'systems/shadowrun6-elysium/dist/templates/apps/dialogs/skill-test-dialog.html';
+        return 'systems/sr6elysium/dist/templates/apps/dialogs/skill-test-dialog.html';
     }
 
     /**

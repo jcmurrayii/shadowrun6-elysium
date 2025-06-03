@@ -400,6 +400,10 @@ export class DocumentSituationModifiers {
         if (canvas.scene.id !== scene.id) return;
 
         // Use current scene for ease of access to tokens
-        canvas.scene.tokens.forEach(token => token.actor?.getSituationModifiers().clearAll());
+        canvas.scene.tokens.forEach(token => {
+            if (token.actor) {
+                token.actor.getSituationModifiers().clearAll();
+            }
+        });
     }
 }

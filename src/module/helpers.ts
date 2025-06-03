@@ -461,7 +461,7 @@ export class Helpers {
         if (!canvas || !canvas.ready) return []
 
         const tokens = Helpers.getControlledTokens();
-        return tokens.map(token => token.actor) as SR6Actor[];
+        return tokens.map(token => token.actor).filter(actor => actor !== null && actor !== undefined) as SR6Actor[];
     }
 
     /**
@@ -578,9 +578,13 @@ export class Helpers {
         let defenseRating = 0;
         for(const token of targets) {
             let target = token.actor;
+            if (!target) {
+                console.warn('Shadowrun 6e | Token has no actor:', token.name);
+                continue;
+            }
             console.log(target);
             // @ts-ignore
-            if ('defense_rating' in target.system.values && target.system.values.defense_rating.value > defenseRating) {
+            if (target.system && target.system.values && 'defense_rating' in target.system.values && target.system.values.defense_rating.value > defenseRating) {
                 // @ts-ignore
                 defenseRating = target.system.values.defense_rating.value;
             }
@@ -1064,7 +1068,7 @@ export class Helpers {
                     allActors = allActors.concat(`
                             <option value="${t.id}">${t.name}</option>`);
                 });
-            const  dialog_content = `  
+            const  dialog_content = `
                 <select name ="actor">
                 ${allActors}
                 </select>`;

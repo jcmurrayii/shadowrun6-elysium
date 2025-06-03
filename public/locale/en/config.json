@@ -23,7 +23,7 @@
         "HideGMOnlyChatContent": "Hide critical information on GM test",
         "HideGMOnlyChatContentDescription": "GM test messages will only show all information to players that own the used actor",
         "IgnoreDiagonal": "Ignore Diagonal Movement (1-1-1)",
-        "ImportIconFolderDescription": "The folder where the importer can find icon files. Default location: 'systems/shadowrun6-elysium/dist/icons/importer/'",
+        "ImportIconFolderDescription": "The folder where the importer can find icon files. Default location: 'systems/sr6elysium/dist/icons/importer/'",
         "ImportIconFolderName": "Importer Icon Folder",
         "ManualRollOnSuccessTest": "Manual dice roll on any test",
         "ManualRollOnSuccessTestDescription": "Allow user to manually roll dice on tests and report back hits",
@@ -249,7 +249,7 @@
         "LatestChangelog": "Latest Changelog",
         "Reason": "You've updated to the latest version!",
         "ReportIssues": "Please report bugs and feature requests",
-        "Title": "shadowrun6-elysium Update"
+        "Title": "sr6elysium Update"
     },
     "SR6.Character": {
         "Modifiers": {

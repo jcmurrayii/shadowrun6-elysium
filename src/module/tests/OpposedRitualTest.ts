@@ -31,7 +31,7 @@ export class OpposedRitualTest extends OpposedTest<OpposedRitualTestData> {
     }
 
     override get _chatMessageTemplate(): string {
-        return 'systems/shadowrun6-elysium/dist/templates/rolls/success-test-message.html'
+        return 'systems/sr6elysium/dist/templates/rolls/success-test-message.html'
     }
 
     /**

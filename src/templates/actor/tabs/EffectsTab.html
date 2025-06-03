@@ -1,8 +1,8 @@
-{{#> 'systems/shadowrun6-elysium/dist/templates/common/TabWrapper.html' tabId='effects'}}
+{{#> 'systems/sr6elysium/dist/templates/common/TabWrapper.html' tabId='effects'}}
     <div class="inventory">
         <div class="scroll-area">
         <!-- Local Document Effects. Actor and Item. -->
-        {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListHeader.html'
+        {{> 'systems/sr6elysium/dist/templates/common/List/ListHeader.html'
             name=(localize 'SR6.Effects')
             itemCssClass='list-item-effect'
             rightSide=(ItemHeaderRightSide 'effects')
@@ -10,7 +10,7 @@
             tooltip=(localize 'SR6.Tooltips.Effect.DocumentEffects')
         }}
         {{#each effects}}
-        {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListItem.html'
+        {{> 'systems/sr6elysium/dist/templates/common/List/ListItem.html'
             img=(firstDefined this.img this.icon)
             name=this.name
             itemId=this.id
@@ -24,14 +24,14 @@
         {{/each}}
         <!-- Owned Item Effects. Actor only. -->
         {{#if itemEffects}}
-        {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListHeader.html'
+        {{> 'systems/sr6elysium/dist/templates/common/List/ListHeader.html'
             name=(localize 'SR6.Labels.Sheet.ItemEffects')
             tooltip=(localize 'SR6.Tooltips.Effect.ItemEffects')
             itemCssClass='list-item-effect'
             rightSide=(ItemHeaderRightSide 'itemEffects')
         }}
         {{#each itemEffects}}
-        {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListItem.html'
+        {{> 'systems/sr6elysium/dist/templates/common/List/ListItem.html'
             img=(firstDefined this.img this.icon)
             name=this.sheetName
             itemId=this.uuid
@@ -46,4 +46,4 @@
         {{/if}}
         </div>
     </div>
-{{/'systems/shadowrun6-elysium/dist/templates/common/TabWrapper.html'}}
+{{/'systems/sr6elysium/dist/templates/common/TabWrapper.html'}}

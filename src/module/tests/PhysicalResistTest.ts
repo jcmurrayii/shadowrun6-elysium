@@ -51,7 +51,7 @@ export class PhysicalResistTest extends SuccessTest<PhysicalResistTestData> {
         const armor = this.actor?.getArmor();
         if(armor?.hardened){
             data.hitsIcon = {
-                icon: "systems/shadowrun6-elysium/dist/icons/bell-shield.svg",
+                icon: "systems/sr6elysium/dist/icons/bell-shield.svg",
                 tooltip: "SR6.ArmorHardenedFull",
             };
         }
@@ -60,11 +60,11 @@ export class PhysicalResistTest extends SuccessTest<PhysicalResistTestData> {
     }
 
     override get _chatMessageTemplate() {
-        return 'systems/shadowrun6-elysium/dist/templates/rolls/defense-test-message.html';
+        return 'systems/sr6elysium/dist/templates/rolls/defense-test-message.html';
     }
 
     override get _dialogTemplate(): string {
-        return 'systems/shadowrun6-elysium/dist/templates/apps/dialogs/physical-resist-test-dialog.html';
+        return 'systems/sr6elysium/dist/templates/apps/dialogs/physical-resist-test-dialog.html';
     }
 
     /**

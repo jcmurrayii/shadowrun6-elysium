@@ -242,7 +242,7 @@ export const registerSystemSettings = () => {
         scope: 'world',
         config: true,
         type: String,
-        default: 'systems/shadowrun6-elysium/dist/icons/importer/'
+        default: 'systems/sr6elysium/dist/icons/importer/'
     });
 
     /**
@@ -257,7 +257,7 @@ export const registerSystemSettings = () => {
         default: true
     });
 
-    game.settings.register('shadowrun6-elysium', 'migrateWeaponRanges', {
+    game.settings.register('sr6elysium', 'migrateWeaponRanges', {
         name: 'Migrate to Standard Weapon Ranges',
         hint: 'Updates all weapons to use the standard SR6e range categories.',
         scope: 'world',
@@ -268,7 +268,7 @@ export const registerSystemSettings = () => {
             if (value) {
                 MigrationRunner.migrateToNewRanges().then(() => {
                     // Reset the setting after migration
-                    game.settings.set('shadowrun6-elysium', 'migrateWeaponRanges', false);
+                    game.settings.set('sr6elysium', 'migrateWeaponRanges', false);
                 });
             }
         }

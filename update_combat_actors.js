@@ -8,7 +8,7 @@ let content = fs.readFileSync(filePath, 'utf8');
 const actorCreationPattern = /const (actor|attacker|defender|spellcaster) = await testActor\.create\(\{(?!\s*flags)/g;
 
 // Replace with the version that includes the hasMatrixActions flag
-const replacement = 'const $1 = await testActor.create({\n                    flags: {\n                        \'shadowrun6-elysium\': {\n                            hasMatrixActions: true\n                        }\n                    },';
+const replacement = 'const $1 = await testActor.create({\n                    flags: {\n                        \'sr6elysium\': {\n                            hasMatrixActions: true\n                        }\n                    },';
 
 // Perform the replacement
 const updatedContent = content.replace(actorCreationPattern, replacement);

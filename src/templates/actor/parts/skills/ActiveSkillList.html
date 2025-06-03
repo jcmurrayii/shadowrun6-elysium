@@ -1,5 +1,5 @@
 <div class="flexcol">
-    {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListHeader.html'
+    {{> 'systems/sr6elysium/dist/templates/common/List/ListHeader.html'
             name=(localize 'SR6.ActiveSkills')
             itemCssClass="skill-header"
             icons=(SkillHeaderIcons 'active')
@@ -19,7 +19,7 @@
     </div>
     <div class="scroll-area left light-border-right-skills">
         {{#each system.skills.active as |skill sid|}}
-            {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListItem.html'
+            {{> 'systems/sr6elysium/dist/templates/common/List/ListItem.html'
                     name=(localizeSkill skill)
                     itemNameCssClass="skill-roll"
                     itemId=sid

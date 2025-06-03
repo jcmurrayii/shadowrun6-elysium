@@ -6,7 +6,7 @@ import RangesTemplateData = Shadowrun.RangesTemplateData;
 import RangeTemplateData = Shadowrun.RangeTemplateData;
 
 /**
- * shadowrun6-elysium rules applying to ranged weapons in general.
+ * sr6elysium rules applying to ranged weapons in general.
  */
 export const RangedWeaponRules = {
     /**

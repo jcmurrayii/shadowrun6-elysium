@@ -84,7 +84,7 @@ export class WeaponParser {
         };
         action.type = 'varies';
 
-        // Transform Chummer skill naming schema to shadowrun6-elysium naming schema.
+        // Transform Chummer skill naming schema to sr6elysium naming schema.
         // NOTE: chummerWeapon.skill CAN be null. Don't rely on it.
         if (chummerWeapon.skill) {
             action.skill = chummerWeapon.skill.toLowerCase().replace(/\s/g, '_');
@@ -280,15 +280,15 @@ export class WeaponParser {
                 ammo.push(currentAmmo);
             });
 
-            if(!item.flags?.shadowrun6-elysium?.embeddedItems) {
+            if(!item.flags?.sr6elysium?.embeddedItems) {
                 item.flags = {
-                    "shadowrun6-elysium": {
+                    "sr6elysium": {
                         embeddedItems: ammo
                     }
                 }
             }
             else {
-                item.flags.shadowrun6-elysium.embeddedItems.push(...ammo)
+                item.flags.sr6elysium.embeddedItems.push(...ammo)
             }            
         }
     }
@@ -316,15 +316,15 @@ export class WeaponParser {
                 accessories.push(current);
             });
 
-            if(!itemData.flags?.shadowrun6-elysium?.embeddedItems) {
+            if(!itemData.flags?.sr6elysium?.embeddedItems) {
                 itemData.flags = {
-                    "shadowrun6-elysium": {
+                    "sr6elysium": {
                         embeddedItems: accessories
                     }
                 }
             }
             else {
-                itemData.flags.shadowrun6-elysium.embeddedItems.push(...accessories)
+                itemData.flags.sr6elysium.embeddedItems.push(...accessories)
             }            
         }
     }

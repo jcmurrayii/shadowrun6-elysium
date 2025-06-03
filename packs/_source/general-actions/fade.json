@@ -2,7 +2,7 @@
   "_id": "IyYJOPovXGure9SJ",
   "name": "Fade",
   "type": "action",
-  "img": "systems/shadowrun6-elysium/dist/icons/redist/swirl.svg",
+  "img": "systems/sr6elysium/dist/icons/redist/swirl.svg",
   "effects": [],
   "folder": null,
   "sort": 0,
@@ -113,7 +113,7 @@
     "default": 0
   },
   "_stats": {
-    "systemId": "shadowrun6-elysium",
+    "systemId": "sr6elysium",
     "systemVersion": "0.16.1",
     "coreVersion": "10.312",
     "createdTime": null,

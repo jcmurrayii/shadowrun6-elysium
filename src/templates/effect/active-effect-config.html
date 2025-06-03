@@ -85,14 +85,14 @@
         <div class="form-group">
             <label>{{ localize "SR6.ActiveEffect.OnlyForWireless" }}</label>
             <div class="form-fields">
-                <input type="checkbox" name="flags.shadowrun6-elysium.onlyForWireless" {{checked onlyForWireless}}/>
+                <input type="checkbox" name="flags.sr6elysium.onlyForWireless" {{checked onlyForWireless}}/>
             </div>
         </div>
 
         <div class="form-group">
             <label>{{ localize "SR6.ActiveEffect.OnlyForEquipped" }}</label>
             <div class="form-fields">
-                <input type="checkbox" name="flags.shadowrun6-elysium.onlyForEquipped" {{checked onlyForEquipped}}/>
+                <input type="checkbox" name="flags.sr6elysium.onlyForEquipped" {{checked onlyForEquipped}}/>
             </div>
         </div>
         {{/if}}
@@ -103,7 +103,7 @@
         <div class="form-group">
             <label data-tooltip="{{localize 'SR6.Tooltips.Effect.ApplyTo'}}">{{ localize "SR6.ActiveEffect.ApplyTo" }}</label>
             <div class="form-fields">
-                <select name="flags.shadowrun6-elysium.applyTo" data-dtype="Text"
+                <select name="flags.sr6elysium.applyTo" data-dtype="Text"
                     {{#if hasChanges}}disabled{{/if}}
                     {{#if hasChanges}}data-tooltip="{{localize 'SR6.Tooltips.Effect.AlterApplyToWithChanges'}}"{{/if}}
                 >
@@ -116,31 +116,31 @@
         <div class="form-group">
             <label data-tooltip="{{localize 'SR6.Tooltips.Effect.OnlyFilteredUsed'}}">{{ localize "SR6.ActiveEffect.Test.Tests" }}</label>
             <div class="form-fields">
-                <input name="flags.shadowrun6-elysium.selection_tests" id="test-selection" class="tagify-selection" data-dtype="Text"/>
+                <input name="flags.sr6elysium.selection_tests" id="test-selection" class="tagify-selection" data-dtype="Text"/>
             </div>
         </div>
         <div class="form-group">
             <label data-tooltip="{{localize 'SR6.Tooltips.Effect.OnlyFilteredUsed'}}">{{ localize "SR6.ActiveEffect.Test.ActionCategories" }}</label>
             <div class="form-fields">
-                <input name="flags.shadowrun6-elysium.selection_categories" id="categories-selection" class="tagify-selection" data-dtype="Text"/>
+                <input name="flags.sr6elysium.selection_categories" id="categories-selection" class="tagify-selection" data-dtype="Text"/>
             </div>
         </div>
         <div class="form-group">
             <label  data-tooltip="{{localize 'SR6.Tooltips.Effect.OnlyFilteredUsed'}}">{{ localize "SR6.ActiveEffect.Test.Skills" }}</label>
             <div class="form-fields">
-                <input name="flags.shadowrun6-elysium.selection_skills" id="skill-selection" class="tagify-selection" data-dtype="Text"/>
+                <input name="flags.sr6elysium.selection_skills" id="skill-selection" class="tagify-selection" data-dtype="Text"/>
             </div>
         </div>
         <div class="form-group">
             <label data-tooltip="{{localize 'SR6.Tooltips.Effect.OnlyAllFilteredUsed'}}">{{ localize "SR6.ActiveEffect.Test.Attributes" }}</label>
             <div class="form-fields">
-                <input name="flags.shadowrun6-elysium.selection_attributes" id="attribute-selection" class="tagify-selection" data-dtype="Text"/>
+                <input name="flags.sr6elysium.selection_attributes" id="attribute-selection" class="tagify-selection" data-dtype="Text"/>
             </div>
         </div>
         <div class="form-group">
             <label data-tooltip="{{localize 'SR6.Tooltips.Effect.OnlyFilteredUsed'}}">{{ localize "SR6.ActiveEffect.Test.Limits" }}</label>
             <div class="form-fields">
-                <input name="flags.shadowrun6-elysium.selection_limits" id="limit-selection" class="tagify-selection" data-dtype="Text"/>
+                <input name="flags.sr6elysium.selection_limits" id="limit-selection" class="tagify-selection" data-dtype="Text"/>
             </div>
         </div>
         {{/ife}}
@@ -149,7 +149,7 @@
         <div class="form-group">
             <label data-tooltip="{{localize 'SR6.Tooltips.Effect.OnlyForItemTest'}}">{{ localize "SR6.ActiveEffect.OnlyForItemTest" }}</label>
             <div class="form-fields">
-                <input type="checkbox" name="flags.shadowrun6-elysium.onlyForItemTest" {{checked onlyForItemTest}}/>
+                <input type="checkbox" name="flags.sr6elysium.onlyForItemTest" {{checked onlyForItemTest}}/>
             </div>
         </div>
         {{/ife}}

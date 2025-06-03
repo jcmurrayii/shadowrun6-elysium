@@ -1,11 +1,11 @@
 <div class="scroll-area">
-    {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListHeader.html'
+    {{> 'systems/sr6elysium/dist/templates/common/List/ListHeader.html'
             name=(localize 'SR6.Languages')
             icons=(SkillHeaderIcons 'language')
             rightSide=(SkillHeaderRightSide 'language')
     }}
     {{#each system.skills.language.value as |skill sid|}}
-        {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListItem.html'
+        {{> 'systems/sr6elysium/dist/templates/common/List/ListItem.html'
                 name=(localizeSkill skill)
                 itemNameCssClass="language-skill"
                 itemId=sid
@@ -16,14 +16,14 @@
         }}
     {{/each}}
     {{#each system.skills.knowledge as |cat cid|}}
-    {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListHeader.html'
+    {{> 'systems/sr6elysium/dist/templates/common/List/ListHeader.html'
             name=(localizeOb cid ../config.knowledgeSkillCategories)
             itemId=cid
             icons=(SkillHeaderIcons 'knowledge')
             rightSide=(SkillHeaderRightSide 'knowledge')
     }}
         {{#each cat.value as |skill sid|}}
-            {{> 'systems/shadowrun6-elysium/dist/templates/common/List/ListItem.html'
+            {{> 'systems/sr6elysium/dist/templates/common/List/ListItem.html'
                     name=(localizeSkill skill)
                     itemNameCssClass="knowledge-skill"
                     itemId=(buildName part1=sid part2=cid)

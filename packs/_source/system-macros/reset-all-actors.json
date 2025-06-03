@@ -7,7 +7,7 @@
   "command": "console.log('Shadowrun 5e | Reset all actors for a new run');\n\ngame.actors.forEach(actor => actor.resetRunData());",
   "flags": {},
   "_stats": {
-    "systemId": "shadowrun6-elysium",
+    "systemId": "sr6elysium",
     "systemVersion": "0.9.0",
     "coreVersion": "10.291",
     "createdTime": 1677239005898,

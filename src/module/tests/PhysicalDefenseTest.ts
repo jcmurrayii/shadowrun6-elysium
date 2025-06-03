@@ -42,7 +42,7 @@ export class PhysicalDefenseTest<T extends PhysicalDefenseTestData = PhysicalDef
     }
 
     override get _dialogTemplate(): string {
-        return 'systems/shadowrun6-elysium/dist/templates/apps/dialogs/physical-defense-test-dialog.html';
+        return 'systems/sr6elysium/dist/templates/apps/dialogs/physical-defense-test-dialog.html';
     }
 
     static override _getDefaultTestAction(): Partial<MinimalActionData> {

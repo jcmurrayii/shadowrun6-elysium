@@ -8,7 +8,7 @@ import SocketMessageBody = Shadowrun.SocketMessageData;
  *
  * Use emitForGM for messages meant only for ONE gm
  * > SocketMessage.emitGM(FLAGS.<yourFlag>, {yourDataField: 'yourData'})
- * 
+ *
  * To listen to these socket messages see Hooks#registerSocketListeners
  */
 export class SocketMessage {
@@ -20,7 +20,7 @@ export class SocketMessage {
         if (!game.socket) return;
 
         const message = SocketMessage._createMessage(type, data);
-        console.trace('Shadowrun 6e | Emitting shadowrun6-elysium system socket message', message);
+        console.trace('Shadowrun 6e | Emitting sr6elysium system socket message', message);
         await game.socket.emit(SYSTEM_SOCKET, message);
     }
 
@@ -34,14 +34,14 @@ export class SocketMessage {
         if (!gmUser) return console.error('No active GM user! One GM must be active for this action to work.');
 
         const message = SocketMessage._createMessage(type, data, gmUser.id);
-        console.trace('Shadowrun 6e | Emitting shadowrun6-elysium system socket message', message);
+        console.trace('Shadowrun 6e | Emitting sr6elysium system socket message', message);
         await game.socket.emit(SYSTEM_SOCKET, message);
     }
 
     /**
      * Assert at least one active GM user to avoid confusing bugs when none is present and gm socket message
      * aren´t handeled.
-     * 
+     *
      * If that's the case, also inform users to avoid confusion.
      */
     static _assertActiveGMUser() {
