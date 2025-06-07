@@ -14,6 +14,7 @@ declare namespace Shadowrun {
          */
         inventories: InventoriesData
         visibilityChecks: VisibilityChecks
+        combatRoundTracker: CombatRoundTracker
     }
 
     export interface MagicData {

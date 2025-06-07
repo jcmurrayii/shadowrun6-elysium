@@ -25,6 +25,7 @@ import { mountedWeaponParserTesting } from './actorImport/itemImporter/vehicleIm
 import { shadowrunSR5ItemDataPrep } from './sr5.ItemDataPrep.spec';
 import { vehicleImporterTesting } from './actorImport/itemImporter/vehicleImport/sr5.VehicleImporter.spec';
 import { vehicleModParserTesting } from './actorImport/itemImporter/vehicleImport/sr5.VehicleModImporter.spec';
+import { shadowrunEdgeTesting} from './sr6.Edge.spec';
 
 import { Quench } from '@ethaks/fvtt-quench';
 
@@ -122,5 +123,9 @@ export const quenchRegister = (quench: Quench) => {
 
     quench.registerBatch('sr6elysium.parser.weapon', weaponParserBaseTesting, {
         displayName: 'sr6elysium: Data Importer Weapon Parsing',
+    });
+
+    quench.registerBatch('sr6.Edge.spec.ts', shadowrunEdgeTesting, {
+        displayName: 'sr6elysium: Edge Rules',
     });
 };

@@ -102,6 +102,12 @@ declare namespace Shadowrun {
         };
     };
 
+    export type CombatRoundTracker = {
+        edgeGained: number
+        majorTaken: number
+        minorTaken: number
+    }
+
     export type Initiative = {
         perception: string;
         meatspace: InitiativeType;

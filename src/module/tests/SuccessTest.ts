@@ -110,6 +110,12 @@ export interface TestData {
 
     // Has this test been cast before
     evaluated: boolean
+
+    edgeGain: {
+        gained: boolean,
+        discarded: boolean,
+        effect: any
+    }
 }
 
 export interface SuccessTestData extends TestData {
@@ -123,6 +129,7 @@ export interface SuccessTestData extends TestData {
     rerolledFailuresRolls?: SR6Roll[]
     // Store the number of failures rerolled
     rerolledFailuresCount?: number
+
 }
 
 export interface TestOptions {
@@ -215,6 +222,7 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
      */
     _prepareData(data, options: TestOptions) {
         data.type = data.type || this.type;
+        data.actor = this.actor;
 
         // Store the current users targeted token ids for later use.
         data.targetActorsUuid = data.targetActorsUuid || Helpers.getUserTargets().map(token => token.actor?.uuid).filter(uuid => !!uuid);
@@ -263,6 +271,7 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
         data.damage = data.damage || DataDefaults.damageData();
 
         data.extendedRoll = data.extendedRoll || false;
+        data.edgeGain = {gained: false, discarded: false, effect: null}
 
         console.debug('Shadowrun 6e | Prepared test data', data);
 
@@ -614,7 +623,9 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
         const roundAllMods = (value: Shadowrun.ValueField) => {
             value.base = Math.ceil(value.base);
             if (value.override) value.override.value = Math.ceil(value.override.value);
-            value.mod.forEach(mod => mod.value = Math.ceil(mod.value));
+            if(value.mod instanceof Array) {
+                value.mod.forEach(mod => mod.value = Math.ceil(mod.value));
+            }
         }
 
         roundAllMods(this.data.modifiers);
@@ -666,6 +677,7 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
 
         this.data.evaluated = true;
         this.calculateDerivedValues();
+
 
         return this;
     }
@@ -870,6 +882,23 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
     get hasDamage(): boolean {
         // check that we don't have a damage value of 0 and a damage type that isn't empty
         return this.data.action.damage.value !== 0 && this.data.action.damage.type.value !== '';
+    }
+
+    get cappedEdge(): boolean {
+        console.log('Shadowrun 6e | Capped edge:', this.data.edgeGain.discarded);
+        return this.data.edgeGain.discarded;
+    }
+    get earnedEdge(): boolean {
+        return this.data.edgeGain.gained;
+    }
+
+    get edgeEarnedReason() : string {
+        if(this.data.edgeGain.effect == null) return '';
+        if(this.data.edgeGain.gained && this.data.edgeGain.effect instanceof SR6ActiveEffect) {
+            return this.data.edgeGain.effect.name ?? '';
+        } else {
+            return this.data.edgeGain.effect;
+        }
     }
 
     /**
@@ -1426,7 +1455,7 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
         this.prepareTestCategories();
 
         // Effects need to be applied before any values are calculated.
-        this.effects.applyAllEffects();
+        await this.effects.applyAllEffects();
 
         await this.prepareDocumentData();
 
@@ -1537,6 +1566,43 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
      * This can be used to alter values after a test is over.
      */
     async processResults() {
+        const edgeQualities = new Map([
+            ['Attribute Mastery: Agility', 'agility'],
+            ['Attribute Mastery: Body', 'body'],
+            ['Attribute Mastery: Charisma', 'charisma'],
+            ['Attribute Mastery: Intuition', 'intuition'],
+            ['Attribute Mastery: Reaction', 'reaction'],
+            ['Attribute Mastery: Strength', 'strength'],
+            ['Attribute Mastery: Willpower', 'willpower'],
+            ['Analytical Mind', 'logic']
+        ]);
+        //['Attribute Mastery','Analytical Mind'];
+        const processQuality = async (quality) =>{
+
+            if(edgeQualities.has(quality.name)) {
+                const stat = edgeQualities.get(quality.name);
+                if(this.data.action.attribute !== stat && this.data.action.attribute2 !== stat) {
+                    console.log(`Shadowrun 6e | ${quality.name} does not apply to this test`);
+                    return;
+                }
+                if(this.actor.system.combatRoundTracker.edgeGained >= 2) {
+                    this.data.edgeGain = {gained: true, discarded: true, effect: "No more edge may be gained this round."}
+                    return;
+                } else if (this.actor?.system.attributes.edge.uses >= 7) {
+                    this.data.edgeGain = {gained: true, discarded: true, effect: "Edge pool is full"}
+                    return;
+                }
+                this.data.edgeGain = {gained: true, discarded: false, effect: quality.name}
+                await this.actor.update({
+                    'system.combatRoundTracker.edgeGained': this.actor?.system.combatRoundTracker.edgeGained + 1,
+                    'system.attributes.edge.uses': this.actor?.system.attributes.edge.uses + 1
+                })
+            }
+        }
+
+        this.actor?.items.filter(item => item.type === 'quality').forEach(quality => processQuality(quality));
+
+
         if (this.success) {
             await this.processSuccess();
         } else {
@@ -2027,7 +2093,10 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
             extended: this.extended,
             opposing: this.opposing,
             opposed: this.opposed,
-            autoSuccess: this.autoSuccess
+            autoSuccess: this.autoSuccess,
+            earnedEdge: this.earnedEdge,
+            edgeEarnedReason: this.edgeEarnedReason,
+            cappedEdge: this.cappedEdge
         };
 
         return {
@@ -2059,7 +2128,9 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
             applyGmOnlyContent: GmOnlyMessageContentFlow.applyGmOnlyContent(this.actor),
 
             // Effects that should be shown in this tests message for manual drag & drop application.
-            effects: [] as SR6ActiveEffect[]
+            effects: [] as SR6ActiveEffect[],
+            earnedEdge: this.earnedEdge,
+            edgeEarnedReason: this.edgeEarnedReason
         }
     }
 

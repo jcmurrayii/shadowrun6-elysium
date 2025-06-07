@@ -13,9 +13,9 @@
       "type": "major",
       "test": "SuccessTest",
       "categories": [
-        "magic"
+        "matrix"
       ],
-      "attribute": "magic",
+      "attribute": "logic",
       "attribute2": "",
       "skill": "cracking",
       "armor": false,

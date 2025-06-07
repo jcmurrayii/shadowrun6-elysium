@@ -32,7 +32,7 @@
         "value": 0,
         "base": 0
       },
-      "extended": false,
+      "extended": true,
       "damage": {
         "type": {
           "value": "",

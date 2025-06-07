@@ -280,11 +280,13 @@ export class SR6ActiveEffect extends ActiveEffect {
         // legacyTransferal has item effects created with their items as owner/source.
         // modern transferal has item effects directly on owned items.
         const source = CONFIG.ActiveEffect.legacyTransferral ? this.source : this.parent;
-
+        console.log(change);
         SR6ActiveEffect.resolveDynamicChangeValue(source, change);
+
 
         // Foundry can be used to apply to actors.
         if (object instanceof SR6Actor) {
+            console.log("Actor change:",change);
             return super.apply(object, change);
         }
 

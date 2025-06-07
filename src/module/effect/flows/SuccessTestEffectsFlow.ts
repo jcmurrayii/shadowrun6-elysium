@@ -32,25 +32,26 @@ export class SuccessTestEffectsFlow<T extends SuccessTest> {
      * NOTE: Since effects are applied as none unique modifiers, applying them multiple times is possible.
      *       Changes can't be applied as unique modifiers as they're names are not unique.
      */
-    applyAllEffects() {
+    async applyAllEffects() {
         // Extended tests have their effects applied on first run.
         // As soon as a test is extended, it's effects are already applied and shouldn't be applied again
         if (this.test.extendedRoll) return;
 
         // Since we're extending EffectChangeData by a effect field only locally, I don't care enough to resolve the typing issue.
         const changes: any[] = [];
-
+        console.log(this.allApplicableEffects());
         for (const effect of this.allApplicableEffects()) {
             // Organize non-disabled effects by their application priority
             if (!effect.active) continue;
 
             if (this._skipEffectForTestLimitations(effect)) continue;
-
+            console.log('No limitations interfere')
             // Collect all changes of effect left.
             changes.push(...effect.changes.map(change => {
                 const c = foundry.utils.deepClone(change) as any;
                 // Make sure FoundryVTT key migration doesn't affect us here.
-                c.key = c.key.replace('system.', 'data.');
+
+                //c.key = c.key.replace('system.', 'data.');
                 c.effect = effect;
                 c.priority = c.priority ?? (c.mode * 10);
                 return c;
@@ -58,13 +59,13 @@ export class SuccessTestEffectsFlow<T extends SuccessTest> {
             // TODO: What's with the statuses?
             // for (const statusId of effect.statuses) this.statuses.add(statusId);
         }
-
+        console.log("Changes:", changes);
         changes.sort((a, b) => a.priority - b.priority);
 
         // Apply all changes
         for (const change of changes) {
             if (!change.key) continue;
-            change.effect.apply(this.test, change);
+                change.effect.apply(this.test, change)
         }
     }
 
@@ -107,6 +108,9 @@ export class SuccessTestEffectsFlow<T extends SuccessTest> {
         const attributes = effect.selectionAttributes;
         const attribute = this.test.data.action.attribute;
         const attribute2 = this.test.data.action.attribute2;
+
+        console.log('Attributes: ', attributes);
+
         if (attributes.length > 0 && attribute && !attributes.includes(attribute)) return true;
         if (attributes.length > 0 && attribute2 && !attributes.includes(attribute2)) return true;
         if (attributes.length > 0 && !attribute && !attribute2) return true;

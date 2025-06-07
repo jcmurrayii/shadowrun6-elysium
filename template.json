@@ -506,6 +506,11 @@
                         "hasIcon": false,
                         "runningSilent": false
                     }
+                },
+                "combatRoundTracker": {
+                    "edgeGained": 0,
+                    "majorTaken": 0,
+                    "minorTaken": 0
                 }
             },
             "physical_combat_values": {

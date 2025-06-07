@@ -126,7 +126,7 @@
     {{#if test.usingManualRoll}}
     <div class="card-main-content">
         <div class="card-content">* {{localize "SR6.ManualHits"}}</div>
-    </disv>
+    </div>
     {{/if}}
     {{#if (or @root.isGM (eq speaker.actor.type 'character'))}} <!-- Show dice rolls only to GMs or if it's a player character -->
     <div class="card-rolls {{#if applyGmOnlyContent}}gm-only-content{{/if}}">
@@ -137,6 +137,16 @@
             }}
         {{/each}}
         {{/if}}
+    </div>
+    {{/if}}
+    {{#if test.cappedEdge}}
+        <div class="card-content">
+            Edge not Gained: {{test.edgeEarnedReason}}
+        </div>
+    {{/if}}
+    {{#if (and test.earnedEdge (not test.cappedEdge))}}
+    <div class="card-content">
+        Edge Gained: {{test.edgeEarnedReason}}
     </div>
     {{/if}}
 

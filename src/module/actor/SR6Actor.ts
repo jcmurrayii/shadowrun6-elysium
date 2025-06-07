@@ -2465,6 +2465,12 @@ export class SR6Actor extends Actor {
             });
         }
 
+        if(!this.system.combatRoundTracker) {
+            await this.update({
+                'system.combatRoundTracker': {}
+            })
+        }
+
         // Calculate available actions based on initiative dice
         const initiativeDice = this.system.initiative?.current?.dice?.value || 0;
 
@@ -2486,7 +2492,8 @@ export class SR6Actor extends Actor {
         await this.update({
             'system.initiative.actions.major': majorCount,
             'system.initiative.actions.minor': minorCount,
-            'system.initiative.actions.free': freeCount
+            'system.initiative.actions.free': freeCount,
+            'system.combatRoundTracker.edgeGained': 0
         });
 
         console.log(`Shadowrun 6e | Reset actions for ${this.name}: Major: ${majorCount}, Minor: ${minorCount}, Free: ${freeCount}`);
