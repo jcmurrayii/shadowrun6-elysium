@@ -1,0 +1,56 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <div class="inventory">
+        <div class="scroll-area">
+
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Character</th>
+                        <th><i class="fas fa-brain"></i> Stun</th>
+                        <th><i class="fas fa-bone-break"></i> Physical</th>
+                        <th><i class="fas fa-clover"></i> Edge</th>
+                    </tr>
+                </thead>
+
+                {{#each actors as |actor index|}}
+                    <tr>
+                        <td>
+                            {{#if actor.img}}
+                            <img
+                                src="{{actor.img}}"
+                                data-tooltip="{{actor.name}}"
+                                height="24px"
+                                width="24px"
+                            />&nbsp;
+                            {{/if}}
+                            {{actor.name}}
+                        </td>
+                        <td>
+                            {{actor.stunLevel}}
+                        </td>
+                        <td>
+                            {{actor.physicalLevel}}
+                        </td>
+                        <td>{{ actor.system.attributes.edge.uses }} / {{ actor.system.attributes.edge.value }}</td>
+                    </tr>
+                {{/each}}
+                <tr>
+                    <td>
+                        <img
+                            src="icons/svg/mystery-man.svg"
+                            data-tooltip="{{actor.name}}"
+                            height="24px"
+                            width="24px"
+                        />&nbsp;
+                        Maeglyn
+                    </td>
+                    <td colspan="3">
+                        No connection...
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</form>

@@ -5,7 +5,7 @@
                 <div class="item-left">
                     <div class="item-text item-rtg"></div>
                     <div class="item-text item-name">
-                        {{localize "SR6.Ammo"}}
+                        {{localize "SR6.Ammo._"}}
                     </div>
                 </div>
                 <div class="item-right">
@@ -14,15 +14,6 @@
                     </div>
                     <div class="item-text six">
                         {{localize "SR6.Damage"}}
-                    </div>
-                    <div class="item-text element">
-                        {{localize "SR6.Element"}}
-                    </div>
-                    <div class="item-text rtg">
-                        {{localize "SR6.AP"}}
-                    </div>
-                    <div class="item-text">
-                        {{localize "SR6.Accuracy"}}
                     </div>
                     <div class="item-text radius">
                         {{localize "SR6.Radius"}}
@@ -79,39 +70,6 @@
                             disabled
                             value="{{ammo.system.damage}}{{damageAbbreviation ammo.system.damageType}}"
                             data-dtype="Text"
-                        />
-                    </div>
-                    <div class="item-text element">
-                        <input
-                            class="display"
-                            type="text"
-                            disabled
-                            value="{{localizeOb ammo.system.element ../config.elementTypes}}"
-                            data-dtype="Text"
-                        />
-                    </div>
-                    <div class="item-text rtg">
-                        <input
-                            class="display"
-                            size="3"
-                            maxlength="3"
-                            type="text"
-                            disabled
-                            value="{{ammo.system.ap}}"
-                            data-dtype="Number"
-                            placeholder="0"
-                        />
-                    </div>
-                    <div class="item-text">
-                        <input
-                            class="display"
-                            size="3"
-                            maxlength="3"
-                            type="text"
-                            disabled
-                            value="{{ammo.system.accuracy}}"
-                            data-dtype="Number"
-                            placeholder="0"
                         />
                     </div>
                     <div class="item-text center radius">

@@ -132,19 +132,6 @@
     </div>
     <div class="form-line">
         <div class="label">
-            {{localize "SR6.Armor"}}
-        </div>
-        <div class="inputs">
-            <input
-                    data-tooltip="SR6.Armor"
-                    type="checkbox"
-                    name="system.action.armor"
-                    {{checked system.action.armor}}
-            />
-        </div>
-    </div>
-    <div class="form-line">
-        <div class="label">
             {{localize "SR6.DicePoolModifier"}}
         </div>
         <div class="inputs">
@@ -160,49 +147,6 @@
         </div>
     </div>
     {{#ifne item.type "spell"}} {{#ifne item.type "complex_form"}}
-    <div class="form-line">
-        <div class="label">
-            {{localize "SR6.Limit"}}
-        </div>
-        <div class="inputs">
-            <input
-                size="4"
-                maxlength="3"
-                type="number"
-                name="system.action.limit.base"
-                value="{{system.action.limit.base}}"
-                data-dtype="Number"
-                placeholder=""
-            />
-            <div>
-                +
-            </div>
-            <select name="system.action.limit.attribute" data-dtype="Text">
-                {{#select system.action.limit.attribute}}
-                <option value=""></option>
-                {{#each limits as |name type|}}
-                <option value="{{type}}">{{localize name}}</option>
-                {{/each}}
-                {{/select}}
-            </select>
-        </div>
-    </div>
-    <div class="form-line">
-        <div class="label">
-            {{localize "SR6.Threshold"}}
-        </div>
-        <div class="inputs">
-            <input
-                size="4"
-                maxlength="3"
-                type="number"
-                name="system.action.threshold.base"
-                value="{{system.action.threshold.base}}"
-                data-dtype="Number"
-                placeholder=""
-            />
-        </div>
-    </div>
     <div class="form-line">
         <div class="label" data-tooltip="SR6.Tooltips.Item.ActionRollMode">
             {{localize "SR6.RollMode"}}

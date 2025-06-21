@@ -2,6 +2,7 @@
   "name": "Attribute Mastery: Reaction",
   "type": "quality",
   "img": "icons/svg/upgrade.svg",
+  "_id": "quality-attribute-mastery-reaction",
   "system": {
     "description": "<p>You have mastered your Reaction attribute. You gain Edge when making Reaction-based tests.</p>",
     "type": "positive",

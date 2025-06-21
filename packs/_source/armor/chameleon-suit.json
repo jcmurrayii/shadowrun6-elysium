@@ -1,0 +1,91 @@
+{
+  "name": "Chameleon Suit",
+  "type": "armor",
+  "img": "systems/sr6elysium/dist/icons/importer/armor/specialty-armor.svg",
+  "_id": "armor-chameleon-suit",
+  "_key": "!items!armor-chameleon-suit",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": "",
+      "source": ""
+    },
+    "armor": {
+      "value": 0,
+      "mod": [],
+      "acid": 0,
+      "cold": 0,
+      "fire": 0,
+      "electricity": 0,
+      "radiation": 0,
+      "temp": 0,
+      "hardened": false,
+      "capacity": {
+        "base": null
+      },
+      "defense_rating": {
+        "base": 2,
+        "value": 0,
+        "mod": [],
+        "temp": 0
+      },
+      "social_rating": {
+        "base": 0,
+        "value": 0,
+        "mod": [],
+        "temp": 0
+      }
+    },
+    "technology": {
+      "rating": 1,
+      "availability": "4(I)",
+      "quantity": 1,
+      "cost": 2000,
+      "equipped": false,
+      "conceal": {
+        "base": 0,
+        "value": 0
+      },
+      "condition_monitor": {
+        "value": 0,
+        "max": 9
+      },
+      "wireless": true,
+      "networkController": null
+    },
+    "importFlags": {
+      "name": "",
+      "type": "",
+      "subType": "",
+      "isFreshImport": false,
+      "isImported": false
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "flags": {
+    "LocknKey": {
+      "IDKeysFlag": "",
+      "RemoveKeyonUseFlag": false,
+      "LPFormulaFlag": "",
+      "LPFormulaOverrideFlag": false,
+      "LBFormulaFlag": "",
+      "LBFormulaOverrideFlag": false,
+      "ReplacementItemFlag": ""
+    },
+    "exportSource": {
+      "world": "sr6-test-bed",
+      "system": "sr6elysium",
+      "coreVersion": "12.331",
+      "systemVersion": "0.24.1"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.331",
+    "systemId": "sr6elysium",
+    "systemVersion": "0.24.1",
+    "createdTime": 1750530417529,
+    "modifiedTime": 1750530445047,
+    "lastModifiedBy": "LBVNJqEpJEBeImQd"
+  }
+}

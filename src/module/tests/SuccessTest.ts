@@ -1863,6 +1863,7 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
         const test = await TestCreator.fromFollowupTest(this, this.data.options);
         if (!test) return;
         await test.execute();
+
     }
 
     /**

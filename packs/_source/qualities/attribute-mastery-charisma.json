@@ -2,6 +2,7 @@
   "name": "Attribute Mastery: Charisma",
   "type": "quality",
   "img": "icons/svg/upgrade.svg",
+  "_id": "quality-attribute-mastery-charisma",
   "system": {
     "description": "<p>You have mastered your Charisma attribute. You gain Edge when making Charisma-based tests.</p>",
     "type": "positive",

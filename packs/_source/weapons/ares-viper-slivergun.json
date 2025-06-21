@@ -1,0 +1,202 @@
+{
+  "name": "Ares Viper Slivergun",
+  "type": "weapon",
+  "img": "systems/sr6elysium/dist/icons/importer/weapon/heavy-pistols.svg",
+  "_id": "weapon-ares-viper-slivergun",
+  "_key": "!items!weapon-ares-viper-slivergun",
+  "system": {
+    "description": {
+      "value": "<p>The unique Slivergun hangs out in the Heavy</p><p>Pistol class, but it’s a creature all its own. The Sliv-</p><p>ergun fires metal slivers that count as flechette am-</p><p>munition and are bought as such, but they aren’t</p><p>interchangeable with any other flechette weapon.</p><p>The weapon remains capable of Burst Fire and has</p><p>a silencer integrated into the barrel, and the large</p><p>ammo capacity makes it a terror on the streets.</p>",
+      "chat": "",
+      "source": ""
+    },
+    "action": {
+      "type": "major",
+      "test": "RangedAttackTest",
+      "categories": [],
+      "attribute": "agility",
+      "attribute2": "",
+      "skill": "firearms",
+      "armor": false,
+      "spec": false,
+      "mod": null,
+      "mod_description": "",
+      "roll_mode": "publicroll",
+      "initiative_timing": "initiative",
+      "legality": "legal",
+      "limit": {
+        "value": 0,
+        "base": 0,
+        "attribute": ""
+      },
+      "threshold": {
+        "value": 0,
+        "base": 0
+      },
+      "extended": false,
+      "damage": {
+        "type": {
+          "value": "",
+          "base": "physical"
+        },
+        "element": {
+          "value": "",
+          "base": ""
+        },
+        "value": 0,
+        "base": 4,
+        "ap": {
+          "value": 0,
+          "base": 0,
+          "base_formula_operator": "add",
+          "attribute": ""
+        },
+        "base_formula_operator": "add",
+        "attribute": "",
+        "source": {
+          "actorId": "",
+          "itemId": "",
+          "itemType": "",
+          "itemName": ""
+        }
+      },
+      "opposed": {
+        "type": "",
+        "test": "PhysicalDefenseTest",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0,
+        "description": "",
+        "resist": {
+          "test": "PhysicalResistTest",
+          "skill": "",
+          "attribute": "",
+          "attribute2": "",
+          "armor": false,
+          "mod": 0
+        }
+      },
+      "followed": {
+        "test": "",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0
+      },
+      "modifiers": []
+    },
+    "technology": {
+      "rating": 1,
+      "availability": "",
+      "quantity": 1,
+      "cost": null,
+      "equipped": false,
+      "conceal": {
+        "base": 0,
+        "value": 0
+      },
+      "condition_monitor": {
+        "value": 0,
+        "max": 9
+      },
+      "wireless": true,
+      "networkController": null
+    },
+    "category": "range",
+    "subcategory": "",
+    "ammo": {
+      "spare_clips": {
+        "value": 0,
+        "max": 0
+      },
+      "current": {
+        "value": 0,
+        "max": 0
+      },
+      "clip_type": "",
+      "partial_reload_value": -1
+    },
+    "range": {
+      "category": "",
+      "ranges": {
+        "short": 0,
+        "medium": 0,
+        "long": 0,
+        "extreme": 0,
+        "category": "manual"
+      },
+      "attackRating": {
+        "short": 0,
+        "medium": 6,
+        "long": 0,
+        "extreme": null,
+        "close": 12,
+        "near": 8,
+        "far": null
+      },
+      "rc": {
+        "value": 0
+      },
+      "modes": {
+        "single_shot": false,
+        "semi_auto": true,
+        "burst_fire": true,
+        "full_auto": false
+      }
+    },
+    "melee": {
+      "reach": 0
+    },
+    "thrown": {
+      "ranges": {
+        "short": 0,
+        "medium": 0,
+        "long": 0,
+        "extreme": 0,
+        "attribute": "",
+        "category": "manual"
+      },
+      "blast": {
+        "radius": 0,
+        "dropoff": 0
+      }
+    },
+    "importFlags": {
+      "name": "",
+      "type": "",
+      "subType": "",
+      "isFreshImport": false,
+      "isImported": false
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "flags": {
+    "LocknKey": {
+      "IDKeysFlag": "",
+      "RemoveKeyonUseFlag": false,
+      "LPFormulaFlag": "",
+      "LPFormulaOverrideFlag": false,
+      "LBFormulaFlag": "",
+      "LBFormulaOverrideFlag": false,
+      "ReplacementItemFlag": ""
+    },
+    "exportSource": {
+      "world": "sr6-test-bed",
+      "system": "sr6elysium",
+      "coreVersion": "12.331",
+      "systemVersion": "0.24.1"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.331",
+    "systemId": "sr6elysium",
+    "systemVersion": "0.24.1",
+    "createdTime": 1750529791725,
+    "modifiedTime": 1750529886316,
+    "lastModifiedBy": "LBVNJqEpJEBeImQd"
+  }
+}

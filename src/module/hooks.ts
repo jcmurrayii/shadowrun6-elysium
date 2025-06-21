@@ -15,6 +15,7 @@ import {_combatantGetInitiativeFormula, SR6Combat} from './combat/SR6Combat';
 import {HandlebarManager} from './handlebars/HandlebarManager';
 
 import {OverwatchScoreTracker} from './apps/gmtools/OverwatchScoreTracker';
+import {PartyHud} from './apps/partytools/PartyHud';
 import {Import} from './apps/itemImport/apps/import-form';
 import {ChangelogApplication} from "./apps/ChangelogApplication";
 import { SituationModifiersApplication } from './apps/SituationModifiersApplication';
@@ -395,6 +396,11 @@ ___________________
             event.preventDefault();
             new OverwatchScoreTracker().render(true);
         });
+
+        html.find('[data-tool="party-hud"]').on('click', (event) => {
+            event.preventDefault();
+            new PartyHud().render(true);
+        });
     }
 
     static getSceneControlButtons(controls) {
@@ -405,6 +411,15 @@ ___________________
                 name: 'overwatch-score-tracker',
                 title: 'CONTROLS.SR6.OverwatchScoreTracker',
                 icon: 'fas fa-network-wired',
+                button: true
+            });
+        }
+
+        if (game.user?.isGM) {
+            tokenControls.tools.push({
+                name: 'party-hud',
+                title: 'CONTROLS.SR6.PartyHud',
+                icon: 'fas fa-heart-pulse',
                 button: true
             });
         }

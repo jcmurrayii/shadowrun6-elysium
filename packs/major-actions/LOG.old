@@ -1,8 +1,0 @@
-2025/06/06-18:02:56.305 abf8 Recovering log #177
-2025/06/06-18:02:56.309 abf8 Delete type=0 #177
-2025/06/06-18:02:56.309 abf8 Delete type=3 #175
-2025/06/06-18:08:55.967 9e48 Level-0 table #182: started
-2025/06/06-18:08:55.967 9e48 Level-0 table #182: 0 bytes OK
-2025/06/06-18:08:55.968 9e48 Delete type=0 #180
-2025/06/06-18:08:55.968 9e48 Manual compaction at level-0 from '!items!SWjpnYmk4sAgoqSf' @ 72057594037927935 : 1 .. '!items!SWjpnYmk4sAgoqSf' @ 0 : 0; will stop at (end)
-2025/06/06-18:08:55.968 9e48 Manual compaction at level-1 from '!items!SWjpnYmk4sAgoqSf' @ 72057594037927935 : 1 .. '!items!SWjpnYmk4sAgoqSf' @ 0 : 0; will stop at (end)

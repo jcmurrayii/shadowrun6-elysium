@@ -1,0 +1,170 @@
+{
+  "name": "Social Stress",
+  "type": "quality",
+  "img": "systems/sr6elysium/dist/icons/importer/quality/negative.svg",
+  "_id": "quality-social-stress",
+  "_key": "!items!quality-social-stress",
+  "system": {
+    "description": {
+      "value": "",
+      "chat": "",
+      "source": ""
+    },
+    "action": {
+      "type": "",
+      "test": "SuccessTest",
+      "categories": [],
+      "attribute": "",
+      "attribute2": "",
+      "skill": "",
+      "armor": false,
+      "spec": "",
+      "mod": 0,
+      "mod_description": "",
+      "roll_mode": "",
+      "initiative_timing": "",
+      "legality": "legal",
+      "limit": {
+        "value": 0,
+        "base": 0,
+        "attribute": ""
+      },
+      "threshold": {
+        "value": 0,
+        "base": 0
+      },
+      "extended": false,
+      "damage": {
+        "type": {
+          "value": "",
+          "base": ""
+        },
+        "element": {
+          "value": "",
+          "base": ""
+        },
+        "value": 0,
+        "base": 0,
+        "ap": {
+          "value": 0,
+          "base": 0
+        },
+        "base_formula_operator": "add",
+        "attribute": "",
+        "source": {
+          "actorId": "",
+          "itemId": "",
+          "itemType": "",
+          "itemName": ""
+        }
+      },
+      "opposed": {
+        "type": "",
+        "test": "",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0,
+        "description": "",
+        "resist": {
+          "test": "",
+          "skill": "",
+          "attribute": "",
+          "attribute2": "",
+          "armor": false,
+          "mod": 0
+        }
+      },
+      "followed": {
+        "test": "",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0
+      },
+      "modifiers": []
+    },
+    "importFlags": {
+      "name": "",
+      "type": "",
+      "subType": "",
+      "isFreshImport": false,
+      "isImported": false
+    },
+    "type": "positive",
+    "rating": 0,
+    "karma": 0
+  },
+  "effects": [
+    {
+      "origin": "Item.Fwh5M88kkpwR0hb1",
+      "name": "Social Stress",
+      "_id": "PSsL78YaeZhyNgPH",
+      "_key": "!items!PSsL78YaeZhyNgPH",
+      "img": "systems/sr6elysium/dist/icons/importer/quality/negative.svg",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "sr6elysium": {
+          "onlyForWireless": false,
+          "onlyForEquipped": false,
+          "applyTo": "actor"
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "sr6elysium",
+        "systemVersion": "0.24.1",
+        "createdTime": 1750528535189,
+        "modifiedTime": 1750528551100,
+        "lastModifiedBy": "LBVNJqEpJEBeImQd"
+      }
+    }
+  ],
+  "folder": null,
+  "flags": {
+    "LocknKey": {
+      "IDKeysFlag": "",
+      "RemoveKeyonUseFlag": false,
+      "LPFormulaFlag": "",
+      "LPFormulaOverrideFlag": false,
+      "LBFormulaFlag": "",
+      "LBFormulaOverrideFlag": false,
+      "ReplacementItemFlag": ""
+    },
+    "exportSource": {
+      "world": "sr6-test-bed",
+      "system": "sr6elysium",
+      "coreVersion": "12.331",
+      "systemVersion": "0.24.1"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.331",
+    "systemId": "sr6elysium",
+    "systemVersion": "0.24.1",
+    "createdTime": 1750528500329,
+    "modifiedTime": 1750528509049,
+    "lastModifiedBy": "LBVNJqEpJEBeImQd"
+  }
+}

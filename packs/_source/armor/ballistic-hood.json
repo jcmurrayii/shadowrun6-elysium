@@ -1,0 +1,91 @@
+{
+  "name": "Ballistic Hood",
+  "type": "armor",
+  "img": "systems/sr6elysium/dist/icons/importer/armor/armor.svg",
+  "_id": "armor-ballistic-hood",
+  "_key": "!items!armor-ballistic-hood",
+  "system": {
+    "description": {
+      "value": "<p>Much less conspicuous than a helmet or a mask, these hoods are made of ballistic cloth and match the style of the armor they’re attached to, including any Social Modifier. They can be added to anything that covers the torso and add a +1 to the armor’s Defense Rating. Hoods do not have any capacity rating on their own but are considered to have the modifications of the base armor.</p><p>Hoods are headwear, and while they can be worn over a helmet or with a ballistic mask, they do not provide their additional protection when used with those items. A hood adds five percent to the total cost of the armor it’s attached to, including the cost of all modifications.</p>",
+      "chat": "foo",
+      "source": "CRB335"
+    },
+    "armor": {
+      "value": 0,
+      "mod": [],
+      "acid": 0,
+      "cold": 0,
+      "fire": 0,
+      "electricity": 0,
+      "radiation": 0,
+      "temp": 0,
+      "hardened": false,
+      "capacity": {
+        "base": null
+      },
+      "defense_rating": {
+        "base": 1,
+        "value": 0,
+        "mod": [],
+        "temp": 0
+      },
+      "social_rating": {
+        "base": 0,
+        "value": 0,
+        "mod": [],
+        "temp": 0
+      }
+    },
+    "technology": {
+      "rating": 1,
+      "availability": "",
+      "quantity": 1,
+      "cost": null,
+      "equipped": false,
+      "conceal": {
+        "base": 0,
+        "value": 0
+      },
+      "condition_monitor": {
+        "value": 0,
+        "max": 9
+      },
+      "wireless": true,
+      "networkController": null
+    },
+    "importFlags": {
+      "name": "",
+      "type": "",
+      "subType": "",
+      "isFreshImport": false,
+      "isImported": false
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "flags": {
+    "LocknKey": {
+      "IDKeysFlag": "",
+      "RemoveKeyonUseFlag": false,
+      "LPFormulaFlag": "",
+      "LPFormulaOverrideFlag": false,
+      "LBFormulaFlag": "",
+      "LBFormulaOverrideFlag": false,
+      "ReplacementItemFlag": ""
+    },
+    "exportSource": {
+      "world": "sr6-test-bed",
+      "system": "sr6elysium",
+      "coreVersion": "12.331",
+      "systemVersion": "0.24.1"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.331",
+    "systemId": "sr6elysium",
+    "systemVersion": "0.24.1",
+    "createdTime": 1750524905787,
+    "modifiedTime": 1750524938996,
+    "lastModifiedBy": "LBVNJqEpJEBeImQd"
+  }
+}

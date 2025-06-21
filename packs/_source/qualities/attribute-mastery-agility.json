@@ -2,6 +2,7 @@
   "name": "Attribute Mastery: Agility",
   "type": "quality",
   "img": "icons/svg/upgrade.svg",
+  "_id": "quality-attribute-mastery-agility",
   "system": {
     "description": "<p>You have mastered your Agility attribute. You gain Edge when making Agility-based tests.</p>",
     "type": "positive",

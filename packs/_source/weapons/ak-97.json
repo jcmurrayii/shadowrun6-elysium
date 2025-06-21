@@ -1,0 +1,202 @@
+{
+  "name": "AK-97",
+  "type": "weapon",
+  "img": "systems/sr6elysium/dist/icons/importer/weapon/assault-rifles.svg",
+  "_id": "weapon-ak-97",
+  "_key": "!items!weapon-ak-97",
+  "system": {
+    "description": {
+      "value": "<p>The AK-97 will never go out of style, especial-</p><p>ly since it still looks like its mid-twentieth-century</p><p>predecessor. Built for reliability and endurance, it’s</p><p>not the prettiest girl at the dance, but it can sure</p><p>shake a tailfeather.</p>",
+      "chat": "",
+      "source": ""
+    },
+    "action": {
+      "type": "major",
+      "test": "RangedAttackTest",
+      "categories": [],
+      "attribute": "agility",
+      "attribute2": "",
+      "skill": "firearms",
+      "armor": false,
+      "spec": false,
+      "mod": null,
+      "mod_description": "",
+      "roll_mode": "publicroll",
+      "initiative_timing": "initiative",
+      "legality": "legal",
+      "limit": {
+        "value": 0,
+        "base": 0,
+        "attribute": ""
+      },
+      "threshold": {
+        "value": 0,
+        "base": 0
+      },
+      "extended": false,
+      "damage": {
+        "type": {
+          "value": "",
+          "base": "physical"
+        },
+        "element": {
+          "value": "",
+          "base": ""
+        },
+        "value": 0,
+        "base": 5,
+        "ap": {
+          "value": 0,
+          "base": 0,
+          "base_formula_operator": "add",
+          "attribute": ""
+        },
+        "base_formula_operator": "add",
+        "attribute": "",
+        "source": {
+          "actorId": "",
+          "itemId": "",
+          "itemType": "",
+          "itemName": ""
+        }
+      },
+      "opposed": {
+        "type": "",
+        "test": "PhysicalDefenseTest",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0,
+        "description": "",
+        "resist": {
+          "test": "PhysicalResistTest",
+          "skill": "",
+          "attribute": "",
+          "attribute2": "",
+          "armor": false,
+          "mod": 0
+        }
+      },
+      "followed": {
+        "test": "",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0
+      },
+      "modifiers": []
+    },
+    "technology": {
+      "rating": 1,
+      "availability": "2(L)",
+      "quantity": 1,
+      "cost": 2100,
+      "equipped": false,
+      "conceal": {
+        "base": 0,
+        "value": 0
+      },
+      "condition_monitor": {
+        "value": 0,
+        "max": 9
+      },
+      "wireless": false,
+      "networkController": null
+    },
+    "category": "range",
+    "subcategory": "",
+    "ammo": {
+      "spare_clips": {
+        "value": 0,
+        "max": 0
+      },
+      "current": {
+        "value": 0,
+        "max": 0
+      },
+      "clip_type": "",
+      "partial_reload_value": -1
+    },
+    "range": {
+      "category": "",
+      "ranges": {
+        "short": 0,
+        "medium": 0,
+        "long": 0,
+        "extreme": 0,
+        "category": "manual"
+      },
+      "attackRating": {
+        "short": 0,
+        "medium": 9,
+        "long": 0,
+        "extreme": 1,
+        "close": 4,
+        "near": 11,
+        "far": 2
+      },
+      "rc": {
+        "value": 0
+      },
+      "modes": {
+        "single_shot": false,
+        "semi_auto": true,
+        "burst_fire": true,
+        "full_auto": true
+      }
+    },
+    "melee": {
+      "reach": 0
+    },
+    "thrown": {
+      "ranges": {
+        "short": 0,
+        "medium": 0,
+        "long": 0,
+        "extreme": 0,
+        "attribute": "",
+        "category": "manual"
+      },
+      "blast": {
+        "radius": 0,
+        "dropoff": 0
+      }
+    },
+    "importFlags": {
+      "name": "",
+      "type": "",
+      "subType": "",
+      "isFreshImport": false,
+      "isImported": false
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "flags": {
+    "LocknKey": {
+      "IDKeysFlag": "",
+      "RemoveKeyonUseFlag": false,
+      "LPFormulaFlag": "",
+      "LPFormulaOverrideFlag": false,
+      "LBFormulaFlag": "",
+      "LBFormulaOverrideFlag": false,
+      "ReplacementItemFlag": ""
+    },
+    "exportSource": {
+      "world": "sr6-test-bed",
+      "system": "sr6elysium",
+      "coreVersion": "12.331",
+      "systemVersion": "0.24.1"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.331",
+    "systemId": "sr6elysium",
+    "systemVersion": "0.24.1",
+    "createdTime": 1750529357893,
+    "modifiedTime": 1750529587558,
+    "lastModifiedBy": "LBVNJqEpJEBeImQd"
+  }
+}

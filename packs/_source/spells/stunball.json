@@ -1,0 +1,147 @@
+{
+  "name": "Stunball",
+  "type": "spell",
+  "img": "systems/sr6elysium/dist/icons/importer/spell/spell.svg",
+  "_id": "spell-stunball",
+  "_key": "!items!spell-stunball",
+  "system": {
+    "description": {
+      "value": "<p>Sometimes you take a little off the heater to</p><p>catch the other guy off-balance. These spells chan-</p><p>nel mana in a way that hurts, but only to stun.</p><p>Stunbolt hits individuals, Stunball is area effect.</p>",
+      "chat": "",
+      "source": ""
+    },
+    "action": {
+      "type": "major",
+      "test": "SpellCastingTest",
+      "categories": [],
+      "attribute": "magic",
+      "attribute2": "",
+      "skill": "sorcery",
+      "armor": false,
+      "spec": false,
+      "mod": null,
+      "mod_description": "",
+      "roll_mode": "",
+      "initiative_timing": "initiative",
+      "legality": "legal",
+      "limit": {
+        "value": 0,
+        "base": 0,
+        "attribute": ""
+      },
+      "threshold": {
+        "value": 0,
+        "base": 0
+      },
+      "extended": false,
+      "damage": {
+        "type": {
+          "value": "",
+          "base": "stun"
+        },
+        "element": {
+          "value": "",
+          "base": ""
+        },
+        "value": 0,
+        "base": 0,
+        "ap": {
+          "value": 0,
+          "base": 0
+        },
+        "base_formula_operator": "add",
+        "attribute": "",
+        "source": {
+          "actorId": "",
+          "itemId": "",
+          "itemType": "",
+          "itemName": ""
+        }
+      },
+      "opposed": {
+        "type": "",
+        "test": "CombatSpellDefenseTest",
+        "attribute": "willpower",
+        "attribute2": "intuition",
+        "skill": "",
+        "armor": false,
+        "mod": 0,
+        "description": "",
+        "resist": {
+          "test": "PhysicalResistTest",
+          "skill": "",
+          "attribute": "",
+          "attribute2": "",
+          "armor": false,
+          "mod": 0
+        }
+      },
+      "followed": {
+        "test": "DrainTest",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0
+      },
+      "modifiers": []
+    },
+    "importFlags": {
+      "name": "",
+      "type": "",
+      "subType": "",
+      "isFreshImport": false,
+      "isImported": false
+    },
+    "drain": 5,
+    "category": "combat",
+    "type": "mana",
+    "range": "los_a",
+    "duration": "instant",
+    "combat": {
+      "type": "direct"
+    },
+    "detection": {
+      "passive": false,
+      "type": "",
+      "extended": false
+    },
+    "illusion": {
+      "type": "",
+      "sense": ""
+    },
+    "manipulation": {
+      "damaging": false,
+      "mental": false,
+      "environmental": false,
+      "physical": false
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "flags": {
+    "LocknKey": {
+      "IDKeysFlag": "",
+      "RemoveKeyonUseFlag": false,
+      "LPFormulaFlag": "",
+      "LPFormulaOverrideFlag": false,
+      "LBFormulaFlag": "",
+      "LBFormulaOverrideFlag": false,
+      "ReplacementItemFlag": ""
+    },
+    "exportSource": {
+      "world": "sr6-test-bed",
+      "system": "sr6elysium",
+      "coreVersion": "12.331",
+      "systemVersion": "0.24.1"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.331",
+    "systemId": "sr6elysium",
+    "systemVersion": "0.24.1",
+    "createdTime": 1750527378835,
+    "modifiedTime": 1750527521975,
+    "lastModifiedBy": "LBVNJqEpJEBeImQd"
+  }
+}

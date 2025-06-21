@@ -2,6 +2,7 @@
   "name": "Attribute Mastery: Intuition",
   "type": "quality",
   "img": "icons/svg/upgrade.svg",
+  "_id": "quality-attribute-mastery-intuition",
   "system": {
     "description": "<p>You have mastered your Intuition attribute. You gain Edge when making Intuition-based tests.</p>",
     "type": "positive",

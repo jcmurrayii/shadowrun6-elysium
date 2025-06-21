@@ -561,6 +561,8 @@
             "street_cred": 0,
             "notoriety": 0,
             "public_awareness": 0,
+            "reputation": 0,
+            "heat": 0,
             "is_critter": false,
             "karma": {
                 "value": 0,

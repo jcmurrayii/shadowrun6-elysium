@@ -1,8 +1,0 @@
-2025/06/06-18:02:56.428 8fac Recovering log #142
-2025/06/06-18:02:56.433 8fac Delete type=0 #142
-2025/06/06-18:02:56.433 8fac Delete type=3 #140
-2025/06/06-18:08:55.972 9e48 Level-0 table #147: started
-2025/06/06-18:08:55.972 9e48 Level-0 table #147: 0 bytes OK
-2025/06/06-18:08:55.973 9e48 Delete type=0 #145
-2025/06/06-18:08:55.990 9e48 Manual compaction at level-0 from '!items!0rszuztwAilTH8fo' @ 72057594037927935 : 1 .. '!items!0rszuztwAilTH8fo' @ 0 : 0; will stop at (end)
-2025/06/06-18:08:55.990 9e48 Manual compaction at level-1 from '!items!0rszuztwAilTH8fo' @ 72057594037927935 : 1 .. '!items!0rszuztwAilTH8fo' @ 0 : 0; will stop at (end)

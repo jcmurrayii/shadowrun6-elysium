@@ -24,25 +24,27 @@ export const registerSkillLineHelpers = () => {
                 addIcon.cssClass = 'add-knowledge';
                 return [addIcon];
             default:
-                return [];
+                addIcon.cssClass = 'add-knowledge';
+                return [addIcon];
         }
     });
 
     /**
      * Handle the right side of the skill header.
-     * 
+     *
      * Main feature necessary is to indicate the list being filtered or not.
-     * 
+     *
      * @param id The skill category of this skill header.
      * @param filters As soon as the sheet uses some kind of filter this will provide an object that is 'truey'.
      */
     Handlebars.registerHelper('SkillHeaderRightSide', function (id: string, filters?: SR5SheetFilters) {
-        const specs = {
-            text: {
-                text: game.i18n.localize('SR6.Specialization'),
-                cssClass: 'skill-spec-item',
-            },
-        };
+        const specs = "";
+        // const specs = {
+        //     text: {
+        //         text: game.i18n.localize('SR6.Specialization'),
+        //         cssClass: 'skill-spec-item',
+        //     },
+        // };
 
         // Display filters for active skills. See issue #871.
         // when not given, filters won't be undefined, but will contain a handlebar object.
@@ -103,7 +105,7 @@ export const registerSkillLineHelpers = () => {
             title: game.i18n.localize('SR6.EditSkill'),
             cssClass: '',
         };
-        const openSourceIcon = { 
+        const openSourceIcon = {
             icon: 'fas fa-file',
             title: game.i18n.localize('SR6.OpenSource'),
             cssClass: '',

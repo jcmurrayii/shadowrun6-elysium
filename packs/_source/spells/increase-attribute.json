@@ -1,0 +1,147 @@
+{
+  "name": "Increase Attribute",
+  "type": "spell",
+  "img": "systems/sr6elysium/dist/icons/importer/spell/spell.svg",
+  "_id": "spell-increase-attribute",
+  "_key": "!items!spell-increase-attribute",
+  "system": {
+    "description": {
+      "value": "<p>The touch of the mage strengthens, speeds, or</p><p>enlightens the target, temporarily raising one of</p><p>their attributes. The caster decides which attribute</p><p>to target before casting the spell. The caster rolls a</p><p>Sorcery + Magic (5 – Essence) test. They can select</p><p>how many net hits they actually apply to the tar-</p><p>get to increase the selected attribute, at a rate of 1</p><p>point of increase per net hit (maximum bonus +4);</p><p>for each net hit applied beyond the first, the Drain</p><p>Value of the spell increases by 1. The spell cannot</p><p>affect Edge, Essence, Magic, or Resonance.</p>",
+      "chat": "",
+      "source": ""
+    },
+    "action": {
+      "type": "major",
+      "test": "SpellCastingTest",
+      "categories": [],
+      "attribute": "magic",
+      "attribute2": "",
+      "skill": "sorcery",
+      "armor": false,
+      "spec": false,
+      "mod": null,
+      "mod_description": "",
+      "roll_mode": "",
+      "initiative_timing": "initiative",
+      "legality": "legal",
+      "limit": {
+        "value": 0,
+        "base": 0,
+        "attribute": ""
+      },
+      "threshold": {
+        "value": 0,
+        "base": 0
+      },
+      "extended": false,
+      "damage": {
+        "type": {
+          "value": "",
+          "base": ""
+        },
+        "element": {
+          "value": "",
+          "base": ""
+        },
+        "value": 0,
+        "base": 0,
+        "ap": {
+          "value": 0,
+          "base": 0
+        },
+        "base_formula_operator": "add",
+        "attribute": "",
+        "source": {
+          "actorId": "",
+          "itemId": "",
+          "itemType": "",
+          "itemName": ""
+        }
+      },
+      "opposed": {
+        "type": "",
+        "test": "OpposedTest",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0,
+        "description": "",
+        "resist": {
+          "test": "",
+          "skill": "",
+          "attribute": "",
+          "attribute2": "",
+          "armor": false,
+          "mod": 0
+        }
+      },
+      "followed": {
+        "test": "DrainTest",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0
+      },
+      "modifiers": []
+    },
+    "importFlags": {
+      "name": "",
+      "type": "",
+      "subType": "",
+      "isFreshImport": false,
+      "isImported": false
+    },
+    "drain": 3,
+    "category": "health",
+    "type": "physical",
+    "range": "touch",
+    "duration": "sustained",
+    "combat": {
+      "type": ""
+    },
+    "detection": {
+      "passive": false,
+      "type": "",
+      "extended": false
+    },
+    "illusion": {
+      "type": "",
+      "sense": ""
+    },
+    "manipulation": {
+      "damaging": false,
+      "mental": false,
+      "environmental": false,
+      "physical": false
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "flags": {
+    "LocknKey": {
+      "IDKeysFlag": "",
+      "RemoveKeyonUseFlag": false,
+      "LPFormulaFlag": "",
+      "LPFormulaOverrideFlag": false,
+      "LBFormulaFlag": "",
+      "LBFormulaOverrideFlag": false,
+      "ReplacementItemFlag": ""
+    },
+    "exportSource": {
+      "world": "sr6-test-bed",
+      "system": "sr6elysium",
+      "coreVersion": "12.331",
+      "systemVersion": "0.24.1"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.331",
+    "systemId": "sr6elysium",
+    "systemVersion": "0.24.1",
+    "createdTime": 1750526773301,
+    "modifiedTime": 1750526854580,
+    "lastModifiedBy": "LBVNJqEpJEBeImQd"
+  }
+}

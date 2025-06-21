@@ -1,6 +1,7 @@
 {
     "CONTROLS.SR6.EnvironmentalModifiers": "Environmental Modifiers",
     "CONTROLS.SR6.OverwatchScoreTracker": "Overwatch Score Tracker",
+    "CONTROLS.SR6.PartyHud": "Party HUD",
     "CONTROLS.SR6.SituationalModifiers": "Situational Modifiers",
     "SETTINGS": {
         "ApplyLimitsDescription": "Should Limits be applied to rolls",
@@ -515,6 +516,7 @@
     "SR6.Glitches": "Glitches:",
     "SR6.GoodCover": "Good Cover",
     "SR6.HackingProgram": "Hacking Program",
+    "SR6.Heat": "Heat",
     "SR6.Help": "Help",
     "SR6.Hits": "Hits",
     "SR6.Host": {
@@ -861,6 +863,7 @@
     "SR6.Overflow": "Overflow",
     "SR6.Override": "Override",
     "SR6.OverwatchScore": "Overwatch Score",
+    "SR6.PartyHud": "Party HUD",
     "SR6.OverwatchScoreTracker": {
         "AddSelect": "Add selected tokens linked actor",
         "CantDeleteUserCharacter": "Player Character can't be removed from the tracker",
@@ -910,6 +913,7 @@
     "SR6.RecoilCompensation": "Recoil Comp.",
     "SR6.RemoveBonus": "Remove Bonus",
     "SR6.RemoveSpecialization": "Remove Specialization",
+    "SR6.Reputation": "Reputation",
     "SR6.Resist": "Resist",
     "SR6.RestoreDefaultSkills": "Restore Default Skills",
     "SR6.RightClickToClear": "Right Click to Clear",

@@ -1,0 +1,147 @@
+{
+  "name": "Heal",
+  "type": "spell",
+  "img": "systems/sr6elysium/dist/icons/importer/spell/spell.svg",
+  "_id": "spell-heal",
+  "_key": "!items!spell-heal",
+  "system": {
+    "description": {
+      "value": "<p>Shadowrunning comes with bumps, bruises, and</p><p>bullet wounds, and magic is perhaps the quickest</p><p>and most effective way to repair it. When casting this</p><p>spell, roll Sorcery + Magic with a threshold of (5 –</p><p>Essence). Heal 1 box of Stun, Physical, or Overflow</p><p>damage per net hit. Injuries can only be affected once</p><p>by any Heal spell (including Cleansing Heal, Cooling</p><p>Heal, and Warming Heal).</p>",
+      "chat": "",
+      "source": ""
+    },
+    "action": {
+      "type": "major",
+      "test": "SpellCastingTest",
+      "categories": [],
+      "attribute": "magic",
+      "attribute2": "",
+      "skill": "sorcery",
+      "armor": false,
+      "spec": false,
+      "mod": null,
+      "mod_description": "",
+      "roll_mode": "",
+      "initiative_timing": "initiative",
+      "legality": "legal",
+      "limit": {
+        "value": 0,
+        "base": 0,
+        "attribute": ""
+      },
+      "threshold": {
+        "value": 0,
+        "base": 0
+      },
+      "extended": false,
+      "damage": {
+        "type": {
+          "value": "",
+          "base": "physical"
+        },
+        "element": {
+          "value": "",
+          "base": ""
+        },
+        "value": 0,
+        "base": 0,
+        "ap": {
+          "value": 0,
+          "base": 0
+        },
+        "base_formula_operator": "add",
+        "attribute": "",
+        "source": {
+          "actorId": "",
+          "itemId": "",
+          "itemType": "",
+          "itemName": ""
+        }
+      },
+      "opposed": {
+        "type": "",
+        "test": "OpposedTest",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0,
+        "description": "",
+        "resist": {
+          "test": "",
+          "skill": "",
+          "attribute": "",
+          "attribute2": "",
+          "armor": false,
+          "mod": 0
+        }
+      },
+      "followed": {
+        "test": "DrainTest",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0
+      },
+      "modifiers": []
+    },
+    "importFlags": {
+      "name": "",
+      "type": "",
+      "subType": "",
+      "isFreshImport": false,
+      "isImported": false
+    },
+    "drain": 3,
+    "category": "health",
+    "type": "physical",
+    "range": "touch",
+    "duration": "permanent",
+    "combat": {
+      "type": ""
+    },
+    "detection": {
+      "passive": false,
+      "type": "",
+      "extended": false
+    },
+    "illusion": {
+      "type": "",
+      "sense": ""
+    },
+    "manipulation": {
+      "damaging": false,
+      "mental": false,
+      "environmental": false,
+      "physical": false
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "flags": {
+    "LocknKey": {
+      "IDKeysFlag": "",
+      "RemoveKeyonUseFlag": false,
+      "LPFormulaFlag": "",
+      "LPFormulaOverrideFlag": false,
+      "LBFormulaFlag": "",
+      "LBFormulaOverrideFlag": false,
+      "ReplacementItemFlag": ""
+    },
+    "exportSource": {
+      "world": "sr6-test-bed",
+      "system": "sr6elysium",
+      "coreVersion": "12.331",
+      "systemVersion": "0.24.1"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.331",
+    "systemId": "sr6elysium",
+    "systemVersion": "0.24.1",
+    "createdTime": 1750526521290,
+    "modifiedTime": 1750526692107,
+    "lastModifiedBy": "LBVNJqEpJEBeImQd"
+  }
+}

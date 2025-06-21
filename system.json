@@ -104,6 +104,30 @@
             "system": "sr6elysium"
         },
         {
+            "name": "armor",
+            "label": "SR6e Core Armor",
+            "path": "packs/armor",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "TRUSTED": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            },
+            "type": "Item",
+            "system": "sr6elysium"
+        },
+        {
+            "name": "qualities",
+            "label": "SR6e Core Qualities",
+            "path": "packs/qualities",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "TRUSTED": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            },
+            "type": "Item",
+            "system": "sr6elysium"
+        },
+        {
             "name": "spells",
             "label": "Spells",
             "path": "packs/spells",
@@ -114,6 +138,51 @@
             },
             "type": "Item",
             "system": "sr6elysium"
+        }
+    ],
+    "packFolders": [
+        {
+            "name": "Shadowrun 6e",
+            "color": "#000080",
+            "sorting": "m",
+            "folders": [
+                {
+                    "name": "Armor",
+                    "sorting": "m",
+                    "packs": ["armor"]
+                },
+                {
+                    "name": "Actions",
+                    "sorting": "m",
+                    "folders": [
+                        {
+                            "name": "General",
+                            "sorting": "m",
+                            "packs": ["general-actions"]
+                        },
+                        {
+                            "name": "Matrix",
+                            "sorting": "m",
+                            "packs": ["matrix-actions"]
+                        }
+                    ]
+                },
+                {
+                    "name": "Qualities",
+                    "sorting": "m",
+                    "packs": ["qualities"]
+                },
+                {
+                    "name": "Spells",
+                    "sorting": "m",
+                    "packs": ["spells"]
+                },
+                {
+                    "name": "Weapons",
+                    "sorting": "m",
+                    "packs": ["weapons"]
+                }
+            ]
         }
     ],
     "relationships": [

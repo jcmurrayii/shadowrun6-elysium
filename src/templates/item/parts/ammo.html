@@ -42,36 +42,6 @@
     </div>
     <div class="form-line">
         <div class="label">
-            {{localize "SR6.Element"}}
-        </div>
-        <div class="inputs">
-            <select name="system.element">
-                {{#select system.element}}
-                <option value=""></option>
-                {{#each config.elementTypes as |name type|}}
-                <option value="{{type}}">{{localize name}}</option>
-                {{/each}} {{/select}}
-            </select>
-        </div>
-    </div>
-    <div class="form-line">
-        <div class="label">
-            {{localize "SR6.AP"}}
-        </div>
-        <div class="inputs">
-            <input
-                type="text"
-                maxlength="3"
-                size="3"
-                name="system.ap"
-                value="{{system.ap}}"
-                data-dtype="Number"
-                placeholder="AP"
-            />
-        </div>
-    </div>
-    <div class="form-line">
-        <div class="label">
             {{localize "SR6.BlastRadius"}}
         </div>
         <div class="inputs">
@@ -104,20 +74,4 @@
         </div>
     </div>
     {{/if}} {{/if}}
-    <div class="form-line">
-        <div class="label">
-            {{localize "SR6.Accuracy"}}
-        </div>
-        <div class="inputs">
-            <input
-                type="number"
-                maxlength="3"
-                size="3"
-                name="system.accuracy"
-                value="{{system.accuracy}}"
-                data-dtype="Number"
-                placeholder="{{localize "SR6.Accuracy"}}"
-            />
-        </div>
-    </div>
 </div>

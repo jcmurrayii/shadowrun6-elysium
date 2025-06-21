@@ -57,19 +57,6 @@
             {{/unless}}
         </div>
     </div>
-    <div class="form-line">
-        <div class="label">
-            {{localize "SR6.Armor"}}
-        </div>
-        <div class="inputs">
-            <input
-                    data-tooltip="SR6.Armor"
-                    type="checkbox"
-                    name="system.action.opposed.armor"
-                    {{checked system.action.opposed.armor}}
-            />
-        </div>
-    </div>
     {{/if}}
     <div class="header">
         {{localize "SR6.Labels.Action.DamageResistanceTest"}}
@@ -127,19 +114,6 @@
                 {{/each}} {{/select}}
             </select>
             {{/unless}}
-        </div>
-    </div>
-    <div class="form-line">
-        <div class="label">
-            {{localize "SR6.Armor"}}
-        </div>
-        <div class="inputs">
-            <input
-                    data-tooltip="SR6.Armor"
-                    type="checkbox"
-                    name="system.action.opposed.resist.armor"
-                    {{checked system.action.opposed.resist.armor}}
-            />
         </div>
     </div>
     {{/if}}

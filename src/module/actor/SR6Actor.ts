@@ -1628,6 +1628,62 @@ export class SR6Actor extends Actor {
         await this.healDamage('physical', healing);
     }
 
+    get physicalLevel(): string {
+        const physical = this.getPhysicalTrack();
+        if (!physical) return "Unknown";
+
+        const filledBoxes = physical.value;
+        const totalBoxes = physical.max;
+        const stage = Math.floor(filledBoxes / 3);
+
+        switch (true) {
+            case (filledBoxes === 0):
+                return "Uninjured";
+            case (stage === 0):
+                return "Bruised";
+            case (stage === 1):
+                return "Wounded";
+            case (stage === 2):
+                return "Injured";
+            case (stage === 3):
+                return "Critical";
+            case (stage === 4):
+                return "Gravely Hurt";
+            case (filledBoxes >= totalBoxes):
+                return "Unconscious";
+            default:
+                return "Unknown";
+        }
+    }
+
+
+    get stunLevel(): string {
+        const stun = this.getStunTrack();
+        const max = stun?.max ?? 0;
+        const value = stun?.value ?? 0;
+        const stage = Math.floor(value / 3);
+        const maxStage = Math.floor(max / 3);
+
+        switch (true) {
+            case (value === 0):
+                return "Alert";
+            case (stage === 0):
+                return "Rattled";
+            case (stage === 1):
+                return "Shaken";
+            case (stage === 2):
+                return "Staggered";
+            case (stage === 3):
+                return "Reeling";
+            case (stage === 4):
+                return "Overloaded";
+            case (value >= max):
+                return "Unconscious";
+            default:
+                return "Unknown";
+        }
+    }
+
     get canRecoverPhysicalDamage(): boolean {
         const stun = this.getStunTrack();
         if (!stun) return false
