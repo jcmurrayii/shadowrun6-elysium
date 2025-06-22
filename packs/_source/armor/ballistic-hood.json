@@ -77,13 +77,13 @@
       "world": "sr6-test-bed",
       "system": "sr6elysium",
       "coreVersion": "12.331",
-      "systemVersion": "0.24.1"
+      "systemVersion": "0.0.8"
     }
   },
   "_stats": {
     "coreVersion": "12.331",
     "systemId": "sr6elysium",
-    "systemVersion": "0.24.1",
+    "systemVersion": "0.0.8",
     "createdTime": 1750524905787,
     "modifiedTime": 1750524938996,
     "lastModifiedBy": "LBVNJqEpJEBeImQd"

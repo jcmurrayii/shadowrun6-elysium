@@ -109,11 +109,9 @@
   },
   "flags": {},
   "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "sr6elysium",
-    "systemVersion": "0.23.2",
+    "systemVersion": "0.0.8",
     "createdTime": 1744067715264,
     "modifiedTime": 1744077316220,
     "lastModifiedBy": "sr5ebuilder"
