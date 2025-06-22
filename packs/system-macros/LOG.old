@@ -1,0 +1,5 @@
+2025/06/21-20:21:19.234 2974 Delete type=3 #1
+2025/06/21-20:21:19.236 bb44 Level-0 table #5: started
+2025/06/21-20:21:19.239 bb44 Level-0 table #5: 1745 bytes OK
+2025/06/21-20:21:19.240 bb44 Delete type=0 #3
+2025/06/21-20:21:19.240 bb44 Manual compaction at level-0 from '!macros!addMatrixActions' @ 72057594037927935 : 1 .. '!macros!uelsuP7iB2riZ4ww' @ 0 : 0; will stop at (end)

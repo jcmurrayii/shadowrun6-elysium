@@ -1,5 +1,14 @@
-2025/06/21-19:06:05.509 8280 Delete type=3 #1
-2025/06/21-19:06:05.511 4e70 Level-0 table #5: started
-2025/06/21-19:06:05.523 4e70 Level-0 table #5: 3522 bytes OK
-2025/06/21-19:06:05.524 4e70 Delete type=0 #3
-2025/06/21-19:06:05.524 4e70 Manual compaction at level-0 from '!items!PSsL78YaeZhyNgPH' @ 72057594037927935 : 1 .. 'custwillpowermastery' @ 0 : 0; will stop at (end)
+2025/06/21-20:23:29.917 32c8 Recovering log #4
+2025/06/21-20:23:29.923 32c8 Delete type=0 #4
+2025/06/21-20:23:29.923 32c8 Delete type=3 #2
+=============== Jun 21, 2025 (MDT) ===============
+20:26:25.863140 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:26:25.864178 version@stat F·[0 0 1] S·3KiB[0B 0B 3KiB] Sc·[0.00 0.00 0.00]
+20:26:25.864178 db@open opening
+20:26:25.864178 journal@recovery F·1
+20:26:25.864698 journal@recovery recovering @7
+20:26:25.865237 version@stat F·[0 0 1] S·3KiB[0B 0B 3KiB] Sc·[0.00 0.00 0.00]
+20:26:25.871942 db@janitor F·3 G·0
+20:26:25.871942 db@open done T·7.7641ms
+20:26:47.882501 db@close closing
+20:26:47.882501 db@close done T·0s

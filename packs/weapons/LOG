@@ -1,5 +1,15 @@
-2025/06/21-19:06:05.618 8280 Delete type=3 #1
-2025/06/21-19:06:05.621 4e70 Level-0 table #5: started
-2025/06/21-19:06:05.626 4e70 Level-0 table #5: 7076 bytes OK
-2025/06/21-19:06:05.628 4e70 Delete type=0 #3
-2025/06/21-19:06:05.628 4e70 Manual compaction at level-0 from '!items!d9dc67b4-cafa-488c-a26f-3b08ef8751ec' @ 72057594037927935 : 1 .. '!items!weapon-hk-227' @ 0 : 0; will stop at (end)
+2025/06/21-20:23:29.900 8324 Recovering log #4
+2025/06/21-20:23:29.903 8324 Delete type=0 #4
+2025/06/21-20:23:29.904 8324 Delete type=3 #2
+=============== Jun 21, 2025 (MDT) ===============
+20:25:44.330608 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:25:44.331743 version@stat F·[0 0 1] S·6KiB[0B 0B 6KiB] Sc·[0.00 0.00 0.00]
+20:25:44.331743 db@open opening
+20:25:44.331743 journal@recovery F·1
+20:25:44.332266 journal@recovery recovering @7
+20:25:44.333838 memdb@flush created L0@8 N·2 S·2KiB "!it..QLs,v9":"!it..ull,v8"
+20:25:44.334365 version@stat F·[1 0 1] S·9KiB[2KiB 0B 6KiB] Sc·[0.25 0.00 0.00]
+20:25:44.337490 db@janitor F·4 G·0
+20:25:44.337998 db@open done T·6.2556ms
+20:26:01.935691 db@close closing
+20:26:01.936198 db@close done T·506.6µs
