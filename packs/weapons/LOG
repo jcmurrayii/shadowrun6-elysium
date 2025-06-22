@@ -1,0 +1,5 @@
+2025/06/21-19:06:05.618 8280 Delete type=3 #1
+2025/06/21-19:06:05.621 4e70 Level-0 table #5: started
+2025/06/21-19:06:05.626 4e70 Level-0 table #5: 7076 bytes OK
+2025/06/21-19:06:05.628 4e70 Delete type=0 #3
+2025/06/21-19:06:05.628 4e70 Manual compaction at level-0 from '!items!d9dc67b4-cafa-488c-a26f-3b08ef8751ec' @ 72057594037927935 : 1 .. '!items!weapon-hk-227' @ 0 : 0; will stop at (end)

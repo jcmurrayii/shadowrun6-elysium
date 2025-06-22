@@ -1,0 +1,5 @@
+2025/06/21-19:06:05.548 8280 Delete type=3 #1
+2025/06/21-19:06:05.551 4e70 Level-0 table #5: started
+2025/06/21-19:06:05.553 4e70 Level-0 table #5: 4249 bytes OK
+2025/06/21-19:06:05.554 4e70 Delete type=0 #3
+2025/06/21-19:06:05.554 4e70 Manual compaction at level-0 from '!items!spell-heal' @ 72057594037927935 : 1 .. '!items!spell-stunball' @ 0 : 0; will stop at (end)
