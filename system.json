@@ -10,12 +10,12 @@
         }
     ],
     "url": "#{URL}#",
-    "version": "0.24.1",
+    "version": "0.0.10",
     "compatibility": {
-        "minimum": "11",
+        "minimum": "12",
         "verified": "12"
     },
-    "minimumCoreVersion": "11",
+    "minimumCoreVersion": "12",
     "scripts": [],
     "esmodules": [
         "dist/bundle.js"
