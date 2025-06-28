@@ -2,8 +2,8 @@
   "name": "Ares Viper Slivergun",
   "type": "weapon",
   "img": "systems/sr6elysium/dist/icons/importer/weapon/heavy-pistols.svg",
-  "_id": "weapon-ares-viper-slivergun",
-  "_key": "!items!weapon-ares-viper-slivergun",
+  "_id": "M0zazvq4pr0mevse",
+  "_key": "!items!M0zazvq4pr0mevse",
   "system": {
     "description": {
       "value": "<p>The unique Slivergun hangs out in the Heavy</p><p>Pistol class, but it’s a creature all its own. The Sliv-</p><p>ergun fires metal slivers that count as flechette am-</p><p>munition and are bought as such, but they aren’t</p><p>interchangeable with any other flechette weapon.</p><p>The weapon remains capable of Burst Fire and has</p><p>a silencer integrated into the barrel, and the large</p><p>ammo capacity makes it a terror on the streets.</p>",
@@ -163,17 +163,14 @@
         "radius": 0,
         "dropoff": 0
       }
-    },
-    "importFlags": {
-      "name": "",
-      "type": "",
-      "subType": "",
-      "isFreshImport": false,
-      "isImported": false
     }
   },
   "effects": [],
   "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
   "flags": {
     "LocknKey": {
       "IDKeysFlag": "",
@@ -188,13 +185,13 @@
       "world": "sr6-test-bed",
       "system": "sr6elysium",
       "coreVersion": "12.331",
-      "systemVersion": "0.0.8"
+      "systemVersion": "0.0.13"
     }
   },
   "_stats": {
     "coreVersion": "12.331",
     "systemId": "sr6elysium",
-    "systemVersion": "0.0.8",
+    "systemVersion": "0.0.13",
     "createdTime": 1750529791725,
     "modifiedTime": 1750529886316,
     "lastModifiedBy": "LBVNJqEpJEBeImQd"

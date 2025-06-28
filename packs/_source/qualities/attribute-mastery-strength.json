@@ -2,7 +2,7 @@
   "name": "Attribute Mastery: Strength",
   "type": "quality",
   "img": "icons/svg/upgrade.svg",
-  "_id": "quality-attribute-mastery-strength",
+  "_id": "0DNtKCihpnCPGLhz",
   "system": {
     "description": "<p>You have mastered your Strength attribute. You gain Edge when making Strength-based tests.</p>",
     "type": "positive",

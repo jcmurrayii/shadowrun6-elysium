@@ -2,8 +2,8 @@
   "name": "AK-97",
   "type": "weapon",
   "img": "systems/sr6elysium/dist/icons/importer/weapon/assault-rifles.svg",
-  "_id": "weapon-ak-97",
-  "_key": "!items!weapon-ak-97",
+  "_id": "K2uUJ7mJFcYiz07K",
+  "_key": "!items!K2uUJ7mJFcYiz07K",
   "system": {
     "description": {
       "value": "<p>The AK-97 will never go out of style, especial-</p><p>ly since it still looks like its mid-twentieth-century</p><p>predecessor. Built for reliability and endurance, it’s</p><p>not the prettiest girl at the dance, but it can sure</p><p>shake a tailfeather.</p>",
@@ -163,17 +163,14 @@
         "radius": 0,
         "dropoff": 0
       }
-    },
-    "importFlags": {
-      "name": "",
-      "type": "",
-      "subType": "",
-      "isFreshImport": false,
-      "isImported": false
     }
   },
   "effects": [],
   "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
   "flags": {
     "LocknKey": {
       "IDKeysFlag": "",
@@ -188,13 +185,13 @@
       "world": "sr6-test-bed",
       "system": "sr6elysium",
       "coreVersion": "12.331",
-      "systemVersion": "0.0.8"
+      "systemVersion": "0.0.13"
     }
   },
   "_stats": {
     "coreVersion": "12.331",
     "systemId": "sr6elysium",
-    "systemVersion": "0.0.8",
+    "systemVersion": "0.0.13",
     "createdTime": 1750529357893,
     "modifiedTime": 1750529587558,
     "lastModifiedBy": "LBVNJqEpJEBeImQd"

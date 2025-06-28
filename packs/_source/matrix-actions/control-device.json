@@ -92,26 +92,19 @@
           "placeMarks": false
         }
       }
-    },
-    "importFlags": {
-      "name": "",
-      "type": "",
-      "subType": "",
-      "isFreshImport": false,
-      "isImported": false
     }
   },
   "effects": [],
   "folder": null,
   "sort": 0,
-  "ownership": {
+  "permission": {
     "default": 0
   },
   "flags": {},
   "_stats": {
     "coreVersion": "12.331",
     "systemId": "sr6elysium",
-    "systemVersion": "0.0.8",
+    "systemVersion": "0.0.13",
     "createdTime": 1744066610948,
     "modifiedTime": 1744077316210,
     "lastModifiedBy": "sr5ebuilder"

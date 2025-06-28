@@ -1,0 +1,119 @@
+{
+  "name": "Cure Disease",
+  "type": "spell",
+  "_id": "xYadgUItkNjHcWOq",
+  "img": "systems/sr6elysium/dist/icons/importer/spell/spell.svg",
+  "system": {
+    "description": {
+      "value": "Cures the target of infections and diseases.",
+      "chat": "Cures the target of infections and diseases.",
+      "source": ""
+    },
+    "drain": 5,
+    "category": "Health",
+    "type": "Health",
+    "range": "Touch",
+    "duration": "P",
+    "combat": {
+      "type": ""
+    },
+    "detection": {
+      "passive": false,
+      "type": "",
+      "extended": false
+    },
+    "illusion": {
+      "type": "",
+      "sense": ""
+    },
+    "manipulation": {
+      "damaging": false,
+      "mental": false,
+      "environmental": false,
+      "physical": false
+    },
+    "action": {
+      "test": "SpellCastingTest",
+      "type": "varies",
+      "categories": [
+        "spell"
+      ],
+      "attribute": "magic",
+      "attribute2": "",
+      "skill": "spellcasting",
+      "armor": false,
+      "spec": false,
+      "mod": null,
+      "mod_description": "",
+      "roll_mode": "publicroll",
+      "limit": {
+        "value": 0,
+        "base": 0,
+        "attribute": ""
+      },
+      "threshold": {
+        "value": 0,
+        "base": 0
+      },
+      "extended": false,
+      "damage": {
+        "type": {
+          "value": "",
+          "base": ""
+        },
+        "element": {
+          "value": "",
+          "base": ""
+        },
+        "value": 0,
+        "base": 0,
+        "ap": {
+          "value": 0,
+          "base": 0
+        },
+        "base_formula_operator": "add",
+        "attribute": "",
+        "source": {
+          "actorId": "",
+          "itemId": "",
+          "itemType": "",
+          "itemName": ""
+        }
+      },
+      "opposed": {
+        "test": "",
+        "resist": {
+          "test": ""
+        }
+      },
+      "followed": {
+        "test": "DrainTest"
+      },
+      "modifiers": [
+        "wounds"
+      ],
+      "initiative_timing": "initiative"
+    },
+    "activation": {
+      "type": "initiative",
+      "cost": 0,
+      "actionType": "major"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "12.331",
+    "systemId": "sr6elysium",
+    "systemVersion": "0.0.13",
+    "createdTime": 1751133415864,
+    "modifiedTime": 1751133415864,
+    "lastModifiedBy": "sr5ebuilder"
+  },
+  "_key": "!items!xYadgUItkNjHcWOq"
+}

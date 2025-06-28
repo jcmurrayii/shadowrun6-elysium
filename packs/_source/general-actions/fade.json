@@ -101,20 +101,14 @@
           "placeMarks": false
         }
       }
-    },
-    "importFlags": {
-      "name": "",
-      "type": "",
-      "subType": "",
-      "isFreshImport": false
     }
   },
-  "ownership": {
+  "permission": {
     "default": 0
   },
   "_stats": {
     "systemId": "sr6elysium",
-    "systemVersion": "0.0.8",
+    "systemVersion": "0.0.13",
     "coreVersion": "10.312",
     "createdTime": null,
     "modifiedTime": 1700749627938,

@@ -2,8 +2,8 @@
   "name": "HK 227",
   "type": "weapon",
   "img": "systems/sr6elysium/dist/icons/importer/weapon/submachine-guns.svg",
-  "_id": "weapon-hk-227",
-  "_key": "!items!weapon-hk-227",
+  "_id": "neLBOZGRHtk42vHj",
+  "_key": "!items!neLBOZGRHtk42vHj",
   "system": {
     "description": {
       "value": "<p>Heckler & Koch know how to design an</p><p>SMG, since the 227 has been built off the same</p><p>frame (the venerable MP5) for over a century.</p><p>A top choice for corporate and military securi-</p><p>ty forces, the HK–227 offers a retractable stock,</p><p>integrated smartgun system, and an integral bar-</p><p>rel-mounted silencer.</p>",
@@ -163,17 +163,14 @@
         "radius": 0,
         "dropoff": 0
       }
-    },
-    "importFlags": {
-      "name": "",
-      "type": "",
-      "subType": "",
-      "isFreshImport": false,
-      "isImported": false
     }
   },
   "effects": [],
   "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
   "flags": {
     "LocknKey": {
       "IDKeysFlag": "",
@@ -188,13 +185,13 @@
       "world": "sr6-test-bed",
       "system": "sr6elysium",
       "coreVersion": "12.331",
-      "systemVersion": "0.0.8"
+      "systemVersion": "0.0.13"
     }
   },
   "_stats": {
     "coreVersion": "12.331",
     "systemId": "sr6elysium",
-    "systemVersion": "0.0.8",
+    "systemVersion": "0.0.13",
     "createdTime": 1750530956377,
     "modifiedTime": 1750531163148,
     "lastModifiedBy": "LBVNJqEpJEBeImQd"

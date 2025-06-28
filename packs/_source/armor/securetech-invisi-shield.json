@@ -2,8 +2,8 @@
   "name": "SecureTech Invisi-Shield",
   "type": "armor",
   "img": "systems/sr6elysium/dist/icons/importer/armor/clothing.svg",
-  "_id": "armor-securetech-invisi-shield",
-  "_key": "!items!armor-securetech-invisi-shield",
+  "_id": "5EfmOOC1mwUYdYym",
+  "_key": "!items!5EfmOOC1mwUYdYym",
   "system": {
     "description": {
       "value": "",
@@ -52,18 +52,11 @@
       },
       "wireless": true,
       "networkController": null
-    },
-    "importFlags": {
-      "name": "",
-      "type": "",
-      "subType": "",
-      "isFreshImport": false,
-      "isImported": false
     }
   },
   "effects": [
     {
-      "origin": "Item.R9kMG8dWQ2oOobCV",
+      "origin": "Item.5EfmOOC1mwUYdYym",
       "name": "Cumulative Armor",
       "_id": "M7aMuI5f8pDPk0Lt",
         "_key": "!items!M7aMuI5f8pDPk0Lt",
@@ -95,9 +88,9 @@
         }
       },
       "_stats": {
-        "coreVersion": "12.331",
+            "coreVersion": "12.331",
         "systemId": "sr6elysium",
-        "systemVersion": "0.0.8",
+        "systemVersion": "0.0.13",
         "createdTime": 1750530844913,
         "modifiedTime": 1750530892957,
         "lastModifiedBy": "LBVNJqEpJEBeImQd"
@@ -105,6 +98,10 @@
     }
   ],
   "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
   "flags": {
     "LocknKey": {
       "IDKeysFlag": "",
@@ -119,13 +116,13 @@
       "world": "sr6-test-bed",
       "system": "sr6elysium",
       "coreVersion": "12.331",
-      "systemVersion": "0.0.8"
+      "systemVersion": "0.0.13"
     }
   },
   "_stats": {
     "coreVersion": "12.331",
     "systemId": "sr6elysium",
-    "systemVersion": "0.0.8",
+    "systemVersion": "0.0.13",
     "createdTime": 1750530779185,
     "modifiedTime": 1750530925733,
     "lastModifiedBy": "LBVNJqEpJEBeImQd"

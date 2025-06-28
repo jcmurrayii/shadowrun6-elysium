@@ -2,8 +2,8 @@
   "name": "Social Stress",
   "type": "quality",
   "img": "systems/sr6elysium/dist/icons/importer/quality/negative.svg",
-  "_id": "quality-social-stress",
-  "_key": "!items!quality-social-stress",
+  "_id": "vB6CPfkC1pyjj5oy",
+  "_key": "!items!vB6CPfkC1pyjj5oy",
   "system": {
     "description": {
       "value": "",
@@ -86,20 +86,13 @@
       },
       "modifiers": []
     },
-    "importFlags": {
-      "name": "",
-      "type": "",
-      "subType": "",
-      "isFreshImport": false,
-      "isImported": false
-    },
     "type": "positive",
     "rating": 0,
     "karma": 0
   },
   "effects": [
     {
-      "origin": "Item.Fwh5M88kkpwR0hb1",
+      "origin": "Item.vB6CPfkC1pyjj5oy",
       "name": "Social Stress",
       "_id": "PSsL78YaeZhyNgPH",
       "_key": "!items!PSsL78YaeZhyNgPH",
@@ -130,9 +123,9 @@
         }
       },
       "_stats": {
-        "coreVersion": "12.331",
+            "coreVersion": "12.331",
         "systemId": "sr6elysium",
-        "systemVersion": "0.0.8",
+        "systemVersion": "0.0.13",
         "createdTime": 1750528535189,
         "modifiedTime": 1750528551100,
         "lastModifiedBy": "LBVNJqEpJEBeImQd"
@@ -140,6 +133,10 @@
     }
   ],
   "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
   "flags": {
     "LocknKey": {
       "IDKeysFlag": "",
@@ -154,13 +151,13 @@
       "world": "sr6-test-bed",
       "system": "sr6elysium",
       "coreVersion": "12.331",
-      "systemVersion": "0.0.8"
+      "systemVersion": "0.0.13"
     }
   },
   "_stats": {
     "coreVersion": "12.331",
     "systemId": "sr6elysium",
-    "systemVersion": "0.0.8",
+    "systemVersion": "0.0.13",
     "createdTime": 1750528500329,
     "modifiedTime": 1750528509049,
     "lastModifiedBy": "LBVNJqEpJEBeImQd"

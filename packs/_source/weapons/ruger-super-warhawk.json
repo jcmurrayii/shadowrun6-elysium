@@ -1,5 +1,5 @@
 {
-    "_id": "d9dc67b4-cafa-488c-a26f-3b08ef8751ec",
+    "_id": "kstXeIC8YUoSXrMD",
     "name": "Ruger Super WarHawk",
     "type": "weapon",
     "img": "systems/sr6elysium/dist/icons/importer/weapons/heavy-pistols.svg",
@@ -61,5 +61,5 @@
         "SPXNNTkUujenPCaS": 3
     },
     "flags": {},
-    "_key": "!items!d9dc67b4-cafa-488c-a26f-3b08ef8751ec"
+    "_key": "!items!kstXeIC8YUoSXrMD"
 }

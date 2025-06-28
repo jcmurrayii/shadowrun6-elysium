@@ -2,8 +2,8 @@
   "name": "Barret Model 122",
   "type": "weapon",
   "img": "systems/sr6elysium/dist/icons/importer/weapon/sniper-rifles.svg",
-  "_id": "weapon-barret-model-122",
-  "_key": "!items!weapon-barret-model-122",
+  "_id": "XomwEN2nu2V9IEno",
+  "_key": "!items!XomwEN2nu2V9IEno",
   "system": {
     "description": {
       "value": "",
@@ -163,17 +163,14 @@
         "radius": 0,
         "dropoff": 0
       }
-    },
-    "importFlags": {
-      "name": "",
-      "type": "",
-      "subType": "",
-      "isFreshImport": false,
-      "isImported": false
     }
   },
   "effects": [],
   "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
   "flags": {
     "LocknKey": {
       "IDKeysFlag": "",
@@ -188,13 +185,13 @@
       "world": "sr6-test-bed",
       "system": "sr6elysium",
       "coreVersion": "12.331",
-      "systemVersion": "0.0.8"
+      "systemVersion": "0.0.13"
     }
   },
   "_stats": {
     "coreVersion": "12.331",
     "systemId": "sr6elysium",
-    "systemVersion": "0.0.8",
+    "systemVersion": "0.0.13",
     "createdTime": 1750529674716,
     "modifiedTime": 1750529764160,
     "lastModifiedBy": "LBVNJqEpJEBeImQd"

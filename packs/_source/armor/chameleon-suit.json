@@ -2,8 +2,8 @@
   "name": "Chameleon Suit",
   "type": "armor",
   "img": "systems/sr6elysium/dist/icons/importer/armor/specialty-armor.svg",
-  "_id": "armor-chameleon-suit",
-  "_key": "!items!armor-chameleon-suit",
+  "_id": "kA1bbffCC4FNRDFB",
+  "_key": "!items!kA1bbffCC4FNRDFB",
   "system": {
     "description": {
       "value": "",
@@ -52,17 +52,14 @@
       },
       "wireless": true,
       "networkController": null
-    },
-    "importFlags": {
-      "name": "",
-      "type": "",
-      "subType": "",
-      "isFreshImport": false,
-      "isImported": false
     }
   },
   "effects": [],
   "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
   "flags": {
     "LocknKey": {
       "IDKeysFlag": "",
@@ -77,13 +74,13 @@
       "world": "sr6-test-bed",
       "system": "sr6elysium",
       "coreVersion": "12.331",
-      "systemVersion": "0.0.8"
+      "systemVersion": "0.0.13"
     }
   },
   "_stats": {
     "coreVersion": "12.331",
     "systemId": "sr6elysium",
-    "systemVersion": "0.0.8",
+    "systemVersion": "0.0.13",
     "createdTime": 1750530417529,
     "modifiedTime": 1750530445047,
     "lastModifiedBy": "LBVNJqEpJEBeImQd"

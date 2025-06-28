@@ -2,7 +2,7 @@
   "name": "Attribute Mastery: Willpower",
   "type": "quality",
   "img": "icons/svg/upgrade.svg",
-  "_id": "quality-attribute-mastery-willpower",
+  "_id": "88LqbPIlpTDtpq3L",
   "system": {
     "description": "<p>You have mastered your Willpower attribute. You gain Edge when making Willpower-based tests.</p>",
     "type": "positive",

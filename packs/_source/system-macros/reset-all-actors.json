@@ -8,7 +8,7 @@
   "flags": {},
   "_stats": {
     "systemId": "sr6elysium",
-    "systemVersion": "0.0.8",
+    "systemVersion": "0.0.13",
     "coreVersion": "10.291",
     "createdTime": 1677239005898,
     "modifiedTime": 1677239448364,
@@ -16,7 +16,7 @@
   },
   "folder": null,
   "sort": 0,
-  "ownership": {
+  "permission": {
     "default": 0
   },
   "_id": "uelsuP7iB2riZ4ww",

@@ -69,13 +69,13 @@ interface SR6ItemSheetData extends SR6BaseItemSheetData {
 
     // Action Items. (not only type = action)
     //@ts-expect-error
-    tests: typeof game['sr6elysium'].tests
+    tests: typeof game['sr6elysium'].tests;
     // @ts-expect-error
-    opposedTests: typeof game['sr6elysium'].opposedTests
+    opposedTests: typeof game['sr6elysium'].opposedTests;
     // @ts-expect-error
-    activeTests: typeof game['sr6elysium'].activeTests
+    activeTests: typeof game['sr6elysium'].activeTests;
     // @ts-expect-error
-    resistTests: typeof game['sr6elysium'].resistTests
+    resistTests: typeof game['sr6elysium'].resistTests;
 
     // Rendered description field
     descriptionHTML: string

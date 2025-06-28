@@ -1,5 +1,15 @@
-2025/06/21-20:21:19.170 2974 Delete type=3 #1
-2025/06/21-20:21:19.174 bb44 Level-0 table #5: started
-2025/06/21-20:21:19.177 bb44 Level-0 table #5: 3522 bytes OK
-2025/06/21-20:21:19.178 bb44 Delete type=0 #3
-2025/06/21-20:21:19.179 bb44 Manual compaction at level-0 from '!items!PSsL78YaeZhyNgPH' @ 72057594037927935 : 1 .. 'custwillpowermastery' @ 0 : 0; will stop at (end)
+2025/06/28-12:46:57.151 b37c Recovering log #18
+2025/06/28-12:46:57.155 b37c Delete type=0 #18
+2025/06/28-12:46:57.155 b37c Delete type=3 #16
+2025/06/28-12:46:57.160 7d90 Level-0 table #24: started
+2025/06/28-12:46:57.170 7d90 Level-0 table #24: 3648 bytes OK
+2025/06/28-12:46:57.171 7d90 Delete type=0 #22
+2025/06/28-12:46:57.172 7d90 Manual compaction at level-0 from '!items!PSsL78YaeZhyNgPH' @ 72057594037927935 : 1 .. 'custwillpowermastery' @ 0 : 0; will stop at (end)
+2025/06/28-12:46:57.172 7d90 Manual compaction at level-1 from '!items!PSsL78YaeZhyNgPH' @ 72057594037927935 : 1 .. 'custwillpowermastery' @ 0 : 0; will stop at 'custwillpowermastery' @ 56 : 1
+2025/06/28-12:46:57.172 7d90 Compacting 1@1 + 1@2 files
+2025/06/28-12:46:57.174 7d90 Generated table #25@1: 12 keys, 3648 bytes
+2025/06/28-12:46:57.174 7d90 Compacted 1@1 + 1@2 files => 3648 bytes
+2025/06/28-12:46:57.175 7d90 compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/06/28-12:46:57.175 7d90 Delete type=2 #20
+2025/06/28-12:46:57.176 7d90 Delete type=2 #24
+2025/06/28-12:46:57.176 7d90 Manual compaction at level-1 from 'custwillpowermastery' @ 56 : 1 .. 'custwillpowermastery' @ 0 : 0; will stop at (end)

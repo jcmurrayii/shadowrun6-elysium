@@ -253,6 +253,20 @@
         <div class="right-side"></div>
     </div>
 </div>
+{{#if ammoDescription}}
+<div class="sr6 chat-card roll-card">
+    <div class="card-content">
+        <div class="card-description">
+            <div class="card-description-header">
+                <strong>{{ammoName}} ({{localize "SR6.Ammo._"}})</strong>
+            </div>
+            <div class="card-description-content">
+                {{{ammoDescription}}}
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
 {{#each test.data.defenders as | defender |}}
 <div class="sr6 chat-card roll-card">
     <div class="card-content">

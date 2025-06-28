@@ -2,8 +2,8 @@
   "name": "Mortimer of London's Crimson Sky",
   "type": "armor",
   "img": "systems/sr6elysium/dist/icons/importer/armor/high-fashion-armor-clothing.svg",
-  "_id": "armor-mortimer-of-londons-crimson-sky",
-  "_key": "!items!armor-mortimer-of-londons-crimson-sky",
+  "_id": "zLEqw4tyFggKhYRB",
+  "_key": "!items!zLEqw4tyFggKhYRB",
   "system": {
     "description": {
       "value": "<p>Nothing says money like a perfectly tailored</p><p>British suit, and Mortimer fits that bill perfectly</p><p>across all of their lines. <br><br> The</p><p>Crimson Sky style has skyrocketed in popularity.</p>",
@@ -52,17 +52,14 @@
       },
       "wireless": false,
       "networkController": null
-    },
-    "importFlags": {
-      "name": "",
-      "type": "",
-      "subType": "",
-      "isFreshImport": false,
-      "isImported": false
     }
   },
   "effects": [],
   "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
   "flags": {
     "LocknKey": {
       "IDKeysFlag": "",
@@ -77,13 +74,13 @@
       "world": "sr6-test-bed",
       "system": "sr6elysium",
       "coreVersion": "12.331",
-      "systemVersion": "0.0.8"
+      "systemVersion": "0.0.13"
     }
   },
   "_stats": {
     "coreVersion": "12.331",
     "systemId": "sr6elysium",
-    "systemVersion": "0.0.8",
+    "systemVersion": "0.0.13",
     "createdTime": 1750530668559,
     "modifiedTime": 1750530742605,
     "lastModifiedBy": "LBVNJqEpJEBeImQd"

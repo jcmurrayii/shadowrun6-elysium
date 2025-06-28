@@ -1,0 +1,128 @@
+{
+  "name": "Freefall",
+  "type": "adept_power",
+  "_id": "f5rr0SuM6eTQyHvb",
+  "img": "systems/sr6elysium/dist/icons/importer/critter_power/mana.svg",
+  "system": {
+    "description": {
+      "value": "Add dice equal to power level when falling or tumbling to reduce damage or recover safely.",
+      "chat": "",
+      "source": ""
+    },
+    "pp": 0.25,
+    "type": "passive",
+    "drain": false,
+    "level": 1,
+    "action": {
+      "type": "",
+      "test": "SuccessTest",
+      "categories": [],
+      "attribute": "",
+      "attribute2": "",
+      "skill": "",
+      "armor": false,
+      "spec": false,
+      "mod": null,
+      "mod_description": "",
+      "roll_mode": "publicroll",
+      "limit": {
+        "value": 0,
+        "base": 0,
+        "attribute": ""
+      },
+      "threshold": {
+        "value": 0,
+        "base": 0
+      },
+      "extended": false,
+      "damage": {
+        "type": {
+          "value": "",
+          "base": ""
+        },
+        "element": {
+          "value": "",
+          "base": ""
+        },
+        "value": 0,
+        "base": 0,
+        "ap": {
+          "value": 0,
+          "base": 0
+        },
+        "base_formula_operator": "add",
+        "attribute": "",
+        "source": {
+          "actorId": "",
+          "itemId": "",
+          "itemType": "",
+          "itemName": ""
+        }
+      },
+      "opposed": {
+        "type": "",
+        "test": "OpposedTest",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0,
+        "description": "",
+        "resist": {
+          "test": "",
+          "skill": "",
+          "attribute": "",
+          "attribute2": "",
+          "armor": false,
+          "mod": 0
+        }
+      },
+      "followed": {
+        "test": "",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0
+      },
+      "modifiers": [
+        "wounds"
+      ],
+      "initiative_timing": "initiative"
+    },
+    "armor": {
+      "defense_rating": {
+        "value": 0,
+        "base": 0,
+        "mod": [],
+        "override": {
+          "value": null
+        }
+      },
+      "mod": false,
+      "value": 0,
+      "acid": 0,
+      "cold": 0,
+      "fire": 0,
+      "electricity": 0,
+      "radiation": 0,
+      "hardened": false
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "12.331",
+    "systemId": "sr6elysium",
+    "systemVersion": "0.0.13",
+    "createdTime": 1751133377875,
+    "modifiedTime": 1751133377875,
+    "lastModifiedBy": "sr5ebuilder"
+  },
+  "_key": "!items!f5rr0SuM6eTQyHvb"
+}

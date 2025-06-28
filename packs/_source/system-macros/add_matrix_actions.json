@@ -7,13 +7,13 @@
   "command": "// Add Matrix Actions to Selected Actors\n// This macro adds all matrix actions from the matrix-actions compendium to selected actors\n\n(async () => {\n  // Check if any actors are selected\n  if (!canvas.tokens.controlled.length && !game.user.character) {\n    ui.notifications.warn(\"Please select at least one token or assign a character to your user\");\n    return;\n  }\n  \n  // Get the matrix actions compendium\n  const matrixPack = game.packs.get(\"sr6elysium.matrix-actions\");\n  if (!matrixPack) {\n    ui.notifications.error(\"Matrix Actions compendium not found\");\n    return;\n  }\n  \n  // Get all matrix actions\n  await matrixPack.getIndex();\n  const matrixActions = await Promise.all(\n    Array.from(matrixPack.index).map(i => matrixPack.getDocument(i._id))\n  );\n  \n  // Get the actors to update\n  const actors = canvas.tokens.controlled.map(t => t.actor);\n  if (game.user.character && !actors.length) {\n    actors.push(game.user.character);\n  }\n  \n  // Add matrix actions to each actor\n  for (const actor of actors) {\n    if (!actor) continue;\n    \n    // Get existing action names to avoid duplicates\n    const existingNames = actor.items\n      .filter(i => i.type === \"action\")\n      .map(i => i.name.toLowerCase());\n    \n    // Filter out actions the actor already has\n    const actionsToAdd = matrixActions.filter(\n      a => !existingNames.includes(a.name.toLowerCase())\n    );\n    \n    if (actionsToAdd.length === 0) {\n      ui.notifications.info(`${actor.name} already has all matrix actions`);\n      continue;\n    }\n    \n    // Add the actions\n    await actor.createEmbeddedDocuments(\n      \"Item\",\n      actionsToAdd.map(a => a.toObject())\n    );\n    \n    ui.notifications.info(`Added ${actionsToAdd.length} matrix actions to ${actor.name}`);\n  }\n})();",
   "folder": null,
   "sort": 0,
-  "ownership": {
+  "permission": {
     "default": 0
   },
   "flags": {},
   "_stats": {
     "systemId": "sr6elysium",
-    "systemVersion": "0.0.8",
+    "systemVersion": "0.0.13",
     "coreVersion": "11",
     "createdTime": 1718560000000,
     "modifiedTime": 1718560000000,

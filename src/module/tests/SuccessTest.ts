@@ -2100,6 +2100,20 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
             cappedEdge: this.cappedEdge
         };
 
+        // Get ammo description for weapon attacks
+        let ammoDescription = '';
+        let ammoName = '';
+
+        if (this.item?.isWeapon) {
+            const equippedAmmo = this.item.getEquippedAmmo();
+            if (equippedAmmo) {
+                ammoName = equippedAmmo.name || '';
+                if (equippedAmmo.system.description?.value) {
+                    ammoDescription = await TextEditor.enrichHTML(equippedAmmo.system.description.value, {});
+                }
+            }
+        }
+
         return {
             title: this.data.title,
             test: testObject,
@@ -2124,6 +2138,9 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
             previewTemplate: this._canPlaceBlastTemplate,
             showDescription: this._canShowDescription,
             description: await this.item?.getChatData() || '',
+            // Add ammo description for weapon attacks
+            ammoDescription: ammoDescription,
+            ammoName: ammoName,
             // Some message segments are only meant for the gm, when the gm is the one creating the message.
             // When this test doesn't use an actor, don't worry about hiding anything.
             applyGmOnlyContent: GmOnlyMessageContentFlow.applyGmOnlyContent(this.actor),

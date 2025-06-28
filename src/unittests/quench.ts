@@ -26,6 +26,7 @@ import { shadowrunSR5ItemDataPrep } from './sr5.ItemDataPrep.spec';
 import { vehicleImporterTesting } from './actorImport/itemImporter/vehicleImport/sr5.VehicleImporter.spec';
 import { vehicleModParserTesting } from './actorImport/itemImporter/vehicleImport/sr5.VehicleModImporter.spec';
 import { shadowrunEdgeTesting} from './sr6.Edge.spec';
+import { shadowrunAmmoDescriptionTesting } from './sr6.AmmoDescription.spec';
 
 import { Quench } from '@ethaks/fvtt-quench';
 
@@ -127,5 +128,9 @@ export const quenchRegister = (quench: Quench) => {
 
     quench.registerBatch('sr6.Edge.spec.ts', shadowrunEdgeTesting, {
         displayName: 'sr6elysium: Edge Rules',
+    });
+
+    quench.registerBatch('sr6.AmmoDescription.spec.ts', shadowrunAmmoDescriptionTesting, {
+        displayName: 'sr6elysium: Ammo Description in Chat Cards',
     });
 };

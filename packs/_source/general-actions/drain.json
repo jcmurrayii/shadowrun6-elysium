@@ -102,12 +102,12 @@
       }
     }
   },
-  "ownership": {
+  "permission": {
     "default": 0
   },
   "_stats": {
     "systemId": "sr6elysium",
-    "systemVersion": "0.0.8",
+    "systemVersion": "0.0.13",
     "coreVersion": "10.291",
     "createdTime": null,
     "modifiedTime": 1676126405212,

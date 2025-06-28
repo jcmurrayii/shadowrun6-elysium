@@ -2,8 +2,8 @@
   "name": "Bad Back",
   "type": "quality",
   "img": "systems/sr6elysium/dist/icons/importer/quality/negative.svg",
-  "_id": "quality-bad-back",
-  "_key": "!items!quality-bad-back",
+  "_id": "UFno4aY19UHAUwII",
+  "_key": "!items!UFno4aY19UHAUwII",
   "system": {
     "description": {
       "value": "",
@@ -86,20 +86,13 @@
       },
       "modifiers": []
     },
-    "importFlags": {
-      "name": "",
-      "type": "",
-      "subType": "",
-      "isFreshImport": false,
-      "isImported": false
-    },
     "type": "negative",
     "rating": 0,
     "karma": 0
   },
   "effects": [
     {
-      "origin": "Item.VMEcHqBh4HoijjpO",
+      "origin": "Item.UFno4aY19UHAUwII",
       "name": "Hobbled",
       "_id": "t5oHRfvbtvDvQlm9",
       "_key": "!items!t5oHRfvbtvDvQlm9",
@@ -149,9 +142,9 @@
         }
       },
       "_stats": {
-        "coreVersion": "12.331",
+            "coreVersion": "12.331",
         "systemId": "sr6elysium",
-        "systemVersion": "0.0.8",
+        "systemVersion": "0.0.13",
         "createdTime": 1750527858589,
         "modifiedTime": 1750528327666,
         "lastModifiedBy": "LBVNJqEpJEBeImQd"
@@ -159,6 +152,10 @@
     }
   ],
   "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
   "flags": {
     "LocknKey": {
       "IDKeysFlag": "",
@@ -173,13 +170,13 @@
       "world": "sr6-test-bed",
       "system": "sr6elysium",
       "coreVersion": "12.331",
-      "systemVersion": "0.0.8"
+      "systemVersion": "0.0.13"
     }
   },
   "_stats": {
     "coreVersion": "12.331",
     "systemId": "sr6elysium",
-    "systemVersion": "0.0.8",
+    "systemVersion": "0.0.13",
     "createdTime": 1750527828428,
     "modifiedTime": 1750528304856,
     "lastModifiedBy": "LBVNJqEpJEBeImQd"

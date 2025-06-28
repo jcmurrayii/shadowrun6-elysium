@@ -2,8 +2,8 @@
   "name": "Ace of Coins",
   "type": "armor",
   "img": "systems/sr6elysium/dist/icons/importer/armor/high-fashion-armor-clothing.svg",
-  "_id": "armor-ace-of-coins",
-  "_key": "!items!armor-ace-of-coins",
+  "_id": "IMq10AKVE4ehtCwG",
+  "_key": "!items!IMq10AKVE4ehtCwG",
   "system": {
     "description": {
       "value": "<p>The fashion masters at Vashon Island continue</p><p>to maintain their perch atop the mid-level fashion</p><p>armor market. A few of their creations are even</p><p>pushing the limits and brushing elbows with some</p><p>of the world’s most well-known high-end names.</p><p>The Aces lineup continues to wow with unique</p><p>designs.  <br><br>The Ace of Coins</p><p>pushes the limits with black juggernaut hide, plati-</p><p>num thread stitching, and solid gold accents.</p>",
@@ -52,17 +52,14 @@
       },
       "wireless": true,
       "networkController": null
-    },
-    "importFlags": {
-      "name": "",
-      "type": "",
-      "subType": "",
-      "isFreshImport": false,
-      "isImported": false
     }
   },
   "effects": [],
   "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
   "flags": {
     "LocknKey": {
       "IDKeysFlag": "",
@@ -77,13 +74,13 @@
       "world": "sr6-test-bed",
       "system": "sr6elysium",
       "coreVersion": "12.331",
-      "systemVersion": "0.0.8"
+      "systemVersion": "0.0.13"
     }
   },
   "_stats": {
     "coreVersion": "12.331",
     "systemId": "sr6elysium",
-    "systemVersion": "0.0.8",
+    "systemVersion": "0.0.13",
     "createdTime": 1750530535580,
     "modifiedTime": 1750530596558,
     "lastModifiedBy": "LBVNJqEpJEBeImQd"

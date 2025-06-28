@@ -10,7 +10,7 @@
         }
     ],
     "url": "#{URL}#",
-    "version": "0.0.12",
+    "version": "0.0.13",
     "compatibility": {
         "minimum": "12",
         "verified": "12"
@@ -128,9 +128,69 @@
             "system": "sr6elysium"
         },
         {
-            "name": "spells",
-            "label": "Spells",
-            "path": "packs/spells",
+            "name": "adept_powers",
+            "label": "SR6e Adept Powers",
+            "path": "packs/adept_powers",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "TRUSTED": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            },
+            "type": "Item",
+            "system": "sr6elysium"
+        },
+        {
+            "name": "spells-combat",
+            "label": "SR6e Combat Spells",
+            "path": "packs/spells-combat",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "TRUSTED": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            },
+            "type": "Item",
+            "system": "sr6elysium"
+        },
+        {
+            "name": "spells-detection",
+            "label": "SR6e Detection Spells",
+            "path": "packs/spells-detection",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "TRUSTED": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            },
+            "type": "Item",
+            "system": "sr6elysium"
+        },
+        {
+            "name": "spells-illusion",
+            "label": "SR6e Illusion Spells",
+            "path": "packs/spells-illusion",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "TRUSTED": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            },
+            "type": "Item",
+            "system": "sr6elysium"
+        },
+        {
+            "name": "spells-manipulation",
+            "label": "SR6e Manipulation Spells",
+            "path": "packs/spells-manipulation",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "TRUSTED": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            },
+            "type": "Item",
+            "system": "sr6elysium"
+        },
+        {
+            "name": "spells-health",
+            "label": "SR6e Health Spells",
+            "path": "packs/spells-health",
             "ownership": {
                 "PLAYER": "OBSERVER",
                 "TRUSTED": "OBSERVER",
@@ -149,7 +209,9 @@
                 {
                     "name": "Armor",
                     "sorting": "m",
-                    "packs": ["armor"]
+                    "packs": [
+                        "armor"
+                    ]
                 },
                 {
                     "name": "Actions",
@@ -158,29 +220,93 @@
                         {
                             "name": "General",
                             "sorting": "m",
-                            "packs": ["general-actions"]
+                            "packs": [
+                                "general-actions"
+                            ]
                         },
                         {
                             "name": "Matrix",
                             "sorting": "m",
-                            "packs": ["matrix-actions"]
+                            "packs": [
+                                "matrix-actions"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Magic",
+                    "sorting": "m",
+                    "folders": [
+                        {
+                            "name": "Spells",
+                            "sorting": "m",
+                            "packs": [
+                                "spells"
+                            ]
+                        },
+                        {
+                            "name": "Adept Powers",
+                            "sorting": "m",
+                            "packs": [
+                                "adept_powers"
+                            ]
                         }
                     ]
                 },
                 {
                     "name": "Qualities",
                     "sorting": "m",
-                    "packs": ["qualities"]
-                },
-                {
-                    "name": "Spells",
-                    "sorting": "m",
-                    "packs": ["spells"]
+                    "packs": [
+                        "qualities"
+                    ]
                 },
                 {
                     "name": "Weapons",
                     "sorting": "m",
-                    "packs": ["weapons"]
+                    "packs": [
+                        "weapons"
+                    ]
+                },
+                {
+                    "name": "Spells",
+                    "sorting": "m",
+                    "folders": [
+                        {
+                            "name": "Combat",
+                            "sorting": "m",
+                            "packs": [
+                                "spells-combat"
+                            ]
+                        },
+                        {
+                            "name": "Detection",
+                            "sorting": "m",
+                            "packs": [
+                                "spells-detection"
+                            ]
+                        },
+                        {
+                            "name": "Health",
+                            "sorting": "m",
+                            "packs": [
+                                "spells-health"
+                            ]
+                        },
+                        {
+                            "name": "Illusion",
+                            "sorting": "m",
+                            "packs": [
+                                "spells-illusion"
+                            ]
+                        },
+                        {
+                            "name": "Manipulation",
+                            "sorting": "m",
+                            "packs": [
+                                "spells-manipulation"
+                            ]
+                        }
+                    ]
                 }
             ]
         }

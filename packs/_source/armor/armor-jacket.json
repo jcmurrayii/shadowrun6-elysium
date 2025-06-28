@@ -2,8 +2,8 @@
   "name": "Armor Jacket",
   "type": "armor",
   "img": "systems/sr6elysium/dist/icons/importer/armor/armor.svg",
-  "_id": "armor-armor-jacket",
-  "_key": "!items!armor-armor-jacket",
+  "_id": "1CIjzGcraEwr0lM4",
+  "_key": "!items!1CIjzGcraEwr0lM4",
   "system": {
     "description": {
       "value": "<p>Available in all manner of styles, it offers good</p><p>protection without catching too much attention.</p><p>But don’t think of wearing one to a social event or</p><p>government building.</p>",
@@ -52,17 +52,14 @@
       },
       "wireless": true,
       "networkController": null
-    },
-    "importFlags": {
-      "name": "",
-      "type": "",
-      "subType": "",
-      "isFreshImport": false,
-      "isImported": false
     }
   },
   "effects": [],
   "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
   "flags": {
     "LocknKey": {
       "IDKeysFlag": "",
@@ -77,13 +74,13 @@
       "world": "sr6-test-bed",
       "system": "sr6elysium",
       "coreVersion": "12.331",
-      "systemVersion": "0.0.8"
+      "systemVersion": "0.0.13"
     }
   },
   "_stats": {
     "coreVersion": "12.331",
     "systemId": "sr6elysium",
-    "systemVersion": "0.0.8",
+    "systemVersion": "0.0.13",
     "createdTime": 1750530265563,
     "modifiedTime": 1750530324320,
     "lastModifiedBy": "LBVNJqEpJEBeImQd"

@@ -56,3 +56,13 @@
 20:22:18.038136 db@janitor F·3 G·1
 20:22:18.038136 db@janitor removing table-5
 20:22:18.038666 remove 000005.ldb: remove spells\000005.ldb: The directory is not empty.
+=============== Jun 28, 2025 (MDT) ===============
+10:21:10.554457 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+10:21:10.555501 version@stat F·[] S·0B[] Sc·[]
+10:21:10.555501 db@open opening
+10:21:10.555501 journal@recovery F·1
+10:21:10.556021 journal@recovery recovering @10
+10:21:10.556546 version@stat F·[] S·0B[] Sc·[]
+10:21:10.560639 db@janitor F·3 G·1
+10:21:10.560639 db@janitor removing table-5
+10:21:10.561646 remove 000005.ldb: remove spells\000005.ldb: The directory is not empty.

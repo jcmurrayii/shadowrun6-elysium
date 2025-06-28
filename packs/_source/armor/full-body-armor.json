@@ -2,8 +2,8 @@
   "name": "Full Body Armor",
   "type": "armor",
   "img": "systems/sr6elysium/dist/icons/importer/armor/specialty-armor.svg",
-  "_id": "armor-full-body-armor",
-  "_key": "!items!armor-full-body-armor",
+  "_id": "Zgy9RX2BwGYBmz9I",
+  "_key": "!items!Zgy9RX2BwGYBmz9I",
   "system": {
     "description": {
       "value": "<p>This armor is worn by military and security per-</p><p>sonnel around the world for heavy-duty jobs. It is</p><p>styled for intimidation but includes an array of tac-</p><p>tical holsters, pouches, and webbing for deadly effi-</p><p>ciency. It’s going to draw attention, just so you know.</p><p>The suit can be modified for environmental adapta-</p><p>tion (hot or cold environments) or chemically sealed</p><p>to completely protect the wearer from toxic environ-</p><p>ments and attacks. The suit comes with a helmet with</p><p>a Capacity of 6 for vision or audio enhancements.</p>",
@@ -52,17 +52,14 @@
       },
       "wireless": true,
       "networkController": null
-    },
-    "importFlags": {
-      "name": "",
-      "type": "",
-      "subType": "",
-      "isFreshImport": false,
-      "isImported": false
     }
   },
   "effects": [],
   "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
   "flags": {
     "LocknKey": {
       "IDKeysFlag": "",
@@ -77,13 +74,13 @@
       "world": "sr6-test-bed",
       "system": "sr6elysium",
       "coreVersion": "12.331",
-      "systemVersion": "0.0.8"
+      "systemVersion": "0.0.13"
     }
   },
   "_stats": {
     "coreVersion": "12.331",
     "systemId": "sr6elysium",
-    "systemVersion": "0.0.8",
+    "systemVersion": "0.0.13",
     "createdTime": 1750530102619,
     "modifiedTime": 1750530217837,
     "lastModifiedBy": "LBVNJqEpJEBeImQd"
