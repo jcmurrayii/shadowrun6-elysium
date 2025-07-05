@@ -8,8 +8,8 @@ import { TestCreator } from './TestCreator';
 import { RANGE_CATEGORIES, WeaponRangeTestBehavior, WeaponRangeTestDataFragment } from '../rules/WeaponRangeRules';
 import { Helpers } from '../helpers';
 import { SR6Actor } from '../actor/SR6Actor';
-import { SYSTEM_NAME } from '../constants';
 import { PartsList } from '../parts/PartsList';
+import { SYSTEM_NAME } from '../constants';
 import { CharacterPrep } from '../rules/CharacterPrep';
 import { SR6ItemDataWrapper } from '../item/SR6ItemDataWrapper';
 
@@ -29,6 +29,8 @@ export interface RangedAttackTestData extends SuccessTestData, WeaponRangeTestDa
     attackerAR: number
     defenderDRs: number[]
     attackerEdge: boolean
+    attackerEdgeAwarded: boolean
+    attackerEdgeReason: string
     defenders: {
         actorUuid: string;
         name: string
@@ -47,13 +49,45 @@ export class RangedAttackTest extends SuccessTest<RangedAttackTestData> {
     override _prepareData(data, options): RangedAttackTestData {
         data = super._prepareData(data, options);
 
-        console.log('Shadowrun 6e | RangedAttackTest preparation started');
+
 
         data.fireModes = [];
         data.fireMode = {value: 0, defense: 0, label: ''};
         WeaponRangeTestBehavior.prepareData(this, data);
 
+        // Copy weapon damage data to test data
+
+        if (this.item?.system?.action?.damage) {
+            // Ensure the item is properly prepared
+            this.item.prepareData();
+
+            // Copy the prepared damage data
+            const weaponDamage = foundry.utils.duplicate(this.item.system.action.damage);
+
+            // Ensure both base and value are set correctly
+            if (weaponDamage.base === 0 && weaponDamage.value > 0) {
+                weaponDamage.base = weaponDamage.value;
+            }
+
+            // Store base damage for display
+            data.baseDamage = foundry.utils.duplicate(weaponDamage);
+
+            // Store damage that will be modified with hits later
+            data.damage = foundry.utils.duplicate(weaponDamage);
+
+            // Also ensure action.damage is set for hasDamage getter
+            if (!data.action) {
+                data.action = foundry.utils.duplicate(this.item.system.action);
+            } else {
+                data.action.damage = weaponDamage;
+            }
+
+
+        }
+
         data.attackerAR = 5;
+        data.attackerEdgeAwarded = false;
+        data.attackerEdgeReason = '';
 
         console.log('Shadowrun 6e | Getting user targets');
         const targets = Helpers.getUserTargets(game.user);
@@ -115,6 +149,8 @@ export class RangedAttackTest extends SuccessTest<RangedAttackTestData> {
 
         return data;
     }
+
+
 
     override _testDialogListeners() {
         return [{
@@ -325,6 +361,13 @@ export class RangedAttackTest extends SuccessTest<RangedAttackTestData> {
     override async processResults() {
         console.log('Shadowrun 6e | Processing ranged attack test results');
         await super.processResults();
+
+        // Update damage with attack hits for display
+        if (this.data.damage && this.hits.value > 0) {
+            this.data.damage.mod = PartsList.AddUniquePart(this.data.damage.mod, 'SR6.Attacker', this.hits.value);
+            this.data.damage.value = Helpers.calcTotal(this.data.damage, {min: 0});
+        }
+
         console.log('Shadowrun 6e | Starting edge award calculations');
         await this.calculateEdgeAwards();
         console.log('Shadowrun 6e | Finished edge award calculations');
@@ -353,7 +396,34 @@ export class RangedAttackTest extends SuccessTest<RangedAttackTestData> {
             defender.hasSignificantAdvantage = hasSignificantAdvantage;
             defender.edgeReason = ''; // Add this to track the reason
 
-            if (!attackerWins && hasSignificantAdvantage) {
+            // Award edge to attacker if they win with significant advantage
+            if (attackerWins && hasSignificantAdvantage) {
+                console.log(`Shadowrun 6e | ${this.actor.name} (AR: ${this.data.attackerAR}) has significant advantage over ${defender.name} (DR: ${defender.dr})`);
+
+                if (this.isSpirit(this.actor)) {
+                    this.data.attackerEdgeReason = `${this.actor.name} is a spirit and cannot gain Edge`;
+                    console.log('Shadowrun 6e | Attacker is a spirit and cannot gain Edge');
+                } else {
+                    const edge = this.actor.getEdge();
+                    const edgeGainedThisRound = this.actor.getFlag(SYSTEM_NAME, 'edgeGainedThisRound') || 0;
+
+                    if (!edge) {
+                        this.data.attackerEdgeReason = `${this.actor.name} has no Edge attribute`;
+                        console.log('Shadowrun 6e | Attacker has no Edge attribute');
+                    } else if (edgeGainedThisRound >= 2) {
+                        this.data.attackerEdgeReason = `${this.actor.name} has already gained the maximum Edge (${edgeGainedThisRound}) this round`;
+                        console.log('Shadowrun 6e | Attacker has already gained maximum Edge this round');
+                    } else if (edge.uses >= 7) {
+                        this.data.attackerEdgeReason = `${this.actor.name} is already at maximum Edge (${edge.uses})`;
+                        console.log('Shadowrun 6e | Attacker is already at maximum Edge');
+                    } else {
+                        console.log('Shadowrun 6e | Attempting to award edge to attacker');
+                        this.data.attackerEdgeAwarded = await this.awardEdge(this.actor);
+                    }
+                }
+            }
+            // Award edge to defender if they win with significant advantage
+            else if (!attackerWins && hasSignificantAdvantage) {
                 console.log(`Shadowrun 6e | ${defender.name} (DR: ${defender.dr}) has significant advantage over ${this.actor.name} (AR: ${this.data.attackerAR})`);
 
                 try {
@@ -365,19 +435,24 @@ export class RangedAttackTest extends SuccessTest<RangedAttackTestData> {
                     });
 
                     if (defenderActor instanceof SR6Actor) {
-                        const edge = defenderActor.getEdge();
-                        const edgeGainedThisRound = defenderActor.getFlag(SYSTEM_NAME, 'edgeGainedThisRound') || 0;
+                        // Check if defender is a spirit first
+                        if (this.isSpirit(defenderActor)) {
+                            defender.edgeReason = `${defenderActor.name} is a spirit and cannot gain Edge`;
+                        } else {
+                            const edge = defenderActor.getEdge();
+                            const edgeGainedThisRound = defenderActor.getFlag(SYSTEM_NAME, 'edgeGainedThisRound') || 0;
 
-                        // Check conditions and set reasons
-                        if (!edge) {
-                            defender.edgeReason = `${defenderActor.name} has no Edge attribute`;
-                        } else if (edgeGainedThisRound >= 2) {
-                            defender.edgeReason = `${defenderActor.name} has already gained the maximum Edge (${edgeGainedThisRound}) this round`;
-                        } else if (edge.uses >= 7) {
-                            defender.edgeReason = `${defenderActor.name} is already at maximum Edge (${edge.uses})`;
+                            // Check conditions and set reasons
+                            if (!edge) {
+                                defender.edgeReason = `${defenderActor.name} has no Edge attribute`;
+                            } else if (edgeGainedThisRound >= 2) {
+                                defender.edgeReason = `${defenderActor.name} has already gained the maximum Edge (${edgeGainedThisRound}) this round`;
+                            } else if (edge.uses >= 7) {
+                                defender.edgeReason = `${defenderActor.name} is already at maximum Edge (${edge.uses})`;
+                            }
                         }
 
-                        const canGainEdge = edge && edgeGainedThisRound < 2 && edge.uses < 7;
+                        const canGainEdge = !this.isSpirit(defenderActor) && edge && edgeGainedThisRound < 2 && edge.uses < 7;
 
                         console.log('Shadowrun 6e | Edge check for defender:', {
                             hasEdge: !!edge,
@@ -403,6 +478,12 @@ export class RangedAttackTest extends SuccessTest<RangedAttackTestData> {
     }
 
     private async awardEdge(actor: SR6Actor) {
+        // Spirits never gain edge
+        if (this.isSpirit(actor)) {
+            console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: Spirits cannot gain Edge`);
+            return false;
+        }
+
         const edge = actor.getEdge();
         if (!edge) {
             console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: No edge attribute found`);
@@ -443,7 +524,7 @@ export class RangedAttackTest extends SuccessTest<RangedAttackTestData> {
 
         // Show floating text - try both token and primary token
         const token = actor.token || actor.getActiveTokens()[0];
-        if (token) {
+        if (token && token.center && token.center.x !== undefined && token.center.y !== undefined) {
             canvas.interface?.createScrollingText(token.center, `Edge +1`, {
                 anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
                 direction: CONST.TEXT_ANCHOR_POINTS.TOP,
@@ -454,6 +535,8 @@ export class RangedAttackTest extends SuccessTest<RangedAttackTestData> {
                 strokeThickness: 4,
                 duration: 1000
             });
+        } else {
+            console.log('Shadowrun 6e | Could not show floating text: token or token.center not available');
         }
 
         // Notify in chat
@@ -523,5 +606,12 @@ export class RangedAttackTest extends SuccessTest<RangedAttackTestData> {
         });
 
         return this.data.attackerAR;
+    }
+
+    /**
+     * Check if an actor is a spirit (spirits cannot gain edge)
+     */
+    private isSpirit(actor: SR6Actor): boolean {
+        return actor.system.is_npc && actor.system.npc?.is_spirit;
     }
 }

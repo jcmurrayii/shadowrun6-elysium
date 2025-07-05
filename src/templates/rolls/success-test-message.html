@@ -240,19 +240,29 @@
     </div>
     {{/if}}
 </div>
+
+{{#unless (or (eq test.type "PhysicalDefenseTest") (eq test.type "DefenseTest") (eq test.type "PhysicalResistTest") (eq test.type "SoakTest"))}}
 {{#if test.data.damage}}{{#if test.hasDamage}}
 <div class="sr6 chat-card roll-card">
     <div class="card-content">
         <div class="left-side">
             {{> 'systems/sr6elysium/dist/templates/rolls/parts/Damage.html'
-                name=(localize "SR6.Incoming")
+                name="Base DV"
+                damage=test.data.baseDamage
+                showAP=true
+            }}
+        </div>
+        <div class="right-side">
+            {{> 'systems/sr6elysium/dist/templates/rolls/parts/Damage.html'
+                name="Modified"
                 damage=test.data.damage
                 showAP=true
             }}
         </div>
-        <div class="right-side"></div>
     </div>
 </div>
+{{/if}}{{/if}}
+{{/unless}}
 {{#if ammoDescription}}
 <div class="sr6 chat-card roll-card">
     <div class="card-content">
@@ -282,12 +292,13 @@
         </div>
     </div>
 </div>
+{{!-- Consolidated edge award logic --}}
 {{#if defender.hasSignificantAdvantage}}
     {{#if defender.isWinner}}
         {{#if defender.edgeAwarded}}
         <div class="sr6 chat-card roll-card">
             <div class="card-content">
-                <b>{{defender.name}} gained Edge!</b>
+                <b>{{defender.name}} gained 1 Edge from having a significantly higher DR.</b>
             </div>
         </div>
         {{else}}
@@ -298,10 +309,17 @@
         </div>
         {{/if}}
     {{else}}
-        {{#if (not defender.edgeAwarded)}}
+        {{!-- Attacker wins with significant advantage --}}
+        {{#if ../test.data.attackerEdgeAwarded}}
         <div class="sr6 chat-card roll-card">
             <div class="card-content">
-                <b>Edge Not Gained:</b> {{defender.edgeReason}}
+                <b>{{../speaker.actor.name}} gained 1 Edge from having a significantly higher AR.</b>
+            </div>
+        </div>
+        {{else}}
+        <div class="sr6 chat-card roll-card">
+            <div class="card-content">
+                <b>Edge Not Gained:</b> {{../test.data.attackerEdgeReason}}
             </div>
         </div>
         {{/if}}
@@ -314,4 +332,3 @@
 </div>
 {{/if}}
 {{/each}}
-{{/if}}{{/if}}

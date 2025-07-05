@@ -26,12 +26,30 @@ export class DefenseTest<T extends DefenseTestData = DefenseTestData> extends Op
     override _prepareData(data, options?) {
         data = super._prepareData(data, options);
 
-        const damage = data.against ? data.against.damage : DataDefaults.damageData();
 
-        data.incomingDamage = foundry.utils.duplicate(damage);
-        data.modifiedDamage = foundry.utils.duplicate(damage);
+
+        // Try to get damage from the correct path
+        const baseDamage = data.against?.data?.damage || data.against?.damage || DataDefaults.damageData();
+
+        // Calculate incoming damage (base damage + attacker hits)
+        data.incomingDamage = foundry.utils.duplicate(baseDamage);
+        if (data.against?.hits?.value) {
+            const PartsList = CONFIG.SR6.PartsList;
+            data.incomingDamage.mod = PartsList.AddUniquePart(data.incomingDamage.mod, 'SR6.Attacker', data.against.hits.value);
+            data.incomingDamage.value = Helpers.calcTotal(data.incomingDamage, {min: 0});
+        }
+
+        // Modified damage will be calculated in processResults based on defense hits
+        data.modifiedDamage = foundry.utils.duplicate(data.incomingDamage);
 
         return data;
+    }
+
+    /**
+     * For defense tests, check if there's incoming damage instead of action damage
+     */
+    override get hasDamage(): boolean {
+        return this.data.incomingDamage?.value > 0 && this.data.incomingDamage?.type?.value !== '';
     }
 
     override get _chatMessageTemplate() {

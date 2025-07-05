@@ -17,6 +17,8 @@ export interface SpellCastingTestData extends SuccessTestData {
     reckless: boolean
     attackerAR: number
     attackerEdge: boolean
+    attackerEdgeAwarded: boolean
+    attackerEdgeReason: string
     ampUp: number       // Number of amp up levels applied
     increasedArea: number  // Number of increased area levels applied
     defenders: {
@@ -46,6 +48,8 @@ export class SpellCastingTest extends SuccessTest<SpellCastingTestData> {
         data.reckless = data.reckless || false;
         data.attackerAR = data.attackerAR || 0;
         data.attackerEdge = data.attackerEdge || false;
+        data.attackerEdgeAwarded = false;
+        data.attackerEdgeReason = '';
         data.ampUp = data.ampUp || 0;
         data.increasedArea = data.increasedArea || 0;
         data.defenders = data.defenders || [];
@@ -461,7 +465,34 @@ export class SpellCastingTest extends SuccessTest<SpellCastingTestData> {
             defender.hasSignificantAdvantage = hasSignificantAdvantage;
             defender.edgeReason = ''; // Reset the reason
 
-            if (!attackerWins && hasSignificantAdvantage) {
+            // Award edge to attacker if they win with significant advantage
+            if (attackerWins && hasSignificantAdvantage) {
+                console.log(`Shadowrun 6e | ${this.actor.name} (AR: ${this.data.attackerAR}) has significant advantage over ${defender.name} (DR: ${defender.dr})`);
+
+                if (this.isSpirit(this.actor)) {
+                    this.data.attackerEdgeReason = `${this.actor.name} is a spirit and cannot gain Edge`;
+                    console.log('Shadowrun 6e | Attacker is a spirit and cannot gain Edge');
+                } else {
+                    const edge = this.actor.getEdge();
+                    const edgeGainedThisRound = this.actor.getFlag(SYSTEM_NAME, 'edgeGainedThisRound') || 0;
+
+                    if (!edge) {
+                        this.data.attackerEdgeReason = `${this.actor.name} has no Edge attribute`;
+                        console.log('Shadowrun 6e | Attacker has no Edge attribute');
+                    } else if (edgeGainedThisRound >= 2) {
+                        this.data.attackerEdgeReason = `${this.actor.name} has already gained the maximum Edge (${edgeGainedThisRound}) this round`;
+                        console.log('Shadowrun 6e | Attacker has already gained maximum Edge this round');
+                    } else if (edge.uses >= 7) {
+                        this.data.attackerEdgeReason = `${this.actor.name} is already at maximum Edge (${edge.uses})`;
+                        console.log('Shadowrun 6e | Attacker is already at maximum Edge');
+                    } else {
+                        console.log('Shadowrun 6e | Attempting to award edge to attacker');
+                        this.data.attackerEdgeAwarded = await this.awardEdge(this.actor);
+                    }
+                }
+            }
+            // Award edge to defender if they win with significant advantage
+            else if (!attackerWins && hasSignificantAdvantage) {
                 console.log(`Shadowrun 6e | ${defender.name} (DR: ${defender.dr}) has significant advantage over ${this.actor.name} (AR: ${this.data.attackerAR})`);
 
                 try {
@@ -471,7 +502,9 @@ export class SpellCastingTest extends SuccessTest<SpellCastingTestData> {
                         const edgeGainedThisRound = defenderActor.getFlag(SYSTEM_NAME, 'edgeGainedThisRound') || 0;
 
                         // Check conditions and set reasons with detailed explanations
-                        if (!edge) {
+                        if (this.isSpirit(defenderActor)) {
+                            defender.edgeReason = `${defenderActor.name} is a spirit and cannot gain Edge`;
+                        } else if (!edge) {
                             defender.edgeReason = `${defenderActor.name} has no Edge attribute`;
                         } else if (edgeGainedThisRound >= 2) {
                             defender.edgeReason = `${defenderActor.name} has already gained the maximum Edge (${edgeGainedThisRound}) this round`;
@@ -483,7 +516,7 @@ export class SpellCastingTest extends SuccessTest<SpellCastingTestData> {
                             defender.edgeReason = `${defenderActor.name} did not have a higher DR than the caster's AR`;
                         }
 
-                        const canGainEdge = edge && edgeGainedThisRound < 2 && edge.uses < 7;
+                        const canGainEdge = !this.isSpirit(defenderActor) && edge && edgeGainedThisRound < 2 && edge.uses < 7;
 
                         console.log('Shadowrun 6e | Edge check for defender:', {
                             hasEdge: !!edge,
@@ -514,6 +547,12 @@ export class SpellCastingTest extends SuccessTest<SpellCastingTestData> {
      * @returns True if edge was awarded, false otherwise
      */
     private async awardEdge(actor: SR6Actor) {
+        // Spirits never gain edge
+        if (this.isSpirit(actor)) {
+            console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: Spirits cannot gain Edge`);
+            return false;
+        }
+
         const edge = actor.getEdge();
         if (!edge) {
             console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: No edge attribute found`);
@@ -607,5 +646,12 @@ export class SpellCastingTest extends SuccessTest<SpellCastingTestData> {
         }
 
         return templateData;
+    }
+
+    /**
+     * Check if an actor is a spirit (spirits cannot gain edge)
+     */
+    private isSpirit(actor: SR6Actor): boolean {
+        return actor.system.is_npc && actor.system.npc?.is_spirit;
     }
 }

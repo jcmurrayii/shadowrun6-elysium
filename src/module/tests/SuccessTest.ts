@@ -268,6 +268,8 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
         data.opposed = data.opposed || undefined;
         data.modifiers = this._prepareModifiersData(data.modifiers);
 
+
+
         data.damage = data.damage || DataDefaults.damageData();
 
         data.extendedRoll = data.extendedRoll || false;
@@ -881,7 +883,14 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
      */
     get hasDamage(): boolean {
         // check that we don't have a damage value of 0 and a damage type that isn't empty
-        return this.data.action.damage.value !== 0 && this.data.action.damage.type.value !== '';
+        return this.data.action?.damage?.value !== 0 && this.data.action?.damage?.type?.value !== '';
+    }
+
+    /**
+     * Get the damage data for this test.
+     */
+    get damage(): Shadowrun.DamageData {
+        return this.data.damage;
     }
 
     get cappedEdge(): boolean {
@@ -2008,6 +2017,9 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
         const linkedTokens = this.actor?.getActiveTokens(true) || [];
         const token = linkedTokens.length >= 1 ? linkedTokens[0] : undefined;
 
+
+        console.log('SR6: this.data keys:', Object.keys(this.data));
+
         // Get action type and initiative timing information if available
         let actionType = '';
         let initiativeTiming = '';
@@ -2051,7 +2063,8 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
 
         // Create a test object with all the necessary properties for the template
         const testObject = {
-            ...this.data,
+            data: this.data,
+            type: this.constructor.name,
             // Add properties from the test instance
             rolls: this.rolls,
             rerolledFailures: this.data.rerolledFailures,
@@ -2097,7 +2110,8 @@ export class SuccessTest<T extends SuccessTestData = SuccessTestData> {
             autoSuccess: this.autoSuccess,
             earnedEdge: this.earnedEdge,
             edgeEarnedReason: this.edgeEarnedReason,
-            cappedEdge: this.cappedEdge
+            cappedEdge: this.cappedEdge,
+            hasDamage: this.hasDamage
         };
 
         // Get ammo description for weapon attacks

@@ -162,6 +162,46 @@ export class SR6Combat extends Combat {
     }
 
     /**
+     * Reset edge gained tracking for all combatants at the start of a new round
+     */
+    async resetEdgeGainedTracking() {
+        console.log('Shadowrun 6e | Resetting edge gained tracking for all combatants');
+
+        for (const combatant of this.combatants) {
+            if (combatant.actor) {
+                await combatant.actor.unsetFlag(SYSTEM_NAME, 'edgeGainedThisRound');
+                console.log(`Shadowrun 6e | Reset edge gained tracking for ${combatant.actor.name}`);
+            }
+        }
+    }
+
+    /**
+     * Post a message indicating the combat round has ended
+     */
+    async postRoundEndMessage() {
+        const previousRound = this.round - 1;
+
+        await ChatMessage.create({
+            content: `
+                <div class="sr6 chat-card roll-card">
+                    <div class="card-title card-header">
+                        <span class="test-name">Combat Round ${previousRound} Ended</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="left-side">
+                            <div class="test-value">
+                                <span class="value">Edge gained tracking has been reset for all combatants.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+            speaker: { alias: "Combat System" }
+        });
+
+        console.log(`Shadowrun 6e | Posted round end message for round ${previousRound}`);
+    }
+
+    /**
      * Handle the change of a initiative round. This needs owner permission on the combat document.
      * @param combatId
      */
@@ -174,6 +214,9 @@ export class SR6Combat extends Combat {
 
         // Reset actions for all combatants
         await combat.resetCombatantActions();
+
+        // Reset edge gained tracking for all combatants
+        await combat.resetEdgeGainedTracking();
 
         // In Shadowrun 6th Edition, initiative is not rerolled each round
         // Only roll initiative for combatants who don't have an initiative score yet
@@ -191,6 +234,9 @@ export class SR6Combat extends Combat {
         const turn = 0;
         await combat.update({ turn });
         await combat.handleActionPhase();
+
+        // Post round end message
+        await combat.postRoundEndMessage();
     }
 
     /**

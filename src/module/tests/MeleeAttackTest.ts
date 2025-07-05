@@ -9,6 +9,8 @@ export interface MeleeAttackData extends SuccessTestData {
     reach: number
     attackerAR: number
     attackerEdge: boolean
+    attackerEdgeAwarded: boolean
+    attackerEdgeReason: string
     defenders: {
         actorUuid: string;
         name: string
@@ -28,6 +30,8 @@ export class MeleeAttackTest extends SuccessTest<MeleeAttackData> {
         data.damage = data.damage || DataDefaults.damageData();
         data.attackerAR = data.attackerAR || 0;
         data.attackerEdge = data.attackerEdge || false;
+        data.attackerEdgeAwarded = false;
+        data.attackerEdgeReason = '';
         data.defenders = data.defenders || [];
 
         // Initialize defenders data with target tokens
@@ -319,7 +323,34 @@ export class MeleeAttackTest extends SuccessTest<MeleeAttackData> {
             defender.hasSignificantAdvantage = hasSignificantAdvantage;
             defender.edgeReason = ''; // Reset the reason
 
-            if (!attackerWins && hasSignificantAdvantage) {
+            // Award edge to attacker if they win with significant advantage
+            if (attackerWins && hasSignificantAdvantage) {
+                console.log(`Shadowrun 6e | ${this.actor.name} (AR: ${this.data.attackerAR}) has significant advantage over ${defender.name} (DR: ${defender.dr})`);
+
+                if (this.isSpirit(this.actor)) {
+                    this.data.attackerEdgeReason = `${this.actor.name} is a spirit and cannot gain Edge`;
+                    console.log('Shadowrun 6e | Attacker is a spirit and cannot gain Edge');
+                } else {
+                    const edge = this.actor.getEdge();
+                    const edgeGainedThisRound = this.actor.getFlag(SYSTEM_NAME, 'edgeGainedThisRound') || 0;
+
+                    if (!edge) {
+                        this.data.attackerEdgeReason = `${this.actor.name} has no Edge attribute`;
+                        console.log('Shadowrun 6e | Attacker has no Edge attribute');
+                    } else if (edgeGainedThisRound >= 2) {
+                        this.data.attackerEdgeReason = `${this.actor.name} has already gained the maximum Edge (${edgeGainedThisRound}) this round`;
+                        console.log('Shadowrun 6e | Attacker has already gained maximum Edge this round');
+                    } else if (edge.uses >= 7) {
+                        this.data.attackerEdgeReason = `${this.actor.name} is already at maximum Edge (${edge.uses})`;
+                        console.log('Shadowrun 6e | Attacker is already at maximum Edge');
+                    } else {
+                        console.log('Shadowrun 6e | Attempting to award edge to attacker');
+                        this.data.attackerEdgeAwarded = await this.awardEdge(this.actor);
+                    }
+                }
+            }
+            // Award edge to defender if they win with significant advantage
+            else if (!attackerWins && hasSignificantAdvantage) {
                 console.log(`Shadowrun 6e | ${defender.name} (DR: ${defender.dr}) has significant advantage over ${this.actor.name} (AR: ${this.data.attackerAR})`);
 
                 try {
@@ -329,7 +360,9 @@ export class MeleeAttackTest extends SuccessTest<MeleeAttackData> {
                         const edgeGainedThisRound = defenderActor.getFlag(SYSTEM_NAME, 'edgeGainedThisRound') || 0;
 
                         // Check conditions and set reasons with detailed explanations
-                        if (!edge) {
+                        if (this.isSpirit(defenderActor)) {
+                            defender.edgeReason = `${defenderActor.name} is a spirit and cannot gain Edge`;
+                        } else if (!edge) {
                             defender.edgeReason = `${defenderActor.name} has no Edge attribute`;
                         } else if (edgeGainedThisRound >= 2) {
                             defender.edgeReason = `${defenderActor.name} has already gained the maximum Edge (${edgeGainedThisRound}) this round`;
@@ -341,7 +374,7 @@ export class MeleeAttackTest extends SuccessTest<MeleeAttackData> {
                             defender.edgeReason = `${defenderActor.name} did not have a higher DR than the attacker's AR`;
                         }
 
-                        const canGainEdge = edge && edgeGainedThisRound < 2 && edge.uses < 7;
+                        const canGainEdge = !this.isSpirit(defenderActor) && edge && edgeGainedThisRound < 2 && edge.uses < 7;
 
                         console.log('Shadowrun 6e | Edge check for defender:', {
                             hasEdge: !!edge,
@@ -372,6 +405,12 @@ export class MeleeAttackTest extends SuccessTest<MeleeAttackData> {
      * @returns True if edge was awarded, false otherwise
      */
     private async awardEdge(actor: SR6Actor) {
+        // Spirits never gain edge
+        if (this.isSpirit(actor)) {
+            console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: Spirits cannot gain Edge`);
+            return false;
+        }
+
         const edge = actor.getEdge();
         if (!edge) {
             console.log(`Shadowrun 6e | Could not award edge to ${actor.name}: No edge attribute found`);
@@ -433,5 +472,12 @@ export class MeleeAttackTest extends SuccessTest<MeleeAttackData> {
 
         console.log(`Shadowrun 6e | Edge awarded to ${actor.name}: ${edge.uses} → ${newEdgeUses}`);
         return true;  // Return true to indicate edge was successfully awarded
+    }
+
+    /**
+     * Check if an actor is a spirit (spirits cannot gain edge)
+     */
+    private isSpirit(actor: SR6Actor): boolean {
+        return actor.system.is_npc && actor.system.npc?.is_spirit;
     }
 }

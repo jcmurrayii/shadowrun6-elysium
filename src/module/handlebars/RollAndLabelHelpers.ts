@@ -18,12 +18,8 @@ export const registerRollAndLabelHelpers = () => {
     Handlebars.registerHelper('damageCode', function(damage: DamageData): SafeString {
         // Add null checks to prevent errors when damage or damage.type is undefined
         if (!damage) {
-            console.log('Shadowrun 6e | Damage object is undefined in damageCode helper');
             return new Handlebars.SafeString('0S');
         }
-
-        // Add debugging to see what's in the damage object
-        console.log('Shadowrun 6e | Damage object in damageCode helper:', damage);
 
         // Make sure damage.value is defined
         let damageValue = 0;
@@ -48,7 +44,6 @@ export const registerRollAndLabelHelpers = () => {
 
         const typeCode = Handlebars.helpers.damageAbbreviation(damageType);
         let code = `${damageValue}${typeCode}`;
-        console.log('Shadowrun 6e | Damage code generated:', code);
         return new Handlebars.SafeString(code);
     });
 

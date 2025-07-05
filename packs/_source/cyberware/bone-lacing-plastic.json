@@ -1,0 +1,291 @@
+{
+  "_id": "BoneLacingPlastic001",
+  "name": "Bone Lacing (Plastic)",
+  "type": "cyberware",
+  "img": "systems/sr6elysium/dist/icons/importer/cyberware/bodyware.svg",
+  "system": {
+    "description": {
+      "value": "<p>Plastic bone lacing reinforces the character's skeleton with a plastic polymer mesh. This provides moderate protection and enhances unarmed combat effectiveness by making punches and kicks deal physical damage instead of stun damage.</p><p><strong>Effects:</strong></p><ul><li>+1 Body</li><li>+1 Defense Rating</li><li>Unarmed attacks deal 3P damage instead of 2S</li><li>+1 AR for unarmed attacks</li></ul>",
+      "chat": "",
+      "source": "SR6 Core Rulebook"
+    },
+    "technology": {
+      "rating": 2,
+      "availability": "6L",
+      "quantity": 1,
+      "cost": 15000,
+      "equipped": true,
+      "conceal": {
+        "base": 0,
+        "value": 0,
+        "mod": []
+      },
+      "condition_monitor": {
+        "label": "",
+        "value": 0,
+        "max": 0
+      }
+    },
+    "essence": 0.5,
+    "capacity": 0,
+    "grade": "standard",
+    "action": {
+      "type": "",
+      "test": "",
+      "categories": [],
+      "attribute": "",
+      "attribute2": "",
+      "skill": "",
+      "armor": false,
+      "spec": false,
+      "mod": null,
+      "mod_description": "",
+      "roll_mode": "",
+      "initiative_timing": "",
+      "legality": "legal",
+      "limit": {
+        "value": 0,
+        "base": 0,
+        "attribute": ""
+      },
+      "threshold": {
+        "value": 0,
+        "base": 0
+      },
+      "extended": false,
+      "damage": {
+        "type": {
+          "value": "",
+          "base": ""
+        },
+        "element": {
+          "value": "",
+          "base": ""
+        },
+        "value": 0,
+        "base": 0,
+        "ap": {
+          "value": 0,
+          "base": 0,
+          "base_formula_operator": "add",
+          "attribute": ""
+        },
+        "base_formula_operator": "add",
+        "attribute": "",
+        "source": {
+          "actorId": "",
+          "itemId": "",
+          "itemType": "",
+          "itemName": ""
+        }
+      },
+      "opposed": {
+        "type": "",
+        "test": "",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0,
+        "description": "",
+        "resist": {
+          "test": "",
+          "skill": "",
+          "attribute": "",
+          "attribute2": "",
+          "armor": false,
+          "mod": 0
+        }
+      },
+      "followed": {
+        "test": "",
+        "attribute": "",
+        "attribute2": "",
+        "skill": "",
+        "armor": false,
+        "mod": 0
+      },
+      "modifiers": []
+    },
+    "import": {
+      "source": "",
+      "name": "",
+      "id": ""
+    }
+  },
+  "effects": [
+    {
+      "_id": "BoneLacingPlasticBodyBonus",
+      "name": "Bone Lacing (Plastic) - Body Bonus",
+      "icon": "systems/sr6elysium/dist/icons/importer/cyberware/bodyware.svg",
+      "changes": [
+        {
+          "key": "system.attributes.body",
+          "mode": 2,
+          "value": "1"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "flags": {
+        "sr6elysium": {
+          "applyTo": "actor",
+          "onlyForWireless": false,
+          "onlyForEquipped": true,
+          "onlyForItemTest": false
+        }
+      },
+      "transfer": true
+    },
+    {
+      "_id": "BoneLacingPlasticDefenseBonus",
+      "name": "Bone Lacing (Plastic) - Defense Rating Bonus",
+      "icon": "systems/sr6elysium/dist/icons/importer/cyberware/bodyware.svg",
+      "changes": [
+        {
+          "key": "system.attributes.defense_rating",
+          "mode": 2,
+          "value": "1"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "flags": {
+        "sr6elysium": {
+          "applyTo": "actor",
+          "onlyForWireless": false,
+          "onlyForEquipped": true,
+          "onlyForItemTest": false
+        }
+      },
+      "transfer": true
+    },
+    {
+      "_id": "BoneLacingPlasticDamageType",
+      "name": "Bone Lacing (Plastic) - Unarmed Damage Type",
+      "icon": "systems/sr6elysium/dist/icons/importer/cyberware/bodyware.svg",
+      "changes": [
+        {
+          "key": "system.action.damage.type.base",
+          "mode": 5,
+          "value": "physical"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "flags": {
+        "sr6elysium": {
+          "applyTo": "item",
+          "onlyForWireless": false,
+          "onlyForEquipped": true,
+          "onlyForItemTest": false,
+          "itemFilter": "Unarmed Attack"
+        }
+      },
+      "transfer": false
+    },
+    {
+      "_id": "BoneLacingPlasticDamageValue",
+      "name": "Bone Lacing (Plastic) - Unarmed Damage Value",
+      "icon": "systems/sr6elysium/dist/icons/importer/cyberware/bodyware.svg",
+      "changes": [
+        {
+          "key": "system.action.damage.base",
+          "mode": 5,
+          "value": "3"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "flags": {
+        "sr6elysium": {
+          "applyTo": "item",
+          "onlyForWireless": false,
+          "onlyForEquipped": true,
+          "onlyForItemTest": false,
+          "itemFilter": "Unarmed Attack"
+        }
+      },
+      "transfer": false
+    },
+    {
+      "_id": "BoneLacingPlasticARBonus",
+      "name": "Bone Lacing (Plastic) - Unarmed AR Bonus",
+      "icon": "systems/sr6elysium/dist/icons/importer/cyberware/bodyware.svg",
+      "changes": [
+        {
+          "key": "system.range.short.ar",
+          "mode": 2,
+          "value": "1"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "flags": {
+        "sr6elysium": {
+          "applyTo": "item",
+          "onlyForWireless": false,
+          "onlyForEquipped": true,
+          "onlyForItemTest": false,
+          "itemFilter": "Unarmed Attack"
+        }
+      },
+      "transfer": false
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!BoneLacingPlastic001",
+  "_stats": {
+    "coreVersion": "12.331",
+    "systemId": "sr6elysium",
+    "systemVersion": "0.0.8",
+    "createdTime": 1704067200000,
+    "modifiedTime": 1704067200000,
+    "lastModifiedBy": "techno-savant"
+  }
+}

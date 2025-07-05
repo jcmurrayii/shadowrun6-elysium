@@ -116,6 +116,18 @@
             "system": "sr6elysium"
         },
         {
+            "name": "cyberware",
+            "label": "SR6e Cyberware",
+            "path": "packs/cyberware",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "TRUSTED": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            },
+            "type": "Item",
+            "system": "sr6elysium"
+        },
+        {
             "name": "qualities",
             "label": "SR6e Core Qualities",
             "path": "packs/qualities",
@@ -265,6 +277,13 @@
                     "sorting": "m",
                     "packs": [
                         "weapons"
+                    ]
+                },
+                {
+                    "name": "Cyberware",
+                    "sorting": "m",
+                    "packs": [
+                        "cyberware"
                     ]
                 },
                 {
