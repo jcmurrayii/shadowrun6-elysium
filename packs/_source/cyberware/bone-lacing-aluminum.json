@@ -144,7 +144,8 @@
           "onlyForItemTest": false
         }
       },
-      "transfer": true
+      "transfer": true,
+      "_key": "!items.effects!BoneLacingAluminum01.BoneLacingAluminumBodyBonus"
     },
     {
       "_id": "BoneLacingAluminumDefenseBonus",
@@ -175,7 +176,8 @@
           "onlyForItemTest": false
         }
       },
-      "transfer": true
+      "transfer": true,
+      "_key": "!items.effects!BoneLacingAluminum01.BoneLacingAluminumDefenseBonus"
     },
     {
       "_id": "BoneLacingAluminumDamageType",
@@ -207,7 +209,8 @@
           "itemFilter": "Unarmed Attack"
         }
       },
-      "transfer": false
+      "transfer": false,
+      "_key": "!items.effects!BoneLacingAluminum01.BoneLacingAluminumDamageType"
     },
     {
       "_id": "BoneLacingAluminumDamageValue",
@@ -239,7 +242,8 @@
           "itemFilter": "Unarmed Attack"
         }
       },
-      "transfer": false
+      "transfer": false,
+      "_key": "!items.effects!BoneLacingAluminum01.BoneLacingAluminumDamageValue"
     },
     {
       "_id": "BoneLacingAluminumARBonus",
@@ -271,7 +275,8 @@
           "itemFilter": "Unarmed Attack"
         }
       },
-      "transfer": false
+      "transfer": false,
+      "_key": "!items.effects!BoneLacingAluminum01.BoneLacingAluminumARBonus"
     }
   ],
   "folder": null,

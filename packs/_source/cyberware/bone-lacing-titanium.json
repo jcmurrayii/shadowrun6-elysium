@@ -1,5 +1,5 @@
 {
-  "_id": "BoneLacingTitanium01",
+  "_id": "mWgPkl4wjgmIowJR",
   "name": "Bone Lacing (Titanium)",
   "type": "cyberware",
   "img": "systems/sr6elysium/dist/icons/importer/cyberware/bodyware.svg",
@@ -143,7 +143,8 @@
           "onlyForItemTest": false
         }
       },
-      "transfer": true
+      "transfer": true,
+      "_key": "!items.effects!BoneLacingTitanium01.BoneLacingTitaniumBodyBonus"
     },
     {
       "_id": "BoneLacingTitaniumDefenseBonus",
@@ -174,7 +175,8 @@
           "onlyForItemTest": false
         }
       },
-      "transfer": true
+      "transfer": true,
+      "_key": "!items.effects!BoneLacingTitanium01.BoneLacingTitaniumDefenseBonus"
     },
     {
       "_id": "BoneLacingTitaniumDamageType",
@@ -206,7 +208,8 @@
           "itemFilter": "Unarmed Attack"
         }
       },
-      "transfer": false
+      "transfer": false,
+      "_key": "!items.effects!BoneLacingTitanium01.BoneLacingTitaniumDamageType"
     },
     {
       "_id": "BoneLacingTitaniumDamageValue",
@@ -238,7 +241,8 @@
           "itemFilter": "Unarmed Attack"
         }
       },
-      "transfer": false
+      "transfer": false,
+      "_key": "!items.effects!BoneLacingTitanium01.BoneLacingTitaniumDamageValue"
     },
     {
       "_id": "BoneLacingTitaniumARBonus",
@@ -270,7 +274,8 @@
           "itemFilter": "Unarmed Attack"
         }
       },
-      "transfer": false
+      "transfer": false,
+      "_key": "!items.effects!BoneLacingTitanium01.BoneLacingTitaniumARBonus"
     }
   ],
   "folder": null,

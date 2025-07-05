@@ -1,4 +1,5 @@
 {
+  "_id": "UnarmedAttack000001",
   "name": "Unarmed Attack",
   "type": "weapon",
   "img": "systems/sr6elysium/dist/icons/importer/weapon/unarmed.svg",
@@ -166,12 +167,13 @@
     "default": 0
   },
   "flags": {},
+  "_key": "!items!UnarmedAttack000001",
   "_stats": {
     "coreVersion": "12.331",
     "systemId": "sr6elysium",
     "systemVersion": "0.0.8",
-    "createdTime": null,
-    "modifiedTime": null,
-    "lastModifiedBy": null
+    "createdTime": 1704067200000,
+    "modifiedTime": 1704067200000,
+    "lastModifiedBy": "techno-savant"
   }
 }

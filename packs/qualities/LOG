@@ -1,3 +1,15 @@
-2025/07/05-10:55:31.421 e080 Recovering log #37
-2025/07/05-10:55:31.426 e080 Delete type=0 #37
-2025/07/05-10:55:31.426 e080 Delete type=3 #35
+2025/07/05-14:04:53.583 c4c Recovering log #43
+2025/07/05-14:04:53.587 c4c Delete type=0 #43
+2025/07/05-14:04:53.587 c4c Delete type=3 #41
+2025/07/05-14:04:53.592 a3b8 Level-0 table #49: started
+2025/07/05-14:04:53.601 a3b8 Level-0 table #49: 3648 bytes OK
+2025/07/05-14:04:53.602 a3b8 Delete type=0 #47
+2025/07/05-14:04:53.603 a3b8 Manual compaction at level-0 from '!items!PSsL78YaeZhyNgPH' @ 72057594037927935 : 1 .. 'custwillpowermastery' @ 0 : 0; will stop at (end)
+2025/07/05-14:04:53.603 a3b8 Manual compaction at level-1 from '!items!PSsL78YaeZhyNgPH' @ 72057594037927935 : 1 .. 'custwillpowermastery' @ 0 : 0; will stop at 'custwillpowermastery' @ 92 : 1
+2025/07/05-14:04:53.603 a3b8 Compacting 1@1 + 1@2 files
+2025/07/05-14:04:53.605 a3b8 Generated table #50@1: 12 keys, 3648 bytes
+2025/07/05-14:04:53.605 a3b8 Compacted 1@1 + 1@2 files => 3648 bytes
+2025/07/05-14:04:53.606 a3b8 compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/07/05-14:04:53.606 a3b8 Delete type=2 #45
+2025/07/05-14:04:53.607 a3b8 Delete type=2 #49
+2025/07/05-14:04:53.607 a3b8 Manual compaction at level-1 from 'custwillpowermastery' @ 92 : 1 .. 'custwillpowermastery' @ 0 : 0; will stop at (end)

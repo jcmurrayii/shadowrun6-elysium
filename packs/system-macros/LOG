@@ -1,3 +1,15 @@
-2025/07/05-10:55:31.377 9d34 Recovering log #23
-2025/07/05-10:55:31.381 9d34 Delete type=0 #23
-2025/07/05-10:55:31.382 9d34 Delete type=3 #21
+2025/07/05-14:04:53.736 c4c Recovering log #30
+2025/07/05-14:04:53.742 c4c Delete type=0 #30
+2025/07/05-14:04:53.742 c4c Delete type=3 #28
+2025/07/05-14:04:53.745 a3b8 Level-0 table #36: started
+2025/07/05-14:04:53.760 a3b8 Level-0 table #36: 1772 bytes OK
+2025/07/05-14:04:53.761 a3b8 Delete type=0 #34
+2025/07/05-14:04:53.761 a3b8 Manual compaction at level-0 from '!macros!addMatrixActions' @ 72057594037927935 : 1 .. '!macros!uelsuP7iB2riZ4ww' @ 0 : 0; will stop at (end)
+2025/07/05-14:04:53.761 a3b8 Manual compaction at level-1 from '!macros!addMatrixActions' @ 72057594037927935 : 1 .. '!macros!uelsuP7iB2riZ4ww' @ 0 : 0; will stop at '!macros!uelsuP7iB2riZ4ww' @ 14 : 1
+2025/07/05-14:04:53.761 a3b8 Compacting 1@1 + 1@2 files
+2025/07/05-14:04:53.763 a3b8 Generated table #37@1: 2 keys, 1772 bytes
+2025/07/05-14:04:53.763 a3b8 Compacted 1@1 + 1@2 files => 1772 bytes
+2025/07/05-14:04:53.764 a3b8 compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/07/05-14:04:53.764 a3b8 Delete type=2 #32
+2025/07/05-14:04:53.764 a3b8 Delete type=2 #36
+2025/07/05-14:04:53.764 a3b8 Manual compaction at level-1 from '!macros!uelsuP7iB2riZ4ww' @ 14 : 1 .. '!macros!uelsuP7iB2riZ4ww' @ 0 : 0; will stop at (end)

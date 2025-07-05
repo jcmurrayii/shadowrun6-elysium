@@ -1,0 +1,5 @@
+2025/07/05-14:02:42.103 ac94 Delete type=3 #1
+2025/07/05-14:02:42.107 d7e4 Level-0 table #5: started
+2025/07/05-14:02:42.110 d7e4 Level-0 table #5: 5559 bytes OK
+2025/07/05-14:02:42.111 d7e4 Delete type=0 #3
+2025/07/05-14:02:42.111 d7e4 Manual compaction at level-0 from '!items!BoneLacingAluminum01' @ 72057594037927935 : 1 .. '!items.effects!BoneLacingTitanium01.BoneLacingTitaniumDefenseBonus' @ 0 : 0; will stop at (end)
